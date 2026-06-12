@@ -153,6 +153,7 @@
       const bits = [];
       if (d.company) { bits.push(`<strong>${d.company}</strong>`); $('ledgerCompany').textContent = d.company.toUpperCase(); }
       if (d.stateGuess && R.states[d.stateGuess]) { sel.value = d.stateGuess; bits.push(`based in ${R.states[d.stateGuess].name}`); }
+      if (d.employeesGuess) { $('f-emp').value = Math.min(d.employeesGuess, 2000); bits.push(`~${d.employeesGuess.toLocaleString()} employees`); }
       if (d.industryGuess) { $('f-ind').value = d.industryGuess; bits.push($('f-ind').selectedOptions[0].text.toLowerCase()); }
       if (bits.length) {
         note.innerHTML = `We pre-filled what we could: ${bits.join(' &middot; ')}. Adjust anything that's off.`;
