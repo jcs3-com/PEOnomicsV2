@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PEOnomics — One email. A real PEO cost estimate.</title>
+<meta name="description" content="Put in your business email and PEOnomics goes to work: an itemized employer-cost estimate, standalone vs PEO, built on published state and federal rates.">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="stylesheet" href="/assets/css/tokens.css">
+<link rel="stylesheet" href="/assets/css/site.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">PEO<span class="accent">nomics</span></a>
+    <ul class="nav-links">
+      <li><a href="/peo-pricing-explained.html">Pricing, explained</a></li>
+      <li><a href="/peo-vs-payroll.html">PEO vs payroll</a></li>
+      <li><a href="/states/">State rates</a></li>
+      <li><a href="/methodology.html">Methodology</a></li>
+      <li><a href="/quote.html" class="nav-cta">Run a quote</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero">
+  <div>
+    <div class="eyebrow">PEO cost intelligence</div>
+    <h1>One email.<br><em>A real estimate.</em></h1>
+    <p class="hero-sub">Put in your business email and PEOnomics goes to work — your employer costs, itemized line by line, standalone vs. PEO. Built on published rates for all 50 states.</p>
+    <form class="quote-box" action="/quote.html" method="get">
+      <input type="email" name="e" placeholder="you@yourcompany.com" aria-label="Business email" required>
+      <button type="submit" class="btn-go">Build my estimate</button>
+    </form>
+    <p class="quote-note">Your estimate appears instantly — no gate, no spam. Want the deep version? We'll research your company and send a drafted PEO quote.</p>
+    <div class="hero-stats">
+      <div class="hero-stat"><span class="num">51</span><small>Jurisdictions</small></div>
+      <div class="hero-stat"><span class="num">6</span><small>Cost lines itemized</small></div>
+      <div class="hero-stat"><span class="num">7.65%</span><small>Where every quote starts</small></div>
+    </div>
+  </div>
+
+  <aside class="ledger" aria-label="Sample employer burden ledger">
+    <div class="ledger-head">
+      <span class="ledger-title">Employer burden ledger — annual</span>
+      <div class="state-tabs" role="tablist" aria-label="Select state">
+        <button data-state="MD" class="active">MD</button>
+        <button data-state="CA">CA</button>
+        <button data-state="TX">TX</button>
+        <button data-state="FL">FL</button>
+        <button data-state="NY">NY</button>
+      </div>
+    </div>
+    <div class="assumption">
+      <span>SAMPLE: 25 EMPLOYEES</span>
+      <span>AVG WAGE $65,000</span>
+      <span>OFFICE / PROFESSIONAL</span>
+    </div>
+    <div class="ledger-body"></div>
+    <div class="ledger-totals">
+      <div class="trow"><span class="label">Standalone total</span><span class="amt js-standalone">—</span></div>
+      <div class="trow"><span class="label">With PEO (range)</span><span class="amt js-peo">—</span></div>
+      <div class="trow delta"><span class="label">Estimated delta</span><span class="amt js-delta">—</span></div>
+    </div>
+    <div class="ledger-foot">2025 rate dataset, v2025.1. Ranges shown where published data can't pin a number. <a href="/methodology.html" style="color:#8FA0B5;">Full methodology &rarr;</a></div>
+  </aside>
+</header>
+
+<section class="section band-raised">
+  <div class="shell">
+    <div class="sec-eyebrow">How it works</div>
+    <h2>Three steps. About thirty seconds.</h2>
+    <div class="steps">
+      <div class="step"><span class="n">01</span><h3>Enter your email</h3><p>Your company domain tells us who you are — industry, size, home state. We pre-fill the assumptions; you can adjust any of them.</p></div>
+      <div class="step"><span class="n">02</span><h3>We run the rates</h3><p>FICA, FUTA, your state's unemployment insurance, workers' comp, health, and the PEO fee itself — itemized, with the math visible.</p></div>
+      <div class="step"><span class="n">03</span><h3>Compare side by side</h3><p>Your costs standalone vs. with a PEO, as a range. If you want the deep version, we'll research your company and send a drafted quote.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="shell">
+    <div class="sec-eyebrow">The six lines that matter</div>
+    <h2>Every PEO bill is built from the same six costs.</h2>
+    <p class="sec-sub">Most calculators hand-wave a single percentage. We track each line separately, against its own published source.</p>
+    <div class="items">
+      <div class="item"><span class="tag">Federal</span><h3>FICA</h3><p>Social Security plus Medicare. Fixed by statute — the one line nobody can shop.</p><span class="src">SSA / IRS</span></div>
+      <div class="item"><span class="tag">Federal</span><h3>FUTA</h3><p>0.6% net on the first $7,000 per employee — more if your state is on the credit-reduction list.</p><span class="src">US DOL</span></div>
+      <div class="item"><span class="tag">State</span><h3>SUI</h3><p>51 jurisdictions, 51 wage bases, 51 rates. The biggest state-to-state swing in your bill.</p><span class="src">STATE WORKFORCE AGENCIES</span></div>
+      <div class="item"><span class="tag">State</span><h3>Workers' comp</h3><p>Driven by your state and your class-code mix. The largest single lever a good PEO can pull.</p><span class="src">OREGON DCBS RATE STUDY</span></div>
+      <div class="item"><span class="tag">Market</span><h3>Health benefits</h3><p>The employer share of premiums, by firm size and region — and where PEO master plans earn their keep.</p><span class="src">KFF EHBS</span></div>
+      <div class="item"><span class="tag">Market</span><h3>The PEO fee</h3><p>Per-employee-per-month or percent of payroll. Which model fits depends on how your business grows.</p><span class="src">MARKET DATA</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="section band-ink">
+  <div class="shell" style="display:grid;grid-template-columns:1fr auto;gap:32px;align-items:center;flex-wrap:wrap;">
+    <div>
+      <div class="sec-eyebrow">Ready when you are</div>
+      <h2 style="margin-bottom:8px;">Get your number.</h2>
+      <p class="sec-sub" style="margin:0;">Thirty seconds to an itemized estimate. Every assumption editable.</p>
+    </div>
+    <a href="/quote.html" class="btn-go" style="text-decoration:none;display:inline-block;padding:16px 32px;font-size:15px;">Run a quote &rarr;</a>
+  </div>
+</section>
+
+<footer class="footer">
+  <div><span class="nav-logo" style="font-size:17px;">PEO<span class="accent">nomics</span></span><br>PEO cost intelligence.</div>
+  <div>
+    <a href="/peo-pricing-explained.html">Pricing, explained</a>
+    <a href="/states/">State rates</a>
+    <a href="/methodology.html">Methodology</a>
+    <a href="https://github.com/jcs3-com/PEOnomicsV2">Dataset on GitHub</a>
+  </div>
+</footer>
+
+<script src="/assets/js/engine.js"></script>
+<script>
+(async () => {
+  await PEO.load();
+  const ledger = document.querySelector('.ledger');
+  const sample = { employees: 25, avgWage: 65000, industry: 'clerical_professional' };
+  const draw = s => PEO.renderLedger(ledger, { ...sample, state: s });
+  document.querySelectorAll('.state-tabs button').forEach(b => {
+    b.addEventListener('click', () => {
+      document.querySelectorAll('.state-tabs button').forEach(x => x.classList.remove('active'));
+      b.classList.add('active');
+      draw(b.dataset.state);
+    });
+  });
+  draw('MD');
+})();
+</script>
+</body>
+</html>

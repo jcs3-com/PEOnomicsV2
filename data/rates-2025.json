@@ -1,0 +1,513 @@
+{
+ "meta": {
+  "dataset": "PEOnomics employer-burden rates",
+  "tax_year": 2025,
+  "version": "2025.1-preliminary",
+  "status": "PRELIMINARY - every figure carries a confidence flag; low-confidence values are estimates pending primary-source verification. Corrections via GitHub issues.",
+  "sources": [
+   "State workforce agencies (SUI)",
+   "US DOL (FUTA credit reduction)",
+   "SSA/IRS (FICA)",
+   "Oregon DCBS Premium Rate Ranking study (WC index basis)",
+   "KFF Employer Health Benefits Survey (health)"
+  ]
+ },
+ "federal": {
+  "fica_ss_rate": 0.062,
+  "fica_ss_wage_base": 176100,
+  "fica_medicare_rate": 0.0145,
+  "futa_gross_rate": 0.06,
+  "futa_net_rate": 0.006,
+  "futa_wage_base": 7000,
+  "futa_credit_reduction_states": {
+   "CA": 0.012,
+   "VI": 0.042
+  },
+  "futa_credit_reduction_note": "Estimated 2025 add-on rates; DOL finalizes each November.",
+  "confidence": "high"
+ },
+ "health": {
+  "employer_annual_single_avg": 7580,
+  "range_pct": 0.1,
+  "note": "KFF EHBS small-firm employer share of single coverage, rounded; PEO master-plan factor applied in engine.",
+  "confidence": "med"
+ },
+ "peo_admin": {
+  "pepm_low": 135,
+  "pepm_high": 185,
+  "pct_payroll_low": 0.025,
+  "pct_payroll_high": 0.05,
+  "note": "Practitioner-derived market ranges for full-service PEO, 10-100 EE tier.",
+  "confidence": "med"
+ },
+ "wc_industry_multipliers": {
+  "clerical_professional": 0.35,
+  "retail_services": 0.9,
+  "hospitality_food": 1.1,
+  "light_manufacturing": 1.6,
+  "transportation_logistics": 2.8,
+  "construction_trades": 3.2,
+  "note": "Multiplier applied to state payroll-weighted WC index to approximate class-mix exposure."
+ },
+ "states": {
+  "AK": {
+   "name": "Alaska",
+   "sui_wage_base": 51700,
+   "sui_new_employer_rate": 0.0237,
+   "sui_confidence": "low",
+   "wc_index_per_100": 1.45,
+   "wc_confidence": "low",
+   "wc_monopolistic": false
+  },
+  "AL": {
+   "name": "Alabama",
+   "sui_wage_base": 8000,
+   "sui_new_employer_rate": 0.027,
+   "sui_confidence": "med",
+   "wc_index_per_100": 1.1,
+   "wc_confidence": "med",
+   "wc_monopolistic": false
+  },
+  "AR": {
+   "name": "Arkansas",
+   "sui_wage_base": 7000,
+   "sui_new_employer_rate": 0.019,
+   "sui_confidence": "low",
+   "wc_index_per_100": 0.85,
+   "wc_confidence": "low",
+   "wc_monopolistic": false
+  },
+  "AZ": {
+   "name": "Arizona",
+   "sui_wage_base": 8000,
+   "sui_new_employer_rate": 0.02,
+   "sui_confidence": "med",
+   "wc_index_per_100": 0.95,
+   "wc_confidence": "med",
+   "wc_monopolistic": false
+  },
+  "CA": {
+   "name": "California",
+   "sui_wage_base": 7000,
+   "sui_new_employer_rate": 0.034,
+   "sui_confidence": "high",
+   "wc_index_per_100": 1.78,
+   "wc_confidence": "med",
+   "wc_monopolistic": false
+  },
+  "CO": {
+   "name": "Colorado",
+   "sui_wage_base": 27200,
+   "sui_new_employer_rate": 0.0305,
+   "sui_confidence": "med",
+   "wc_index_per_100": 0.9,
+   "wc_confidence": "med",
+   "wc_monopolistic": false
+  },
+  "CT": {
+   "name": "Connecticut",
+   "sui_wage_base": 26100,
+   "sui_new_employer_rate": 0.025,
+   "sui_confidence": "low",
+   "wc_index_per_100": 1.45,
+   "wc_confidence": "low",
+   "wc_monopolistic": false
+  },
+  "DC": {
+   "name": "District of Columbia",
+   "sui_wage_base": 9000,
+   "sui_new_employer_rate": 0.027,
+   "sui_confidence": "med",
+   "wc_index_per_100": 1.05,
+   "wc_confidence": "low",
+   "wc_monopolistic": false
+  },
+  "DE": {
+   "name": "Delaware",
+   "sui_wage_base": 10500,
+   "sui_new_employer_rate": 0.012,
+   "sui_confidence": "low",
+   "wc_index_per_100": 1.35,
+   "wc_confidence": "low",
+   "wc_monopolistic": false
+  },
+  "FL": {
+   "name": "Florida",
+   "sui_wage_base": 7000,
+   "sui_new_employer_rate": 0.027,
+   "sui_confidence": "high",
+   "wc_index_per_100": 1.0,
+   "wc_confidence": "med",
+   "wc_monopolistic": false
+  },
+  "GA": {
+   "name": "Georgia",
+   "sui_wage_base": 9500,
+   "sui_new_employer_rate": 0.0264,
+   "sui_confidence": "med",
+   "wc_index_per_100": 1.3,
+   "wc_confidence": "low",
+   "wc_monopolistic": false
+  },
+  "HI": {
+   "name": "Hawaii",
+   "sui_wage_base": 61800,
+   "sui_new_employer_rate": 0.03,
+   "sui_confidence": "low",
+   "wc_index_per_100": 1.65,
+   "wc_confidence": "low",
+   "wc_monopolistic": false
+  },
+  "IA": {
+   "name": "Iowa",
+   "sui_wage_base": 39500,
+   "sui_new_employer_rate": 0.01,
+   "sui_confidence": "med",
+   "wc_index_per_100": 1.05,
+   "wc_confidence": "low",
+   "wc_monopolistic": false
+  },
+  "ID": {
+   "name": "Idaho",
+   "sui_wage_base": 55300,
+   "sui_new_employer_rate": 0.01,
+   "sui_confidence": "low",
+   "wc_index_per_100": 1.2,
+   "wc_confidence": "low",
+   "wc_monopolistic": false
+  },
+  "IL": {
+   "name": "Illinois",
+   "sui_wage_base": 13916,
+   "sui_new_employer_rate": 0.0365,
+   "sui_confidence": "med",
+   "wc_index_per_100": 1.35,
+   "wc_confidence": "med",
+   "wc_monopolistic": false
+  },
+  "IN": {
+   "name": "Indiana",
+   "sui_wage_base": 9500,
+   "sui_new_employer_rate": 0.025,
+   "sui_confidence": "med",
+   "wc_index_per_100": 0.7,
+   "wc_confidence": "med",
+   "wc_monopolistic": false
+  },
+  "KS": {
+   "name": "Kansas",
+   "sui_wage_base": 14000,
+   "sui_new_employer_rate": 0.027,
+   "sui_confidence": "med",
+   "wc_index_per_100": 0.95,
+   "wc_confidence": "low",
+   "wc_monopolistic": false
+  },
+  "KY": {
+   "name": "Kentucky",
+   "sui_wage_base": 11700,
+   "sui_new_employer_rate": 0.027,
+   "sui_confidence": "low",
+   "wc_index_per_100": 1.0,
+   "wc_confidence": "low",
+   "wc_monopolistic": false
+  },
+  "LA": {
+   "name": "Louisiana",
+   "sui_wage_base": 7700,
+   "sui_new_employer_rate": 0.02,
+   "sui_confidence": "low",
+   "wc_index_per_100": 1.5,
+   "wc_confidence": "low",
+   "wc_monopolistic": false
+  },
+  "MA": {
+   "name": "Massachusetts",
+   "sui_wage_base": 15000,
+   "sui_new_employer_rate": 0.0187,
+   "sui_confidence": "med",
+   "wc_index_per_100": 1.05,
+   "wc_confidence": "low",
+   "wc_monopolistic": false
+  },
+  "MD": {
+   "name": "Maryland",
+   "sui_wage_base": 8500,
+   "sui_new_employer_rate": 0.026,
+   "sui_confidence": "med",
+   "wc_index_per_100": 1.05,
+   "wc_confidence": "med",
+   "wc_monopolistic": false
+  },
+  "ME": {
+   "name": "Maine",
+   "sui_wage_base": 12000,
+   "sui_new_employer_rate": 0.022,
+   "sui_confidence": "low",
+   "wc_index_per_100": 1.1,
+   "wc_confidence": "low",
+   "wc_monopolistic": false
+  },
+  "MI": {
+   "name": "Michigan",
+   "sui_wage_base": 9500,
+   "sui_new_employer_rate": 0.027,
+   "sui_confidence": "med",
+   "wc_index_per_100": 0.95,
+   "wc_confidence": "low",
+   "wc_monopolistic": false
+  },
+  "MN": {
+   "name": "Minnesota",
+   "sui_wage_base": 43000,
+   "sui_new_employer_rate": 0.019,
+   "sui_confidence": "low",
+   "wc_index_per_100": 1.3,
+   "wc_confidence": "low",
+   "wc_monopolistic": false
+  },
+  "MO": {
+   "name": "Missouri",
+   "sui_wage_base": 9500,
+   "sui_new_employer_rate": 0.0238,
+   "sui_confidence": "med",
+   "wc_index_per_100": 1.1,
+   "wc_confidence": "low",
+   "wc_monopolistic": false
+  },
+  "MS": {
+   "name": "Mississippi",
+   "sui_wage_base": 14000,
+   "sui_new_employer_rate": 0.01,
+   "sui_confidence": "med",
+   "wc_index_per_100": 1.05,
+   "wc_confidence": "low",
+   "wc_monopolistic": false
+  },
+  "MT": {
+   "name": "Montana",
+   "sui_wage_base": 45100,
+   "sui_new_employer_rate": 0.017,
+   "sui_confidence": "low",
+   "wc_index_per_100": 1.6,
+   "wc_confidence": "low",
+   "wc_monopolistic": false
+  },
+  "NC": {
+   "name": "North Carolina",
+   "sui_wage_base": 32600,
+   "sui_new_employer_rate": 0.01,
+   "sui_confidence": "med",
+   "wc_index_per_100": 0.9,
+   "wc_confidence": "low",
+   "wc_monopolistic": false
+  },
+  "ND": {
+   "name": "North Dakota",
+   "sui_wage_base": 45100,
+   "sui_new_employer_rate": 0.0113,
+   "sui_confidence": "low",
+   "wc_index_per_100": 0.6,
+   "wc_confidence": "low",
+   "wc_monopolistic": true
+  },
+  "NE": {
+   "name": "Nebraska",
+   "sui_wage_base": 9000,
+   "sui_new_employer_rate": 0.0125,
+   "sui_confidence": "med",
+   "wc_index_per_100": 0.95,
+   "wc_confidence": "low",
+   "wc_monopolistic": false
+  },
+  "NH": {
+   "name": "New Hampshire",
+   "sui_wage_base": 14000,
+   "sui_new_employer_rate": 0.017,
+   "sui_confidence": "low",
+   "wc_index_per_100": 1.15,
+   "wc_confidence": "low",
+   "wc_monopolistic": false
+  },
+  "NJ": {
+   "name": "New Jersey",
+   "sui_wage_base": 43300,
+   "sui_new_employer_rate": 0.034,
+   "sui_confidence": "low",
+   "wc_index_per_100": 2.1,
+   "wc_confidence": "med",
+   "wc_monopolistic": false
+  },
+  "NM": {
+   "name": "New Mexico",
+   "sui_wage_base": 33200,
+   "sui_new_employer_rate": 0.01,
+   "sui_confidence": "med",
+   "wc_index_per_100": 1.25,
+   "wc_confidence": "low",
+   "wc_monopolistic": false
+  },
+  "NV": {
+   "name": "Nevada",
+   "sui_wage_base": 41800,
+   "sui_new_employer_rate": 0.0295,
+   "sui_confidence": "med",
+   "wc_index_per_100": 1.1,
+   "wc_confidence": "low",
+   "wc_monopolistic": false
+  },
+  "NY": {
+   "name": "New York",
+   "sui_wage_base": 12800,
+   "sui_new_employer_rate": 0.041,
+   "sui_confidence": "med",
+   "wc_index_per_100": 1.5,
+   "wc_confidence": "med",
+   "wc_monopolistic": false
+  },
+  "OH": {
+   "name": "Ohio",
+   "sui_wage_base": 9000,
+   "sui_new_employer_rate": 0.027,
+   "sui_confidence": "high",
+   "wc_index_per_100": 0.75,
+   "wc_confidence": "low",
+   "wc_monopolistic": true
+  },
+  "OK": {
+   "name": "Oklahoma",
+   "sui_wage_base": 28200,
+   "sui_new_employer_rate": 0.015,
+   "sui_confidence": "low",
+   "wc_index_per_100": 1.2,
+   "wc_confidence": "low",
+   "wc_monopolistic": false
+  },
+  "OR": {
+   "name": "Oregon",
+   "sui_wage_base": 54300,
+   "sui_new_employer_rate": 0.024,
+   "sui_confidence": "med",
+   "wc_index_per_100": 0.95,
+   "wc_confidence": "med",
+   "wc_monopolistic": false
+  },
+  "PA": {
+   "name": "Pennsylvania",
+   "sui_wage_base": 10000,
+   "sui_new_employer_rate": 0.0382,
+   "sui_confidence": "med",
+   "wc_index_per_100": 1.4,
+   "wc_confidence": "med",
+   "wc_monopolistic": false
+  },
+  "RI": {
+   "name": "Rhode Island",
+   "sui_wage_base": 29800,
+   "sui_new_employer_rate": 0.011,
+   "sui_confidence": "low",
+   "wc_index_per_100": 1.35,
+   "wc_confidence": "low",
+   "wc_monopolistic": false
+  },
+  "SC": {
+   "name": "South Carolina",
+   "sui_wage_base": 14000,
+   "sui_new_employer_rate": 0.0045,
+   "sui_confidence": "low",
+   "wc_index_per_100": 1.4,
+   "wc_confidence": "low",
+   "wc_monopolistic": false
+  },
+  "SD": {
+   "name": "South Dakota",
+   "sui_wage_base": 15000,
+   "sui_new_employer_rate": 0.012,
+   "sui_confidence": "med",
+   "wc_index_per_100": 1.05,
+   "wc_confidence": "low",
+   "wc_monopolistic": false
+  },
+  "TN": {
+   "name": "Tennessee",
+   "sui_wage_base": 7000,
+   "sui_new_employer_rate": 0.027,
+   "sui_confidence": "med",
+   "wc_index_per_100": 0.85,
+   "wc_confidence": "low",
+   "wc_monopolistic": false
+  },
+  "TX": {
+   "name": "Texas",
+   "sui_wage_base": 9000,
+   "sui_new_employer_rate": 0.027,
+   "sui_confidence": "high",
+   "wc_index_per_100": 0.55,
+   "wc_confidence": "med",
+   "wc_monopolistic": false
+  },
+  "UT": {
+   "name": "Utah",
+   "sui_wage_base": 48900,
+   "sui_new_employer_rate": 0.014,
+   "sui_confidence": "low",
+   "wc_index_per_100": 0.8,
+   "wc_confidence": "low",
+   "wc_monopolistic": false
+  },
+  "VA": {
+   "name": "Virginia",
+   "sui_wage_base": 8000,
+   "sui_new_employer_rate": 0.025,
+   "sui_confidence": "med",
+   "wc_index_per_100": 0.75,
+   "wc_confidence": "med",
+   "wc_monopolistic": false
+  },
+  "VT": {
+   "name": "Vermont",
+   "sui_wage_base": 14800,
+   "sui_new_employer_rate": 0.01,
+   "sui_confidence": "low",
+   "wc_index_per_100": 1.3,
+   "wc_confidence": "low",
+   "wc_monopolistic": false
+  },
+  "WA": {
+   "name": "Washington",
+   "sui_wage_base": 72800,
+   "sui_new_employer_rate": 0.016,
+   "sui_confidence": "low",
+   "wc_index_per_100": 1.2,
+   "wc_confidence": "low",
+   "wc_monopolistic": true
+  },
+  "WI": {
+   "name": "Wisconsin",
+   "sui_wage_base": 14000,
+   "sui_new_employer_rate": 0.0305,
+   "sui_confidence": "med",
+   "wc_index_per_100": 1.25,
+   "wc_confidence": "low",
+   "wc_monopolistic": false
+  },
+  "WV": {
+   "name": "West Virginia",
+   "sui_wage_base": 9521,
+   "sui_new_employer_rate": 0.027,
+   "sui_confidence": "low",
+   "wc_index_per_100": 1.15,
+   "wc_confidence": "low",
+   "wc_monopolistic": false
+  },
+  "WY": {
+   "name": "Wyoming",
+   "sui_wage_base": 32400,
+   "sui_new_employer_rate": 0.014,
+   "sui_confidence": "low",
+   "wc_index_per_100": 1.3,
+   "wc_confidence": "low",
+   "wc_monopolistic": true
+  }
+ }
+}

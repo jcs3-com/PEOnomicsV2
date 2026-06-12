@@ -1,0 +1,517 @@
+/* =========================================================================
+   PEOnomics — Ranking page styles
+   Builds on tokens.css — used by all four industry pages
+   ========================================================================= */
+
+/* ── HERO ──────────────────────────────────────────────────────── */
+.rank-hero {
+  padding: 96px 0 64px;
+  position: relative;
+}
+.rank-hero-inner {
+  max-width: var(--w-page);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+.rank-breadcrumb {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 28px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.rank-breadcrumb a { color: var(--muted); transition: color var(--d-fast) var(--ease-out); }
+.rank-breadcrumb a:hover { color: var(--accent); }
+.rank-breadcrumb .sep { color: var(--muted-2); }
+
+.rank-hero h1 {
+  font-family: var(--f-display);
+  font-weight: 400;
+  font-size: clamp(40px, 5.6vw, 76px);
+  line-height: 1.0;
+  letter-spacing: -0.025em;
+  color: var(--text);
+  max-width: 900px;
+  font-variation-settings: 'opsz' 144;
+}
+.rank-hero h1 .em { font-style: italic; color: var(--warm); }
+.rank-hero h1 .accent-word { font-style: italic; color: var(--accent); }
+
+.rank-hero .lead {
+  margin-top: 28px;
+  font-size: 19px;
+  line-height: 1.55;
+  color: var(--text-2);
+  max-width: 720px;
+}
+
+.rank-meta {
+  display: flex;
+  gap: 36px;
+  margin-top: 40px;
+  padding-top: 28px;
+  border-top: 1px solid var(--border);
+  flex-wrap: wrap;
+}
+.rank-meta-item {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.rank-meta-item strong {
+  display: block;
+  font-family: var(--f-display);
+  font-size: 22px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--text);
+  margin-bottom: 4px;
+  font-style: normal;
+}
+
+/* ── EDITORIAL / "WHY THIS INDUSTRY IS DIFFERENT" ─────────────── */
+.editorial {
+  background: var(--bg-warm);
+  border: 1px solid var(--border);
+  border-radius: var(--r-xl);
+  padding: 64px 56px;
+  position: relative;
+  overflow: hidden;
+}
+.editorial::before {
+  content: '';
+  position: absolute;
+  top: -80px;
+  right: -80px;
+  width: 280px;
+  height: 280px;
+  background: radial-gradient(circle, var(--warm-dim) 0%, transparent 70%);
+  pointer-events: none;
+}
+.editorial-inner {
+  max-width: 760px;
+  position: relative;
+}
+.editorial h2 {
+  font-family: var(--f-display);
+  font-weight: 400;
+  font-size: clamp(28px, 3.6vw, 44px);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  margin-top: 14px;
+}
+.editorial h2 .em { font-style: italic; color: var(--warm); }
+.editorial p {
+  margin-top: 18px;
+  font-size: 17px;
+  line-height: 1.65;
+  color: var(--text-2);
+}
+.editorial p + p { margin-top: 14px; }
+.editorial blockquote {
+  margin: 28px 0;
+  padding-left: 24px;
+  border-left: 2px solid var(--warm);
+  font-family: var(--f-display);
+  font-style: italic;
+  font-size: 22px;
+  line-height: 1.35;
+  color: var(--warm);
+  letter-spacing: -0.01em;
+}
+
+@media (max-width: 700px) {
+  .editorial { padding: 40px 28px; }
+}
+
+/* ── SHORTLIST TABLE (reuse compare-table from home.css but tighter) ── */
+.shortlist-wrap {
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+}
+.shortlist-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+.shortlist-table thead th {
+  text-align: left;
+  font-family: var(--f-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding: 20px;
+  background: var(--bg-elev-2);
+  border-bottom: 1px solid var(--border-2);
+}
+.shortlist-table td {
+  padding: 22px 20px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-2);
+  vertical-align: middle;
+}
+.shortlist-table tr:last-child td { border-bottom: 0; }
+.shortlist-table .rank-num {
+  font-family: var(--f-mono);
+  font-size: 13px;
+  color: var(--muted);
+  letter-spacing: 0.06em;
+}
+.shortlist-table .provider {
+  font-family: var(--f-display);
+  font-size: 19px;
+  font-weight: 500;
+  color: var(--text);
+  letter-spacing: -0.01em;
+}
+.shortlist-table .winner-tag {
+  display: inline-block;
+  margin-left: 10px;
+  padding: 3px 8px;
+  background: var(--accent-dim);
+  color: var(--accent);
+  font-family: var(--f-mono);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-radius: 4px;
+  vertical-align: 3px;
+}
+.shortlist-table .best-for {
+  font-size: 13px;
+  color: var(--muted);
+  margin-top: 4px;
+}
+.shortlist-table .score {
+  font-family: var(--f-mono);
+  font-size: 13px;
+  color: var(--text-2);
+}
+.shortlist-table .overall {
+  font-family: var(--f-display);
+  font-size: 22px;
+  font-weight: 500;
+  color: var(--text);
+  letter-spacing: -0.01em;
+}
+.shortlist-table tr.featured td {
+  background: rgba(125,163,199,.04);
+}
+
+@media (max-width: 760px) {
+  .shortlist-table thead { display: none; }
+  .shortlist-table tr {
+    display: block;
+    border-bottom: 1px solid var(--border);
+    padding: 14px 0;
+  }
+  .shortlist-table td {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 8px 20px;
+    border-bottom: 0;
+  }
+  .shortlist-table td::before {
+    content: attr(data-label);
+    font-family: var(--f-mono);
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .shortlist-table .provider { font-size: 17px; }
+}
+
+/* ── DETAILED RANKING CARDS ────────────────────────────────────── */
+.ranking-card {
+  position: relative;
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: 36px;
+  margin-bottom: 20px;
+  transition: border-color var(--d-med) var(--ease-out);
+}
+.ranking-card:hover { border-color: var(--border-2); }
+.ranking-card.is-pick {
+  border-color: rgba(125,163,199,.30);
+  background:
+    radial-gradient(ellipse 60% 80% at 100% 0%, var(--accent-dim) 0%, transparent 60%),
+    var(--bg-elev);
+}
+
+.rc-head {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 24px;
+  align-items: baseline;
+  margin-bottom: 24px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--border);
+}
+.rc-rank {
+  font-family: var(--f-mono);
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+.rc-name {
+  font-family: var(--f-display);
+  font-size: clamp(26px, 3vw, 34px);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  color: var(--text);
+}
+.rc-name .em { font-style: italic; color: var(--warm); }
+.rc-tag {
+  display: inline-block;
+  margin-left: 12px;
+  padding: 4px 10px;
+  background: var(--accent-dim);
+  color: var(--accent);
+  font-family: var(--f-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-radius: 4px;
+  vertical-align: 5px;
+}
+.rc-overall {
+  text-align: right;
+}
+.rc-overall-num {
+  font-family: var(--f-display);
+  font-size: 48px;
+  font-weight: 500;
+  color: var(--text);
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+.is-pick .rc-overall-num { color: var(--accent); }
+.rc-overall-max {
+  font-size: 16px;
+  color: var(--muted);
+  margin-left: 4px;
+}
+.rc-overall-label {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 6px;
+}
+
+.rc-scores {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+  margin-bottom: 24px;
+}
+.rc-score {
+  padding: 14px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+}
+.rc-score-label {
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+.rc-score-stars {
+  font-family: var(--f-mono);
+  color: var(--accent);
+  font-size: 14px;
+  letter-spacing: 2px;
+}
+.rc-score-stars .empty { color: var(--muted-2); }
+
+.rc-verdict {
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--text-2);
+}
+.rc-verdict strong { color: var(--text); }
+
+.rc-best-worst {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+}
+.rc-bw-label {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+.rc-bw-body { font-size: 14px; line-height: 1.55; color: var(--text-2); }
+
+@media (max-width: 760px) {
+  .ranking-card { padding: 28px 24px; }
+  .rc-head { grid-template-columns: 1fr; gap: 14px; }
+  .rc-overall { text-align: left; display: flex; align-items: baseline; gap: 10px; }
+  .rc-overall-num { font-size: 36px; }
+  .rc-overall-label { margin-top: 0; }
+  .rc-scores { grid-template-columns: 1fr 1fr; }
+  .rc-best-worst { grid-template-columns: 1fr; }
+}
+
+/* ── METHODOLOGY BOX ─────────────────────────────────────────── */
+.method-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: start;
+}
+.method-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+}
+.method-item {
+  padding: 22px 0;
+  border-top: 1px solid var(--border);
+  display: grid;
+  grid-template-columns: 60px 1fr auto;
+  gap: 20px;
+  align-items: baseline;
+}
+.method-item:last-child { border-bottom: 1px solid var(--border); }
+.method-num {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+}
+.method-name {
+  font-family: var(--f-display);
+  font-size: 19px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--text);
+}
+.method-desc {
+  font-size: 14px;
+  color: var(--muted);
+  margin-top: 4px;
+  line-height: 1.5;
+}
+.method-weight {
+  font-family: var(--f-mono);
+  font-size: 14px;
+  color: var(--accent);
+  letter-spacing: 0.04em;
+}
+
+@media (max-width: 860px) {
+  .method-grid { grid-template-columns: 1fr; gap: 32px; }
+  .method-item { grid-template-columns: 1fr auto; }
+  .method-item .method-num { grid-column: 1 / -1; margin-bottom: 4px; }
+}
+
+/* ── BUYER CHECKLIST ─────────────────────────────────────────── */
+.checklist {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.checklist-item {
+  padding: 24px;
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 16px;
+  align-items: start;
+}
+.checklist-num {
+  font-family: var(--f-mono);
+  font-size: 12px;
+  color: var(--accent);
+  letter-spacing: 0.08em;
+  padding-top: 2px;
+}
+.checklist-q {
+  font-family: var(--f-display);
+  font-size: 17px;
+  font-weight: 500;
+  color: var(--text);
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+  margin-bottom: 8px;
+}
+.checklist-a {
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--muted);
+}
+
+@media (max-width: 700px) {
+  .checklist { grid-template-columns: 1fr; }
+}
+
+/* ── RELATED GUIDES (compact row) ────────────────────────────── */
+.related-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+.related-card {
+  display: block;
+  padding: 28px 24px;
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  transition: all var(--d-med) var(--ease-out);
+  position: relative;
+}
+.related-card:hover {
+  border-color: var(--border-3);
+  transform: translateY(-2px);
+}
+.related-tag {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+.related-title {
+  font-family: var(--f-display);
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: var(--text);
+}
+.related-card:hover .related-title { color: var(--accent); }
+
+@media (max-width: 900px) {
+  .related-grid { grid-template-columns: 1fr; }
+}

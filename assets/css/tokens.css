@@ -1,0 +1,71 @@
+/* PEOnomics design tokens — v2 "financial print" identity.
+   Old token names are preserved so ported content pages restyle automatically. */
+@import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+:root{
+  /* type */
+  --f-display:'Newsreader',Georgia,serif;
+  --f-body:'Hanken Grotesk',-apple-system,sans-serif;
+  --f-mono:'IBM Plex Mono',ui-monospace,monospace;
+
+  /* color — ink navy / cool paper / engraved-currency green / filing amber */
+  --bg:#F6F7F3;
+  --bg-elev:#FDFDFB;
+  --bg-warm:#EFF1EA;
+  --text:#11233A;
+  --muted:#4A5C73;
+  --border:#D8DAD2;
+
+  --accent:#1E6B52;
+  --accent-hover:#14503D;
+  --accent-deep:#0E3A2C;
+  --accent-dim:#E2EDE7;
+  --accent-glow:rgba(30,107,82,0.14);
+
+  --warm:#A87A1F;        /* uncertainty / ranges */
+  --warm-dim:#F3ECDC;
+
+  --positive:#1E6B52;
+  --negative:#9C3A22;
+  --neutral:#4A5C73;
+
+  /* dark surfaces (ledger, bands) */
+  --ink:#11233A;
+  --ink-2:#0C1A2C;
+  --ink-rule:#2A3D55;
+  --ink-text:#F6F7F3;
+  --ink-muted:#A9B7C8;
+  --ink-faint:#7E8FA4;
+
+  /* geometry — near-zero radius is part of the identity */
+  --r-sm:2px;
+  --r-md:2px;
+  --r-lg:3px;
+  --r-xl:4px;
+
+  /* widths */
+  --w-narrow:680px;
+  --w-prose:760px;
+  --w-page:1140px;
+  --w-wide:1280px;
+
+  /* motion */
+  --d-fast:120ms;
+  --d-med:240ms;
+  --d-slow:420ms;
+  --ease-out:cubic-bezier(.2,.7,.3,1);
+  --ease-in-out:cubic-bezier(.45,0,.25,1);
+}
+
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto;}
+  *,*::before,*::after{animation:none!important;transition:none!important;}
+}
+body{margin:0;font-family:var(--f-body);background:var(--bg);color:var(--text);
+  font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;}
+.num,.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums;}
+a{color:inherit;}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
+img{max-width:100%;}

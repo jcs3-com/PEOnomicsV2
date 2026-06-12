@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your estimate — PEOnomics</title>
+<meta name="description" content="Itemized employer-cost estimate, standalone vs PEO, built from published 2025 rates. Every assumption editable.">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="stylesheet" href="/assets/css/tokens.css">
+<link rel="stylesheet" href="/assets/css/site.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">PEO<span class="accent">nomics</span></a>
+    <ul class="nav-links">
+      <li><a href="/peo-pricing-explained.html">Pricing, explained</a></li>
+      <li><a href="/states/">State rates</a></li>
+      <li><a href="/methodology.html">Methodology</a></li>
+      <li><a href="/quote.html" class="nav-cta is-active">Run a quote</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="engine">
+  <div>
+    <div class="eyebrow" style="margin-top:8px;">Your assumptions</div>
+    <div id="enrichNote" class="enrich-note" hidden></div>
+    <div class="panel">
+      <h3>Company profile</h3>
+      <div class="field">
+        <label for="f-email">Business email</label>
+        <input type="email" id="f-email" placeholder="you@yourcompany.com">
+        <p class="hint" id="emailHint" hidden>That looks like a personal address — fill in the fields below and the estimate works the same.</p>
+      </div>
+      <div class="field">
+        <label for="f-state">Primary state</label>
+        <select id="f-state"></select>
+      </div>
+      <div class="field">
+        <label for="f-emp">Employees <small>(W-2 headcount)</small></label>
+        <input type="number" id="f-emp" value="25" min="1" max="2000">
+      </div>
+      <div class="field">
+        <label for="f-wage">Average annual wage</label>
+        <input type="number" id="f-wage" value="65000" min="20000" step="1000">
+      </div>
+      <div class="field">
+        <label for="f-ind">Workforce mix</label>
+        <select id="f-ind">
+          <option value="clerical_professional">Office / professional</option>
+          <option value="retail_services">Retail / services</option>
+          <option value="hospitality_food">Hospitality / food</option>
+          <option value="light_manufacturing">Light manufacturing</option>
+          <option value="transportation_logistics">Transportation / logistics</option>
+          <option value="construction_trades">Construction / trades</option>
+        </select>
+        <p class="hint">Drives the workers' comp line — the biggest lever in most quotes.</p>
+      </div>
+    </div>
+
+    <div class="lead-cta">
+      <h3>Want the deep version?</h3>
+      <p>We'll research your company, run the full numbers, and email you a drafted PEO quote — usually within two business days.</p>
+      <button class="btn-go" id="leadBtn">Send me the full analysis</button>
+      <p class="status-msg" id="leadStatus" hidden></p>
+    </div>
+  </div>
+
+  <div>
+    <div class="eyebrow" style="margin-top:8px;">Your estimate</div>
+    <aside class="ledger" aria-live="polite">
+      <div class="ledger-head">
+        <span class="ledger-title">Employer burden ledger — annual</span>
+        <span class="ledger-title" id="ledgerCompany"></span>
+      </div>
+      <div class="assumption" id="ledgerAssump"></div>
+      <div class="ledger-body"></div>
+      <div class="ledger-totals">
+        <div class="trow"><span class="label">Standalone total</span><span class="amt js-standalone">—</span></div>
+        <div class="trow"><span class="label">With PEO (range)</span><span class="amt js-peo">—</span></div>
+        <div class="trow delta"><span class="label">Estimated delta</span><span class="amt js-delta">—</span></div>
+      </div>
+      <div class="ledger-foot">
+        Estimate built on the 2025 PEOnomics rate dataset (v2025.1). Rates marked <span class="conf low" style="border-color:#A87A1F;color:#E3C988;">estimate</span> use market averages or ranges where published data can't pin a number. A bindable quote also depends on claims history, experience rating, and employee census — which is what the full analysis covers. <a href="/methodology.html" style="color:#8FA0B5;">Methodology &rarr;</a>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<footer class="footer">
+  <div><span class="nav-logo" style="font-size:17px;">PEO<span class="accent">nomics</span></span><br>PEO cost intelligence.</div>
+  <div>
+    <a href="/states/">State rates</a>
+    <a href="/methodology.html">Methodology</a>
+    <a href="https://github.com/jcs3-com/PEOnomicsV2">Dataset on GitHub</a>
+  </div>
+</footer>
+
+<script src="/assets/js/engine.js"></script>
+<script>
+(async () => {
+  const R = await PEO.load();
+  const $ = id => document.getElementById(id);
+  const FREEMAIL = ['gmail.com','yahoo.com','hotmail.com','outlook.com','aol.com','icloud.com','proton.me','protonmail.com','msn.com','live.com','comcast.net','verizon.net','me.com','mail.com','ymail.com'];
+
+  // populate state select
+  const sel = $('f-state');
+  Object.entries(R.states).forEach(([ab, s]) => {
+    const o = document.createElement('option');
+    o.value = ab; o.textContent = s.name;
+    sel.appendChild(o);
+  });
+  sel.value = 'MD';
+
+  const ledger = document.querySelector('.ledger');
+  let enriched = null;
+
+  function inputs() {
+    return {
+      state: sel.value,
+      employees: Math.max(1, parseInt($('f-emp').value) || 25),
+      avgWage: Math.max(20000, parseInt($('f-wage').value) || 65000),
+      industry: $('f-ind').value
+    };
+  }
+
+  function draw() {
+    const inp = inputs();
+    $('ledgerAssump').innerHTML =
+      `<span>${inp.employees} EMPLOYEES</span><span>AVG WAGE ${PEO.fmt(inp.avgWage)}</span><span>${$('f-ind').selectedOptions[0].text.toUpperCase()}</span>`;
+    PEO.renderLedger(ledger, inp, { showConf: true });
+  }
+
+  ['f-state','f-emp','f-wage','f-ind'].forEach(id => {
+    $(id).addEventListener('input', draw);
+    $(id).addEventListener('change', draw);
+  });
+
+  // email from ?e= or manual entry → enrichment
+  async function enrich(email) {
+    const domain = (email.split('@')[1] || '').toLowerCase().trim();
+    if (!domain) return;
+    if (FREEMAIL.includes(domain)) { $('emailHint').hidden = false; return; }
+    $('emailHint').hidden = true;
+    try {
+      const res = await fetch('/api/enrich?domain=' + encodeURIComponent(domain));
+      if (!res.ok) return;
+      const d = await res.json();
+      enriched = d;
+      const note = $('enrichNote');
+      const bits = [];
+      if (d.company) { bits.push(`<strong>${d.company}</strong>`); $('ledgerCompany').textContent = d.company.toUpperCase(); }
+      if (d.stateGuess && R.states[d.stateGuess]) { sel.value = d.stateGuess; bits.push(`based in ${R.states[d.stateGuess].name}`); }
+      if (d.industryGuess) { $('f-ind').value = d.industryGuess; bits.push($('f-ind').selectedOptions[0].text.toLowerCase()); }
+      if (bits.length) {
+        note.innerHTML = `We pre-filled what we could: ${bits.join(' &middot; ')}. Adjust anything that's off.`;
+        note.hidden = false;
+      }
+      draw();
+    } catch (e) { /* enrichment is best-effort; estimate works without it */ }
+  }
+
+  const params = new URLSearchParams(location.search);
+  if (params.get('e')) { $('f-email').value = params.get('e'); enrich(params.get('e')); }
+  $('f-email').addEventListener('change', () => enrich($('f-email').value));
+
+  // lead capture
+  $('leadBtn').addEventListener('click', async () => {
+    const email = $('f-email').value.trim();
+    const status = $('leadStatus');
+    status.hidden = false;
+    if (!email || !email.includes('@')) {
+      status.textContent = 'Add your email above first.'; status.className = 'status-msg err'; return;
+    }
+    status.textContent = 'Sending…'; status.className = 'status-msg';
+    const inp = inputs();
+    const c = PEO.compute(inp);
+    try {
+      const res = await fetch('/api/lead', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email, ...inp,
+          company: enriched?.company || '',
+          standalone: Math.round(c.standalone),
+          peoLow: Math.round(c.peoLo), peoHigh: Math.round(c.peoHi),
+          page: location.href
+        })
+      });
+      if (!res.ok) throw new Error();
+      status.textContent = 'Got it. Your full analysis is on its way — usually within two business days.';
+      status.className = 'status-msg ok';
+      $('leadBtn').disabled = true;
+    } catch (e) {
+      status.innerHTML = 'Something hiccuped. Email us directly: <a href="mailto:quotes@peonomics.com" style="color:#5FBF9A;">quotes@peonomics.com</a>';
+      status.className = 'status-msg err';
+    }
+  });
+
+  draw();
+})();
+</script>
+</body>
+</html>
