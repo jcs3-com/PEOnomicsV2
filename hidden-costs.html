@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Hidden Cost of In-House HR | PEOnomics</title>
+<meta name="description" content="PwC found that administering payroll and HR in-house costs ~$2,000 per employee per year — and more than half of it is hidden. The thesis behind the PEOnomics calculator.">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="stylesheet" href="/assets/css/tokens.css">
+<link rel="stylesheet" href="/assets/css/site.css">
+<style>
+.lede{max-width:var(--w-prose);}
+.lede p{font-size:17px;color:var(--muted);margin:0 0 18px;}
+.bignum{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);margin:44px 0;}
+@media(max-width:680px){.bignum{grid-template-columns:1fr;}}
+.bignum .cell{background:var(--bg-elev);padding:26px 22px;}
+.bignum .v{font-family:var(--f-mono);font-size:30px;font-weight:600;color:var(--accent-hover);display:block;letter-spacing:-0.02em;}
+.bignum .l{font-size:13.5px;color:var(--muted);margin-top:6px;}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);margin:32px 0;}
+@media(max-width:680px){.split{grid-template-columns:1fr;}}
+.split .half{background:var(--bg-elev);padding:24px;}
+.split .half.hidden-side{background:var(--ink);color:var(--ink-text);}
+.split h4{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;margin:0 0 14px;color:var(--muted);}
+.split.x .hidden-side h4{color:#8FA0B5;}
+.split ul{margin:0;padding-left:18px;font-size:14px;line-height:1.7;}
+.prose{max-width:var(--w-prose);}
+.prose h3{font-family:var(--f-display);font-size:24px;font-weight:500;margin:40px 0 12px;letter-spacing:-0.01em;}
+.prose p{font-size:16px;color:var(--text);margin:0 0 16px;line-height:1.6;}
+.prose .muted{color:var(--muted);}
+.callout{border-left:3px solid var(--accent);background:var(--accent-dim);padding:18px 20px;margin:28px 0;font-size:15px;}
+.disclosure-note{font-family:var(--f-mono);font-size:11.5px;color:var(--muted);border-top:1px solid var(--border);padding-top:16px;margin-top:40px;line-height:1.7;}
+.cta-strip{margin-top:44px;border:1px solid var(--text);background:var(--bg-elev);padding:28px;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;}
+</style>
+</head>
+<body>
+
+<nav class="nav"><div class="nav-inner">
+  <a href="/" class="nav-logo">PEO<span class="accent">nomics</span></a>
+  <ul class="nav-links">
+    <li><a href="/hidden-costs.html" class="is-active">Hidden costs</a></li>
+    <li><a href="/peo-pricing-explained.html">Pricing, explained</a></li>
+    <li><a href="/states/">State rates</a></li>
+    <li><a href="/methodology.html">Methodology</a></li>
+    <li><a href="/quote.html" class="nav-cta">Run a quote</a></li>
+  </ul>
+</div></nav>
+
+<section class="section">
+  <div class="shell lede">
+    <div class="sec-eyebrow">The thesis</div>
+    <h1 style="font-size:clamp(32px,4.4vw,52px);">The cheapest line on your<br><em>HR budget is the one<br>you never see.</em></h1>
+    <p>Every employer compares a PEO fee against zero. That comparison is wrong. Running payroll, benefits, time, and HR administration in-house isn't free — it's one of the most expensive things a small company does, and most of the cost is invisible.</p>
+    <p>PwC has spent two decades measuring exactly how expensive. The finding is the reason this site exists.</p>
+  </div>
+
+  <div class="shell" style="max-width:var(--w-prose);">
+    <div class="bignum">
+      <div class="cell"><span class="v">~$2,000</span><div class="l">Per employee, per year, to administer payroll &amp; HR in-house at a mid-size firm</div></div>
+      <div class="cell"><span class="v">&gt;50%</span><div class="l">Of that total is "hidden" cost — indirect labor, system seams, maintenance</div></div>
+      <div class="cell"><span class="v">18%</span><div class="l">Higher total cost of ownership for in-house vs. outsourced administration</div></div>
+    </div>
+    <p class="muted" style="font-size:12.5px;font-family:var(--f-mono);margin-top:-24px;">Source: PwC, <em>The Hidden Reality of Payroll &amp; HR Administration Costs</em> (2011), 279 organizations. Figures below are the study's, with 2026 inflation-adjusted equivalents noted.</p>
+  </div>
+</section>
+
+<section class="section band-raised">
+  <div class="shell prose">
+    <div class="sec-eyebrow">What "hidden" actually means</div>
+    <h2>Half the bill never hits a budget line.</h2>
+    <p class="muted">The visible costs are easy: payroll software, the HR staffer's salary, the benefits broker. PwC found those are barely half the story. The rest is buried in time and friction nobody tracks.</p>
+
+    <div class="split x">
+      <div class="half">
+        <h4>Visible costs (≈49%)</h4>
+        <ul>
+          <li>Payroll &amp; HRIS software licenses</li>
+          <li>Direct HR/payroll staff salaries</li>
+          <li>System installation &amp; upgrades</li>
+          <li>Outsourced tax filing, check printing</li>
+        </ul>
+      </div>
+      <div class="half hidden-side">
+        <h4>Hidden costs (&gt;51%)</h4>
+        <ul>
+          <li><strong>Indirect labor</strong> — managers approving time, distributing pay, answering benefits questions</li>
+          <li><strong>"Seams" costs</strong> — making disconnected systems talk to each other (~$200/EE/yr alone)</li>
+          <li><strong>System maintenance</strong> — the IT time to keep it all running</li>
+          <li><strong>Non-labor overhead</strong> — consultants, facilities, G&amp;A</li>
+        </ul>
+      </div>
+    </div>
+
+    <p>The indirect labor line is the quiet killer. PwC pegged it at <strong>nearly $10 per paycheck</strong> — the cumulative minutes managers and staff spend on payroll and benefits tasks that aren't anyone's actual job. Multiply that across every pay period, every employee, every year.</p>
+
+    <div class="callout">
+      The smaller you are, the worse it gets. A 1,000-person company spreads its HR overhead across 1,000 people. A 20-person company spreads the same fixed obligations across 20 — so its <em>per-employee</em> cost runs <strong>materially higher</strong>. Diseconomies of scale are why in-house administration punishes small employers most.
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="shell prose">
+    <div class="sec-eyebrow">Why this changes the math</div>
+    <h2>A PEO doesn't add a cost. It replaces one.</h2>
+    <p>This is the framing most PEO comparisons get backwards. The PEO fee isn't a new expense bolted onto your existing costs — it <strong>absorbs</strong> the administrative burden you're already carrying, the visible half and the hidden half both. The honest comparison isn't "fee vs. nothing." It's "fee vs. the fully-loaded cost of doing it yourself."</p>
+    <p>That's why the PEOnomics calculator now puts an <strong>in-house HR administration line</strong> in the standalone column. Built from PwC's per-employee figures, scaled to your headcount, it's the cost that was always there and never shown. Add it, and for most small and mid-size employers the comparison stops favoring the status quo.</p>
+
+    <h3>What a PEO consolidates that ADP doesn't</h3>
+    <p>PwC measured outsourcing to ADP — payroll and HR administration. A PEO goes further. Through co-employment it also consolidates the <strong>statutory and insurance layers</strong>: SUI rate management, workers' comp under a master policy, and benefits sourced through the PEO's pooled buying power. So the PwC finding is the <em>floor</em> of the PEO argument, not the ceiling — it quantifies the administrative savings without counting the SUI, WC, and benefits effects a PEO adds on top.</p>
+
+    <div class="cta-strip">
+      <div><strong>See it in your own numbers.</strong><br><span class="muted" style="font-size:14px;">The calculator now counts the in-house admin burden. Watch where your real break-even lands.</span></div>
+      <a href="/quote.html" class="btn-go" style="text-decoration:none;">Run your quote &rarr;</a>
+    </div>
+
+    <p class="disclosure-note">
+      <strong>On the source.</strong> The PwC study (2011, 279 U.S. organizations) was sponsored by ADP, and "outsourcing" in the study specifically means outsourcing to ADP; PwC does not generalize its findings to other providers or to PEOs. We cite it for its structural findings — that in-house administration is expensive and that more than half the cost is hidden — which are robust and independently sensible. Dollar figures are 15 years old; where we use them in the calculator we apply a labeled inflation adjustment (~+43% CPI, 2011→2026) and flag the result as an estimate. The original is linked in our <a href="/methodology.html">methodology</a>.
+    </p>
+  </div>
+</section>
+
+<footer class="footer">
+  <div><span class="nav-logo" style="font-size:17px;">PEO<span class="accent">nomics</span></span><br>PEO cost intelligence.</div>
+  <div>
+    <a href="/hidden-costs.html">Hidden costs</a>
+    <a href="/states/">State rates</a>
+    <a href="/methodology.html">Methodology</a>
+    <a href="https://github.com/jcs3-com/PEOnomicsV2">Dataset on GitHub</a>
+  </div>
+</footer>
+</body>
+</html>

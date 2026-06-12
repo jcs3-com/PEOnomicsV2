@@ -43,21 +43,34 @@ const PEO = (() => {
 
     // PEO admin fee range (PEPM tier)
     const a = R.peo_admin;
-    const adminLo = EMP * a.pepm_low * 12;
-    const adminHi = EMP * a.pepm_high * 12;
+    const peoFeeLo = EMP * a.pepm_low * 12;
+    const peoFeeHi = EMP * a.pepm_high * 12;
 
-    // Standalone = statutory + WC + midpoint health (no PEO fee)
-    const standalone = fica + futa + sui + wc + healthMid;
+    // In-house HR administration burden (PwC TCO, CPI-adjusted).
+    // PEPY rises as headcount falls — diseconomies of scale.
+    const hb = R.hr_admin_burden;
+    const tier = hb.pepy_by_headcount.find(t => EMP <= t.max_employees) || hb.pepy_by_headcount.at(-1);
+    const adminPepy = tier.pepy;
+    const adminBurden = EMP * adminPepy;             // standalone bears this in full
+    const adminBurdenLo = adminBurden * (1 - hb.midpoint_band_pct);
+    const adminBurdenHi = adminBurden * (1 + hb.midpoint_band_pct);
+    // A PEO absorbs most of this; a residual ~20% stays as internal coordination time.
+    const peoResidualAdmin = adminBurden * 0.20;
 
-    // PEO scenarios:
-    // favorable  — master-plan health 12% better, WC managed 10% better, low admin
-    // conservative — health parity, WC parity, high admin
-    const peoLo = fica + futa + sui + wc * 0.90 + healthLo * 0.88 + adminLo;
-    const peoHi = fica + futa + sui + wc * 1.00 + healthHi * 1.00 + adminHi;
+    // Standalone = statutory + WC + midpoint health + full in-house admin burden
+    const standalone = fica + futa + sui + wc + healthMid + adminBurden;
+
+    // PEO scenarios — fee replaces the admin burden, plus health/WC effects:
+    // favorable  — master-plan health 12% better, WC managed 10% better, low fee
+    // conservative — health parity, WC parity, high fee
+    const peoLo = fica + futa + sui + wc * 0.90 + healthLo * 0.88 + peoFeeLo + peoResidualAdmin;
+    const peoHi = fica + futa + sui + wc * 1.00 + healthHi * 1.00 + peoFeeHi + peoResidualAdmin;
     const peoMid = (peoLo + peoHi) / 2;
 
     return { st, f, mult, wcRate, crAdd,
-      fica, futa, sui, wc, healthLo, healthMid, healthHi, adminLo, adminHi,
+      fica, futa, sui, wc, healthLo, healthMid, healthHi,
+      peoFeeLo, peoFeeHi, adminPepy, adminBurden, adminBurdenLo, adminBurdenHi,
+      adminConfidence: tier.confidence, peoResidualAdmin,
       standalone, peoLo, peoMid, peoHi, delta: standalone - peoMid };
   }
 
@@ -82,8 +95,10 @@ const PEO = (() => {
         <span class="rate">$${c.wcRate.toFixed(2)}/$100</span><span class="amt">${fmt(c.wc)}</span></div>
       <div class="lrow range"><span class="label">Health (employer share)<small>National avg, single coverage</small></span>
         <span class="rate">range</span><span class="amt">${fmt(c.healthLo)}&ndash;${fmt(c.healthHi)}</span></div>
-      <div class="lrow range"><span class="label">PEO admin fee<small>$${R.peo_admin.pepm_low}&ndash;$${R.peo_admin.pepm_high} PEPM tier</small></span>
-        <span class="rate">range</span><span class="amt">${fmt(c.adminLo)}&ndash;${fmt(c.adminHi)}</span></div>`;
+      <div class="lrow range"><span class="label">In-house HR admin${opts.showConf ? confBadge(c.adminConfidence) : ''}<small>Standalone only · $${c.adminPepy.toLocaleString()}/EE/yr · <a href="/hidden-costs.html" style="color:#8FA0B5;">PwC TCO &rarr;</a></small></span>
+        <span class="rate">standalone</span><span class="amt">${fmt(c.adminBurdenLo)}&ndash;${fmt(c.adminBurdenHi)}</span></div>
+      <div class="lrow range"><span class="label">PEO fee (replaces admin)<small>PEO only · $${R.peo_admin.pepm_low}&ndash;$${R.peo_admin.pepm_high} PEPM</small></span>
+        <span class="rate">PEO</span><span class="amt">${fmt(c.peoFeeLo + c.peoResidualAdmin)}&ndash;${fmt(c.peoFeeHi + c.peoResidualAdmin)}</span></div>`;
     const set = (id, v) => { const n = el.querySelector(id); if (n) n.textContent = v; };
     set('.js-standalone', fmt(c.standalone));
     set('.js-peo', fmt(c.peoLo) + '–' + fmt(c.peoHi));

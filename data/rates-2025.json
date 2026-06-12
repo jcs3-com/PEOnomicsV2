@@ -2,7 +2,7 @@
  "meta": {
   "dataset": "PEOnomics employer-burden rates",
   "tax_year": 2025,
-  "version": "2025.1-preliminary",
+  "version": "2025.2",
   "status": "PRELIMINARY - every figure carries a confidence flag; low-confidence values are estimates pending primary-source verification. Corrections via GitHub issues.",
   "sources": [
    "State workforce agencies (SUI)",
@@ -509,5 +509,47 @@
    "wc_confidence": "low",
    "wc_monopolistic": true
   }
+ },
+ "hr_admin_burden": {
+  "source": "PwC, 'The hidden reality of payroll & HR administration costs' (2011, ADP-sponsored). Dollar figures CPI-adjusted ~+43% to 2026.",
+  "basis_2011_pepy": {
+   "midsize_100_1000": 1953,
+   "large_1000plus": 1403
+  },
+  "cpi_adjustment": 1.43,
+  "note": "In-house TCO of payroll, workforce admin, time & attendance, and H&W administration, per employee per year. Hidden costs (indirect labor, seams, system maintenance) are >50% of this per the study. Smaller employers pay more PEPY due to diseconomies of scale; tiers below extrapolate the study's size curve and are labeled as estimates.",
+  "pepy_by_headcount": [
+   {
+    "max_employees": 9,
+    "pepy": 3450,
+    "confidence": "low"
+   },
+   {
+    "max_employees": 24,
+    "pepy": 3150,
+    "confidence": "low"
+   },
+   {
+    "max_employees": 49,
+    "pepy": 2950,
+    "confidence": "low"
+   },
+   {
+    "max_employees": 99,
+    "pepy": 2800,
+    "confidence": "med"
+   },
+   {
+    "max_employees": 1000,
+    "pepy": 2790,
+    "confidence": "med"
+   },
+   {
+    "max_employees": 100000,
+    "pepy": 2010,
+    "confidence": "med"
+   }
+  ],
+  "midpoint_band_pct": 0.15
  }
 }
