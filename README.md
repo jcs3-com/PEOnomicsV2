@@ -13,7 +13,7 @@ step for the core site, no client-side secrets.
 index.html              Landing — live sample ledger (MD/CA/TX/FL/NY)
 quote.html              Quote engine — enrichment prefill, editable assumptions,
                         itemized ledger, lead capture
-states/                 51 generated state rate pages + index (programmatic SEO)
+states/                 51 generated state rate pages + index (programmatic SEO.)
 data/rates-2025.json    The dataset. Every figure carries a confidence flag.
 assets/js/engine.js     Computation engine (shared by index + quote)
 functions/api/enrich.js Cloudflare Pages Function — $0 enrichment: fetches the
