@@ -104,3 +104,27 @@ for ab, s in R['states'].items():
         body, f"/states/{ab.lower()}.html"))
 
 print(f"built {len(R['states'])} state pages + index")
+
+
+# ---- sitemap (covers ALL public pages, not just states) ----
+def build_sitemap():
+    import glob, datetime
+    today = datetime.date.today().isoformat()
+    urls = []
+    for p in sorted(glob.glob(os.path.join(ROOT, '*.html'))):
+        n = os.path.basename(p)
+        urls.append('https://peonomics.com/' if n == 'index.html' else f'https://peonomics.com/{n}')
+    for p in sorted(glob.glob(os.path.join(ROOT, 'states', '*.html'))):
+        n = os.path.basename(p)
+        urls.append('https://peonomics.com/states/' if n == 'index.html' else f'https://peonomics.com/states/{n}')
+    urls = sorted(set(urls), key=lambda u: (u != 'https://peonomics.com/', u))
+    lines = ['<?xml version="1.0" encoding="UTF-8"?>',
+             '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
+    for u in urls:
+        lines.append(f'  <url><loc>{u}</loc><lastmod>{today}</lastmod></url>')
+    lines.append('</urlset>')
+    open(os.path.join(ROOT, 'sitemap.xml'), 'w').write('\n'.join(lines) + '\n')
+    print(f"built sitemap.xml ({len(urls)} urls)")
+
+
+build_sitemap()
