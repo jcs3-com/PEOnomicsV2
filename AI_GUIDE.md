@@ -84,12 +84,18 @@ favicon.svg  README.md  .gitignore
 Identity: **"financial print."** Editorial, engraved, precise. The point is to NOT look like an
 AI-generated template.
 
-- **Always link `tokens.css` FIRST** in `<head>`, then the role stylesheet for the page type:
-  - landing / app / state pages → `tokens.css` + `site.css` (e.g. index, quote, hidden-costs, states/*)
-  - article pages → `tokens.css` + `content.css` (e.g. about, contact, insights, methodology, peo-pricing-explained, peo-vs-payroll)
-  - ranking pages → `tokens.css` + `ranking.css` (best-peo-*)
-  When building a new page, copy the `<head>` and structure from an **existing page of the same
-  type**.
+- **Stylesheet order is LAW** (getting this wrong shipped a real bug — broken nav/footer on 10
+  pages). `site.css` carries the shared chrome — `.nav`, `.footer`, `.btn*`, `.eyebrow`, `.hero` —
+  so **every page links it**. Link in this exact order in `<head>`:
+  1. `tokens.css` — design variables, always first.
+  2. `site.css` — base + chrome, on EVERY page, no exceptions.
+  3. the role sheet, if the page needs one: `content.css` for article pages (about, contact,
+     insights, methodology, peo-pricing-explained, peo-vs-payroll), or `ranking.css` for the
+     best-peo-* pages.
+  `content.css` and `ranking.css` are *additive*: they define only their own content classes
+  (`.prose`, `.model-card`, `.compare-grid`, ranking tables) and share **zero** selectors with
+  `site.css`. A page that links a role sheet but NOT `site.css` renders with an unstyled nav and
+  footer. When building a new page, copy the `<head>` from an **existing page of the same type**.
 - **Never hard-code colors, fonts, border-radius, or spacing.** Use the CSS variables:
   `var(--accent)` (#1E6B52 engraved-currency green), `var(--text)`, `var(--bg)`, `var(--muted)`,
   `var(--warm)` (reserved for *ranges / uncertainty*), `var(--positive)` / `var(--negative)`, etc.
