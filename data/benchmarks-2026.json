@@ -1,0 +1,83 @@
+{
+  "metadata": {
+    "year": 2026,
+    "lastReviewed": "2026-10-27",
+    "purpose": "Verified 2026 federal and national context; state SUTA/WC remains 2025 in existing Cost Lab pending official verification",
+    "doNotBlend": "Do not label the 2025 state reference model as 2026 without updating and reviewing individual state values.",
+    "verification": "Each value checked against the cited primary source page on lastReviewed (SSA OACT contribution-and-benefit-base table; KFF EHBS 2026 report page)."
+  },
+  "federal": {
+    "socialSecurityWageBase": {
+      "value": 184500,
+      "year": 2026,
+      "sourceName": "Social Security Administration",
+      "sourceUrl": "https://www.ssa.gov/OACT/COLA/cbb.html",
+      "lastReviewed": "2026-10-27",
+      "label": "Social Security taxable wage maximum"
+    },
+    "employerSocialSecurityRate": {
+      "value": 0.062,
+      "year": 2026,
+      "sourceName": "Social Security Administration",
+      "sourceUrl": "https://www.ssa.gov/OACT/cola/cbb.html",
+      "lastReviewed": "2026-10-27",
+      "label": "Employer Social Security tax rate"
+    }
+  },
+  "healthNational": {
+    "annualSinglePremium": {
+      "value": 9804,
+      "year": 2026,
+      "sourceName": "KFF EHBS 2026",
+      "sourceUrl": "https://www.kff.org/health-costs/2026-employer-health-benefits-survey/",
+      "lastReviewed": "2026-10-27",
+      "label": "Avg. annual premium, single coverage (all firms)"
+    },
+    "annualSingleWorkerContribution": {
+      "value": 1672,
+      "year": 2026,
+      "sourceName": "KFF EHBS 2026",
+      "sourceUrl": "https://www.kff.org/health-costs/2026-employer-health-benefits-survey/",
+      "lastReviewed": "2026-10-27",
+      "label": "Avg. worker contribution, single"
+    },
+    "annualFamilyPremium": {
+      "value": 28303,
+      "year": 2026,
+      "sourceName": "KFF EHBS 2026",
+      "sourceUrl": "https://www.kff.org/health-costs/2026-employer-health-benefits-survey/",
+      "lastReviewed": "2026-10-27",
+      "label": "Avg. annual premium, family coverage (all firms)"
+    },
+    "annualFamilyWorkerContribution": {
+      "value": 7471,
+      "year": 2026,
+      "sourceName": "KFF EHBS 2026",
+      "sourceUrl": "https://www.kff.org/health-costs/2026-employer-health-benefits-survey/",
+      "lastReviewed": "2026-10-27",
+      "label": "Avg. worker contribution, family"
+    },
+    "annualSingleEmployerShareDerived": {
+      "value": 8132,
+      "year": 2026,
+      "label": "Employer share, single (derived: premium − worker contribution)",
+      "sourceName": "Derived from KFF EHBS 2026",
+      "sourceUrl": "https://www.kff.org/health-costs/2026-employer-health-benefits-survey/",
+      "lastReviewed": "2026-10-27"
+    },
+    "annualFamilyEmployerShareDerived": {
+      "value": 20832,
+      "year": 2026,
+      "label": "Employer share, family (derived: premium − worker contribution)",
+      "sourceName": "Derived from KFF EHBS 2026",
+      "sourceUrl": "https://www.kff.org/health-costs/2026-employer-health-benefits-survey/",
+      "lastReviewed": "2026-10-27"
+    }
+  },
+  "stateIndustryWages": {},
+  "stateHealth": {},
+  "notes": [
+    "National annual employer cost is premium minus annual worker contribution; do not substitute it for a state-level employer benchmark.",
+    "BLS QCEW annual pay is per covered employee and excludes benefits; match ownership and NAICS scope consistently."
+  ]
+}

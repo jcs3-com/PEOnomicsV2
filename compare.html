@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Compare PEO Quotes Side by Side — Free Tool | PEOnomics</title>
+<meta name="description" content="Normalize up to three PEO proposals: admin fee, SUTA, workers' comp, health, EPLI and setup, on identical terms. Free, private to your browser, CSV export.">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="stylesheet" href="/assets/css/tokens.css">
+<link rel="stylesheet" href="/assets/css/site.css">
+<link rel="stylesheet" href="/assets/css/cost-lab.css">
+<link rel="stylesheet" href="/assets/css/compare.css">
+<link rel="canonical" href="https://peonomics.com/compare.html">
+<meta property="og:title" content="Compare PEO Quotes Side by Side — Free Tool | PEOnomics">
+<meta property="og:description" content="Normalize up to three PEO proposals: admin fee, SUTA, workers' comp, health, EPLI and setup, on identical terms. Free, private to your browser, CSV export.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://peonomics.com/compare.html">
+<meta property="og:image" content="https://peonomics.com/assets/images/og-default.png">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{"@context": "https://schema.org", "@type": "WebApplication", "name": "PEOnomics Quote Comparator", "url": "https://peonomics.com/compare.html", "applicationCategory": "BusinessApplication", "operatingSystem": "Web", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "description": "Normalize up to three PEO proposals: admin fee, SUTA, workers' comp, health, EPLI and setup, on identical terms. Free, private to your browser, CSV export."}
+</script>
+</head>
+<body>
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">PEO<span class="accent">nomics</span></a>
+    <ul class="nav-links">
+      <li><a href="/compare.html" class="is-active">Compare quotes</a></li>
+      <li><a href="/data-library.html">Data library</a></li>
+      <li><a href="/states/">State rates</a></li>
+      <li><a href="/peo-pricing-explained.html">Pricing, explained</a></li>
+      <li><a href="/#cost-lab" class="nav-cta">Open the Cost Lab</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="section compare-main">
+  <div class="shell">
+    <div class="eyebrow">Quote comparator &middot; no email required</div>
+    <h1>Put every quote on <em>the same page.</em></h1>
+    <p class="hero-sub">PEO proposals put costs in different places. Enter the numbers from up to three quotes and see first-year and three-year cost on identical terms. No provider recommendations, no assumed savings, and nothing leaves your browser.</p>
+
+    <section class="panel compare-context" aria-labelledby="ctx-title">
+      <h2 id="ctx-title">Common assumptions</h2>
+      <div class="compare-fields">
+        <div class="field"><label for="c-employees">Employees</label><input id="c-employees" type="number" min="1" max="100000" step="1" value="25" inputmode="numeric"></div>
+        <div class="field"><label for="c-wage">Avg. annual wage ($)</label><input id="c-wage" type="number" min="0" step="1000" value="65000" inputmode="numeric"></div>
+        <div class="field"><label for="c-enrollment">Health enrollment (%)</label><input id="c-enrollment" type="number" min="0" max="100" value="60" inputmode="numeric"></div>
+        <div class="field"><label for="c-sutaBase">SUTA taxable wage base ($)</label><input id="c-sutaBase" type="number" min="0" value="9000" inputmode="numeric"><p class="hint">Look yours up in the <a href="/data-library.html">data library</a>.</p></div>
+      </div>
+      <p class="hint">The same headcount, payroll, enrollment and wage base apply to every proposal. Employer FICA and FUTA are left out because they are identical across PEOs.</p>
+    </section>
+
+    <section aria-labelledby="prop-title">
+      <h2 id="prop-title">Enter proposals</h2>
+      <p class="sec-sub">Leave a value blank if the quote doesn't state it &mdash; blank means unknown, not zero. Type 0 only when the quote explicitly charges nothing. A proposal gets a total only when every field is filled.</p>
+      <div class="compare-cards" id="compareCards"></div>
+    </section>
+
+    <section class="ledger on-ink compare-results" aria-labelledby="res-title" aria-live="polite">
+      <div class="ledger-head"><span class="ledger-title" id="res-title">Normalized comparison</span><span class="ledger-title">Annual unless noted</span></div>
+      <p class="compare-status" id="comparisonStatus"></p>
+      <div class="compare-scroll"><table class="compare-table"><caption>Proposal costs on identical assumptions</caption><thead><tr><th scope="col">Cost line</th><th scope="col">Proposal A</th><th scope="col">Proposal B</th><th scope="col">Proposal C</th></tr></thead><tbody id="compareRows"></tbody></table></div>
+      <div class="ledger-foot">Compares only the terms you entered. Unstated fees, experience modifiers, plan design and contract terms are not included. Make sure every quote covers the same period.</div>
+    </section>
+    <div class="compare-actions"><button type="button" class="btn-go" id="downloadCompare">Download CSV</button><a class="lab-textlink" href="/#cost-lab">Model your full employer cost &rarr;</a></div>
+  </div>
+</main>
+
+<footer class="footer">
+  <div><span class="footer-brand">PEO<span class="accent">nomics</span></span><br>PEO cost intelligence. Estimates are not quotes or advice.</div>
+  <div>
+    <a href="/#cost-lab">Cost Lab</a>
+    <a href="/compare.html">Compare quotes</a>
+    <a href="/data-library.html">Data library</a>
+    <a href="/states/">State rates</a>
+    <a href="/about.html">About</a>
+    <a href="/privacy.html">Privacy (draft)</a>
+    <a href="https://github.com/jcs3-com/PEOnomicsV2">Dataset on GitHub</a>
+  </div>
+</footer>
+
+<script src="/assets/js/quote-compare.js" defer></script>
+</body>
+</html>

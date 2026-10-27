@@ -3,7 +3,7 @@
 This file is the **only** source of truth for what is done, open, dropped, or pending a decision.
 Not chat history. Not artifacts. When you finish or add work, update this file in the same commit.
 
-**Last updated:** 2026-10-27 (Cost Lab P0 shipped to production)
+**Last updated:** 2026-10-27 (P1/P2 build: reports, comparator, data library — code live; email delivery awaits owner secrets)
 
 ---
 
@@ -48,7 +48,7 @@ Not chat history. Not artifacts. When you finish or add work, update this file i
     scraper fallback, SSRF hardening (DoH private-range check, per-hop redirect validation,
     blocked suffixes, no ports/userinfo, HTML-only, size cap), origin check, best-effort rate
     limit, **fail-closed usage logging** (no log → no enrichment). Old open GET proxy retired.
-  - Usage log Apps Script (`apps-script/usage-log.gs`): email, domain, company, state, industry,
+  - Usage log Apps Script (`apps-script/usage-log.gs`, since replaced by `usage-log-v2.gs`): email, domain, company, state, industry,
     approx. headcount, summary, source, page, UA, timestamp. Not a CRM; nothing to PEOs.
   - **Apollo tracker removed** from the homepage.
   - "Email this to me" CTA present and **disabled** with an honest note (P1). Print view works.
@@ -59,24 +59,59 @@ Not chat history. Not artifacts. When you finish or add work, update this file i
   - **Verified 2026-10-27:** `ANTHROPIC_API_KEY` is set in production — live `/api/enrich`
     returned `source:"research"` before this release (closes the old P1 "verify enrich live").
 
+- **P1/P2 consolidated build (2026-10-27, second release)** — details in `docs/COST_LAB.md`.
+  - **Emailed report pipeline (code live, delivery OFF until secrets exist):** `POST /api/report-request`
+    validates business email (shared `functions/lib/validate.js`), verifies Cloudflare Turnstile
+    (hostname-bound), **recomputes the scenario server-side** (`functions/lib/report-model.js`;
+    parity with the Cost Lab tested on 1,224 randomized scenarios across 51 states × 6 industries),
+    logs `report_requested` before sending and `report_accepted`/`report_failed` after, and sends a
+    PDF + editable two-sheet XLSX via Resend with `Idempotency-Key = requestId`. Unconfigured → 503
+    before any third-party call. UI says "accepted for delivery", never "delivered".
+    `GET /api/report-status` returns only `{available: bool}`; the button and Turnstile stay off
+    until it is true AND a public site key is set.
+  - PDF: Courier-aligned table, word-wrapped notes, data year/version, limitations. XLSX: Inputs +
+    Model sheets with live formulas; blank PEO-side rates are formulas pointing at the standalone
+    cell; verified by editing inputs and recalculating in LibreOffice (matches the Cost Lab).
+  - **Event log v2** (`apps-script/usage-log-v2.gs`, replaces v1): append-only "Usage Log" + deduped
+    "Contacts" (counts, first/last seen, survey-eligibility date, suppression flag). No pipeline.
+  - **Quote Comparator** (`/compare.html`): three proposals, PEPM or % payroll, blank ≠ $0 ("Incomplete"),
+    first-year + three-year totals, CSV export, browser-only.
+  - **Data Library** (`/data-library.html`): 51-jurisdiction table rendered from `rates-2025.json`
+    (labeled historical), filter + CSV; **2026 national benchmarks** rendered from
+    `data/benchmarks-2026.json`: SSA wage base $184,500; KFF EHBS 2026 single $9,804 / worker $1,672,
+    family $28,303 / worker $7,471 (+ derived employer shares). Each checked at the primary source on
+    2026-10-27. Not blended into the Cost Lab's 2025 state defaults.
+  - **Privacy notice** (`/privacy.html`) published as a labeled **draft**, `noindex`, out of sitemap.
+  - State pages: real `<h1>`; CTA deep-links `/?state=XX#cost-lab` (lab preselects the state);
+    "verified" labels replaced — FICA "statutory", FUTA "statutory" or "estimate" (credit-reduction
+    states), dataset flags shown as "high/medium confidence" or "estimate" (also in the Cost Lab).
+  - 148 internal `/quote.html` links re-pointed to `/#cost-lab` (content pages + generator).
+  - Fixed: report CTA was unclickable under the sticky results ledger (moved below the grid).
+  - Tests now live in `tests/` (no deps): `node tests/test_enrich.mjs`, `test_model.mjs`,
+    `test_report.mjs`; `python3 tests/test_browser.py [URL --live]`. 127 checks on release.
+  - Package correction: the handoff's `test_browser.py` expected $48,000 admin for 25 × $150 PEPM;
+    correct is $45,000 (its code was right, its assertion wrong).
+
 ---
 
 ## 🔲 Open — prioritized
 
-### P0.1 — blockers to finish what shipped (owner action, ~10 min)
-- [ ] **Connect the usage log.** Until `USAGE_WEBHOOK_URL` exists, business-email lookup returns
-      503 and the UI says "lookup is offline" (calculator unaffected). Steps: header of
-      `apps-script/usage-log.gs`. The sheet "PEOnomics — Cost Lab Usage Log" was created in Drive
-      › 34.02 Website › PEOnomics 2.0 — Site Build. Add as a **Secret**, Production env, redeploy.
-- [ ] **Cloudflare WAF rate-limit rule** on `/api/enrich` (e.g. 10 req / 10 min / IP). The in-code
-      limiter is per-isolate and best-effort only; each lookup can cost ~1–2¢ of Haiku.
+### P0.1 — owner-only setup (credentials; Claude must not handle them) — see "External setup" in `docs/COST_LAB.md`
+- [ ] **Usage/event log:** paste `apps-script/usage-log-v2.gs` into the sheet "PEOnomics — Cost Lab
+      Usage Log" (Drive › 34.02 Website › PEOnomics 2.0 — Site Build), deploy as web app, add the URL
+      as Pages secret `USAGE_WEBHOOK_URL`. Unlocks business-email prefill AND is required for reports.
+- [ ] **Resend:** account + verify sending domain `peonomics.com` (DNS records in Cloudflare), API key →
+      Pages secret `RESEND_API_KEY`; sender → Pages secret `REPORT_FROM` (e.g. `PEOnomics <reports@peonomics.com>`).
+- [ ] **Turnstile:** widget for peonomics.com (+ www); **public** site key → `index.html` meta
+      `peonomics-turnstile-site-key`; secret → Pages secret `TURNSTILE_SECRET`.
+- [ ] **WAF rate-limit rule** on `/api/enrich` and `/api/report-request` (in-code limiter is per-isolate).
+- [ ] **Real inbox test** to the owner's own business mailbox once all four secrets exist: PDF + XLSX
+      arrive, Excel recalculates, double-click sends once, sheet shows requested/accepted rows.
 
 ### P1 — reports, data integrity, positioning
-- [ ] **Email this to me** — real PDF from the visitor's final edited inputs: `POST /api/report-request`
-      with a server-validated immutable snapshot, transactional email provider, idempotency key,
-      real delivery status. Keep the button disabled until tested end-to-end. No fake success.
-- [ ] **Privacy policy + retention schedule** before report email launches (homepage promises it).
-      Name actual processors (Cloudflare, Google, Anthropic, email provider). Deletion/suppression.
+- [ ] **Delivery webhooks** (Resend `email.delivered/bounced`) → log true delivery status, not just acceptance.
+- [ ] **Finalize privacy notice** (owner): confirm the proposed 12-month retention and the request
+      channel actually work, then drop the Draft label and `noindex`. Build deletion/suppression handling.
 - [ ] **30-day survey invite** — separate, disclosed permission; CAN-SPAM identification, postal
       address, working unsubscribe. Owner enables; don't automate before compliance is settled.
 - [ ] **Rate-data primary-source pass** → 2026 dataset with per-figure `value/year/effectiveDate/
@@ -90,23 +125,21 @@ Not chat history. Not artifacts. When you finish or add work, update this file i
 - [ ] **Reconcile positioning across pages.** `methodology.html` is a *ranking* methodology with a
       referral-fee disclosure (XcelHR); the homepage promises no PEO hand-off from the lab. Both
       can be true, but the site needs one coherent story. Owner-only factual claims.
-- [ ] **Re-point 148 internal `/quote.html` links** (content pages + `tools/build_states.py` CTA
-      "Run a {ST} quote") to `/#cost-lab`, then regenerate state pages. The stub covers it now.
-- [ ] **Persistent contact identity / dedup** beyond the raw event log (contacts vs. events).
 
 ### P2 — hygiene & polish
 - [ ] **Per-page OG images.** All pages currently share `og-default.png`. Page-specific cards
       (e.g. "Best PEOs for Construction 2026") convert better — generate per template later.
 - [ ] **Verify JSON-LD `datePublished`.** New Article/Org blocks use the site's existing
       convention (`2026-01-15`) with `dateModified` = today. Correct if real publish dates are known.
-- [ ] **State pages have no `<h1>`** (all 51, generated) — fix in `tools/build_states.py`.
 - [ ] **Content/ranking pages use v1 nav markup**; at 360 px their CTA wraps to ~100 px tall.
       Port them to the `site.css` `.nav` markup.
+- [ ] **P3 (from strategy):** provider directory with independently sourced fields only; source-refresh
+      pipeline; 3-year Cost Lab sensitivity.
 - [ ] **Audit/remove legacy code:** `assets/js/engine.js` (biased savings model),
       `functions/api/lead.js` + `apps-script/lead-capture.gs` (sales-lead path). Unreferenced
       since 2026-10-27; `/api/lead` is still a live endpoint. Owner decides delete vs. keep.
 - [ ] **Multi-state / wage-distribution modeling** (FICA above SS base, SUTA per state) — P2+.
-- [ ] **Quote Comparator** (normalize user-entered PEO quotes) — P2 per product strategy.
+- [ ] **Comparator v2:** multi-year fee escalators, per-quote SUTA base, link a quote into the Cost Lab.
 - [ ] Decide keep/remove `CNAME` (GitHub Pages fossil; harmless on Cloudflare).
 - [ ] Delete stray `/og-default.png` at repo root (leftover from the upload; unreferenced, harmless).
 

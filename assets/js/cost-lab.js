@@ -58,7 +58,7 @@
   const signed = v => (v > 0.5 ? '+' : v < -0.5 ? '−' : '') + '$' + Math.round(Math.abs(v)).toLocaleString('en-US');
   const num = id => { const v = parseFloat($(id).value); return Number.isFinite(v) ? v : 0; };
   const optNum = id => { const raw = $(id).value.trim(); if (raw === '') return null; const v = parseFloat(raw); return Number.isFinite(v) ? v : null; };
-  const CONF = { high: 'verified', med: 'likely', low: 'estimate' };
+  const CONF = { high: 'high confidence', med: 'medium confidence', low: 'estimate' };
 
   const PERSONAL = new Set(['gmail.com','googlemail.com','yahoo.com','yahoo.co.uk','ymail.com','rocketmail.com','hotmail.com','hotmail.co.uk','outlook.com','live.com','msn.com','aol.com','icloud.com','me.com','mac.com','mail.com','email.com','proton.me','protonmail.com','pm.me','gmx.com','gmx.net','zoho.com','yandex.com','tutanota.com','fastmail.com','hey.com','comcast.net','verizon.net','att.net','sbcglobal.net','bellsouth.net','cox.net','charter.net','earthlink.net','duck.com']);
 
@@ -282,7 +282,10 @@
     for (const [code, s] of Object.entries(R.states).sort((a, b) => a[1].name.localeCompare(b[1].name))) {
       const o = document.createElement('option'); o.value = code; o.textContent = s.name; sel.append(o);
     }
-    sel.value = R.states.MD ? 'MD' : sel.options[0].value;
+    // ?state=XX (from state pages) preselects the HQ / Main Worksite State; still editable.
+    let want = 'MD';
+    try { const q = new URLSearchParams(location.search).get('state'); if (q && R.states[q.toUpperCase()]) want = q.toUpperCase(); } catch { /* ignore */ }
+    sel.value = R.states[want] ? want : sel.options[0].value;
 
     const meta = R.meta || {};
     const lab = $('datasetLabel'); lab.replaceChildren();

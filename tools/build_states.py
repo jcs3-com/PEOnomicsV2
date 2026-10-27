@@ -8,7 +8,7 @@ R = json.load(open(os.path.join(ROOT, 'data', 'rates-2025.json')))
 OUT = os.path.join(ROOT, 'states')
 os.makedirs(OUT, exist_ok=True)
 
-CONF = {'high': 'verified', 'med': 'likely', 'low': 'estimate'}
+CONF = {'high': 'high confidence', 'med': 'medium confidence', 'low': 'estimate'}
 
 def shell(title, desc, body, canonical):
     return f"""<!DOCTYPE html>
@@ -30,7 +30,7 @@ def shell(title, desc, body, canonical):
     <li><a href="/peo-pricing-explained.html">Pricing, explained</a></li>
     <li><a href="/states/" class="is-active">State rates</a></li>
     <li><a href="/methodology.html">Methodology</a></li>
-    <li><a href="/quote.html" class="nav-cta">Run a quote</a></li>
+    <li><a href="/#cost-lab" class="nav-cta">Open the Cost Lab</a></li>
   </ul>
 </div></nav>
 {body}
@@ -79,23 +79,23 @@ for ab, s in R['states'].items():
     sui_per_ee = sui_max * s['sui_new_employer_rate']
     body = f"""<section class="section"><div class="shell" style="max-width:var(--w-prose);">
   <div class="sec-eyebrow"><a href="/states/" style="text-decoration:none;color:var(--accent);">State rates</a> / {s['name']}</div>
-  <h2>What employers pay in {s['name']}.</h2>
-  <p class="sec-sub">The 2025 statutory rates that drive employer costs — and any PEO quote — in {s['name']}.</p>
+  <h1>What employers pay in {s['name']}.</h1>
+  <p class="sec-sub">2025 reference rates (historical, preliminary — not current 2026 rates) for the costs that drive any PEO quote in {s['name']}. Confidence labels are our dataset's own ratings, not independent verification.</p>
 
   <table class="rate-table">
     <tr><td>SUI wage base</td><td class="num mono">${s['sui_wage_base']:,}</td><td><span class="conf {s['sui_confidence']}">{CONF[s['sui_confidence']]}</span></td></tr>
     <tr><td>SUI new-employer rate</td><td class="num mono">{s['sui_new_employer_rate']*100:.2f}%</td><td><span class="conf {s['sui_confidence']}">{CONF[s['sui_confidence']]}</span></td></tr>
     <tr><td>SUI cost per employee (at new-employer rate)</td><td class="num mono">${sui_per_ee:,.0f}/yr</td><td></td></tr>
-    <tr><td>FUTA effective rate</td><td class="num mono">{futa_rate:.1f}%</td><td><span class="conf high">verified</span></td></tr>
+    <tr><td>FUTA effective rate</td><td class="num mono">{futa_rate:.1f}%</td><td><span class="conf {'low' if cr else 'high'}">{'estimate' if cr else 'statutory'}</span></td></tr>
     <tr><td>Workers' comp index (per $100 payroll)</td><td class="num mono">${s['wc_index_per_100']:.2f}</td><td><span class="conf {s['wc_confidence']}">{CONF[s['wc_confidence']]}</span></td></tr>
-    <tr><td>FICA (federal, all states)</td><td class="num mono">7.65%</td><td><span class="conf high">verified</span></td></tr>
+    <tr><td>FICA (federal, all states)</td><td class="num mono">7.65%</td><td><span class="conf high">statutory</span></td></tr>
   </table>
   {cr_line}
   {mono_line}
   <p style="font-size:14px;color:var(--muted);">The workers' comp index is a payroll-weighted average — your actual rate depends on class-code mix. Office-heavy firms run well below the index; construction and transportation run well above it.</p>
   <div style="margin-top:36px;border:1px solid var(--text);background:var(--bg-elev);padding:24px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;">
     <div><strong>Run these rates against your headcount.</strong><br><span style="color:var(--muted);font-size:14px;">Itemized estimate, standalone vs PEO, in thirty seconds.</span></div>
-    <a href="/quote.html" class="btn-go" style="text-decoration:none;">Run a {ab} quote &rarr;</a>
+    <a href="/?state={ab}#cost-lab" class="btn-go" style="text-decoration:none;">Model {ab} in the Cost Lab &rarr;</a>
   </div>
 </div></section>"""
     open(os.path.join(OUT, ab.lower() + '.html'), 'w').write(shell(

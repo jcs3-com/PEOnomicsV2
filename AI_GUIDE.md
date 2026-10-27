@@ -20,7 +20,8 @@ site in any chat. Read this file *first*, before touching anything.
    **Pushing:** default is **Path A** (§6). Push only when BOTH are true: (a) the owner explicitly
    authorizes pushing/deploying in the current request, and (b) the session has GitHub write
    access granted through the platform's own GitHub integration (not a pasted token). Pushing
-   to `main` deploys to production — run the tests in `docs/COST_LAB.md` first. If either
+   to `main` deploys to production — run every suite in `tests/` first, push a feature branch,
+   check its `*.peonomicsv2.pages.dev` preview, then fast-forward `main`. If either
    condition is missing, use Path A.
 3. **Match, don't reinvent.** `assets/css/tokens.css` is law (§3). `index.html` (with
    `site.css` + `cost-lab.css`) is the reference implementation of the visual identity. New work must look like it.
@@ -37,14 +38,21 @@ site in any chat. Read this file *first*, before touching anything.
   **Auto-deploys on every push to `main`.** There is no separate deploy command.
 - **Serverless:** Cloudflare **Pages Functions** in `functions/api/`. A file at
   `functions/api/<name>.js` becomes a live endpoint at `/api/<name>`. Current endpoints:
-  `POST /api/enrich` (Cost Lab business-email lookup — validates, enriches by domain, logs to
-  the usage sheet, fails closed) and `/api/lead` (legacy, unreferenced). No standalone Workers.
-- **Secrets** (`ANTHROPIC_API_KEY`, `USAGE_WEBHOOK_URL`, legacy `LEAD_WEBHOOK_URL`) live as
-  **Cloudflare Pages environment variables**. Apollo is not used anywhere — never re-add it. They are injected into `env` at runtime. They NEVER appear in
+  `POST /api/enrich` (business-email lookup — validates, enriches by domain, logs, fails closed),
+  `POST /api/report-request` (Turnstile → server recompute → log → Resend PDF+XLSX),
+  `GET /api/report-status` (`{available}` only) and `/api/lead` (legacy, unreferenced).
+  Shared code lives in `functions/lib/` (no route handlers there). No standalone Workers.
+- **Secrets** (`ANTHROPIC_API_KEY`, `USAGE_WEBHOOK_URL`, `RESEND_API_KEY`, `REPORT_FROM`,
+  `TURNSTILE_SECRET`, legacy `LEAD_WEBHOOK_URL`) live as **Cloudflare Pages secrets**. An agent must not
+  type, paste or read them into any field or file — setup is owner-only (`docs/COST_LAB.md`). Apollo is not used anywhere — never re-add it. They are injected into `env` at runtime. They NEVER appear in
   the repo or in any chat. If a chat transcript contains a real key, that key is burned — tell
   the user to rotate it; do not use it.
-- **Usage log (not a lead list):** `/api/enrich` → Google Sheet via `USAGE_WEBHOOK_URL`. Setup
-  in the header of `apps-script/usage-log.gs`. Nothing creates CRM records or contacts a PEO.
+- **Event log (not a lead list):** lookups and report events → Google Sheet via `USAGE_WEBHOOK_URL`
+  (`apps-script/usage-log-v2.gs`: "Usage Log" + deduped "Contacts"). No CRM, nothing to PEOs, no survey sent.
+- **Data vintages are never blended:** `data/rates-2025.json` (historical state model) vs
+  `data/benchmarks-2026.json` (sourced national context, each value with `sourceUrl` + `lastReviewed`).
+  Never relabel 2025 values as 2026. Dataset confidence flags display as "high/medium confidence" or
+  "estimate" — never "verified".
 - **Enrichment:** Claude Haiku + web search on the **domain only**, hardened scraper fallback
   with SSRF controls. Details: `docs/COST_LAB.md`.
 - **The homepage Cost Lab assumes no PEO savings.** Both scenarios carry identical statutory and
@@ -73,14 +81,23 @@ assets/css/tokens.css           Design tokens (variables). LAW. Always linked fi
 assets/css/site.css             Base/components for landing/app/state pages.
 assets/css/content.css          Base for article pages.
 assets/css/ranking.css          Styles for best-peo ranking pages.
-assets/css/cost-lab.css         Cost Lab classes (tokens only). Linked after site.css on index.
+assets/css/cost-lab.css         Cost Lab classes (tokens only). Linked after site.css on index + tool pages.
+assets/css/compare.css          Comparator / data library / privacy classes (tokens only).
+compare.html data-library.html  Quote Comparator; Data Library. privacy.html = noindex DRAFT notice.
+assets/js/report-client.js      Report button: /api/report-status + Turnstile + POST /api/report-request.
+assets/js/quote-compare.js      Comparator (pure evaluateQuotes on window.PEOCompare).
+assets/js/data-library.js       Renders rates-2025.json and benchmarks-2026.json separately.
+data/benchmarks-2026.json       Sourced 2026 federal/national figures (not used by the Cost Lab model).
+functions/lib/                  validate.js, report-model.js, simple-pdf.js, simple-xlsx.js (shared code).
+functions/api/report-*.js       report-request (POST) and report-status (GET).
+tests/                          node + Playwright suites; run before every push (see docs/COST_LAB.md).
 assets/js/cost-lab.js           Cost Lab model + UI. Pure compute() exposed as window.PEOLab.
 assets/js/engine.js             LEGACY, unreferenced (biased savings model). Do not re-wire.
 assets/js/site.js               Site-wide JS.
 data/rates-2025.json            Versioned payroll-tax rate dataset w/ per-figure confidence flags.
 functions/api/enrich.js         POST /api/enrich — lookup: validate, enrich, log, fail closed.
 functions/api/lead.js           LEGACY /api/lead (old quote page lead → sheet). Unreferenced.
-apps-script/usage-log.gs        Apps Script for the Cost Lab usage-log sheet (USAGE_WEBHOOK_URL).
+apps-script/usage-log-v2.gs     Apps Script for the event-log sheet (USAGE_WEBHOOK_URL).
 apps-script/lead-capture.gs     LEGACY Apps Script for the old lead sheet.
 docs/COST_LAB.md                Cost Lab implementation notes: model, endpoint contract, tests.
 tools/build_states.py           Generator for the 51 state pages from rates-2025.json.

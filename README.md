@@ -12,15 +12,21 @@ internals: `docs/COST_LAB.md`.
 ## Architecture
 
 ```
-index.html               Homepage + Cost Lab (assets/js/cost-lab.js, assets/css/cost-lab.css)
+index.html               Homepage + Cost Lab (cost-lab.js/.css) + report button (report-client.js)
+compare.html             Quote Comparator (browser-only, CSV export)
+data-library.html        51-state reference table (2025, historical) + sourced 2026 national benchmarks
+privacy.html             Draft privacy notice (noindex)
 quote.html               Redirect stub -> /#cost-lab
 states/                  51 generated state rate pages + index
-data/rates-2025.json     The dataset (tax year 2025, preliminary). Per-figure confidence flags.
-functions/api/enrich.js  POST /api/enrich - business-email lookup: SSRF-hardened enrichment
-                         (Claude Haiku on the domain + scraper fallback), logged to a private
-                         usage sheet via USAGE_WEBHOOK_URL. Fails closed if the log is down.
-apps-script/usage-log.gs Apps Script for the usage-log sheet (setup steps in its header)
+data/rates-2025.json     State model dataset (tax year 2025, preliminary). Per-figure confidence flags.
+data/benchmarks-2026.json Sourced 2026 federal/national figures
+functions/api/enrich.js  POST - business-email lookup (Haiku on the domain + SSRF-safe scraper), logged
+functions/api/report-request.js  POST - Turnstile, server recompute, PDF+XLSX via Resend, logged
+functions/api/report-status.js   GET - {available}
+functions/lib/           Shared validation, report model, PDF and XLSX writers
+apps-script/usage-log-v2.gs  Event log + deduped contacts sheet (setup steps in its header)
 tools/build_states.py    Regenerates /states/ and sitemap.xml from the dataset
+tests/                   node + Playwright suites
 Legacy, unreferenced:    assets/js/engine.js, functions/api/lead.js, apps-script/lead-capture.gs
 ```
 
@@ -35,10 +41,10 @@ business), methodology.
 2. Build settings: **Framework preset: None. Build command: (empty). Output
    directory: `/`** — it's a static site; Functions in `/functions` deploy
    automatically.
-3. Set up the usage-log webhook: follow the instructions at the top of
-   `apps-script/usage-log.gs` (5 minutes), then add the secret **`USAGE_WEBHOOK_URL`**
-   (and **`ANTHROPIC_API_KEY`** for research-grade enrichment) in Pages → Settings →
-   Variables and Secrets. Redeploy.
+3. Secrets (Pages → Settings → Variables and Secrets): `ANTHROPIC_API_KEY`, `USAGE_WEBHOOK_URL`
+   (`apps-script/usage-log-v2.gs`), and for emailed reports `RESEND_API_KEY`, `REPORT_FROM`,
+   `TURNSTILE_SECRET` plus the public Turnstile site key in `index.html`. Step-by-step:
+   `docs/COST_LAB.md` → "External setup". Redeploy.
 4. Custom domain: Pages → Custom domains → add `peonomics.com`. (The old site is
    on GitHub Pages with a CNAME — don't switch DNS until this deploy looks right.)
 

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PEO Cost Data: State SUTA & Workers' Comp Reference | PEOnomics</title>
+<meta name="description" content="Searchable reference data for all 51 jurisdictions: SUTA wage bases, new-employer rates and workers' comp indexes, clearly dated, plus sourced 2026 national benchmarks. CSV.">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="stylesheet" href="/assets/css/tokens.css">
+<link rel="stylesheet" href="/assets/css/site.css">
+<link rel="stylesheet" href="/assets/css/cost-lab.css">
+<link rel="stylesheet" href="/assets/css/compare.css">
+<link rel="canonical" href="https://peonomics.com/data-library.html">
+<meta property="og:title" content="PEO Cost Data: State SUTA & Workers' Comp Reference | PEOnomics">
+<meta property="og:description" content="Searchable reference data for all 51 jurisdictions: SUTA wage bases, new-employer rates and workers' comp indexes, clearly dated, plus sourced 2026 national benchmarks. CSV.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://peonomics.com/data-library.html">
+<meta property="og:image" content="https://peonomics.com/assets/images/og-default.png">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{"@context": "https://schema.org", "@type": "Dataset", "name": "PEOnomics state employer-cost reference data", "url": "https://peonomics.com/data-library.html", "description": "Searchable reference data for all 51 jurisdictions: SUTA wage bases, new-employer rates and workers' comp indexes, clearly dated, plus sourced 2026 national benchmarks. CSV.", "isAccessibleForFree": true, "license": "https://github.com/jcs3-com/PEOnomicsV2", "creator": {"@type": "Organization", "name": "PEOnomics", "url": "https://peonomics.com/"}, "distribution": [{"@type": "DataDownload", "encodingFormat": "application/json", "contentUrl": "https://peonomics.com/data/rates-2025.json"}, {"@type": "DataDownload", "encodingFormat": "application/json", "contentUrl": "https://peonomics.com/data/benchmarks-2026.json"}]}
+</script>
+</head>
+<body>
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">PEO<span class="accent">nomics</span></a>
+    <ul class="nav-links">
+      <li><a href="/compare.html">Compare quotes</a></li>
+      <li><a href="/data-library.html" class="is-active">Data library</a></li>
+      <li><a href="/states/">State rates</a></li>
+      <li><a href="/peo-pricing-explained.html">Pricing, explained</a></li>
+      <li><a href="/#cost-lab" class="nav-cta">Open the Cost Lab</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="section compare-main">
+  <div class="shell">
+    <div class="eyebrow">Open reference data</div>
+    <h1>The numbers, <em>dated and sourced.</em></h1>
+    <p class="hero-sub">Reference inputs for all 51 jurisdictions, with the data year on every figure. None of these is an employer&rsquo;s actual rate &mdash; they are starting points you can check and correct.</p>
+
+    <section class="panel" aria-labelledby="st-title">
+      <h2 id="st-title">State reference table</h2>
+      <p class="lab-dataset" id="dataVintage">Loading dataset&hellip;</p>
+      <div class="field compare-filter"><label for="filterStates">Filter states</label><input id="filterStates" placeholder="Maryland or MD" autocomplete="off"></div>
+      <div class="compare-scroll"><table class="rate-table data-table"><caption>State SUTA and workers' comp reference values</caption><thead><tr><th scope="col">State</th><th scope="col" class="num">SUTA wage base</th><th scope="col" class="num">New-employer SUTA</th><th scope="col" class="num">WC index / $100</th><th scope="col">Basis</th><th scope="col">Data year</th></tr></thead><tbody id="stateRows"></tbody></table></div>
+      <div class="compare-actions"><button type="button" class="btn-go" id="dataCsv">Download CSV</button><a class="lab-textlink" href="/states/">State pages &rarr;</a><a class="lab-textlink" href="/data/rates-2025.json">Raw JSON &rarr;</a></div>
+    </section>
+
+    <section class="compare-section" aria-labelledby="bm-title">
+      <h2 id="bm-title">2026 federal and national benchmarks</h2>
+      <p class="sec-sub">Verified against the primary source on the review date shown. Kept separate from the state table above and <strong>not</strong> blended into the Cost Lab&rsquo;s 2025 state defaults.</p>
+      <div class="compare-scroll"><table class="rate-table data-table"><caption>2026 benchmarks with sources</caption><thead><tr><th scope="col">Metric</th><th scope="col" class="num">Value</th><th scope="col">Year</th><th scope="col">Source</th><th scope="col">Reviewed</th></tr></thead><tbody id="benchRows"><tr><td colspan="5">Loading&hellip;</td></tr></tbody></table></div>
+    </section>
+
+    <section class="compare-section" aria-labelledby="use-title">
+      <h2 id="use-title">Using these figures responsibly</h2>
+      <p class="sec-sub">SUTA rates depend on each employer&rsquo;s experience and state surcharges. Workers&rsquo; comp depends on class codes, carrier and loss history; an index is not a rate anyone can buy. State &times; industry wages and state health premiums will be added only with a traceable source and year &mdash; until then they are shown as not published rather than estimated.</p>
+    </section>
+  </div>
+</main>
+
+<footer class="footer">
+  <div><span class="footer-brand">PEO<span class="accent">nomics</span></span><br>PEO cost intelligence. Estimates are not quotes or advice.</div>
+  <div>
+    <a href="/#cost-lab">Cost Lab</a>
+    <a href="/compare.html">Compare quotes</a>
+    <a href="/data-library.html">Data library</a>
+    <a href="/states/">State rates</a>
+    <a href="/about.html">About</a>
+    <a href="/privacy.html">Privacy (draft)</a>
+    <a href="https://github.com/jcs3-com/PEOnomicsV2">Dataset on GitHub</a>
+  </div>
+</footer>
+
+<script src="/assets/js/data-library.js" defer></script>
+</body>
+</html>

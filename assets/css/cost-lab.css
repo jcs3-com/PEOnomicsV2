@@ -92,7 +92,7 @@
 .lab-results .ledger-foot a{color:var(--ink-muted);}
 .lab-results .ledger-foot strong{color:var(--ink-text);font-weight:600;}
 
-.lab-cta{margin-top:16px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;}
+.lab-cta{margin-top:24px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;}
 .lab-cta h3{margin-bottom:6px;}
 .lab-cta p{margin:0;font-size:13px;color:var(--muted);max-width:44ch;}
 .lab-cta-buttons{display:flex;gap:8px;flex-wrap:wrap;}
@@ -126,3 +126,6 @@
 .lab-math dd{margin:0;font-size:13.5px;color:var(--text);overflow-wrap:anywhere;}
 .lab-math-note{margin-top:22px;font-size:14px;}
 @media(max-width:620px){.lab-math div{grid-template-columns:1fr;}}
+
+/* ---------- report verification widget ---------- */
+.lab-challenge{margin-top:12px;min-height:0;}
