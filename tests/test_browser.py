@@ -41,7 +41,7 @@ with sync_playwright() as p:
         pg.on('pageerror', lambda e: errors.append(str(e)))
         pg.on('console', lambda m: errors.append(m.text) if m.type == 'error' and 'cloudflareinsights' not in m.text and 'Failed to load resource' not in m.text else None)
         pg.on('request', lambda r: reqs.append(r.url))
-        state = {'available': False, 'report': (200, {'ok': True, 'status': 'accepted_for_delivery'}), 'posted': []}
+        state = {'available': False, 'report': (200, {'ok': True, 'status': 'accepted_for_delivery'}), 'posted': [], 'events': []}
         if not LIVE:
             pg.route('**/api/enrich', lambda r: r.fulfill(status=503, content_type='application/json', body=json.dumps({'ok': False, 'error': 'log_not_configured'})))
             pg.route('**/api/report-status', lambda r: r.fulfill(content_type='application/json', body=json.dumps({'ok': True, 'available': state['available'], 'siteKey': '0x4AAAAAAATESTKEY000' if state['available'] else None})))
@@ -49,6 +49,7 @@ with sync_playwright() as p:
                 state['posted'].append(json.loads(route.request.post_data))
                 st, body = state['report']; route.fulfill(status=st, content_type='application/json', body=json.dumps(body))
             pg.route('**/api/report-request', rep)
+            pg.route('**/api/event', lambda r: (state['events'].append(r.request.post_data or ''), r.fulfill(status=204)))
             pg.route('https://challenges.cloudflare.com/**', lambda r: r.fulfill(content_type='application/javascript', body=TURNSTILE_STUB))
 
         # ---- Cost Lab (P0 regression) ----
@@ -153,6 +154,10 @@ with sync_playwright() as p:
         check(pg.locator('h1').count() == 1 and 'noindex' in (pg.locator('meta[name=robots]').get_attribute('content') or ''), f'{name}: privacy draft noindex')
         check('Draft' in pg.locator('main').inner_text(), f'{name}: privacy labeled draft')
 
+        if not LIVE:
+            names = [json.loads(e)['name'] for e in state['events'] if e]
+            check('calc_used' in names and 'comparator_used' in names and 'data_csv' in names and 'report_requested' in names, f'{name}: product events sent {sorted(set(names))}')
+            check(not any('@' in e or 'acme' in e.lower() or '71250' in e for e in state['events']), f'{name}: no personal data in events')
         check(not errors, f'{name}: console/page errors {errors[:3]}')
         if os.environ.get('SCREENSHOT_DIR'):
             for path in ['/', '/compare.html', '/data-library.html']:

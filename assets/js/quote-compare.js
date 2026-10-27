@@ -111,6 +111,7 @@
       }
       body.append(tr);
     }
+    if (ready.length >= 1) { window.peoTrack && window.peoTrack('comparator_used', {}, { once: true }); }
     status.textContent = ready.length < 2
       ? 'Fill every pricing field for at least two proposals. Blank means not stated; 0 means a documented zero charge.'
       : `${ready.length} complete proposals. Lowest entered first-year cost: ${ready.filter(x => Math.abs(x.yearOne - low) < 0.5).map(x => x.label).join(' / ')}. This compares only what the quotes state.`;
@@ -119,6 +120,7 @@
   document.querySelectorAll('.compare-main input, .compare-main select').forEach(el => el.addEventListener('input', draw));
   $('downloadCompare').addEventListener('click', () => {
     const list = gather(); if (!list) return;
+    window.peoTrack && window.peoTrack('comparator_csv');
     const esc = v => '"' + String(v ?? '').replaceAll('"', '""') + '"';
     const rows = [['PEOnomics quote comparison', ...list.map(x => x.label)],
       ...LINES.map(k => [k, ...list.map(x => x.missing.length ? 'INCOMPLETE' : (k === 'Year one total' ? x.yearOne : k === 'Three-year total' ? x.threeYear : x.parts[k]).toFixed(2))]),

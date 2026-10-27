@@ -40,13 +40,18 @@ site in any chat. Read this file *first*, before touching anything.
   `functions/api/<name>.js` becomes a live endpoint at `/api/<name>`. Current endpoints:
   `POST /api/enrich` (business-email lookup — validates, enriches by domain, logs, fails closed),
   `POST /api/report-request` (Turnstile → server recompute → log → Resend PDF+XLSX),
-  `GET /api/report-status` (`{available}` only) and `/api/lead` (legacy, unreferenced).
+  `GET /api/report-status` (`{available, siteKey}` — public Turnstile key only), `GET /api/health` (booleans:
+  which secrets production sees, never values), `POST /api/event` (allowlisted, PII-free product events →
+  Analytics Engine binding `EVENTS` if present) and `/api/lead` (legacy, unreferenced).
   Shared code lives in `functions/lib/` (no route handlers there). No standalone Workers.
 - **Secrets** (`ANTHROPIC_API_KEY`, `USAGE_WEBHOOK_URL`, `RESEND_API_KEY`, `REPORT_FROM`,
   `TURNSTILE_SECRET`, legacy `LEAD_WEBHOOK_URL`) live as **Cloudflare Pages secrets**. An agent must not
   type, paste or read them into any field or file — setup is owner-only (`docs/COST_LAB.md`). Apollo is not used anywhere — never re-add it. They are injected into `env` at runtime. They NEVER appear in
   the repo or in any chat. If a chat transcript contains a real key, that key is burned — tell
   the user to rotate it; do not use it.
+- **Analytics:** page views = Cloudflare Web Analytics (injected by Pages, cookieless). Product events =
+  `window.peoTrack` → `/api/event`, allowlisted names + coarse props (state, industry key, headcount band,
+  outcome code, path). **Never send an email, company, typed value or identifier to analytics.**
 - **Event log (not a lead list):** lookups and report events → Google Sheet via `USAGE_WEBHOOK_URL`
   (`apps-script/usage-log-v2.gs`: "Usage Log" + deduped "Contacts"). No CRM, nothing to PEOs, no survey sent.
 - **Model data = `data/rates-2026.json`, GENERATED** by `tools/build_rates_2026.py` from `data/src/*.json`
@@ -97,6 +102,10 @@ tests/                          node + Playwright suites; run before every push 
 assets/js/cost-lab.js           Cost Lab model + UI. Pure compute() exposed as window.PEOLab.
 assets/js/engine.js             LEGACY, unreferenced (biased savings model). Do not re-wire.
 assets/js/site.js               Site-wide JS.
+assets/js/track.js              window.peoTrack(): PII-free events → /api/event. Honors GPC/DNT. On every page.
+functions/api/event.js health.js  Event sink (allowlist) and owner config check (booleans).
+tools/unify_pages.py            Applies shared nav/footer/disclosure + Cost Lab CTA to hand-authored pages.
+docs/OWNER_SETUP.md             Owner-only activation checklist (secrets, Resend, Turnstile, WAF, Search Console).
 data/rates-2025.json            HISTORICAL prior edition (not used by the model). data/rates-2026.json = model data (generated).
 functions/api/enrich.js         POST /api/enrich — lookup: validate, enrich, log, fail closed.
 functions/api/lead.js           LEGACY /api/lead (old quote page lead → sheet). Unreferenced.

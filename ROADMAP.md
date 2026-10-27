@@ -129,6 +129,22 @@ Not chat history. Not artifacts. When you finish or add work, update this file i
   - **SEO bug fixed:** every canonical/og:url/sitemap URL ended in `.html`, which Cloudflare 308-redirects → all
     66 URLs were "page with redirect". Now extensionless site-wide (`tools/normalize_urls.py`); internal links too.
 
+- **Site unification + measurement release (2026-10-27, fifth release)**
+  - All 15 hand-authored pages + 52 generated pages share one nav/footer (`tools/site_chrome.py`,
+    `tools/unify_pages.py`). Old v1 chrome was rendering broken (raw mobile link list, unstyled bullet footer,
+    oversized SVG arrows, dark hard-coded gradient blocks).
+  - **Removed false funnel claims** on ranking/content pages ("run real carrier rates… 60 seconds… advisor
+    follow-up 1d", "reply with a structured breakdown"): replaced with one tokens-only Cost Lab panel.
+    Per-ranking-page Formspree lead forms ("Compare my options") removed — the contact page form remains.
+    "Get a Quote"/"quote builder" wording → Cost Lab. About page no longer names CFOs/brokers as the audience.
+  - **Disclosure preserved and extended:** every page footer now carries the XcelHR paid-referral disclosure
+    (owner's existing wording, condensed) plus the statement that the tools favor no provider. Ranking-page top
+    "Sponsored analysis" banners and the methodology disclosure are unchanged.
+  - Measurement: `assets/js/track.js` + `POST /api/event` (allowlisted events: calc_used, lookup_submitted,
+    report_requested, comparator_used, comparator_csv, data_csv, cost_lab_cta; GPC/DNT honored; no PII —
+    tested). Stored only if the owner binds Analytics Engine `EVENTS`; otherwise discarded.
+  - Sitemap (66 URLs) and every canonical/og:url verified extensionless and 200 in production.
+
 ## 🔲 Open — prioritized
 
 ### P0.1 — owner-only setup (credentials; Claude must not handle them) — step-by-step in `docs/OWNER_SETUP.md`
@@ -140,6 +156,9 @@ Not chat history. Not artifacts. When you finish or add work, update this file i
 - [ ] **Turnstile:** widget for peonomics.com (+ www); **public** site key → Pages variable `TURNSTILE_SITE_KEY`;
       secret → Pages secret `TURNSTILE_SECRET`. Check `/api/health`.
 - [ ] **WAF rate-limit rule** on `/api/enrich` and `/api/report-request` (in-code limiter is per-isolate).
+- [ ] **Analytics Engine binding** `EVENTS` (dataset `peonomics_events`) so product events are stored; then a
+      saved SQL query for weekly counts. **Search Console** domain property via DNS TXT + submit sitemap.
+      (No Search Console connector exists for Claude; owner step in `docs/OWNER_SETUP.md` §6.)
 - [ ] **Real inbox test** to the owner's own business mailbox once all four secrets exist: PDF + XLSX
       arrive, Excel recalculates, double-click sends once, sheet shows requested/accepted rows.
 
@@ -169,8 +188,10 @@ Not chat history. Not artifacts. When you finish or add work, update this file i
       (e.g. "Best PEOs for Construction 2026") convert better — generate per template later.
 - [ ] **Verify JSON-LD `datePublished`.** New Article/Org blocks use the site's existing
       convention (`2026-01-15`) with `dateModified` = today. Correct if real publish dates are known.
-- [ ] **Content/ranking pages use v1 nav markup**; at 360 px their CTA wraps to ~100 px tall.
-      Port them to the `site.css` `.nav` markup.
+- [ ] **Content-page body styling**: chrome is unified, but article/ranking bodies still carry ~150 inline
+      `style=` attributes from v1 (forms on /contact, ranking stat strips). Move to classes in content.css/ranking.css.
+- [ ] **Owner decision:** keep or drop the remaining /contact Formspree form; re-add ranking-page contact
+      forms only if wanted (they were removed in the unification release).
 - [ ] **P3 (from strategy):** provider directory with independently sourced fields only; source-refresh
       pipeline; 3-year Cost Lab sensitivity.
 - [ ] **Audit/remove legacy code:** `assets/js/engine.js` (biased savings model),

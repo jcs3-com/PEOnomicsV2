@@ -22,7 +22,8 @@ def fix(text):
     return text
 
 
-files = glob.glob(os.path.join(ROOT, '*.html')) + glob.glob(os.path.join(ROOT, 'assets', 'js', '*.js'))
+files = glob.glob(os.path.join(ROOT, '*.html')) + [p for p in glob.glob(os.path.join(ROOT, 'assets', 'js', '*.js'))
+                                                  if not p.endswith('engine.js')]  # legacy file, left untouched
 changed = 0
 for p in files:
     src = open(p, encoding='utf-8').read()

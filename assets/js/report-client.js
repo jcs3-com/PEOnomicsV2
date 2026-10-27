@@ -56,6 +56,7 @@
         body: JSON.stringify({ email, snapshot: snapshot(), turnstileToken: token, requestId: crypto.randomUUID() })
       });
       const j = await res.json().catch(() => ({}));
+      window.peoTrack && window.peoTrack('report_requested', { outcome: res.ok && j.ok ? 'accepted' : (j.error || 'error'), state: $('state').value, employees: Number($('employees').value) });
       if (!res.ok || !j.ok) { status(ERR[j.error] || 'Report could not be sent. Nothing was sent.'); return; }
       status(`Accepted for delivery to ${email}. It usually arrives within a few minutes — check spam if not.`);
     } catch {

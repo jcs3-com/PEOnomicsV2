@@ -75,7 +75,8 @@ def head(title, desc, canonical, jsonld):
 
 
 def page(title, desc, canonical, jsonld, body):
-    return head(title, desc, canonical, jsonld) + nav('/states/') + '\n' + body + '\n' + footer() + '\n</body>\n</html>\n'
+    return (head(title, desc, canonical, jsonld) + nav('/states/') + '\n' + body + '\n' + footer() +
+            '\n<script src="/assets/js/track.js" defer></script>\n</body>\n</html>\n')
 
 
 def sui_tag(s):

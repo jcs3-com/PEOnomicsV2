@@ -144,3 +144,23 @@ h2{font-family:var(--f-display);font-size:clamp(28px,3.2vw,40px);font-weight:500
   display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;font-size:13px;color:var(--muted);}
 .footer a{color:var(--muted);text-decoration:none;margin-right:18px;}
 .footer a:hover{color:var(--text);}
+
+/* ── Shared chrome additions (2026-10-27): footer disclosure, Cost Lab CTA panel,
+   and helpers for ported content pages (.container, .btn). Tokens only. ── */
+.footer-disclosure{flex-basis:100%;margin:6px 0 0;padding-top:16px;border-top:1px solid var(--border);font-size:12.5px;line-height:1.55;max-width:110ch;}
+.footer-disclosure a{margin-right:0;text-decoration:underline;}
+.container{max-width:var(--w-page);margin:0 auto;padding:0 clamp(20px,5vw,64px);}
+.container-narrow{max-width:var(--w-narrow);margin:0 auto;padding:0 clamp(20px,5vw,64px);}
+.cta-panel{margin:clamp(40px,6vh,72px) 0;padding:28px;background:var(--bg-elev);border:1px solid var(--text);border-radius:var(--r-sm);
+  display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;}
+.cta-panel h2{font-family:var(--f-display);font-weight:500;font-size:clamp(22px,2.6vw,30px);margin:0 0 6px;}
+.cta-panel p{margin:0;color:var(--muted);font-size:14.5px;max-width:58ch;}
+.cta-panel .btn-go{text-decoration:none;display:inline-block;}
+.cta-actions{display:flex;gap:18px;align-items:center;flex-wrap:wrap;}
+.cta-link{font-weight:600;font-size:14px;color:var(--text);text-decoration:none;border-bottom:1px solid var(--border);}
+.cta-link:hover{border-color:var(--text);}
+.btn{display:inline-flex;align-items:center;gap:8px;text-decoration:none;font-family:var(--f-body);font-weight:700;font-size:14px;
+  padding:12px 20px;border-radius:var(--r-sm);border:1px solid var(--text);color:var(--text);background:transparent;cursor:pointer;}
+.btn-primary{background:var(--accent);border-color:var(--accent);color:#fff;}
+.btn-primary:hover{background:var(--accent-hover);}
+.btn svg,svg.arrow{width:1em;height:1em;flex:none;}

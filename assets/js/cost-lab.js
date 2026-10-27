@@ -200,9 +200,11 @@
     };
   }
 
+  let touched = false;            // set by the first visitor edit; drives one calc_used event
   function draw() {
     if (!R) return;
     const i = inputs();
+    if (touched) window.peoTrack && window.peoTrack('calc_used', { state: i.state, industry: $('industry').value, employees: i.employees }, { once: true });
     let r;
     try { r = compute(R, i); } catch { return; }
     const st = R.states[i.state];
@@ -322,6 +324,7 @@
         body: JSON.stringify({ email, page: 'cost-lab' })
       });
       const d = await res.json().catch(() => ({}));
+      window.peoTrack && window.peoTrack('lookup_submitted', { outcome: res.ok && d.ok ? (d.stateGuess || d.company ? 'prefilled' : 'no_match') : (d.error || 'error') });
       if (!res.ok || !d.ok) {
         const msg = {
           business_email_required: "Use a company address — personal or invalid domains can't identify a business.",
@@ -408,6 +411,8 @@
     $('resetBtn').addEventListener('click', resetAssumptions);
     $('printReport').addEventListener('click', () => window.print());
     $('labForm').addEventListener('submit', e => e.preventDefault());
+    $('labForm').addEventListener('input', () => { touched = true; }, { capture: true });
+    $('labForm').addEventListener('change', () => { touched = true; draw(); }, { capture: true });
     $('lookupForm').addEventListener('submit', lookup);
   }
 

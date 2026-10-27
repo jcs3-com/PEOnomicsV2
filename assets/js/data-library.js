@@ -97,6 +97,7 @@
   $('filterStates').addEventListener('input', draw);
   $('dataCsv').addEventListener('click', () => {
     if (!D) return;
+    window.peoTrack && window.peoTrack('data_csv');
     const esc = s => '"' + String(s ?? '').replaceAll('"', '""') + '"';
     const header = ['State', 'Code', 'SUTA wage base 2026', 'New-employer SUTA rate 2026', 'SUTA basis', 'SUTA year', 'SUTA source',
       'Avg pay all private 2025', ...IND.map(k => 'Avg pay ' + k + ' 2025'),
