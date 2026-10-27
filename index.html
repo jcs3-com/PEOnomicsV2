@@ -3,26 +3,26 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PEOnomics — One email. A real PEO cost estimate.</title>
-<meta name="description" content="Put in your business email and PEOnomics goes to work: an itemized employer-cost estimate, standalone vs PEO, built on published state and federal rates.">
+<title>PEO Cost Calculator: Standalone vs. PEO | PEOnomics</title>
+<meta name="description" content="Free PEO cost calculator. Compare payroll taxes, SUTA, workers' comp, health and PEO fees line by line. Every assumption editable. No email required.">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="stylesheet" href="/assets/css/tokens.css">
 <link rel="stylesheet" href="/assets/css/site.css">
-  <link rel="canonical" href="https://peonomics.com/">
-  <meta property="og:title" content="PEOnomics — One email. A real PEO cost estimate.">
-  <meta property="og:description" content="Put in your business email and PEOnomics goes to work: an itemized employer-cost estimate, standalone vs PEO, built on published state and federal rates.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://peonomics.com/">
-  <meta property="og:image" content="https://peonomics.com/assets/images/og-default.png">
-  <meta name="twitter:card" content="summary_large_image">
-  <script type="application/ld+json">
-  { "@context": "https://schema.org", "@graph": [ { "@type": "Organization", "name": "PEOnomics", "url": "https://peonomics.com/", "logo": "https://peonomics.com/favicon.svg", "description": "Independent analysis of the U.S. PEO market — pricing, structure, and buyer-side economics.", "areaServed": "US" }, { "@type": "WebSite", "name": "PEOnomics", "url": "https://peonomics.com/" } ] }
-  </script>
- <script>function initApollo(){var n=Math.random().toString(36).substring(7),o=document.createElement("script");
-o.src="https://assets.apollo.io/micro/website-tracker/tracker.iife.js?nocache="+n,o.async=!0,o.defer=!0,
-o.onload=function(){window.trackingFunctions.onLoad({appId:"6a2c63d159833a00209ba84f"})},
-document.head.appendChild(o)}initApollo();
- </script>
+<link rel="stylesheet" href="/assets/css/cost-lab.css">
+<link rel="canonical" href="https://peonomics.com/">
+<meta property="og:title" content="PEOnomics — PEO pricing, without the pitch">
+<meta property="og:description" content="Free employer cost lab: payroll taxes, SUTA, workers' comp, health and PEO fees, itemized. Every assumption editable. No email required.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://peonomics.com/">
+<meta property="og:image" content="https://peonomics.com/assets/images/og-default.png">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{ "@context": "https://schema.org", "@graph": [
+  { "@type": "Organization", "name": "PEOnomics", "url": "https://peonomics.com/", "logo": "https://peonomics.com/favicon.svg", "description": "Independent analysis of the U.S. PEO market — pricing, structure, and buyer-side economics.", "areaServed": "US" },
+  { "@type": "WebSite", "name": "PEOnomics", "url": "https://peonomics.com/" },
+  { "@type": "WebApplication", "name": "PEOnomics Cost Lab", "url": "https://peonomics.com/#cost-lab", "applicationCategory": "BusinessApplication", "operatingSystem": "Web", "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }, "description": "Editable employer-cost comparison: standalone vs. PEO, itemized by payroll tax, SUTA, workers' comp, health, and administration." }
+] }
+</script>
 </head>
 <body>
 
@@ -34,7 +34,7 @@ document.head.appendChild(o)}initApollo();
       <li><a href="/peo-pricing-explained.html">Pricing, explained</a></li>
       <li><a href="/states/">State rates</a></li>
       <li><a href="/methodology.html">Methodology</a></li>
-      <li><a href="/quote.html" class="nav-cta">Run a quote</a></li>
+      <li><a href="#cost-lab" class="nav-cta">Open the Cost Lab</a></li>
     </ul>
   </div>
 </nav>
@@ -42,118 +42,252 @@ document.head.appendChild(o)}initApollo();
 <header class="hero">
   <div>
     <div class="eyebrow">PEO cost intelligence</div>
-    <h1>One email.<br><em>A real estimate.</em></h1>
-    <p class="hero-sub">Put in your business email and PEOnomics goes to work — your employer costs, itemized line by line, standalone vs. PEO. Built on published rates for all 50 states.</p>
-    <form class="quote-box" action="/quote.html" method="get">
-      <input type="email" name="e" placeholder="you@yourcompany.com" aria-label="Business email" required>
-      <button type="submit" class="btn-go">Build my estimate</button>
-    </form>
-    <p class="quote-note">Your estimate appears instantly — no gate, no spam. Want the deep version? We'll research your company and send a drafted PEO quote.</p>
-    <div class="hero-stats">
-      <div class="hero-stat"><span class="num">4.5M</span><small>Americans employed through a PEO</small></div>
-      <div class="hero-stat"><span class="num">$28,700</span><small>Avg benefits cost per employee / yr</small></div>
-      <div class="hero-stat"><span class="num">14%</span><small>Of mid-size employers use one &mdash; so far</small></div>
+    <h1>PEO pricing,<br><em>without the pitch.</em></h1>
+    <p class="hero-sub">What does it actually cost to employ your team — on your own, and through a PEO? Payroll taxes, unemployment insurance, workers' comp, health, administration and the PEO fee, itemized. Change any assumption. Follow the math.</p>
+    <div class="lab-hero-actions">
+      <a href="#cost-lab" class="btn-go">Open the Cost Lab &darr;</a>
+      <a href="#the-math" class="lab-textlink">How we calculate &rarr;</a>
     </div>
-    <p class="quote-note" style="margin-top:10px;font-size:11px;font-family:var(--f-mono);color:var(--muted);">Sources: NAPEO industry data; BLS Employer Costs for Employee Compensation, Dec 2025.</p>
+    <p class="quote-note">No account. No email required to calculate. Using the lab doesn't send your details to any PEO or trigger a sales call.</p>
   </div>
 
-  <aside class="ledger" aria-label="Sample employer burden ledger">
+  <aside class="ledger on-ink" aria-label="What the model uses">
     <div class="ledger-head">
-      <span class="ledger-title">Employer burden ledger — annual</span>
-      <div class="state-tabs" role="tablist" aria-label="Select state">
-        <button data-state="MD" class="active">MD</button>
-        <button data-state="CA">CA</button>
-        <button data-state="TX">TX</button>
-        <button data-state="FL">FL</button>
-        <button data-state="NY">NY</button>
-      </div>
+      <span class="ledger-title">What the model uses</span>
+      <span class="ledger-title">Data year 2025 &middot; preliminary</span>
     </div>
-    <div class="assumption">
-      <span>SAMPLE: 25 EMPLOYEES</span>
-      <span>AVG WAGE $65,000</span>
-      <span>OFFICE / PROFESSIONAL</span>
+    <div class="ledger-body">
+      <div class="lrow"><span class="label">Employer FICA<small>SS 6.2% to $176,100 + Medicare 1.45%</small></span><span class="rate"><span class="basis basis-stat">Statutory</span></span><span class="amt">2025</span></div>
+      <div class="lrow"><span class="label">FUTA<small>0.6% net on first $7,000, + credit reduction</small></span><span class="rate"><span class="basis basis-stat">Statutory</span></span><span class="amt">2025</span></div>
+      <div class="lrow"><span class="label">State unemployment (SUTA)<small>New-employer rate &times; state wage base</small></span><span class="rate"><span class="basis basis-bench">Benchmark</span></span><span class="amt">2025</span></div>
+      <div class="lrow"><span class="label">Workers' comp<small>State index &times; industry proxy, not class codes</small></span><span class="rate"><span class="basis basis-bench">Benchmark</span></span><span class="amt">2025</span></div>
+      <div class="lrow"><span class="label">Employer health<small>KFF small-firm single coverage, national</small></span><span class="rate"><span class="basis basis-bench">Benchmark</span></span><span class="amt">2025</span></div>
+      <div class="lrow"><span class="label">PEO fee &amp; internal admin<small>Your numbers. No savings assumed.</small></span><span class="rate"><span class="basis basis-user">Your input</span></span><span class="amt">&mdash;</span></div>
     </div>
-    <div class="ledger-body"></div>
-    <div class="ledger-totals">
-      <div class="trow"><span class="label">Standalone total</span><span class="amt js-standalone">—</span></div>
-      <div class="trow"><span class="label">With PEO (range)</span><span class="amt js-peo">—</span></div>
-      <div class="trow delta"><span class="label">Estimated delta</span><span class="amt js-delta">—</span></div>
-    </div>
-    <div class="ledger-foot">2025 rate dataset, v2025.1. Ranges shown where published data can't pin a number. <a href="/methodology.html" style="color:#8FA0B5;">Full methodology &rarr;</a></div>
+    <div class="ledger-foot">These are 2025 reference figures, not 2026 rates or insurance quotes. Same statutory and insurance costs in both scenarios unless you change them. <a href="#the-math">The math &rarr;</a></div>
   </aside>
 </header>
 
-<section class="section band-raised">
+<section class="section band-raised" id="cost-lab" aria-labelledby="lab-title">
   <div class="shell">
-    <div class="sec-eyebrow">How it works</div>
-    <h2>Three steps. About thirty seconds.</h2>
-    <div class="steps">
-      <div class="step"><span class="n">01</span><h3>Enter your email</h3><p>Your company domain tells us who you are — industry, size, home state. We pre-fill the assumptions; you can adjust any of them.</p></div>
-      <div class="step"><span class="n">02</span><h3>We run the rates</h3><p>FICA, FUTA, your state's unemployment insurance, workers' comp, health, and the PEO fee itself — itemized, with the math visible.</p></div>
-      <div class="step"><span class="n">03</span><h3>Compare side by side</h3><p>Your costs standalone vs. with a PEO, as a range. If you want the deep version, we'll research your company and send a drafted quote.</p></div>
+    <div class="lab-head">
+      <div>
+        <div class="sec-eyebrow">01 &mdash; The Cost Lab</div>
+        <h2 id="lab-title">Build your scenario.</h2>
+        <p class="sec-sub">Start from a business email, or skip it and type your own numbers. Results update as you type.</p>
+      </div>
+      <p class="lab-dataset" id="datasetLabel"><strong>Model data:</strong> loading&hellip;</p>
+    </div>
+
+    <div class="panel lab-lookup">
+      <div>
+        <h3>Optional &mdash; prefill from a business email</h3>
+        <p>We research public information about your company's <em>domain</em> to suggest name, state, industry and size. Business addresses only. Each lookup is recorded in our private usage log; it is not passed to any PEO and no sales follow-up is triggered. <a href="#privacy">How information is used</a>.</p>
+      </div>
+      <form class="quote-box" id="lookupForm" novalidate>
+        <input type="email" id="businessEmail" name="email" placeholder="you@yourcompany.com" autocomplete="email" aria-label="Business email" aria-describedby="lookupStatus">
+        <button type="submit" class="btn-go" id="lookupBtn">Prefill</button>
+      </form>
+      <p class="status-msg" id="lookupStatus" role="status" aria-live="polite"></p>
+    </div>
+
+    <div class="lab-grid">
+      <form class="panel lab-form" id="labForm" autocomplete="off" novalidate>
+        <h3>Company &amp; workforce</h3>
+        <div class="field" data-field="company">
+          <label for="company">Company name <span class="basis basis-user">Your input</span></label>
+          <input type="text" id="company" maxlength="80" placeholder="Optional">
+        </div>
+        <div class="field" data-field="state">
+          <label for="state">HQ / Main Worksite State <span class="basis basis-user">Your input</span></label>
+          <select id="state"><option>Loading&hellip;</option></select>
+          <p class="hint">One state per model. Drives the SUTA and workers' comp defaults.</p>
+        </div>
+        <div class="field" data-field="industry">
+          <label for="industry">Industry / workforce mix <span class="basis basis-user">Your input</span></label>
+          <select id="industry">
+            <option value="clerical_professional">Office / professional</option>
+            <option value="retail_services">Retail / services</option>
+            <option value="hospitality_food">Hospitality / food</option>
+            <option value="light_manufacturing">Light manufacturing</option>
+            <option value="transportation_logistics">Transportation / logistics</option>
+            <option value="construction_trades">Construction / trades</option>
+          </select>
+          <p class="hint">Drives the workers' comp proxy.</p>
+        </div>
+        <div class="lab-row">
+          <div class="field" data-field="employees">
+            <label for="employees">Employees <span class="basis basis-user">Your input</span></label>
+            <input type="number" id="employees" value="25" min="1" max="100000" step="1" inputmode="numeric">
+            <p class="hint">W-2 headcount.</p>
+          </div>
+          <div class="field" data-field="salary">
+            <label for="salary">Avg. annual wage ($) <span class="basis basis-user">Your input</span></label>
+            <input type="number" id="salary" value="65000" min="0" step="1000" inputmode="numeric">
+            <p class="hint">Illustrative default &mdash; not a state or industry benchmark.</p>
+          </div>
+        </div>
+
+        <h3 class="lab-sub">Cost assumptions</h3>
+        <div class="lab-row">
+          <div class="field" data-field="suta">
+            <label for="suta">SUTA rate (%) <span class="basis basis-bench" id="sutaBasis">Benchmark</span></label>
+            <input type="number" id="suta" min="0" max="30" step="0.01" inputmode="decimal">
+            <p class="hint"><span id="sutaHint"></span> <button type="button" class="lab-restore" data-restore="suta" hidden>Restore</button></p>
+          </div>
+          <div class="field" data-field="wc">
+            <label for="wc">Workers' comp ($/$100) <span class="basis basis-bench" id="wcBasis">Benchmark</span></label>
+            <input type="number" id="wc" min="0" max="100" step="0.01" inputmode="decimal">
+            <p class="hint"><span id="wcHint"></span> <button type="button" class="lab-restore" data-restore="wc" hidden>Restore</button></p>
+          </div>
+        </div>
+        <div class="lab-row">
+          <div class="field" data-field="enrollment">
+            <label for="enrollment">Health enrollment (%) <span class="basis basis-user">Your input</span></label>
+            <input type="number" id="enrollment" value="60" min="0" max="100" step="1" inputmode="numeric">
+            <p class="hint">Share of employees on the employer plan. 60% is illustrative.</p>
+          </div>
+          <div class="field" data-field="health">
+            <label for="health">Health $ / enrollee / yr <span class="basis basis-bench">Benchmark</span></label>
+            <input type="number" id="health" min="0" step="50" inputmode="numeric">
+            <p class="hint"><span id="healthHint"></span> <button type="button" class="lab-restore" data-restore="health" hidden>Restore</button></p>
+          </div>
+        </div>
+        <div class="field" data-field="pepm">
+          <label for="pepm">PEO admin fee ($ per employee per month) <span class="basis basis-user">Your input</span></label>
+          <input type="number" id="pepm" min="0" step="5" inputmode="numeric">
+          <p class="hint" id="pepmHint"></p>
+        </div>
+        <div class="field" data-field="currentAdmin">
+          <label for="currentAdmin">Current internal HR/payroll admin cost ($/yr) <span class="basis basis-user">Your input</span></label>
+          <input type="number" id="currentAdmin" value="0" min="0" step="500" inputmode="numeric">
+          <p class="hint"><span id="adminHint">Default $0 &mdash; nothing is assumed.</span> <button type="button" class="lab-restore" id="applyAdminRef" hidden>Use reference</button></p>
+        </div>
+        <div class="field" data-field="adminAvoided">
+          <label for="adminAvoided">Admin cost a PEO would replace ($/yr) <span class="basis basis-user">Your input</span></label>
+          <input type="number" id="adminAvoided" value="0" min="0" step="500" inputmode="numeric">
+          <p class="hint" id="avoidedHint">Only spending you would actually stop. Capped at your current admin cost.</p>
+        </div>
+
+        <details id="peoSide">
+          <summary>PEO-side rates <small>&mdash; optional, from a PEO quote</small></summary>
+          <p class="hint lab-details-hint">Leave blank to use the same rate as your current scenario. Enter a value only if a PEO has quoted it.</p>
+          <div class="lab-row">
+            <div class="field" data-field="peoSuta">
+              <label for="peoSuta">PEO SUTA rate (%)</label>
+              <input type="number" id="peoSuta" min="0" max="30" step="0.01" placeholder="Same" inputmode="decimal">
+            </div>
+            <div class="field" data-field="peoWc">
+              <label for="peoWc">PEO workers' comp ($/$100)</label>
+              <input type="number" id="peoWc" min="0" max="100" step="0.01" placeholder="Same" inputmode="decimal">
+            </div>
+          </div>
+          <div class="field" data-field="peoHealth">
+            <label for="peoHealth">PEO health $ / enrollee / yr</label>
+            <input type="number" id="peoHealth" min="0" step="50" placeholder="Same" inputmode="numeric">
+          </div>
+        </details>
+
+        <div class="lab-actions">
+          <button type="button" class="lab-btn-line" id="resetBtn">Reset cost assumptions</button>
+          <span>Calculated in your browser as you type.</span>
+        </div>
+      </form>
+
+      <div>
+        <div class="ledger on-ink lab-results" aria-labelledby="results-title">
+          <div class="ledger-head">
+            <span class="ledger-title" id="results-title">Annual employer cost</span>
+            <span class="ledger-title" id="resultCompany"></span>
+          </div>
+          <div class="assumption" id="resultAssumption"><span>&mdash;</span></div>
+          <div class="lab-table-wrap">
+            <table class="lab-table">
+              <caption>Annual employer cost, current scenario vs. with a PEO</caption>
+              <thead><tr><th scope="col">Line</th><th scope="col">Current</th><th scope="col">With PEO</th></tr></thead>
+              <tbody id="resultRows"></tbody>
+            </table>
+          </div>
+          <div class="ledger-totals lab-totals">
+            <div class="trow"><span class="label">Current total<small id="currentPer"></small></span><span class="amt" id="currentTotal">&mdash;</span></div>
+            <div class="trow"><span class="label">With PEO total<small id="peoPer"></small></span><span class="amt" id="peoTotal">&mdash;</span></div>
+            <div class="trow delta"><span class="label">Difference (PEO &minus; current)<small id="deltaPer"></small></span><span class="amt" id="delta">&mdash;</span></div>
+            <ul class="lab-drivers" id="drivers" aria-label="What drives the difference"></ul>
+            <p class="lab-note" id="deltaNote"></p>
+          </div>
+          <div class="ledger-foot" id="resultFoot"><strong>Read before using:</strong> rates come from the PEOnomics 2025 reference dataset (preliminary). They are historical planning figures &mdash; not 2026 rates, not an insurance quote, not a PEO proposal. FICA uses one average wage for everyone. Verify before deciding. <a href="#the-math">The math &rarr;</a></div>
+        </div>
+
+        <div class="panel lab-cta">
+          <div>
+            <h3>Take the numbers with you</h3>
+            <p id="emailNote">Emailed PDF reports arrive in the next release. Until delivery is connected and tested, this button stays off &mdash; nothing is sent.</p>
+          </div>
+          <div class="lab-cta-buttons">
+            <button type="button" class="btn-go" id="emailReport" disabled aria-describedby="emailNote">Email this to me</button>
+            <button type="button" class="lab-btn-line" id="printReport">Print this view</button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<section class="section">
+<section class="section band-raised" id="the-math" aria-labelledby="math-title">
   <div class="shell">
-    <div class="sec-eyebrow">The six lines that matter</div>
-    <h2>Every PEO bill is built from the same six costs.</h2>
-    <p class="sec-sub">Most calculators hand-wave a single percentage. We track each line separately, against its own published source.</p>
+    <div class="sec-eyebrow">The math</div>
+    <h2 id="math-title">Every line, as a formula.</h2>
+    <p class="sec-sub">N = employees, W = average annual wage. One state per model. Rates come from <a href="https://github.com/jcs3-com/PEOnomicsV2/blob/main/data/rates-2025.json">data/rates-2025.json</a> unless you overwrite them.</p>
+    <dl class="lab-math">
+      <div><dt>Employer FICA</dt><dd class="mono">N &times; [min(W, SS wage base) &times; 6.2% + W &times; 1.45%]</dd></div>
+      <div><dt>FUTA</dt><dd class="mono">N &times; min(W, $7,000) &times; (0.6% + state credit reduction)</dd></div>
+      <div><dt>SUTA</dt><dd class="mono">N &times; min(W, state wage base) &times; SUTA rate</dd></div>
+      <div><dt>Workers' comp</dt><dd class="mono">N &times; W &divide; 100 &times; rate per $100 (state index &times; industry multiplier)</dd></div>
+      <div><dt>Employer health</dt><dd class="mono">N &times; enrollment % &times; employer cost per enrollee</dd></div>
+      <div><dt>Internal admin</dt><dd class="mono">Current: your figure. With PEO: your figure &minus; what a PEO would replace (never below $0)</dd></div>
+      <div><dt>PEO fee</dt><dd class="mono">N &times; PEPM &times; 12 (PEO scenario only)</dd></div>
+    </dl>
+    <p class="sec-sub lab-math-note">No line is discounted in the PEO scenario unless you enter a PEO-quoted rate. Simplifications: one average wage for everyone (understates FICA/SUTA differences when pay is spread out), new-employer SUTA instead of your experience rate, a state-industry proxy instead of class-code workers' comp, single-coverage health only.</p>
+  </div>
+</section>
+
+<section class="section lab-guide">
+  <div class="shell">
+    <div class="sec-eyebrow">How to read the result</div>
+    <h2>Three kinds of number. Labeled every time.</h2>
+    <p class="sec-sub">A calculator is only as honest as its inputs. Each line in the lab says where its number comes from.</p>
     <div class="items">
-      <div class="item"><span class="tag">Federal</span><h3>FICA</h3><p>Social Security plus Medicare. Fixed by statute — the one line nobody can shop.</p><span class="src">SSA / IRS</span></div>
-      <div class="item"><span class="tag">Federal</span><h3>FUTA</h3><p>0.6% net on the first $7,000 per employee — more if your state is on the credit-reduction list.</p><span class="src">US DOL</span></div>
-      <div class="item"><span class="tag">State</span><h3>SUI</h3><p>51 jurisdictions, 51 wage bases, 51 rates. The biggest state-to-state swing in your bill.</p><span class="src">STATE WORKFORCE AGENCIES</span></div>
-      <div class="item"><span class="tag">State</span><h3>Workers' comp</h3><p>Driven by your state and your class-code mix. The largest single lever a good PEO can pull.</p><span class="src">OREGON DCBS RATE STUDY</span></div>
-      <div class="item"><span class="tag">Market</span><h3>Health benefits</h3><p>The employer share of premiums, by firm size and region — and where PEO master plans earn their keep.</p><span class="src">KFF EHBS</span></div>
-      <div class="item"><span class="tag">Market</span><h3>The PEO fee</h3><p>Per-employee-per-month or percent of payroll. Which model fits depends on how your business grows.</p><span class="src">MARKET DATA</span></div>
+      <div class="item"><span class="basis basis-stat">Statutory</span><h3>Set by law</h3><p>Employer FICA and FUTA. The same with or without a PEO. Shown with 2025 parameters until the 2026 refresh is verified.</p></div>
+      <div class="item"><span class="basis basis-bench">Benchmark</span><h3>Published reference</h3><p>State new-employer SUTA rates, a workers' comp index, a national health premium. Starting points &mdash; your actual rates will differ.</p></div>
+      <div class="item"><span class="basis basis-user">Your input</span><h3>Your call</h3><p>Headcount, wages, the PEO fee, your internal admin cost and what a PEO would genuinely replace. Nothing here is pre-filled in a PEO's favor.</p></div>
+      <div class="item"><span class="basis basis-est">Estimate</span><h3>Low-confidence figure</h3><p>Some state figures are flagged in our dataset as pending primary-source verification. The lab marks them so you know to check.</p></div>
+      <div class="item"><span class="basis">Not modeled</span><h3>What this can't see</h3><p>Experience-rated SUTA, class-code workers' comp, plan design, wage distribution above the Social Security base, multi-state payroll.</p></div>
+      <div class="item"><span class="basis">Reference desk</span><h3>Go deeper</h3><p><a href="/states/">State rate pages</a>, <a href="/peo-pricing-explained.html">how PEO pricing works</a>, and <a href="/hidden-costs.html">costs that hide in a quote</a>.</p></div>
     </div>
   </div>
 </section>
 
-<section class="section band-ink">
-  <div class="shell" style="display:grid;grid-template-columns:1fr auto;gap:32px;align-items:center;flex-wrap:wrap;">
-    <div>
-      <div class="sec-eyebrow">Ready when you are</div>
-      <h2 style="margin-bottom:8px;">Get your number.</h2>
-      <p class="sec-sub" style="margin:0;">Thirty seconds to an itemized estimate. Every assumption editable.</p>
-    </div>
-    <a href="/quote.html" class="btn-go" style="text-decoration:none;display:inline-block;padding:16px 32px;font-size:15px;">Run a quote &rarr;</a>
+<section class="section band-ink" id="privacy">
+  <div class="shell lab-privacy">
+    <div class="sec-eyebrow">How information is used</div>
+    <h2>Comparison is the product.</h2>
+    <p>The calculator runs in your browser; your inputs aren't sent anywhere. If you choose the business-email prefill, we record the email, its domain, the company details we found, and the time, in a private log so we can understand how the tool is used. Only the domain &mdash; never the full address &mdash; is used for research.</p>
+    <p>We don't sell or forward that information to PEOs, and using the lab doesn't trigger a sales call. Service providers that host the site and run the research necessarily process the request. A full privacy policy and a retention schedule will be published before emailed reports launch.</p>
   </div>
 </section>
 
 <footer class="footer">
-  <div><span class="nav-logo" style="font-size:17px;">PEO<span class="accent">nomics</span></span><br>PEO cost intelligence.</div>
+  <div><span class="footer-brand">PEO<span class="accent">nomics</span></span><br>PEO cost intelligence. Estimates are not quotes or advice.</div>
   <div>
     <a href="/peo-pricing-explained.html">Pricing, explained</a>
     <a href="/states/">State rates</a>
     <a href="/methodology.html">Methodology</a>
+    <a href="/about.html">About</a>
     <a href="https://github.com/jcs3-com/PEOnomicsV2">Dataset on GitHub</a>
-    <a href="https://www.linkedin.com/company/peonomics/" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:8px;text-decoration:none;color:#fff;background:#0A66C2;padding:10px 14px;border-radius:8px;font-size:14px;font-weight:600;margin-top:8px;">
-      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="white" aria-hidden="true">
-        <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.761 0 5-2.239 5-5v-14c0-2.761-2.239-5-5-5zm-11 19h-3v-10h3v10zm-1.5-11.268c-.966 0-1.75-.784-1.75-1.75s.784-1.75 1.75-1.75 1.75.784 1.75 1.75-.784 1.75-1.75 1.75zm13.5 11.268h-3v-5.604c0-1.337-.026-3.062-1.866-3.062-1.868 0-2.154 1.459-2.154 2.969v5.697h-3v-10h2.881v1.367h.041c.401-.761 1.379-1.561 2.838-1.561 3.037 0 3.6 2 3.6 4.591v5.603z"/>
-      </svg>
-      LinkedIn
-    </a>
+    <a href="https://www.linkedin.com/company/peonomics/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
   </div>
 </footer>
 
-<script src="/assets/js/engine.js"></script>
-<script>
-(async () => {
-  await PEO.load();
-  const ledger = document.querySelector('.ledger');
-  const sample = { employees: 25, avgWage: 65000, industry: 'clerical_professional' };
-  const draw = s => PEO.renderLedger(ledger, { ...sample, state: s });
-  document.querySelectorAll('.state-tabs button').forEach(b => {
-    b.addEventListener('click', () => {
-      document.querySelectorAll('.state-tabs button').forEach(x => x.classList.remove('active'));
-      b.classList.add('active');
-      draw(b.dataset.state);
-    });
-  });
-  draw('MD');
-})();
-</script>
+<script src="/assets/js/cost-lab.js" defer></script>
 </body>
 </html>

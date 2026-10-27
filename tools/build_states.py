@@ -113,6 +113,8 @@ def build_sitemap():
     urls = []
     for p in sorted(glob.glob(os.path.join(ROOT, '*.html'))):
         n = os.path.basename(p)
+        if 'name="robots" content="noindex' in open(p, encoding='utf-8').read():
+            continue  # redirect stubs (e.g. quote.html) stay out of the sitemap
         urls.append('https://peonomics.com/' if n == 'index.html' else f'https://peonomics.com/{n}')
     for p in sorted(glob.glob(os.path.join(ROOT, 'states', '*.html'))):
         n = os.path.basename(p)

@@ -2,7 +2,7 @@
 
 **Audience:** any AI agent (Claude or otherwise) asked to create, edit, debug, or audit this
 site in any chat. Read this file *first*, before touching anything.
-**Last updated:** 2026-06-13
+**Last updated:** 2026-10-27 (Cost Lab P0; push rule reconciled)
 
 ---
 
@@ -15,11 +15,15 @@ site in any chat. Read this file *first*, before touching anything.
    git clone --depth 1 https://github.com/jcs3-com/PEOnomicsV2.git
    ```
    The repo is **public** — no token, no credential needed to read it.
-2. **You cannot push, and you must never accept or use a pasted credential** (GitHub token,
-   Cloudflare token, API key — anything). Hand changes back via **Path A** (§6). This is a hard
-   rule, not a per-session preference. Do not ask the user for a token; do not offer to push.
-3. **Match, don't reinvent.** `assets/css/tokens.css` is law (§3). `index.html` and `quote.html`
-   are the reference implementations of the visual identity. New work must look like it.
+2. **Never accept or use a pasted credential** (GitHub token, Cloudflare token, API key,
+   webhook URL — anything). Do not ask the user for one. This is a hard rule.
+   **Pushing:** default is **Path A** (§6). Push only when BOTH are true: (a) the owner explicitly
+   authorizes pushing/deploying in the current request, and (b) the session has GitHub write
+   access granted through the platform's own GitHub integration (not a pasted token). Pushing
+   to `main` deploys to production — run the tests in `docs/COST_LAB.md` first. If either
+   condition is missing, use Path A.
+3. **Match, don't reinvent.** `assets/css/tokens.css` is law (§3). `index.html` (with
+   `site.css` + `cost-lab.css`) is the reference implementation of the visual identity. New work must look like it.
 4. **Record work in `ROADMAP.md`** in the same change set (§7). The roadmap — not chat history,
    not artifacts — is the canonical backlog.
 
@@ -33,16 +37,19 @@ site in any chat. Read this file *first*, before touching anything.
   **Auto-deploys on every push to `main`.** There is no separate deploy command.
 - **Serverless:** Cloudflare **Pages Functions** in `functions/api/`. A file at
   `functions/api/<name>.js` becomes a live endpoint at `/api/<name>`. Current endpoints:
-  `/api/enrich` and `/api/lead`. (No standalone Workers — that approach was abandoned.)
-- **Secrets** (`ANTHROPIC_API_KEY`, `APOLLO_API_KEY`, `LEAD_WEBHOOK_URL`) live as **Cloudflare
-  Pages environment variables**. They are injected into `env` at runtime. They NEVER appear in
+  `POST /api/enrich` (Cost Lab business-email lookup — validates, enriches by domain, logs to
+  the usage sheet, fails closed) and `/api/lead` (legacy, unreferenced). No standalone Workers.
+- **Secrets** (`ANTHROPIC_API_KEY`, `USAGE_WEBHOOK_URL`, legacy `LEAD_WEBHOOK_URL`) live as
+  **Cloudflare Pages environment variables**. Apollo is not used anywhere — never re-add it. They are injected into `env` at runtime. They NEVER appear in
   the repo or in any chat. If a chat transcript contains a real key, that key is burned — tell
   the user to rotate it; do not use it.
-- **Lead capture:** `/api/lead` → Google Sheet via webhook. Setup notes live at the top of
-  `apps-script/lead-capture.gs`.
-- **Enrichment ($0 model):** `/api/enrich` fetches the prospect's company homepage server-side
-  and uses an LLM to infer name/state/industry. No paid enrichment subscription is assumed; no
-  object storage is needed.
+- **Usage log (not a lead list):** `/api/enrich` → Google Sheet via `USAGE_WEBHOOK_URL`. Setup
+  in the header of `apps-script/usage-log.gs`. Nothing creates CRM records or contacts a PEO.
+- **Enrichment:** Claude Haiku + web search on the **domain only**, hardened scraper fallback
+  with SSRF controls. Details: `docs/COST_LAB.md`.
+- **The homepage Cost Lab assumes no PEO savings.** Both scenarios carry identical statutory and
+  insurance costs unless the visitor enters PEO-quoted rates. Do not reintroduce default
+  discounts (the legacy `engine.js` had −12% health, −10% WC, −80% admin — that is why it's retired).
 - **Positioning:** agnostic **PEO cost intelligence under the PEOnomics brand** — *not* XcelHR on
   the public site. The credibility promise is "real numbers." Every figure shown to a user must
   be sourced or visibly rendered as an estimate. **Never invent statistics.**
@@ -52,8 +59,8 @@ site in any chat. Read this file *first*, before touching anything.
 ## 2. File map
 
 ```
-index.html                      Homepage (landing). REFERENCE IMPLEMENTATION of the identity.
-quote.html                      Quote builder. Vanilla JS (engine.js), NOT React. REFERENCE IMPL.
+index.html                      Homepage + Cost Lab. REFERENCE IMPLEMENTATION of the identity.
+quote.html                      Redirect stub → /#cost-lab (noindex, not in sitemap).
 about.html contact.html         Org / contact pages.
 insights.html methodology.html  Editorial / methodology content.
 hidden-costs.html               Content landing.
@@ -66,12 +73,16 @@ assets/css/tokens.css           Design tokens (variables). LAW. Always linked fi
 assets/css/site.css             Base/components for landing/app/state pages.
 assets/css/content.css          Base for article pages.
 assets/css/ranking.css          Styles for best-peo ranking pages.
-assets/js/engine.js             Quote calculation engine (vanilla JS).
+assets/css/cost-lab.css         Cost Lab classes (tokens only). Linked after site.css on index.
+assets/js/cost-lab.js           Cost Lab model + UI. Pure compute() exposed as window.PEOLab.
+assets/js/engine.js             LEGACY, unreferenced (biased savings model). Do not re-wire.
 assets/js/site.js               Site-wide JS.
 data/rates-2025.json            Versioned payroll-tax rate dataset w/ per-figure confidence flags.
-functions/api/enrich.js         /api/enrich endpoint (company enrichment).
-functions/api/lead.js           /api/lead endpoint (lead → Google Sheet).
-apps-script/lead-capture.gs     Google Apps Script for the lead sheet webhook.
+functions/api/enrich.js         POST /api/enrich — lookup: validate, enrich, log, fail closed.
+functions/api/lead.js           LEGACY /api/lead (old quote page lead → sheet). Unreferenced.
+apps-script/usage-log.gs        Apps Script for the Cost Lab usage-log sheet (USAGE_WEBHOOK_URL).
+apps-script/lead-capture.gs     LEGACY Apps Script for the old lead sheet.
+docs/COST_LAB.md                Cost Lab implementation notes: model, endpoint contract, tests.
 tools/build_states.py           Generator for the 51 state pages from rates-2025.json.
 CNAME                           Fossil from the GitHub Pages era. Harmless on Cloudflare.
 favicon.svg  README.md  .gitignore
@@ -121,7 +132,7 @@ AI-generated template.
    - article/content → `Article` (and `FAQPage` where there's a Q/A block)
    - ranking pages → `ItemList` / `Article`
    - state pages → `Article` or `FAQPage` with the state in scope
-7. Internal links use root-relative absolute paths (`/quote.html`, `/states/`).
+7. Internal links use root-relative absolute paths (`/#cost-lab`, `/states/`).
 8. A `robots.txt` and a `sitemap.xml` must exist at the root and stay in sync with the page set
    (generate the sitemap from the same source as the state pages).
 
@@ -141,7 +152,7 @@ AI-generated template.
 
 ---
 
-## 6. Path A — how you return changes (you cannot push)
+## 6. Path A — how you return changes (default; see §0.2 for when pushing is allowed)
 
 You make changes in your sandbox against the cloned repo, then hand them back. The user commits.
 Cloudflare auto-deploys on push to `main`.
@@ -160,7 +171,7 @@ Cloudflare auto-deploys on push to `main`.
    Never assume a local clone exists — (1) is the default.
 3. State the **exact** files to create vs. replace, and propose the commit message.
 
-**Never:** accept/use a pasted credential; push on the user's behalf; reconstruct files from memory;
+**Never:** accept/use a pasted credential; push without §0.2's two conditions; reconstruct files from memory;
 weaken the disclosure/positioning language without the owner's explicit say-so (only the owner can
 make factual claims about the business).
 

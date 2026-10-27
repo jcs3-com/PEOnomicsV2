@@ -1,27 +1,27 @@
 # PEOnomics v2
 
-**peonomics.com** — PEO cost intelligence. One business email in, an itemized
-employer-cost estimate out: FICA, FUTA, SUI, workers' comp, health, and the PEO
-fee itself, standalone vs. PEO, for all 50 states + DC.
+**peonomics.com** — PEO cost intelligence. The homepage **Cost Lab** compares annual
+employer cost standalone vs. with a PEO — FICA, FUTA, SUTA, workers' comp, health, internal
+admin, and the PEO fee — with every assumption editable, no email required, and no built-in
+PEO savings. An optional business-email lookup prefills company details.
 
-Built as a static site + two Cloudflare Pages Functions. No framework, no build
-step for the core site, no client-side secrets.
+Built as a static site + Cloudflare Pages Functions. No framework, no build step, no
+client-side secrets. Operating manual: `AI_GUIDE.md`. Backlog: `ROADMAP.md`. Cost Lab
+internals: `docs/COST_LAB.md`.
 
 ## Architecture
 
 ```
-index.html              Landing — live sample ledger (MD/CA/TX/FL/NY)
-quote.html              Quote engine — enrichment prefill, editable assumptions,
-                        itemized ledger, lead capture
-states/                 51 generated state rate pages + index (programmatic SEO.)
-data/rates-2025.json    The dataset. Every figure carries a confidence flag.
-assets/js/engine.js     Computation engine (shared by index + quote)
-functions/api/enrich.js Cloudflare Pages Function — $0 enrichment: fetches the
-                        company homepage server-side, heuristics for name/state/industry
-functions/api/lead.js   Cloudflare Pages Function — validates leads, forwards to
-                        Google Sheet via Apps Script webhook (env var, not in repo)
-tools/build_states.py   Regenerates /states/ from the dataset
-apps-script/            The Google Apps Script for the lead sheet (setup inside)
+index.html               Homepage + Cost Lab (assets/js/cost-lab.js, assets/css/cost-lab.css)
+quote.html               Redirect stub -> /#cost-lab
+states/                  51 generated state rate pages + index
+data/rates-2025.json     The dataset (tax year 2025, preliminary). Per-figure confidence flags.
+functions/api/enrich.js  POST /api/enrich - business-email lookup: SSRF-hardened enrichment
+                         (Claude Haiku on the domain + scraper fallback), logged to a private
+                         usage sheet via USAGE_WEBHOOK_URL. Fails closed if the log is down.
+apps-script/usage-log.gs Apps Script for the usage-log sheet (setup steps in its header)
+tools/build_states.py    Regenerates /states/ and sitemap.xml from the dataset
+Legacy, unreferenced:    assets/js/engine.js, functions/api/lead.js, apps-script/lead-capture.gs
 ```
 
 Plus the editorial library carried forward from v1: pricing explainer, PEO vs
@@ -35,9 +35,10 @@ business), methodology.
 2. Build settings: **Framework preset: None. Build command: (empty). Output
    directory: `/`** — it's a static site; Functions in `/functions` deploy
    automatically.
-3. Set up the lead webhook: follow the instructions at the top of
-   `apps-script/lead-capture.gs` (3 minutes), then add the environment variable
-   **`LEAD_WEBHOOK_URL`** in Pages → Settings → Environment variables. Redeploy.
+3. Set up the usage-log webhook: follow the instructions at the top of
+   `apps-script/usage-log.gs` (5 minutes), then add the secret **`USAGE_WEBHOOK_URL`**
+   (and **`ANTHROPIC_API_KEY`** for research-grade enrichment) in Pages → Settings →
+   Variables and Secrets. Redeploy.
 4. Custom domain: Pages → Custom domains → add `peonomics.com`. (The old site is
    on GitHub Pages with a CNAME — don't switch DNS until this deploy looks right.)
 
@@ -62,10 +63,13 @@ python3 tools/build_states.py
 
 ## Security notes
 
-- No secrets in this repo. The lead webhook URL lives only in the Cloudflare
-  Pages environment variable.
-- The enrichment function fetches third-party homepages; it sends an identified
-  User-Agent, caps response size, and times out at 6s.
+- No secrets in this repo. `ANTHROPIC_API_KEY` and `USAGE_WEBHOOK_URL` live only as
+  Cloudflare Pages secrets.
+- The enrichment function fetches third-party homepages behind SSRF controls (strict
+  hostname rules, DNS-over-HTTPS check against private ranges, per-hop redirect
+  re-validation, no ports/credentials, HTML-only, 300 KB cap, 6 s budget), accepts POST
+  only from the site's own origins, and is rate-limited best-effort per isolate. Add a
+  Cloudflare WAF rate-limiting rule on `/api/enrich` for real abuse protection.
 - Any token that has ever appeared in a chat, email, or screenshot should be
   treated as compromised and rotated.
 
