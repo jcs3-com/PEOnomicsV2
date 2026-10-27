@@ -11,8 +11,10 @@
   const status = msg => { note.textContent = msg; };
   const OFF = 'Emailed reports (PDF + editable Excel) are being connected. Nothing is sent yet — use Print for now.';
 
-  const key = (document.querySelector('meta[name="peonomics-turnstile-site-key"]')?.content || '').trim();
-  const keyOk = /^0x[0-9A-Za-z_-]{10,}$/.test(key);
+  // Public Turnstile site key: from the page meta tag if set, otherwise from
+  // /api/report-status (Pages env TURNSTILE_SITE_KEY) so no code change is needed.
+  const KEY_RE = /^0x[0-9A-Za-z_-]{10,}$/;
+  let key = (document.querySelector('meta[name="peonomics-turnstile-site-key"]')?.content || '').trim();
 
   const read = id => { const raw = $(id).value.trim(); return raw === '' ? null : Number(raw); };
   const snapshot = () => ({
@@ -31,7 +33,8 @@
     report_unconfigured: OFF,
     log_unavailable: "The request couldn't be recorded, so nothing was sent. Please try again later.",
     email_unavailable: 'The email service did not accept the request. Nothing was sent.',
-    render_failed: "The report couldn't be generated. Nothing was sent."
+    render_failed: "The report couldn't be generated. Nothing was sent.",
+    rate_limited: 'Too many report requests from this connection. Please try again later. Nothing was sent.'
   };
 
   let token = '', sending = false, widgetId = null;
@@ -75,10 +78,13 @@
 
   async function init() {
     btn.disabled = true;
-    if (!keyOk) { status(OFF); return; }
     let available = false;
-    try { const r = await fetch('/api/report-status', { cache: 'no-store' }); available = (await r.json()).available === true; } catch { available = false; }
-    if (!available) { status(OFF); return; }
+    try {
+      const j = await (await fetch('/api/report-status', { cache: 'no-store' })).json();
+      available = j.available === true;
+      if (!KEY_RE.test(key) && typeof j.siteKey === 'string') key = j.siteKey.trim();
+    } catch { available = false; }
+    if (!available || !KEY_RE.test(key)) { status(OFF); return; }
     status('Get this scenario as a PDF plus an editable Excel workbook, at the business email entered above. We may send one optional survey invitation about 30 days later, with an opt-out. No sales calls; nothing goes to PEOs.');
     note.after(box);
     const s = document.createElement('script');

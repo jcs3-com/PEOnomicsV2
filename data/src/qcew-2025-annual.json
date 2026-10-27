@@ -1,0 +1,2812 @@
+{
+"source": {
+"name": "U.S. Bureau of Labor Statistics \u2014 Quarterly Census of Employment and Wages (QCEW), 2025 annual averages, private ownership",
+"url": "https://www.bls.gov/cew/",
+"dataUrlPattern": "https://data.bls.gov/cew/data/api/2025/a/area/{FIPS}000.csv",
+"lastReviewed": "2026-10-27",
+"field": "avg_annual_pay (average annual pay per job; includes part-time jobs)",
+"fallback": "When BLS suppresses a sector, the value is computed from disclosed 3-digit subsectors only (method=disclosed_subsectors, minimum 2,000 jobs); otherwise null."
+},
+"states": {
+"AL": {
+"all_private": {
+"value": 63676,
+"naics": "10",
+"series": "Total, all private industries",
+"employment": 1721931,
+"method": "sector"
+},
+"construction_trades": {
+"value": 77037,
+"naics": "23",
+"series": "Construction (NAICS 23)",
+"employment": 109968,
+"method": "sector"
+},
+"light_manufacturing": {
+"value": 77189,
+"naics": "31-33",
+"series": "Manufacturing (NAICS 31-33)",
+"employment": 284216,
+"method": "sector"
+},
+"retail_services": {
+"value": 38306,
+"naics": "44-45",
+"series": "Retail trade (NAICS 44-45)",
+"employment": 239342,
+"method": "sector"
+},
+"transportation_logistics": {
+"value": 60523,
+"naics": "48-49",
+"series": "Transportation and warehousing (NAICS 48-49)",
+"employment": 73022,
+"method": "sector"
+},
+"clerical_professional": {
+"value": 103763,
+"naics": "54",
+"series": "Professional, scientific, and technical services (NAICS 54)",
+"employment": 127093,
+"method": "sector"
+},
+"hospitality_food": {
+"value": 23371,
+"naics": "722",
+"series": "Food services and drinking places (NAICS 722)",
+"employment": 173462,
+"method": "sector"
+}
+},
+"AK": {
+"all_private": {
+"value": 75188,
+"naics": "10",
+"series": "Total, all private industries",
+"employment": 257911,
+"method": "sector"
+},
+"construction_trades": {
+"value": 88788,
+"naics": "23",
+"series": "Construction (NAICS 23) \u2014 disclosed 3-digit subsectors only",
+"employment": 7890,
+"method": "disclosed_subsectors",
+"subsectors": [
+"238"
+]
+},
+"light_manufacturing": {
+"value": 69610,
+"naics": "31-33",
+"series": "Manufacturing (NAICS 31-33) \u2014 disclosed 3-digit subsectors only",
+"employment": 11750,
+"method": "disclosed_subsectors",
+"subsectors": [
+"311",
+"312",
+"314",
+"315",
+"321",
+"323",
+"324",
+"325",
+"326",
+"327",
+"331",
+"332",
+"334",
+"339"
+]
+},
+"retail_services": {
+"value": 43193,
+"naics": "44-45",
+"series": "Retail trade (NAICS 44-45)",
+"employment": 34850,
+"method": "sector"
+},
+"transportation_logistics": {
+"value": 90831,
+"naics": "48-49",
+"series": "Transportation and warehousing (NAICS 48-49)",
+"employment": 23139,
+"method": "sector"
+},
+"clerical_professional": {
+"value": 97945,
+"naics": "54",
+"series": "Professional, scientific, and technical services (NAICS 54)",
+"employment": 13642,
+"method": "sector"
+},
+"hospitality_food": null
+},
+"AZ": {
+"all_private": {
+"value": 72784,
+"naics": "10",
+"series": "Total, all private industries",
+"employment": 2826668,
+"method": "sector"
+},
+"construction_trades": {
+"value": 82871,
+"naics": "23",
+"series": "Construction (NAICS 23)",
+"employment": 223800,
+"method": "sector"
+},
+"light_manufacturing": {
+"value": 100008,
+"naics": "31-33",
+"series": "Manufacturing (NAICS 31-33)",
+"employment": 193034,
+"method": "sector"
+},
+"retail_services": {
+"value": 49051,
+"naics": "44-45",
+"series": "Retail trade (NAICS 44-45)",
+"employment": 345432,
+"method": "sector"
+},
+"transportation_logistics": {
+"value": 62778,
+"naics": "48-49",
+"series": "Transportation and warehousing (NAICS 48-49)",
+"employment": 140859,
+"method": "sector"
+},
+"clerical_professional": {
+"value": 111906,
+"naics": "54",
+"series": "Professional, scientific, and technical services (NAICS 54)",
+"employment": 177957,
+"method": "sector"
+},
+"hospitality_food": {
+"value": 30060,
+"naics": "722",
+"series": "Food services and drinking places (NAICS 722)",
+"employment": 267153,
+"method": "sector"
+}
+},
+"AR": {
+"all_private": {
+"value": 61643,
+"naics": "10",
+"series": "Total, all private industries",
+"employment": 1107824,
+"method": "sector"
+},
+"construction_trades": {
+"value": 67208,
+"naics": "23",
+"series": "Construction (NAICS 23) \u2014 disclosed 3-digit subsectors only",
+"employment": 55836,
+"method": "disclosed_subsectors",
+"subsectors": [
+"236",
+"238"
+]
+},
+"light_manufacturing": {
+"value": 64216,
+"naics": "31-33",
+"series": "Manufacturing (NAICS 31-33)",
+"employment": 158956,
+"method": "sector"
+},
+"retail_services": {
+"value": 36809,
+"naics": "44-45",
+"series": "Retail trade (NAICS 44-45)",
+"employment": 143001,
+"method": "sector"
+},
+"transportation_logistics": {
+"value": 62269,
+"naics": "48-49",
+"series": "Transportation and warehousing (NAICS 48-49)",
+"employment": 63357,
+"method": "sector"
+},
+"clerical_professional": {
+"value": 84477,
+"naics": "54",
+"series": "Professional, scientific, and technical services (NAICS 54)",
+"employment": 52899,
+"method": "sector"
+},
+"hospitality_food": {
+"value": 22092,
+"naics": "722",
+"series": "Food services and drinking places (NAICS 722)",
+"employment": 106379,
+"method": "sector"
+}
+},
+"CA": {
+"all_private": {
+"value": 97204,
+"naics": "10",
+"series": "Total, all private industries",
+"employment": 15538140,
+"method": "sector"
+},
+"construction_trades": {
+"value": 93334,
+"naics": "23",
+"series": "Construction (NAICS 23)",
+"employment": 892415,
+"method": "sector"
+},
+"light_manufacturing": {
+"value": 132063,
+"naics": "31-33",
+"series": "Manufacturing (NAICS 31-33)",
+"employment": 1215887,
+"method": "sector"
+},
+"retail_services": {
+"value": 50515,
+"naics": "44-45",
+"series": "Retail trade (NAICS 44-45)",
+"employment": 1567097,
+"method": "sector"
+},
+"transportation_logistics": {
+"value": 78732,
+"naics": "48-49",
+"series": "Transportation and warehousing (NAICS 48-49)",
+"employment": 747702,
+"method": "sector"
+},
+"clerical_professional": {
+"value": 183465,
+"naics": "54",
+"series": "Professional, scientific, and technical services (NAICS 54)",
+"employment": 1387587,
+"method": "sector"
+},
+"hospitality_food": {
+"value": 34106,
+"naics": "722",
+"series": "Food services and drinking places (NAICS 722)",
+"employment": 1439558,
+"method": "sector"
+}
+},
+"CO": {
+"all_private": {
+"value": 85470,
+"naics": "10",
+"series": "Total, all private industries",
+"employment": 2432727,
+"method": "sector"
+},
+"construction_trades": {
+"value": 85235,
+"naics": "23",
+"series": "Construction (NAICS 23)",
+"employment": 184775,
+"method": "sector"
+},
+"light_manufacturing": {
+"value": 94240,
+"naics": "31-33",
+"series": "Manufacturing (NAICS 31-33)",
+"employment": 146498,
+"method": "sector"
+},
+"retail_services": {
+"value": 46020,
+"naics": "44-45",
+"series": "Retail trade (NAICS 44-45)",
+"employment": 269008,
+"method": "sector"
+},
+"transportation_logistics": {
+"value": 77833,
+"naics": "48-49",
+"series": "Transportation and warehousing (NAICS 48-49)",
+"employment": 107610,
+"method": "sector"
+},
+"clerical_professional": {
+"value": 146490,
+"naics": "54",
+"series": "Professional, scientific, and technical services (NAICS 54)",
+"employment": 290832,
+"method": "sector"
+},
+"hospitality_food": {
+"value": 32562,
+"naics": "722",
+"series": "Food services and drinking places (NAICS 722)",
+"employment": 238381,
+"method": "sector"
+}
+},
+"CT": {
+"all_private": {
+"value": 92528,
+"naics": "10",
+"series": "Total, all private industries",
+"employment": 1468253,
+"method": "sector"
+},
+"construction_trades": {
+"value": 88406,
+"naics": "23",
+"series": "Construction (NAICS 23) \u2014 disclosed 3-digit subsectors only",
+"employment": 57432,
+"method": "disclosed_subsectors",
+"subsectors": [
+"236",
+"238"
+]
+},
+"light_manufacturing": {
+"value": 105014,
+"naics": "31-33",
+"series": "Manufacturing (NAICS 31-33)",
+"employment": 152800,
+"method": "sector"
+},
+"retail_services": {
+"value": 46829,
+"naics": "44-45",
+"series": "Retail trade (NAICS 44-45)",
+"employment": 164369,
+"method": "sector"
+},
+"transportation_logistics": {
+"value": 61181,
+"naics": "48-49",
+"series": "Transportation and warehousing (NAICS 48-49)",
+"employment": 67059,
+"method": "sector"
+},
+"clerical_professional": {
+"value": 145598,
+"naics": "54",
+"series": "Professional, scientific, and technical services (NAICS 54)",
+"employment": 102122,
+"method": "sector"
+},
+"hospitality_food": {
+"value": 31622,
+"naics": "722",
+"series": "Food services and drinking places (NAICS 722)",
+"employment": 117270,
+"method": "sector"
+}
+},
+"DE": {
+"all_private": {
+"value": 75821,
+"naics": "10",
+"series": "Total, all private industries",
+"employment": 412488,
+"method": "sector"
+},
+"construction_trades": {
+"value": 75244,
+"naics": "23",
+"series": "Construction (NAICS 23) \u2014 disclosed 3-digit subsectors only",
+"employment": 16074,
+"method": "disclosed_subsectors",
+"subsectors": [
+"238"
+]
+},
+"light_manufacturing": {
+"value": 79420,
+"naics": "31-33",
+"series": "Manufacturing (NAICS 31-33)",
+"employment": 26680,
+"method": "sector"
+},
+"retail_services": {
+"value": 40959,
+"naics": "44-45",
+"series": "Retail trade (NAICS 44-45)",
+"employment": 50811,
+"method": "sector"
+},
+"transportation_logistics": {
+"value": 56747,
+"naics": "48-49",
+"series": "Transportation and warehousing (NAICS 48-49)",
+"employment": 22869,
+"method": "sector"
+},
+"clerical_professional": {
+"value": 133423,
+"naics": "54",
+"series": "Professional, scientific, and technical services (NAICS 54)",
+"employment": 29503,
+"method": "sector"
+},
+"hospitality_food": null
+},
+"DC": {
+"all_private": {
+"value": 123844,
+"naics": "10",
+"series": "Total, all private industries",
+"employment": 514275,
+"method": "sector"
+},
+"construction_trades": {
+"value": 90634,
+"naics": "23",
+"series": "Construction (NAICS 23) \u2014 disclosed 3-digit subsectors only",
+"employment": 8078,
+"method": "disclosed_subsectors",
+"subsectors": [
+"238"
+]
+},
+"light_manufacturing": null,
+"retail_services": {
+"value": 52831,
+"naics": "44-45",
+"series": "Retail trade (NAICS 44-45)",
+"employment": 19825,
+"method": "sector"
+},
+"transportation_logistics": null,
+"clerical_professional": {
+"value": 198031,
+"naics": "54",
+"series": "Professional, scientific, and technical services (NAICS 54)",
+"employment": 115138,
+"method": "sector"
+},
+"hospitality_food": {
+"value": 41861,
+"naics": "722",
+"series": "Food services and drinking places (NAICS 722)",
+"employment": 52240,
+"method": "sector"
+}
+},
+"FL": {
+"all_private": {
+"value": 72719,
+"naics": "10",
+"series": "Total, all private industries",
+"employment": 8814642,
+"method": "sector"
+},
+"construction_trades": {
+"value": 73949,
+"naics": "23",
+"series": "Construction (NAICS 23)",
+"employment": 655646,
+"method": "sector"
+},
+"light_manufacturing": {
+"value": 86479,
+"naics": "31-33",
+"series": "Manufacturing (NAICS 31-33)",
+"employment": 426975,
+"method": "sector"
+},
+"retail_services": {
+"value": 44681,
+"naics": "44-45",
+"series": "Retail trade (NAICS 44-45)",
+"employment": 1149476,
+"method": "sector"
+},
+"transportation_logistics": {
+"value": 70344,
+"naics": "48-49",
+"series": "Transportation and warehousing (NAICS 48-49)",
+"employment": 411378,
+"method": "sector"
+},
+"clerical_professional": {
+"value": 114382,
+"naics": "54",
+"series": "Professional, scientific, and technical services (NAICS 54)",
+"employment": 762717,
+"method": "sector"
+},
+"hospitality_food": {
+"value": 32062,
+"naics": "722",
+"series": "Food services and drinking places (NAICS 722)",
+"employment": 860502,
+"method": "sector"
+}
+},
+"GA": {
+"all_private": {
+"value": 74150,
+"naics": "10",
+"series": "Total, all private industries",
+"employment": 4206571,
+"method": "sector"
+},
+"construction_trades": {
+"value": 84608,
+"naics": "23",
+"series": "Construction (NAICS 23)",
+"employment": 234615,
+"method": "sector"
+},
+"light_manufacturing": {
+"value": 75390,
+"naics": "31-33",
+"series": "Manufacturing (NAICS 31-33)",
+"employment": 425082,
+"method": "sector"
+},
+"retail_services": {
+"value": 41875,
+"naics": "44-45",
+"series": "Retail trade (NAICS 44-45)",
+"employment": 509368,
+"method": "sector"
+},
+"transportation_logistics": {
+"value": 70650,
+"naics": "48-49",
+"series": "Transportation and warehousing (NAICS 48-49)",
+"employment": 264722,
+"method": "sector"
+},
+"clerical_professional": {
+"value": 117810,
+"naics": "54",
+"series": "Professional, scientific, and technical services (NAICS 54)",
+"employment": 336505,
+"method": "sector"
+},
+"hospitality_food": {
+"value": 25983,
+"naics": "722",
+"series": "Food services and drinking places (NAICS 722)",
+"employment": 405698,
+"method": "sector"
+}
+},
+"HI": {
+"all_private": {
+"value": 67677,
+"naics": "10",
+"series": "Total, all private industries",
+"employment": 520492,
+"method": "sector"
+},
+"construction_trades": {
+"value": 96675,
+"naics": "23",
+"series": "Construction (NAICS 23)",
+"employment": 39658,
+"method": "sector"
+},
+"light_manufacturing": {
+"value": 61554,
+"naics": "31-33",
+"series": "Manufacturing (NAICS 31-33) \u2014 disclosed 3-digit subsectors only",
+"employment": 12436,
+"method": "disclosed_subsectors",
+"subsectors": [
+"311",
+"312",
+"314",
+"315",
+"316",
+"321",
+"322",
+"323",
+"325",
+"326",
+"327",
+"332",
+"334",
+"336",
+"337",
+"339"
+]
+},
+"retail_services": {
+"value": 45565,
+"naics": "44-45",
+"series": "Retail trade (NAICS 44-45)",
+"employment": 63580,
+"method": "sector"
+},
+"transportation_logistics": {
+"value": 75931,
+"naics": "48-49",
+"series": "Transportation and warehousing (NAICS 48-49)",
+"employment": 31216,
+"method": "sector"
+},
+"clerical_professional": {
+"value": 107193,
+"naics": "54",
+"series": "Professional, scientific, and technical services (NAICS 54)",
+"employment": 26809,
+"method": "sector"
+},
+"hospitality_food": {
+"value": 34791,
+"naics": "722",
+"series": "Food services and drinking places (NAICS 722)",
+"employment": 66655,
+"method": "sector"
+}
+},
+"ID": {
+"all_private": {
+"value": 63240,
+"naics": "10",
+"series": "Total, all private industries",
+"employment": 748579,
+"method": "sector"
+},
+"construction_trades": {
+"value": 70753,
+"naics": "23",
+"series": "Construction (NAICS 23)",
+"employment": 72070,
+"method": "sector"
+},
+"light_manufacturing": {
+"value": 86864,
+"naics": "31-33",
+"series": "Manufacturing (NAICS 31-33)",
+"employment": 74296,
+"method": "sector"
+},
+"retail_services": {
+"value": 42379,
+"naics": "44-45",
+"series": "Retail trade (NAICS 44-45)",
+"employment": 93991,
+"method": "sector"
+},
+"transportation_logistics": {
+"value": 55518,
+"naics": "48-49",
+"series": "Transportation and warehousing (NAICS 48-49)",
+"employment": 28937,
+"method": "sector"
+},
+"clerical_professional": {
+"value": 100148,
+"naics": "54",
+"series": "Professional, scientific, and technical services (NAICS 54)",
+"employment": 52852,
+"method": "sector"
+},
+"hospitality_food": {
+"value": 22986,
+"naics": "722",
+"series": "Food services and drinking places (NAICS 722)",
+"employment": 67219,
+"method": "sector"
+}
+},
+"IL": {
+"all_private": {
+"value": 81129,
+"naics": "10",
+"series": "Total, all private industries",
+"employment": 5244962,
+"method": "sector"
+},
+"construction_trades": {
+"value": 93904,
+"naics": "23",
+"series": "Construction (NAICS 23)",
+"employment": 240012,
+"method": "sector"
+},
+"light_manufacturing": {
+"value": 90875,
+"naics": "31-33",
+"series": "Manufacturing (NAICS 31-33)",
+"employment": 569734,
+"method": "sector"
+},
+"retail_services": {
+"value": 43192,
+"naics": "44-45",
+"series": "Retail trade (NAICS 44-45)",
+"employment": 568588,
+"method": "sector"
+},
+"transportation_logistics": {
+"value": 70166,
+"naics": "48-49",
+"series": "Transportation and warehousing (NAICS 48-49)",
+"employment": 314080,
+"method": "sector"
+},
+"clerical_professional": {
+"value": 131207,
+"naics": "54",
+"series": "Professional, scientific, and technical services (NAICS 54)",
+"employment": 439915,
+"method": "sector"
+},
+"hospitality_food": {
+"value": 29593,
+"naics": "722",
+"series": "Food services and drinking places (NAICS 722)",
+"employment": 459555,
+"method": "sector"
+}
+},
+"IN": {
+"all_private": {
+"value": 65792,
+"naics": "10",
+"series": "Total, all private industries",
+"employment": 2790648,
+"method": "sector"
+},
+"construction_trades": {
+"value": 80095,
+"naics": "23",
+"series": "Construction (NAICS 23) \u2014 disclosed 3-digit subsectors only",
+"employment": 153333,
+"method": "disclosed_subsectors",
+"subsectors": [
+"236",
+"238"
+]
+},
+"light_manufacturing": {
+"value": 83998,
+"naics": "31-33",
+"series": "Manufacturing (NAICS 31-33)",
+"employment": 517571,
+"method": "sector"
+},
+"retail_services": {
+"value": 38530,
+"naics": "44-45",
+"series": "Retail trade (NAICS 44-45)",
+"employment": 312658,
+"method": "sector"
+},
+"transportation_logistics": {
+"value": 60808,
+"naics": "48-49",
+"series": "Transportation and warehousing (NAICS 48-49)",
+"employment": 166493,
+"method": "sector"
+},
+"clerical_professional": {
+"value": 96526,
+"naics": "54",
+"series": "Professional, scientific, and technical services (NAICS 54)",
+"employment": 150865,
+"method": "sector"
+},
+"hospitality_food": {
+"value": 22887,
+"naics": "722",
+"series": "Food services and drinking places (NAICS 722)",
+"employment": 247420,
+"method": "sector"
+}
+},
+"IA": {
+"all_private": {
+"value": 63675,
+"naics": "10",
+"series": "Total, all private industries",
+"employment": 1308323,
+"method": "sector"
+},
+"construction_trades": {
+"value": 77646,
+"naics": "23",
+"series": "Construction (NAICS 23)",
+"employment": 85010,
+"method": "sector"
+},
+"light_manufacturing": {
+"value": 76771,
+"naics": "31-33",
+"series": "Manufacturing (NAICS 31-33)",
+"employment": 216451,
+"method": "sector"
+},
+"retail_services": {
+"value": 36085,
+"naics": "44-45",
+"series": "Retail trade (NAICS 44-45)",
+"employment": 172840,
+"method": "sector"
+},
+"transportation_logistics": {
+"value": 59718,
+"naics": "48-49",
+"series": "Transportation and warehousing (NAICS 48-49)",
+"employment": 62884,
+"method": "sector"
+},
+"clerical_professional": {
+"value": 96453,
+"naics": "54",
+"series": "Professional, scientific, and technical services (NAICS 54)",
+"employment": 58026,
+"method": "sector"
+},
+"hospitality_food": {
+"value": 20834,
+"naics": "722",
+"series": "Food services and drinking places (NAICS 722)",
+"employment": 105016,
+"method": "sector"
+}
+},
+"KS": {
+"all_private": {
+"value": 64719,
+"naics": "10",
+"series": "Total, all private industries",
+"employment": 1185542,
+"method": "sector"
+},
+"construction_trades": {
+"value": 76952,
+"naics": "23",
+"series": "Construction (NAICS 23)",
+"employment": 73307,
+"method": "sector"
+},
+"light_manufacturing": {
+"value": 76353,
+"naics": "31-33",
+"series": "Manufacturing (NAICS 31-33)",
+"employment": 173891,
+"method": "sector"
+},
+"retail_services": {
+"value": 37080,
+"naics": "44-45",
+"series": "Retail trade (NAICS 44-45)",
+"employment": 140999,
+"method": "sector"
+},
+"transportation_logistics": {
+"value": 60936,
+"naics": "48-49",
+"series": "Transportation and warehousing (NAICS 48-49)",
+"employment": 63334,
+"method": "sector"
+},
+"clerical_professional": {
+"value": 98132,
+"naics": "54",
+"series": "Professional, scientific, and technical services (NAICS 54)",
+"employment": 78885,
+"method": "sector"
+},
+"hospitality_food": {
+"value": 22404,
+"naics": "722",
+"series": "Food services and drinking places (NAICS 722)",
+"employment": 105661,
+"method": "sector"
+}
+},
+"KY": {
+"all_private": {
+"value": 62613,
+"naics": "10",
+"series": "Total, all private industries",
+"employment": 1693812,
+"method": "sector"
+},
+"construction_trades": {
+"value": 74265,
+"naics": "23",
+"series": "Construction (NAICS 23)",
+"employment": 92866,
+"method": "sector"
+},
+"light_manufacturing": {
+"value": 78482,
+"naics": "31-33",
+"series": "Manufacturing (NAICS 31-33)",
+"employment": 252133,
+"method": "sector"
+},
+"retail_services": {
+"value": 38139,
+"naics": "44-45",
+"series": "Retail trade (NAICS 44-45)",
+"employment": 210093,
+"method": "sector"
+},
+"transportation_logistics": {
+"value": 70130,
+"naics": "48-49",
+"series": "Transportation and warehousing (NAICS 48-49)",
+"employment": 125426,
+"method": "sector"
+},
+"clerical_professional": {
+"value": 88677,
+"naics": "54",
+"series": "Professional, scientific, and technical services (NAICS 54)",
+"employment": 88049,
+"method": "sector"
+},
+"hospitality_food": {
+"value": 23759,
+"naics": "722",
+"series": "Food services and drinking places (NAICS 722)",
+"employment": 163584,
+"method": "sector"
+}
+},
+"LA": {
+"all_private": {
+"value": 63581,
+"naics": "10",
+"series": "Total, all private industries",
+"employment": 1622176,
+"method": "sector"
+},
+"construction_trades": {
+"value": 84168,
+"naics": "23",
+"series": "Construction (NAICS 23) \u2014 disclosed 3-digit subsectors only",
+"employment": 114347,
+"method": "disclosed_subsectors",
+"subsectors": [
+"237",
+"238"
+]
+},
+"light_manufacturing": {
+"value": 94875,
+"naics": "31-33",
+"series": "Manufacturing (NAICS 31-33) \u2014 disclosed 3-digit subsectors only",
+"employment": 140383,
+"method": "disclosed_subsectors",
+"subsectors": [
+"311",
+"312",
+"313",
+"314",
+"315",
+"321",
+"322",
+"323",
+"324",
+"325",
+"326",
+"327",
+"331",
+"332",
+"333",
+"334",
+"335",
+"336",
+"337",
+"339"
+]
+},
+"retail_services": {
+"value": 36845,
+"naics": "44-45",
+"series": "Retail trade (NAICS 44-45)",
+"employment": 212707,
+"method": "sector"
+},
+"transportation_logistics": {
+"value": 73477,
+"naics": "48-49",
+"series": "Transportation and warehousing (NAICS 48-49)",
+"employment": 83974,
+"method": "sector"
+},
+"clerical_professional": {
+"value": 90214,
+"naics": "54",
+"series": "Professional, scientific, and technical services (NAICS 54)",
+"employment": 96120,
+"method": "sector"
+},
+"hospitality_food": {
+"value": 23161,
+"naics": "722",
+"series": "Food services and drinking places (NAICS 722)",
+"employment": 170569,
+"method": "sector"
+}
+},
+"ME": {
+"all_private": {
+"value": 65967,
+"naics": "10",
+"series": "Total, all private industries",
+"employment": 549511,
+"method": "sector"
+},
+"construction_trades": {
+"value": 71790,
+"naics": "23",
+"series": "Construction (NAICS 23) \u2014 disclosed 3-digit subsectors only",
+"employment": 31153,
+"method": "disclosed_subsectors",
+"subsectors": [
+"236",
+"238"
+]
+},
+"light_manufacturing": {
+"value": 74002,
+"naics": "31-33",
+"series": "Manufacturing (NAICS 31-33)",
+"employment": 51011,
+"method": "sector"
+},
+"retail_services": {
+"value": 41432,
+"naics": "44-45",
+"series": "Retail trade (NAICS 44-45)",
+"employment": 80854,
+"method": "sector"
+},
+"transportation_logistics": {
+"value": 59033,
+"naics": "48-49",
+"series": "Transportation and warehousing (NAICS 48-49) \u2014 disclosed 3-digit subsectors only",
+"employment": 15988,
+"method": "disclosed_subsectors",
+"subsectors": [
+"481",
+"483",
+"484",
+"485",
+"486",
+"487",
+"488",
+"492",
+"493"
+]
+},
+"clerical_professional": {
+"value": 110464,
+"naics": "54",
+"series": "Professional, scientific, and technical services (NAICS 54)",
+"employment": 33262,
+"method": "sector"
+},
+"hospitality_food": {
+"value": 31190,
+"naics": "722",
+"series": "Food services and drinking places (NAICS 722)",
+"employment": 47276,
+"method": "sector"
+}
+},
+"MD": {
+"all_private": {
+"value": 78676,
+"naics": "10",
+"series": "Total, all private industries",
+"employment": 2230259,
+"method": "sector"
+},
+"construction_trades": {
+"value": 86149,
+"naics": "23",
+"series": "Construction (NAICS 23)",
+"employment": 165130,
+"method": "sector"
+},
+"light_manufacturing": {
+"value": 103964,
+"naics": "31-33",
+"series": "Manufacturing (NAICS 31-33) \u2014 disclosed 3-digit subsectors only",
+"employment": 112988,
+"method": "disclosed_subsectors",
+"subsectors": [
+"311",
+"312",
+"313",
+"314",
+"315",
+"321",
+"322",
+"323",
+"324",
+"325",
+"326",
+"327",
+"331",
+"332",
+"333",
+"334",
+"335",
+"336",
+"337",
+"339"
+]
+},
+"retail_services": {
+"value": 44351,
+"naics": "44-45",
+"series": "Retail trade (NAICS 44-45)",
+"employment": 265220,
+"method": "sector"
+},
+"transportation_logistics": {
+"value": 62879,
+"naics": "48-49",
+"series": "Transportation and warehousing (NAICS 48-49)",
+"employment": 99729,
+"method": "sector"
+},
+"clerical_professional": {
+"value": 128976,
+"naics": "54",
+"series": "Professional, scientific, and technical services (NAICS 54)",
+"employment": 273720,
+"method": "sector"
+},
+"hospitality_food": {
+"value": 29028,
+"naics": "722",
+"series": "Food services and drinking places (NAICS 722)",
+"employment": 199359,
+"method": "sector"
+}
+},
+"MA": {
+"all_private": {
+"value": 101875,
+"naics": "10",
+"series": "Total, all private industries",
+"employment": 3184467,
+"method": "sector"
+},
+"construction_trades": {
+"value": 101378,
+"naics": "23",
+"series": "Construction (NAICS 23) \u2014 disclosed 3-digit subsectors only",
+"employment": 151972,
+"method": "disclosed_subsectors",
+"subsectors": [
+"236",
+"238"
+]
+},
+"light_manufacturing": {
+"value": 110734,
+"naics": "31-33",
+"series": "Manufacturing (NAICS 31-33)",
+"employment": 226691,
+"method": "sector"
+},
+"retail_services": {
+"value": 47720,
+"naics": "44-45",
+"series": "Retail trade (NAICS 44-45)",
+"employment": 322174,
+"method": "sector"
+},
+"transportation_logistics": {
+"value": 68083,
+"naics": "48-49",
+"series": "Transportation and warehousing (NAICS 48-49) \u2014 disclosed 3-digit subsectors only",
+"employment": 106410,
+"method": "disclosed_subsectors",
+"subsectors": [
+"481",
+"483",
+"484",
+"485",
+"487",
+"488",
+"492",
+"493"
+]
+},
+"clerical_professional": {
+"value": 192482,
+"naics": "54",
+"series": "Professional, scientific, and technical services (NAICS 54)",
+"employment": 356647,
+"method": "sector"
+},
+"hospitality_food": {
+"value": 34172,
+"naics": "722",
+"series": "Food services and drinking places (NAICS 722)",
+"employment": 262535,
+"method": "sector"
+}
+},
+"MI": {
+"all_private": {
+"value": 70840,
+"naics": "10",
+"series": "Total, all private industries",
+"employment": 3819548,
+"method": "sector"
+},
+"construction_trades": {
+"value": 86132,
+"naics": "23",
+"series": "Construction (NAICS 23)",
+"employment": 201408,
+"method": "sector"
+},
+"light_manufacturing": {
+"value": 85789,
+"naics": "31-33",
+"series": "Manufacturing (NAICS 31-33)",
+"employment": 582935,
+"method": "sector"
+},
+"retail_services": {
+"value": 41885,
+"naics": "44-45",
+"series": "Retail trade (NAICS 44-45)",
+"employment": 450135,
+"method": "sector"
+},
+"transportation_logistics": {
+"value": 69454,
+"naics": "48-49",
+"series": "Transportation and warehousing (NAICS 48-49)",
+"employment": 154837,
+"method": "sector"
+},
+"clerical_professional": {
+"value": 114848,
+"naics": "54",
+"series": "Professional, scientific, and technical services (NAICS 54)",
+"employment": 308486,
+"method": "sector"
+},
+"hospitality_food": {
+"value": 25079,
+"naics": "722",
+"series": "Food services and drinking places (NAICS 722)",
+"employment": 330595,
+"method": "sector"
+}
+},
+"MN": {
+"all_private": {
+"value": 77504,
+"naics": "10",
+"series": "Total, all private industries",
+"employment": 2548333,
+"method": "sector"
+},
+"construction_trades": {
+"value": 92700,
+"naics": "23",
+"series": "Construction (NAICS 23)",
+"employment": 141493,
+"method": "sector"
+},
+"light_manufacturing": {
+"value": 86634,
+"naics": "31-33",
+"series": "Manufacturing (NAICS 31-33)",
+"employment": 315307,
+"method": "sector"
+},
+"retail_services": {
+"value": 40680,
+"naics": "44-45",
+"series": "Retail trade (NAICS 44-45)",
+"employment": 279777,
+"method": "sector"
+},
+"transportation_logistics": {
+"value": 69844,
+"naics": "48-49",
+"series": "Transportation and warehousing (NAICS 48-49)",
+"employment": 98979,
+"method": "sector"
+},
+"clerical_professional": {
+"value": 126622,
+"naics": "54",
+"series": "Professional, scientific, and technical services (NAICS 54)",
+"employment": 165130,
+"method": "sector"
+},
+"hospitality_food": {
+"value": 26693,
+"naics": "722",
+"series": "Food services and drinking places (NAICS 722)",
+"employment": 196534,
+"method": "sector"
+}
+},
+"MS": {
+"all_private": {
+"value": 52619,
+"naics": "10",
+"series": "Total, all private industries",
+"employment": 942660,
+"method": "sector"
+},
+"construction_trades": {
+"value": 70949,
+"naics": "23",
+"series": "Construction (NAICS 23)",
+"employment": 53778,
+"method": "sector"
+},
+"light_manufacturing": {
+"value": 65815,
+"naics": "31-33",
+"series": "Manufacturing (NAICS 31-33)",
+"employment": 138766,
+"method": "sector"
+},
+"retail_services": {
+"value": 34736,
+"naics": "44-45",
+"series": "Retail trade (NAICS 44-45)",
+"employment": 137934,
+"method": "sector"
+},
+"transportation_logistics": {
+"value": 56705,
+"naics": "48-49",
+"series": "Transportation and warehousing (NAICS 48-49)",
+"employment": 61520,
+"method": "sector"
+},
+"clerical_professional": {
+"value": 76599,
+"naics": "54",
+"series": "Professional, scientific, and technical services (NAICS 54)",
+"employment": 41729,
+"method": "sector"
+},
+"hospitality_food": {
+"value": 20546,
+"naics": "722",
+"series": "Food services and drinking places (NAICS 722)",
+"employment": 101799,
+"method": "sector"
+}
+},
+"MO": {
+"all_private": {
+"value": 67290,
+"naics": "10",
+"series": "Total, all private industries",
+"employment": 2483283,
+"method": "sector"
+},
+"construction_trades": {
+"value": 80065,
+"naics": "23",
+"series": "Construction (NAICS 23) \u2014 disclosed 3-digit subsectors only",
+"employment": 128432,
+"method": "disclosed_subsectors",
+"subsectors": [
+"236",
+"238"
+]
+},
+"light_manufacturing": {
+"value": 77859,
+"naics": "31-33",
+"series": "Manufacturing (NAICS 31-33)",
+"employment": 281886,
+"method": "sector"
+},
+"retail_services": {
+"value": 39506,
+"naics": "44-45",
+"series": "Retail trade (NAICS 44-45)",
+"employment": 304942,
+"method": "sector"
+},
+"transportation_logistics": {
+"value": 58814,
+"naics": "48-49",
+"series": "Transportation and warehousing (NAICS 48-49)",
+"employment": 107151,
+"method": "sector"
+},
+"clerical_professional": {
+"value": 107858,
+"naics": "54",
+"series": "Professional, scientific, and technical services (NAICS 54)",
+"employment": 163101,
+"method": "sector"
+},
+"hospitality_food": {
+"value": 25586,
+"naics": "722",
+"series": "Food services and drinking places (NAICS 722)",
+"employment": 230128,
+"method": "sector"
+}
+},
+"MT": {
+"all_private": {
+"value": 62480,
+"naics": "10",
+"series": "Total, all private industries",
+"employment": 427082,
+"method": "sector"
+},
+"construction_trades": {
+"value": 75949,
+"naics": "23",
+"series": "Construction (NAICS 23)",
+"employment": 36854,
+"method": "sector"
+},
+"light_manufacturing": {
+"value": 71543,
+"naics": "31-33",
+"series": "Manufacturing (NAICS 31-33)",
+"employment": 20947,
+"method": "sector"
+},
+"retail_services": {
+"value": 42443,
+"naics": "44-45",
+"series": "Retail trade (NAICS 44-45)",
+"employment": 63172,
+"method": "sector"
+},
+"transportation_logistics": {
+"value": 61476,
+"naics": "48-49",
+"series": "Transportation and warehousing (NAICS 48-49)",
+"employment": 13168,
+"method": "sector"
+},
+"clerical_professional": {
+"value": 108351,
+"naics": "54",
+"series": "Professional, scientific, and technical services (NAICS 54)",
+"employment": 28883,
+"method": "sector"
+},
+"hospitality_food": {
+"value": 24979,
+"naics": "722",
+"series": "Food services and drinking places (NAICS 722)",
+"employment": 44334,
+"method": "sector"
+}
+},
+"NE": {
+"all_private": {
+"value": 62985,
+"naics": "10",
+"series": "Total, all private industries",
+"employment": 853689,
+"method": "sector"
+},
+"construction_trades": {
+"value": 72797,
+"naics": "23",
+"series": "Construction (NAICS 23)",
+"employment": 63883,
+"method": "sector"
+},
+"light_manufacturing": {
+"value": 66955,
+"naics": "31-33",
+"series": "Manufacturing (NAICS 31-33)",
+"employment": 102692,
+"method": "sector"
+},
+"retail_services": {
+"value": 37830,
+"naics": "44-45",
+"series": "Retail trade (NAICS 44-45)",
+"employment": 103262,
+"method": "sector"
+},
+"transportation_logistics": {
+"value": 60400,
+"naics": "48-49",
+"series": "Transportation and warehousing (NAICS 48-49) \u2014 disclosed 3-digit subsectors only",
+"employment": 41408,
+"method": "disclosed_subsectors",
+"subsectors": [
+"481",
+"484",
+"485",
+"486",
+"488",
+"492",
+"493"
+]
+},
+"clerical_professional": {
+"value": 96179,
+"naics": "54",
+"series": "Professional, scientific, and technical services (NAICS 54)",
+"employment": 50987,
+"method": "sector"
+},
+"hospitality_food": {
+"value": 22590,
+"naics": "722",
+"series": "Food services and drinking places (NAICS 722)",
+"employment": 75425,
+"method": "sector"
+}
+},
+"NV": {
+"all_private": {
+"value": 68413,
+"naics": "10",
+"series": "Total, all private industries",
+"employment": 1394215,
+"method": "sector"
+},
+"construction_trades": {
+"value": 84832,
+"naics": "23",
+"series": "Construction (NAICS 23)",
+"employment": 112044,
+"method": "sector"
+},
+"light_manufacturing": {
+"value": 78633,
+"naics": "31-33",
+"series": "Manufacturing (NAICS 31-33)",
+"employment": 67744,
+"method": "sector"
+},
+"retail_services": {
+"value": 43945,
+"naics": "44-45",
+"series": "Retail trade (NAICS 44-45)",
+"employment": 149578,
+"method": "sector"
+},
+"transportation_logistics": {
+"value": 64010,
+"naics": "48-49",
+"series": "Transportation and warehousing (NAICS 48-49)",
+"employment": 95283,
+"method": "sector"
+},
+"clerical_professional": {
+"value": 109316,
+"naics": "54",
+"series": "Professional, scientific, and technical services (NAICS 54)",
+"employment": 78183,
+"method": "sector"
+},
+"hospitality_food": {
+"value": 31822,
+"naics": "722",
+"series": "Food services and drinking places (NAICS 722)",
+"employment": 148725,
+"method": "sector"
+}
+},
+"NH": {
+"all_private": {
+"value": 82594,
+"naics": "10",
+"series": "Total, all private industries",
+"employment": 605591,
+"method": "sector"
+},
+"construction_trades": {
+"value": 86710,
+"naics": "23",
+"series": "Construction (NAICS 23)",
+"employment": 32400,
+"method": "sector"
+},
+"light_manufacturing": {
+"value": 97708,
+"naics": "31-33",
+"series": "Manufacturing (NAICS 31-33)",
+"employment": 67424,
+"method": "sector"
+},
+"retail_services": {
+"value": 45793,
+"naics": "44-45",
+"series": "Retail trade (NAICS 44-45)",
+"employment": 89522,
+"method": "sector"
+},
+"transportation_logistics": {
+"value": 70837,
+"naics": "48-49",
+"series": "Transportation and warehousing (NAICS 48-49)",
+"employment": 16039,
+"method": "sector"
+},
+"clerical_professional": {
+"value": 141736,
+"naics": "54",
+"series": "Professional, scientific, and technical services (NAICS 54)",
+"employment": 49119,
+"method": "sector"
+},
+"hospitality_food": {
+"value": 30584,
+"naics": "722",
+"series": "Food services and drinking places (NAICS 722)",
+"employment": 52351,
+"method": "sector"
+}
+},
+"NJ": {
+"all_private": {
+"value": 86718,
+"naics": "10",
+"series": "Total, all private industries",
+"employment": 3704796,
+"method": "sector"
+},
+"construction_trades": {
+"value": 93123,
+"naics": "23",
+"series": "Construction (NAICS 23)",
+"employment": 164671,
+"method": "sector"
+},
+"light_manufacturing": {
+"value": 104878,
+"naics": "31-33",
+"series": "Manufacturing (NAICS 31-33)",
+"employment": 249940,
+"method": "sector"
+},
+"retail_services": {
+"value": 46479,
+"naics": "44-45",
+"series": "Retail trade (NAICS 44-45)",
+"employment": 426855,
+"method": "sector"
+},
+"transportation_logistics": {
+"value": 69910,
+"naics": "48-49",
+"series": "Transportation and warehousing (NAICS 48-49)",
+"employment": 233342,
+"method": "sector"
+},
+"clerical_professional": {
+"value": 145213,
+"naics": "54",
+"series": "Professional, scientific, and technical services (NAICS 54)",
+"employment": 337523,
+"method": "sector"
+},
+"hospitality_food": {
+"value": 31088,
+"naics": "722",
+"series": "Food services and drinking places (NAICS 722)",
+"employment": 284439,
+"method": "sector"
+}
+},
+"NM": {
+"all_private": {
+"value": 61011,
+"naics": "10",
+"series": "Total, all private industries",
+"employment": 690919,
+"method": "sector"
+},
+"construction_trades": {
+"value": 71036,
+"naics": "23",
+"series": "Construction (NAICS 23)",
+"employment": 55405,
+"method": "sector"
+},
+"light_manufacturing": {
+"value": 72725,
+"naics": "31-33",
+"series": "Manufacturing (NAICS 31-33)",
+"employment": 28307,
+"method": "sector"
+},
+"retail_services": {
+"value": 38394,
+"naics": "44-45",
+"series": "Retail trade (NAICS 44-45)",
+"employment": 94584,
+"method": "sector"
+},
+"transportation_logistics": {
+"value": 60857,
+"naics": "48-49",
+"series": "Transportation and warehousing (NAICS 48-49)",
+"employment": 25199,
+"method": "sector"
+},
+"clerical_professional": {
+"value": 112184,
+"naics": "54",
+"series": "Professional, scientific, and technical services (NAICS 54)",
+"employment": 68575,
+"method": "sector"
+},
+"hospitality_food": {
+"value": 25652,
+"naics": "722",
+"series": "Food services and drinking places (NAICS 722)",
+"employment": 74202,
+"method": "sector"
+}
+},
+"NY": {
+"all_private": {
+"value": 100938,
+"naics": "10",
+"series": "Total, all private industries",
+"employment": 8364122,
+"method": "sector"
+},
+"construction_trades": {
+"value": 92965,
+"naics": "23",
+"series": "Construction (NAICS 23)",
+"employment": 384950,
+"method": "sector"
+},
+"light_manufacturing": {
+"value": 87280,
+"naics": "31-33",
+"series": "Manufacturing (NAICS 31-33)",
+"employment": 401267,
+"method": "sector"
+},
+"retail_services": {
+"value": 50152,
+"naics": "44-45",
+"series": "Retail trade (NAICS 44-45)",
+"employment": 831746,
+"method": "sector"
+},
+"transportation_logistics": {
+"value": 65835,
+"naics": "48-49",
+"series": "Transportation and warehousing (NAICS 48-49)",
+"employment": 373939,
+"method": "sector"
+},
+"clerical_professional": {
+"value": 163752,
+"naics": "54",
+"series": "Professional, scientific, and technical services (NAICS 54)",
+"employment": 716361,
+"method": "sector"
+},
+"hospitality_food": {
+"value": 36323,
+"naics": "722",
+"series": "Food services and drinking places (NAICS 722)",
+"employment": 664244,
+"method": "sector"
+}
+},
+"NC": {
+"all_private": {
+"value": 72186,
+"naics": "10",
+"series": "Total, all private industries",
+"employment": 4219973,
+"method": "sector"
+},
+"construction_trades": {
+"value": 76742,
+"naics": "23",
+"series": "Construction (NAICS 23) \u2014 disclosed 3-digit subsectors only",
+"employment": 236570,
+"method": "disclosed_subsectors",
+"subsectors": [
+"236",
+"238"
+]
+},
+"light_manufacturing": {
+"value": 78202,
+"naics": "31-33",
+"series": "Manufacturing (NAICS 31-33)",
+"employment": 461466,
+"method": "sector"
+},
+"retail_services": {
+"value": 40383,
+"naics": "44-45",
+"series": "Retail trade (NAICS 44-45)",
+"employment": 526628,
+"method": "sector"
+},
+"transportation_logistics": {
+"value": 61949,
+"naics": "48-49",
+"series": "Transportation and warehousing (NAICS 48-49)",
+"employment": 183284,
+"method": "sector"
+},
+"clerical_professional": {
+"value": 117215,
+"naics": "54",
+"series": "Professional, scientific, and technical services (NAICS 54)",
+"employment": 334993,
+"method": "sector"
+},
+"hospitality_food": {
+"value": 25294,
+"naics": "722",
+"series": "Food services and drinking places (NAICS 722)",
+"employment": 414269,
+"method": "sector"
+}
+},
+"ND": {
+"all_private": {
+"value": 68980,
+"naics": "10",
+"series": "Total, all private industries",
+"employment": 353989,
+"method": "sector"
+},
+"construction_trades": {
+"value": 84290,
+"naics": "23",
+"series": "Construction (NAICS 23)",
+"employment": 30043,
+"method": "sector"
+},
+"light_manufacturing": {
+"value": 73087,
+"naics": "31-33",
+"series": "Manufacturing (NAICS 31-33)",
+"employment": 27820,
+"method": "sector"
+},
+"retail_services": {
+"value": 40464,
+"naics": "44-45",
+"series": "Retail trade (NAICS 44-45)",
+"employment": 46171,
+"method": "sector"
+},
+"transportation_logistics": {
+"value": 74172,
+"naics": "48-49",
+"series": "Transportation and warehousing (NAICS 48-49) \u2014 disclosed 3-digit subsectors only",
+"employment": 17229,
+"method": "disclosed_subsectors",
+"subsectors": [
+"481",
+"484",
+"485",
+"486",
+"488",
+"492",
+"493"
+]
+},
+"clerical_professional": {
+"value": 93288,
+"naics": "54",
+"series": "Professional, scientific, and technical services (NAICS 54)",
+"employment": 16848,
+"method": "sector"
+},
+"hospitality_food": {
+"value": 23458,
+"naics": "722",
+"series": "Food services and drinking places (NAICS 722)",
+"employment": 28643,
+"method": "sector"
+}
+},
+"OH": {
+"all_private": {
+"value": 67921,
+"naics": "10",
+"series": "Total, all private industries",
+"employment": 4796137,
+"method": "sector"
+},
+"construction_trades": {
+"value": 84976,
+"naics": "23",
+"series": "Construction (NAICS 23)",
+"employment": 259526,
+"method": "sector"
+},
+"light_manufacturing": {
+"value": 79276,
+"naics": "31-33",
+"series": "Manufacturing (NAICS 31-33)",
+"employment": 675735,
+"method": "sector"
+},
+"retail_services": {
+"value": 38832,
+"naics": "44-45",
+"series": "Retail trade (NAICS 44-45)",
+"employment": 538214,
+"method": "sector"
+},
+"transportation_logistics": {
+"value": 63985,
+"naics": "48-49",
+"series": "Transportation and warehousing (NAICS 48-49)",
+"employment": 253154,
+"method": "sector"
+},
+"clerical_professional": {
+"value": 105271,
+"naics": "54",
+"series": "Professional, scientific, and technical services (NAICS 54)",
+"employment": 287672,
+"method": "sector"
+},
+"hospitality_food": {
+"value": 23345,
+"naics": "722",
+"series": "Food services and drinking places (NAICS 722)",
+"employment": 447539,
+"method": "sector"
+}
+},
+"OK": {
+"all_private": {
+"value": 60828,
+"naics": "10",
+"series": "Total, all private industries",
+"employment": 1362967,
+"method": "sector"
+},
+"construction_trades": {
+"value": 70353,
+"naics": "23",
+"series": "Construction (NAICS 23)",
+"employment": 90041,
+"method": "sector"
+},
+"light_manufacturing": {
+"value": 73982,
+"naics": "31-33",
+"series": "Manufacturing (NAICS 31-33)",
+"employment": 141088,
+"method": "sector"
+},
+"retail_services": {
+"value": 38079,
+"naics": "44-45",
+"series": "Retail trade (NAICS 44-45)",
+"employment": 184497,
+"method": "sector"
+},
+"transportation_logistics": {
+"value": 62260,
+"naics": "48-49",
+"series": "Transportation and warehousing (NAICS 48-49)",
+"employment": 60951,
+"method": "sector"
+},
+"clerical_professional": {
+"value": 86079,
+"naics": "54",
+"series": "Professional, scientific, and technical services (NAICS 54)",
+"employment": 82697,
+"method": "sector"
+},
+"hospitality_food": {
+"value": 22368,
+"naics": "722",
+"series": "Food services and drinking places (NAICS 722)",
+"employment": 150479,
+"method": "sector"
+}
+},
+"OR": {
+"all_private": {
+"value": 71935,
+"naics": "10",
+"series": "Total, all private industries",
+"employment": 1692261,
+"method": "sector"
+},
+"construction_trades": {
+"value": 85715,
+"naics": "23",
+"series": "Construction (NAICS 23)",
+"employment": 112585,
+"method": "sector"
+},
+"light_manufacturing": {
+"value": 90110,
+"naics": "31-33",
+"series": "Manufacturing (NAICS 31-33)",
+"employment": 178848,
+"method": "sector"
+},
+"retail_services": {
+"value": 43870,
+"naics": "44-45",
+"series": "Retail trade (NAICS 44-45)",
+"employment": 199988,
+"method": "sector"
+},
+"transportation_logistics": {
+"value": 63987,
+"naics": "48-49",
+"series": "Transportation and warehousing (NAICS 48-49)",
+"employment": 71901,
+"method": "sector"
+},
+"clerical_professional": {
+"value": 111573,
+"naics": "54",
+"series": "Professional, scientific, and technical services (NAICS 54)",
+"employment": 108912,
+"method": "sector"
+},
+"hospitality_food": {
+"value": 29579,
+"naics": "722",
+"series": "Food services and drinking places (NAICS 722)",
+"employment": 153663,
+"method": "sector"
+}
+},
+"PA": {
+"all_private": {
+"value": 74383,
+"naics": "10",
+"series": "Total, all private industries",
+"employment": 5375570,
+"method": "sector"
+},
+"construction_trades": {
+"value": 86237,
+"naics": "23",
+"series": "Construction (NAICS 23)",
+"employment": 263870,
+"method": "sector"
+},
+"light_manufacturing": {
+"value": 80766,
+"naics": "31-33",
+"series": "Manufacturing (NAICS 31-33)",
+"employment": 557029,
+"method": "sector"
+},
+"retail_services": {
+"value": 38625,
+"naics": "44-45",
+"series": "Retail trade (NAICS 44-45)",
+"employment": 582263,
+"method": "sector"
+},
+"transportation_logistics": {
+"value": 61155,
+"naics": "48-49",
+"series": "Transportation and warehousing (NAICS 48-49)",
+"employment": 303296,
+"method": "sector"
+},
+"clerical_professional": {
+"value": 129669,
+"naics": "54",
+"series": "Professional, scientific, and technical services (NAICS 54)",
+"employment": 390136,
+"method": "sector"
+},
+"hospitality_food": {
+"value": 24638,
+"naics": "722",
+"series": "Food services and drinking places (NAICS 722)",
+"employment": 411142,
+"method": "sector"
+}
+},
+"RI": {
+"all_private": {
+"value": 69364,
+"naics": "10",
+"series": "Total, all private industries",
+"employment": 438005,
+"method": "sector"
+},
+"construction_trades": {
+"value": 82771,
+"naics": "23",
+"series": "Construction (NAICS 23) \u2014 disclosed 3-digit subsectors only",
+"employment": 20710,
+"method": "disclosed_subsectors",
+"subsectors": [
+"236",
+"238"
+]
+},
+"light_manufacturing": {
+"value": 75424,
+"naics": "31-33",
+"series": "Manufacturing (NAICS 31-33)",
+"employment": 39249,
+"method": "sector"
+},
+"retail_services": {
+"value": 41914,
+"naics": "44-45",
+"series": "Retail trade (NAICS 44-45)",
+"employment": 46492,
+"method": "sector"
+},
+"transportation_logistics": {
+"value": 56015,
+"naics": "48-49",
+"series": "Transportation and warehousing (NAICS 48-49)",
+"employment": 15074,
+"method": "sector"
+},
+"clerical_professional": {
+"value": 113887,
+"naics": "54",
+"series": "Professional, scientific, and technical services (NAICS 54)",
+"employment": 31160,
+"method": "sector"
+},
+"hospitality_food": null
+},
+"SC": {
+"all_private": {
+"value": 63446,
+"naics": "10",
+"series": "Total, all private industries",
+"employment": 1947536,
+"method": "sector"
+},
+"construction_trades": {
+"value": 79388,
+"naics": "23",
+"series": "Construction (NAICS 23) \u2014 disclosed 3-digit subsectors only",
+"employment": 105077,
+"method": "disclosed_subsectors",
+"subsectors": [
+"236",
+"238"
+]
+},
+"light_manufacturing": {
+"value": 78678,
+"naics": "31-33",
+"series": "Manufacturing (NAICS 31-33)",
+"employment": 262216,
+"method": "sector"
+},
+"retail_services": {
+"value": 39585,
+"naics": "44-45",
+"series": "Retail trade (NAICS 44-45)",
+"employment": 269173,
+"method": "sector"
+},
+"transportation_logistics": {
+"value": 58088,
+"naics": "48-49",
+"series": "Transportation and warehousing (NAICS 48-49)",
+"employment": 79439,
+"method": "sector"
+},
+"clerical_professional": {
+"value": 103121,
+"naics": "54",
+"series": "Professional, scientific, and technical services (NAICS 54)",
+"employment": 138013,
+"method": "sector"
+},
+"hospitality_food": {
+"value": 24828,
+"naics": "722",
+"series": "Food services and drinking places (NAICS 722)",
+"employment": 214259,
+"method": "sector"
+}
+},
+"SD": {
+"all_private": {
+"value": 61038,
+"naics": "10",
+"series": "Total, all private industries",
+"employment": 383895,
+"method": "sector"
+},
+"construction_trades": {
+"value": 67604,
+"naics": "23",
+"series": "Construction (NAICS 23) \u2014 disclosed 3-digit subsectors only",
+"employment": 24889,
+"method": "disclosed_subsectors",
+"subsectors": [
+"236",
+"238"
+]
+},
+"light_manufacturing": {
+"value": 66214,
+"naics": "31-33",
+"series": "Manufacturing (NAICS 31-33)",
+"employment": 44307,
+"method": "sector"
+},
+"retail_services": {
+"value": 38524,
+"naics": "44-45",
+"series": "Retail trade (NAICS 44-45)",
+"employment": 53919,
+"method": "sector"
+},
+"transportation_logistics": {
+"value": 55074,
+"naics": "48-49",
+"series": "Transportation and warehousing (NAICS 48-49) \u2014 disclosed 3-digit subsectors only",
+"employment": 13443,
+"method": "disclosed_subsectors",
+"subsectors": [
+"484",
+"485",
+"486",
+"487",
+"488",
+"492",
+"493"
+]
+},
+"clerical_professional": {
+"value": 91897,
+"naics": "54",
+"series": "Professional, scientific, and technical services (NAICS 54)",
+"employment": 18420,
+"method": "sector"
+},
+"hospitality_food": {
+"value": 22771,
+"naics": "722",
+"series": "Food services and drinking places (NAICS 722)",
+"employment": 34669,
+"method": "sector"
+}
+},
+"TN": {
+"all_private": {
+"value": 70752,
+"naics": "10",
+"series": "Total, all private industries",
+"employment": 2837182,
+"method": "sector"
+},
+"construction_trades": {
+"value": 82967,
+"naics": "23",
+"series": "Construction (NAICS 23)",
+"employment": 165988,
+"method": "sector"
+},
+"light_manufacturing": {
+"value": 78802,
+"naics": "31-33",
+"series": "Manufacturing (NAICS 31-33)",
+"employment": 354636,
+"method": "sector"
+},
+"retail_services": {
+"value": 42472,
+"naics": "44-45",
+"series": "Retail trade (NAICS 44-45)",
+"employment": 344699,
+"method": "sector"
+},
+"transportation_logistics": {
+"value": 71812,
+"naics": "48-49",
+"series": "Transportation and warehousing (NAICS 48-49)",
+"employment": 203757,
+"method": "sector"
+},
+"clerical_professional": {
+"value": 109907,
+"naics": "54",
+"series": "Professional, scientific, and technical services (NAICS 54)",
+"employment": 178826,
+"method": "sector"
+},
+"hospitality_food": {
+"value": 26561,
+"naics": "722",
+"series": "Food services and drinking places (NAICS 722)",
+"employment": 279351,
+"method": "sector"
+}
+},
+"TX": {
+"all_private": {
+"value": 79392,
+"naics": "10",
+"series": "Total, all private industries",
+"employment": 12064054,
+"method": "sector"
+},
+"construction_trades": {
+"value": 86802,
+"naics": "23",
+"series": "Construction (NAICS 23)",
+"employment": 901963,
+"method": "sector"
+},
+"light_manufacturing": {
+"value": 97490,
+"naics": "31-33",
+"series": "Manufacturing (NAICS 31-33)",
+"employment": 988649,
+"method": "sector"
+},
+"retail_services": {
+"value": 44170,
+"naics": "44-45",
+"series": "Retail trade (NAICS 44-45)",
+"employment": 1403856,
+"method": "sector"
+},
+"transportation_logistics": {
+"value": 77667,
+"naics": "48-49",
+"series": "Transportation and warehousing (NAICS 48-49)",
+"employment": 640606,
+"method": "sector"
+},
+"clerical_professional": {
+"value": 127878,
+"naics": "54",
+"series": "Professional, scientific, and technical services (NAICS 54)",
+"employment": 1061831,
+"method": "sector"
+},
+"hospitality_food": {
+"value": 26393,
+"naics": "722",
+"series": "Food services and drinking places (NAICS 722)",
+"employment": 1222380,
+"method": "sector"
+}
+},
+"UT": {
+"all_private": {
+"value": 69800,
+"naics": "10",
+"series": "Total, all private industries",
+"employment": 1473262,
+"method": "sector"
+},
+"construction_trades": {
+"value": 71961,
+"naics": "23",
+"series": "Construction (NAICS 23) \u2014 disclosed 3-digit subsectors only",
+"employment": 129046,
+"method": "disclosed_subsectors",
+"subsectors": [
+"236",
+"238"
+]
+},
+"light_manufacturing": {
+"value": 78568,
+"naics": "31-33",
+"series": "Manufacturing (NAICS 31-33)",
+"employment": 153323,
+"method": "sector"
+},
+"retail_services": {
+"value": 44636,
+"naics": "44-45",
+"series": "Retail trade (NAICS 44-45)",
+"employment": 175115,
+"method": "sector"
+},
+"transportation_logistics": {
+"value": 68752,
+"naics": "48-49",
+"series": "Transportation and warehousing (NAICS 48-49)",
+"employment": 70571,
+"method": "sector"
+},
+"clerical_professional": {
+"value": 113024,
+"naics": "54",
+"series": "Professional, scientific, and technical services (NAICS 54)",
+"employment": 133317,
+"method": "sector"
+},
+"hospitality_food": {
+"value": 24086,
+"naics": "722",
+"series": "Food services and drinking places (NAICS 722)",
+"employment": 120785,
+"method": "sector"
+}
+},
+"VT": {
+"all_private": {
+"value": 66806,
+"naics": "10",
+"series": "Total, all private industries",
+"employment": 254712,
+"method": "sector"
+},
+"construction_trades": {
+"value": 71722,
+"naics": "23",
+"series": "Construction (NAICS 23) \u2014 disclosed 3-digit subsectors only",
+"employment": 14593,
+"method": "disclosed_subsectors",
+"subsectors": [
+"236",
+"238"
+]
+},
+"light_manufacturing": {
+"value": 77188,
+"naics": "31-33",
+"series": "Manufacturing (NAICS 31-33)",
+"employment": 27347,
+"method": "sector"
+},
+"retail_services": {
+"value": 43333,
+"naics": "44-45",
+"series": "Retail trade (NAICS 44-45)",
+"employment": 35309,
+"method": "sector"
+},
+"transportation_logistics": {
+"value": 61996,
+"naics": "48-49",
+"series": "Transportation and warehousing (NAICS 48-49) \u2014 disclosed 3-digit subsectors only",
+"employment": 6197,
+"method": "disclosed_subsectors",
+"subsectors": [
+"481",
+"484",
+"485",
+"488",
+"492",
+"493"
+]
+},
+"clerical_professional": {
+"value": 124146,
+"naics": "54",
+"series": "Professional, scientific, and technical services (NAICS 54)",
+"employment": 16756,
+"method": "sector"
+},
+"hospitality_food": null
+},
+"VA": {
+"all_private": {
+"value": 80159,
+"naics": "10",
+"series": "Total, all private industries",
+"employment": 3404966,
+"method": "sector"
+},
+"construction_trades": {
+"value": 82626,
+"naics": "23",
+"series": "Construction (NAICS 23)",
+"employment": 229192,
+"method": "sector"
+},
+"light_manufacturing": {
+"value": 79282,
+"naics": "31-33",
+"series": "Manufacturing (NAICS 31-33)",
+"employment": 236465,
+"method": "sector"
+},
+"retail_services": {
+"value": 40722,
+"naics": "44-45",
+"series": "Retail trade (NAICS 44-45)",
+"employment": 390175,
+"method": "sector"
+},
+"transportation_logistics": {
+"value": 61809,
+"naics": "48-49",
+"series": "Transportation and warehousing (NAICS 48-49)",
+"employment": 166763,
+"method": "sector"
+},
+"clerical_professional": {
+"value": 139606,
+"naics": "54",
+"series": "Professional, scientific, and technical services (NAICS 54)",
+"employment": 464538,
+"method": "sector"
+},
+"hospitality_food": {
+"value": 27553,
+"naics": "722",
+"series": "Food services and drinking places (NAICS 722)",
+"employment": 304926,
+"method": "sector"
+}
+},
+"WA": {
+"all_private": {
+"value": 101847,
+"naics": "10",
+"series": "Total, all private industries",
+"employment": 3005728,
+"method": "sector"
+},
+"construction_trades": {
+"value": 89719,
+"naics": "23",
+"series": "Construction (NAICS 23)",
+"employment": 207426,
+"method": "sector"
+},
+"light_manufacturing": {
+"value": 102940,
+"naics": "31-33",
+"series": "Manufacturing (NAICS 31-33)",
+"employment": 268529,
+"method": "sector"
+},
+"retail_services": {
+"value": 50623,
+"naics": "44-45",
+"series": "Retail trade (NAICS 44-45)",
+"employment": 325156,
+"method": "sector"
+},
+"transportation_logistics": {
+"value": 79821,
+"naics": "48-49",
+"series": "Transportation and warehousing (NAICS 48-49)",
+"employment": 148145,
+"method": "sector"
+},
+"clerical_professional": {
+"value": 166419,
+"naics": "54",
+"series": "Professional, scientific, and technical services (NAICS 54)",
+"employment": 253290,
+"method": "sector"
+},
+"hospitality_food": {
+"value": 34086,
+"naics": "722",
+"series": "Food services and drinking places (NAICS 722)",
+"employment": 247827,
+"method": "sector"
+}
+},
+"WV": {
+"all_private": {
+"value": 59825,
+"naics": "10",
+"series": "Total, all private industries",
+"employment": 560986,
+"method": "sector"
+},
+"construction_trades": {
+"value": 74545,
+"naics": "23",
+"series": "Construction (NAICS 23)",
+"employment": 35253,
+"method": "sector"
+},
+"light_manufacturing": {
+"value": 76718,
+"naics": "31-33",
+"series": "Manufacturing (NAICS 31-33)",
+"employment": 45095,
+"method": "sector"
+},
+"retail_services": {
+"value": 35964,
+"naics": "44-45",
+"series": "Retail trade (NAICS 44-45)",
+"employment": 77304,
+"method": "sector"
+},
+"transportation_logistics": {
+"value": 64111,
+"naics": "48-49",
+"series": "Transportation and warehousing (NAICS 48-49)",
+"employment": 17607,
+"method": "sector"
+},
+"clerical_professional": {
+"value": 81442,
+"naics": "54",
+"series": "Professional, scientific, and technical services (NAICS 54)",
+"employment": 31295,
+"method": "sector"
+},
+"hospitality_food": {
+"value": 21870,
+"naics": "722",
+"series": "Food services and drinking places (NAICS 722)",
+"employment": 53080,
+"method": "sector"
+}
+},
+"WI": {
+"all_private": {
+"value": 66598,
+"naics": "10",
+"series": "Total, all private industries",
+"employment": 2560272,
+"method": "sector"
+},
+"construction_trades": {
+"value": 82190,
+"naics": "23",
+"series": "Construction (NAICS 23) \u2014 disclosed 3-digit subsectors only",
+"employment": 128687,
+"method": "disclosed_subsectors",
+"subsectors": [
+"236",
+"238"
+]
+},
+"light_manufacturing": {
+"value": 75120,
+"naics": "31-33",
+"series": "Manufacturing (NAICS 31-33)",
+"employment": 458245,
+"method": "sector"
+},
+"retail_services": {
+"value": 36790,
+"naics": "44-45",
+"series": "Retail trade (NAICS 44-45)",
+"employment": 294103,
+"method": "sector"
+},
+"transportation_logistics": {
+"value": 56421,
+"naics": "48-49",
+"series": "Transportation and warehousing (NAICS 48-49) \u2014 disclosed 3-digit subsectors only",
+"employment": 113365,
+"method": "disclosed_subsectors",
+"subsectors": [
+"481",
+"484",
+"485",
+"486",
+"487",
+"488",
+"492",
+"493"
+]
+},
+"clerical_professional": {
+"value": 103039,
+"naics": "54",
+"series": "Professional, scientific, and technical services (NAICS 54)",
+"employment": 131613,
+"method": "sector"
+},
+"hospitality_food": {
+"value": 21651,
+"naics": "722",
+"series": "Food services and drinking places (NAICS 722)",
+"employment": 211553,
+"method": "sector"
+}
+},
+"WY": {
+"all_private": {
+"value": 63299,
+"naics": "10",
+"series": "Total, all private industries",
+"employment": 214339,
+"method": "sector"
+},
+"construction_trades": {
+"value": 73590,
+"naics": "23",
+"series": "Construction (NAICS 23)",
+"employment": 23396,
+"method": "sector"
+},
+"light_manufacturing": {
+"value": 84413,
+"naics": "31-33",
+"series": "Manufacturing (NAICS 31-33) \u2014 disclosed 3-digit subsectors only",
+"employment": 9889,
+"method": "disclosed_subsectors",
+"subsectors": [
+"311",
+"312",
+"314",
+"316",
+"321",
+"324",
+"325",
+"326",
+"327",
+"331",
+"332",
+"333",
+"334",
+"335",
+"339"
+]
+},
+"retail_services": {
+"value": 38716,
+"naics": "44-45",
+"series": "Retail trade (NAICS 44-45)",
+"employment": 30231,
+"method": "sector"
+},
+"transportation_logistics": {
+"value": 73503,
+"naics": "48-49",
+"series": "Transportation and warehousing (NAICS 48-49) \u2014 disclosed 3-digit subsectors only",
+"employment": 10402,
+"method": "disclosed_subsectors",
+"subsectors": [
+"481",
+"484",
+"485",
+"486",
+"488",
+"492",
+"493"
+]
+},
+"clerical_professional": {
+"value": 95340,
+"naics": "54",
+"series": "Professional, scientific, and technical services (NAICS 54)",
+"employment": 11417,
+"method": "sector"
+},
+"hospitality_food": {
+"value": 23948,
+"naics": "722",
+"series": "Food services and drinking places (NAICS 722)",
+"employment": 21653,
+"method": "sector"
+}
+}
+}
+}

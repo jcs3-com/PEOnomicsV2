@@ -3,7 +3,7 @@
 This file is the **only** source of truth for what is done, open, dropped, or pending a decision.
 Not chat history. Not artifacts. When you finish or add work, update this file in the same commit.
 
-**Last updated:** 2026-10-27 (P1/P2 build: reports, comparator, data library — code live; email delivery awaits owner secrets)
+**Last updated:** 2026-10-27 (activation release: health check, shared rate limiter, scenario logging, Turnstile key via env; data/unification/analytics releases follow)
 
 ---
 
@@ -94,16 +94,28 @@ Not chat history. Not artifacts. When you finish or add work, update this file i
 
 ---
 
+- **Activation release (2026-10-27, third release)** — owner checklist in `docs/OWNER_SETUP.md`.
+  - `GET /api/health`: booleans only (which secrets production sees) so the owner can confirm setup without exposing values.
+  - Turnstile public site key now read from Pages variable `TURNSTILE_SITE_KEY` via `/api/report-status` — no code change
+    needed after creating the widget (the `[[TODO]]` meta placeholder is gone; the meta tag still overrides if set).
+  - Shared limiter `functions/lib/ratelimit.js` (in-isolate + per-data-center Cache API, hashed IP, fails open):
+    enrich 8/10 min, reports 6/hour per IP. WAF rule remains the authoritative control (owner).
+  - Report events now log the **final edited scenario** (all inputs) + annual current / with-PEO / delta; Contacts keep
+    the last report scenario. Apps Script v2.1 (`usage-log-v2.gs`) — extends existing headers in place.
+  - `tests/test_apps_script.mjs`: runs the real Apps Script in a VM behind the real endpoints — lookup → report →
+    dedupe (mixed-case email = one contact), counters, survey date, scenario columns, PDF totals, XLSX recalculated
+    in LibreOffice, rate limits.
+
 ## 🔲 Open — prioritized
 
-### P0.1 — owner-only setup (credentials; Claude must not handle them) — see "External setup" in `docs/COST_LAB.md`
+### P0.1 — owner-only setup (credentials; Claude must not handle them) — step-by-step in `docs/OWNER_SETUP.md`
 - [ ] **Usage/event log:** paste `apps-script/usage-log-v2.gs` into the sheet "PEOnomics — Cost Lab
       Usage Log" (Drive › 34.02 Website › PEOnomics 2.0 — Site Build), deploy as web app, add the URL
       as Pages secret `USAGE_WEBHOOK_URL`. Unlocks business-email prefill AND is required for reports.
 - [ ] **Resend:** account + verify sending domain `peonomics.com` (DNS records in Cloudflare), API key →
       Pages secret `RESEND_API_KEY`; sender → Pages secret `REPORT_FROM` (e.g. `PEOnomics <reports@peonomics.com>`).
-- [ ] **Turnstile:** widget for peonomics.com (+ www); **public** site key → `index.html` meta
-      `peonomics-turnstile-site-key`; secret → Pages secret `TURNSTILE_SECRET`.
+- [ ] **Turnstile:** widget for peonomics.com (+ www); **public** site key → Pages variable `TURNSTILE_SITE_KEY`;
+      secret → Pages secret `TURNSTILE_SECRET`. Check `/api/health`.
 - [ ] **WAF rate-limit rule** on `/api/enrich` and `/api/report-request` (in-code limiter is per-isolate).
 - [ ] **Real inbox test** to the owner's own business mailbox once all four secrets exist: PDF + XLSX
       arrive, Excel recalculates, double-click sends once, sheet shows requested/accepted rows.

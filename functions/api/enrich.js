@@ -19,6 +19,7 @@
    Optional env: ENRICH_MODEL (default claude-haiku-4-5). */
 
 import { PERSONAL_DOMAINS, validateDomain, parseBusinessEmail, isPrivateAddress } from '../lib/validate.js';
+import { rateLimited } from '../lib/ratelimit.js';
 export { PERSONAL_DOMAINS, validateDomain, parseBusinessEmail, isPrivateAddress };
 
 const STATE_NAMES = {
@@ -61,18 +62,6 @@ async function resolvesPublic(host) {
     } catch { /* treat as unresolved */ }
   }
   return ips.length > 0 && ips.every(ip => !isPrivateAddress(ip));
-}
-
-/* ---------- best-effort per-isolate rate limit ----------
-   Not a substitute for a Cloudflare WAF rate-limiting rule (see ROADMAP). */
-const hits = new Map();
-function rateLimited(key, limit = 8, windowMs = 10 * 60 * 1000) {
-  const now = Date.now();
-  const arr = (hits.get(key) || []).filter(t => now - t < windowMs);
-  arr.push(now);
-  hits.set(key, arr);
-  if (hits.size > 5000) hits.clear();
-  return arr.length > limit;
 }
 
 function allowedOrigin(origin, selfOrigin) {
@@ -275,7 +264,8 @@ export async function onRequestPost({ request, env }) {
   if (!/application\/json/i.test(request.headers.get('content-type') || '')) return respond({ ok: false, error: 'json_required' }, 415);
 
   const ip = request.headers.get('cf-connecting-ip') || 'unknown';
-  if (rateLimited(ip)) return respond({ ok: false, error: 'rate_limited' }, 429);
+  // 8 lookups / 10 min per IP: in-isolate + per-data-center (functions/lib/ratelimit.js).
+  if (await rateLimited('enrich', ip, { limit: 8, windowMs: 10 * 60 * 1000, origin: self })) return respond({ ok: false, error: 'rate_limited' }, 429);
 
   let body;
   try { body = JSON.parse((await request.text()).slice(0, 4000)); } catch { return respond({ ok: false, error: 'invalid_json' }, 400); }

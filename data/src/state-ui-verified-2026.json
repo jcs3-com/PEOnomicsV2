@@ -1,0 +1,103 @@
+{
+  "purpose": "Priority-state 2026 unemployment-insurance facts checked against the state agency's own page on lastReviewed. These override the DOL Significant Provisions base rate because they include employer surcharges/assessments the DOL table excludes (its footnote 3). Rates are percent of taxable wages.",
+  "lastReviewed": "2026-10-27",
+  "states": {
+    "DC": {
+      "wageBase": 9000,
+      "baseRatePct": 2.7,
+      "surcharges": [
+        { "name": "Administrative Funding Assessment", "ratePct": 0.2, "wageBase": 9000,
+          "sourceName": "DC Department of Employment Services — Reporting Questions",
+          "sourceUrl": "https://does-migrate.dc.gov/node/157172" }
+      ],
+      "effective": "2026-01-01",
+      "confidence": "high",
+      "sourceName": "DC Department of Employment Services — Tax Rate Questions",
+      "sourceUrl": "https://does.dc.gov/service/tax-rate-questions",
+      "note": "New employers pay the higher of 2.7% or the prior-year average contribution rate; DOL lists 2.70% for 2026. Same standard rate for construction."
+    },
+    "MD": {
+      "wageBase": 8500,
+      "baseRatePct": 2.6,
+      "surcharges": [],
+      "effective": "2026-01-01",
+      "confidence": "high",
+      "sourceName": "Maryland Department of Labor — Unemployment Insurance Tax Rates (Table A in effect for 2026)",
+      "sourceUrl": "https://labor.maryland.gov/employment/uitrustfundpoints.shtml",
+      "note": "Maryland Labor states 2026 new-employer rates range 1.0%–2.6%; DOL lists 2.60% as the 2026 new-employer base rate. Out-of-state construction contractors pay the Maryland construction average."
+    },
+    "VA": {
+      "wageBase": 8000,
+      "baseRatePct": 2.5,
+      "surcharges": [],
+      "effective": "2026-01-01",
+      "confidence": "med",
+      "sourceName": "Virginia Employment Commission — How are tax rates assigned?",
+      "sourceUrl": "https://www.vec.virginia.gov/node/131",
+      "note": "VEC: new employers receive a 2.5% initial base rate 'plus add-ons'. The 2026 add-on percentages were not published on a VEC page we could verify, so they are NOT included — the real rate is likely somewhat higher."
+    },
+    "CA": {
+      "wageBase": 7000,
+      "baseRatePct": 3.4,
+      "surcharges": [
+        { "name": "Employment Training Tax (ETT)", "ratePct": 0.1, "wageBase": 7000,
+          "sourceName": "California EDD — Rates and Withholding",
+          "sourceUrl": "https://edd.ca.gov/en/payroll_taxes/rates_and_withholding/" }
+      ],
+      "effective": "2026-01-01",
+      "confidence": "high",
+      "sourceName": "California EDD — Rates and Withholding (2026: Schedule F+, new employers 3.4%)",
+      "sourceUrl": "https://edd.ca.gov/en/payroll_taxes/rates_and_withholding/",
+      "note": "SDI (1.3% in 2026) is withheld from employees, not an employer cost, and is excluded."
+    },
+    "TX": {
+      "wageBase": 9000,
+      "baseRatePct": 2.7,
+      "surcharges": [],
+      "effective": "2026-01-01",
+      "confidence": "high",
+      "sourceName": "Texas Workforce Commission — Tax Rates (2026 entry-level rate 2.70% for all NAICS groups)",
+      "sourceUrl": "https://www.twc.texas.gov/programs/unemployment-tax/tax-rates",
+      "note": "TWC's rate is the sum of its components (GTR, replenishment, obligation assessment, deficit, ETIA); the 2.70% entry rate is the total."
+    },
+    "FL": {
+      "wageBase": 7000,
+      "baseRatePct": 2.7,
+      "surcharges": [],
+      "effective": "2026-01-01",
+      "confidence": "high",
+      "sourceName": "Florida Department of Revenue — Reemployment Tax",
+      "sourceUrl": "https://floridarevenue.com/taxes/taxesfees/Pages/reemployment.aspx",
+      "note": "Initial rate 2.7% on the first $7,000 per employee."
+    },
+    "NY": {
+      "wageBase": 17600,
+      "baseRatePct": 4.025,
+      "surcharges": [
+        { "name": "Re-employment Service Fund", "ratePct": 0.075, "wageBase": 17600,
+          "sourceName": "New York State Department of Labor — Unemployment Insurance Rate Information",
+          "sourceUrl": "https://dol.ny.gov/unemployment-insurance-rate-information" }
+      ],
+      "effective": "2026-01-01",
+      "confidence": "high",
+      "sourceName": "New York State Department of Labor — Unemployment Insurance Rate Information (2026 new employer: 4.025% UI + 0.075% RSF = 4.1%)",
+      "sourceUrl": "https://dol.ny.gov/unemployment-insurance-rate-information",
+      "note": "UI rate = normal rate (3.4% for new employers in 2026) plus subsidiary rate. Wage base $17,600 also listed by DOL Significant Provisions July 2026."
+    },
+    "OH": {
+      "wageBase": 9000,
+      "baseRatePct": 2.7,
+      "surcharges": [
+        { "name": "Technology & Customer Service Fee", "ratePct": 0.15, "wageBase": 9000,
+          "sourceName": "Ohio Department of Job and Family Services — 2026 Rate Details",
+          "sourceUrl": "https://dam.assets.ohio.gov/image/upload/jfs.ohio.gov/ouio/uctax/2026RateDetails.pdf" }
+      ],
+      "industryBaseRatePct": { "construction_trades": 5.7 },
+      "effective": "2026-01-01",
+      "confidence": "high",
+      "sourceName": "Ohio Department of Job and Family Services — 2026 Rate Details (new business 2.7%; new construction 5.7%; +0.15% fee)",
+      "sourceUrl": "https://dam.assets.ohio.gov/image/upload/jfs.ohio.gov/ouio/uctax/2026RateDetails.pdf",
+      "note": "Effective new-business rate 2.85%; new construction-business rate 5.85%."
+    }
+  }
+}

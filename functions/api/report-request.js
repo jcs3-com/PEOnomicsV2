@@ -19,6 +19,7 @@ import { parseSnapshot, calculate, reportLines } from '../lib/report-model.js';
 import { makeReportPdf, base64Bytes } from '../lib/simple-pdf.js';
 import { makeReportXlsx } from '../lib/simple-xlsx.js';
 import { parseBusinessEmail } from '../lib/validate.js';
+import { rateLimited } from '../lib/ratelimit.js';
 
 const RESP = (data, status = 200) => new Response(JSON.stringify(data), {
   status, headers: { 'content-type': 'application/json', 'cache-control': 'no-store', 'x-content-type-options': 'nosniff' }
@@ -52,6 +53,14 @@ async function record(url, obj) {
   } catch { return false; }
 }
 
+/** Compact, human-readable record of the inputs used for the report (what the visitor last edited). */
+export function scenarioString(i) {
+  const v = x => (x === null || x === undefined ? 'same' : String(x));
+  return [i.state, i.industry, 'N=' + i.employees, 'W=' + i.wage, 'SUTA%=' + i.suta, 'WC=' + i.wc,
+    'Enroll%=' + i.enrollment, 'Health=' + i.health, 'PEPM=' + i.pepm, 'Admin=' + i.currentAdmin,
+    'Replaced=' + i.adminAvoided, 'PEO_SUTA%=' + v(i.peoSuta), 'PEO_WC=' + v(i.peoWc), 'PEO_Health=' + v(i.peoHealth)].join(' | ');
+}
+
 export function reportConfigured(env) {
   return !!(env.RESEND_API_KEY && env.REPORT_FROM && env.USAGE_WEBHOOK_URL && env.TURNSTILE_SECRET);
 }
@@ -60,6 +69,10 @@ export async function onRequestPost({ request, env }) {
   if (!originAllowed(request.headers.get('origin'), new URL(request.url).origin)) return RESP({ ok: false, error: 'origin' }, 403);
   if (!/application\/json/i.test(request.headers.get('content-type') || '')) return RESP({ ok: false, error: 'json_required' }, 415);
   if (!reportConfigured(env)) return RESP({ ok: false, error: 'report_unconfigured' }, 503);
+  const ip = request.headers.get('cf-connecting-ip') || '';
+  if (await rateLimited('report', ip, { limit: 6, windowMs: 60 * 60 * 1000, origin: new URL(request.url).origin })) {
+    return RESP({ ok: false, error: 'rate_limited' }, 429);
+  }
 
   const bodyText = await request.text();
   if (bodyText.length > 12000) return RESP({ ok: false, error: 'too_large' }, 413);
@@ -81,14 +94,17 @@ export async function onRequestPost({ request, env }) {
     result = calculate(rates, i);
   } catch { return RESP({ ok: false, error: 'invalid_snapshot' }, 400); }
 
-  if (!(await verifyTurnstile(env.TURNSTILE_SECRET, body.turnstileToken, request.headers.get('cf-connecting-ip') || ''))) {
+  if (!(await verifyTurnstile(env.TURNSTILE_SECRET, body.turnstileToken, ip))) {
     return RESP({ ok: false, error: 'challenge_failed' }, 403);
   }
 
   const base = {
     event: 'report_requested', timestamp: new Date().toISOString(), email: parsed.email, domain: parsed.domain,
     company: i.company, state: i.state, industry: i.industry, employees: i.employees, page: 'cost-lab',
-    source: `model ${result.taxYear} v${result.version}`, requestId
+    source: `model ${result.taxYear} v${result.version}`, requestId,
+    // The final, edited scenario exactly as the server recomputed it (no personal data beyond the row's email).
+    scenario: scenarioString(i), annualCurrent: Math.round(result.currentTotal),
+    annualPeo: Math.round(result.peoTotal), annualDelta: Math.round(result.delta)
   };
   if (!(await record(env.USAGE_WEBHOOK_URL, base))) return RESP({ ok: false, error: 'log_unavailable' }, 503);
 

@@ -1,5 +1,6 @@
 /**
  * PEOnomics — private event log + deduplicated contacts (Google Apps Script web app).
+ * v2.1 (2026-10-27): report events also carry the final edited scenario and its annual totals.
  * Replaces usage-log.gs (P0). Receives:
  *   lookup_requested  from POST /api/enrich         (Cost Lab business-email prefill)
  *   report_requested / report_accepted / report_failed  from POST /api/report-request
@@ -20,8 +21,8 @@
  * Leaked? Archive the deployment, create a new one, update the secret.
  */
 const EVENTS='Usage Log',CONTACTS='Contacts';
-const EH=['Timestamp (UTC)','Event','Business Email','Domain','Company','HQ State','Industry','Employees (approx)','Summary','Enrichment Source','Page','User Agent','Request ID','Provider Message ID'];
-const CH=['Business Email','Domain','Company','HQ State','Industry','Employees (approx)','First Seen UTC','Last Seen UTC','Lookup Count','PDF Requested Count','PDF Accepted Count','Survey Eligibility Date','Survey Suppressed'];
+const EH=['Timestamp (UTC)','Event','Business Email','Domain','Company','HQ State','Industry','Employees (approx)','Summary','Enrichment Source','Page','User Agent','Request ID','Provider Message ID','Scenario Inputs','Annual Current','Annual With PEO','Annual Delta'];
+const CH=['Business Email','Domain','Company','HQ State','Industry','Employees (approx)','First Seen UTC','Last Seen UTC','Lookup Count','PDF Requested Count','PDF Accepted Count','Survey Eligibility Date','Survey Suppressed','Last Report Scenario','Last Report Annual Delta'];
 function doPost(e){
   const out=x=>ContentService.createTextOutput(JSON.stringify(x)).setMimeType(ContentService.MimeType.JSON);
   const lock=LockService.getScriptLock();
@@ -33,7 +34,8 @@ function doPost(e){
     function sheet(name,headers){let sh=book.getSheetByName(name);if(!sh)sh=book.insertSheet(name);
       if(!sh.getLastRow()){sh.appendRow(headers);sh.setFrozenRows(1);}else if(sh.getLastColumn()<headers.length){sh.getRange(1,sh.getLastColumn()+1,1,headers.length-sh.getLastColumn()).setValues([headers.slice(sh.getLastColumn())]);}return sh;}
     const ev=sheet(EVENTS,EH),co=sheet(CONTACTS,CH);
-    const safe=v=>String(v??'').slice(0,220).replace(/^[=+\-@\t\r]/,"'$&");
+    const safe=(v,n)=>String(v??'').slice(0,n||220).replace(/^[=+\-@\t\r]/,"'$&");
+    const numOrBlank=v=>(typeof v==='number'&&isFinite(v))?v:'';
     const email=String(d.email).trim().toLowerCase();
     if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))return out({ok:false,error:'bad_email'});
     const stamp=safe(d.timestamp||new Date().toISOString());
@@ -51,8 +53,9 @@ function doPost(e){
       const due=new Date(Date.parse(stamp)+30*86400000);
       if(Number.isFinite(due.getTime()))state[11]=due.toISOString().slice(0,10);
     }
+    if(d.event==='report_requested'&&d.scenario){state[13]=safe(d.scenario,600);state[14]=numOrBlank(d.annualDelta);}
     co.getRange(row,1,1,CH.length).setValues([state]);
-    ev.appendRow([stamp,safe(d.event),safe(email),safe(d.domain),safe(d.company),safe(d.state),safe(d.industry),safe(d.employees),safe(d.summary),safe(d.source),safe(d.page),safe(d.userAgent),safe(d.requestId),safe(d.providerMessageId)]);
+    ev.appendRow([stamp,safe(d.event),safe(email),safe(d.domain),safe(d.company),safe(d.state),safe(d.industry),safe(d.employees),safe(d.summary),safe(d.source),safe(d.page),safe(d.userAgent),safe(d.requestId),safe(d.providerMessageId),safe(d.scenario,600),numOrBlank(d.annualCurrent),numOrBlank(d.annualPeo),numOrBlank(d.annualDelta)]);
     return out({ok:true});
   }catch(err){return out({ok:false,error:'write_failed'});}finally{try{lock.releaseLock();}catch(ignore){}}
 }

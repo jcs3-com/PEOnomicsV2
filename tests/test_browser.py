@@ -44,7 +44,7 @@ with sync_playwright() as p:
         state = {'available': False, 'report': (200, {'ok': True, 'status': 'accepted_for_delivery'}), 'posted': []}
         if not LIVE:
             pg.route('**/api/enrich', lambda r: r.fulfill(status=503, content_type='application/json', body=json.dumps({'ok': False, 'error': 'log_not_configured'})))
-            pg.route('**/api/report-status', lambda r: r.fulfill(content_type='application/json', body=json.dumps({'ok': True, 'available': state['available']})))
+            pg.route('**/api/report-status', lambda r: r.fulfill(content_type='application/json', body=json.dumps({'ok': True, 'available': state['available'], 'siteKey': '0x4AAAAAAATESTKEY000' if state['available'] else None})))
             def rep(route):
                 state['posted'].append(json.loads(route.request.post_data))
                 st, body = state['report']; route.fulfill(status=st, content_type='application/json', body=json.dumps(body))
@@ -69,8 +69,6 @@ with sync_playwright() as p:
         if not LIVE:
             # configured path: fake public key + server says available + stubbed Turnstile
             state['available'] = True
-            html = open(os.path.join(ROOT, 'index.html')).read().replace('[[TODO: PUBLIC TURNSTILE SITE KEY]]', '0x4AAAAAAATESTKEY000')
-            pg.route(lambda u: u.endswith('/?cfg=1'), lambda r: r.fulfill(content_type='text/html', body=html))
             pg.goto(BASE + '/?cfg=1'); pg.wait_for_function("document.querySelectorAll('#state option').length>1")
             pg.wait_for_selector('#tsStub', timeout=10000)
             check(pg.locator('#emailReport').is_disabled(), f'{name}: disabled before verification')

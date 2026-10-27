@@ -1,0 +1,418 @@
+{
+ "source": {
+  "name": "Oregon Department of Consumer and Business Services \u2014 2024 Oregon Workers' Compensation Premium Rate Ranking (published 2025)",
+  "url": "https://www.oregon.gov/dcbs/cost/Pages/ranking-by-state.aspx",
+  "lastReviewed": "2026-10-27",
+  "method": "Index rate = premium per $100 of payroll for a fixed basket of 50 risk classes weighted to Oregon's payroll mix; rates in effect on the dates shown (mostly 2023-2024). Comparable across states, not a class-code rate."
+ },
+ "rows": [
+  {
+   "rank": 1,
+   "priorRank": 2,
+   "state": "Hawaii",
+   "index": 2.52,
+   "pctMedian": 231,
+   "effective": "Jan. 1, 2023"
+  },
+  {
+   "rank": 2,
+   "priorRank": 1,
+   "state": "New Jersey",
+   "index": 2.16,
+   "pctMedian": 198,
+   "effective": "Jan. 1, 2024"
+  },
+  {
+   "rank": 3,
+   "priorRank": 4,
+   "state": "New York",
+   "index": 1.98,
+   "pctMedian": 182,
+   "effective": "Oct. 1, 2023"
+  },
+  {
+   "rank": 4,
+   "priorRank": 3,
+   "state": "California",
+   "index": 1.86,
+   "pctMedian": 170,
+   "effective": "Sept. 1, 2023"
+  },
+  {
+   "rank": 5,
+   "priorRank": 6,
+   "state": "Vermont",
+   "index": 1.6,
+   "pctMedian": 147,
+   "effective": "April 1, 2023"
+  },
+  {
+   "rank": 6,
+   "priorRank": 10,
+   "state": "Connecticut",
+   "index": 1.48,
+   "pctMedian": 135,
+   "effective": "Jan. 1, 2024"
+  },
+  {
+   "rank": 7,
+   "priorRank": 8,
+   "state": "Wisconsin",
+   "index": 1.42,
+   "pctMedian": 130,
+   "effective": "Oct. 1, 2023"
+  },
+  {
+   "rank": 8,
+   "priorRank": 7,
+   "state": "Wyoming",
+   "index": 1.41,
+   "pctMedian": 130,
+   "effective": "Jan. 1, 2024"
+  },
+  {
+   "rank": 9,
+   "priorRank": 5,
+   "state": "Louisiana",
+   "index": 1.41,
+   "pctMedian": 129,
+   "effective": "May 1, 2023"
+  },
+  {
+   "rank": 10,
+   "priorRank": 11,
+   "state": "Rhode Island",
+   "index": 1.38,
+   "pctMedian": 127,
+   "effective": "Aug. 1, 2023"
+  },
+  {
+   "rank": 11,
+   "priorRank": 9,
+   "state": "Maine",
+   "index": 1.37,
+   "pctMedian": 125,
+   "effective": "April 1, 2023"
+  },
+  {
+   "rank": 12,
+   "priorRank": 24,
+   "state": "Washington",
+   "index": 1.35,
+   "pctMedian": 123,
+   "effective": "Jan. 1, 2024"
+  },
+  {
+   "rank": 13,
+   "priorRank": 19,
+   "state": "Illinois",
+   "index": 1.34,
+   "pctMedian": 123,
+   "effective": "Jan. 1, 2024"
+  },
+  {
+   "rank": 14,
+   "priorRank": 15,
+   "state": "Montana",
+   "index": 1.34,
+   "pctMedian": 122,
+   "effective": "July 1, 2023"
+  },
+  {
+   "rank": 15,
+   "priorRank": 17,
+   "state": "Oklahoma",
+   "index": 1.33,
+   "pctMedian": 122,
+   "effective": "Jan. 1, 2023"
+  },
+  {
+   "rank": 16,
+   "priorRank": 13,
+   "state": "Missouri",
+   "index": 1.31,
+   "pctMedian": 120,
+   "effective": "Jan. 1, 2024"
+  },
+  {
+   "rank": 17,
+   "priorRank": 12,
+   "state": "Minnesota",
+   "index": 1.25,
+   "pctMedian": 114,
+   "effective": "Jan. 1, 2024"
+  },
+  {
+   "rank": 18,
+   "priorRank": 18,
+   "state": "New Hampshire",
+   "index": 1.22,
+   "pctMedian": 112,
+   "effective": "Jan. 1, 2023"
+  },
+  {
+   "rank": 19,
+   "priorRank": 14,
+   "state": "Iowa",
+   "index": 1.21,
+   "pctMedian": 110,
+   "effective": "Jan. 1, 2024"
+  },
+  {
+   "rank": 20,
+   "priorRank": 21,
+   "state": "Alaska",
+   "index": 1.16,
+   "pctMedian": 106,
+   "effective": "Jan. 1, 2024"
+  },
+  {
+   "rank": 21,
+   "priorRank": 26,
+   "state": "Pennsylvania",
+   "index": 1.14,
+   "pctMedian": 105,
+   "effective": "April 1, 2023"
+  },
+  {
+   "rank": 22,
+   "priorRank": 25,
+   "state": "South Dakota",
+   "index": 1.13,
+   "pctMedian": 103,
+   "effective": "July 1, 2023"
+  },
+  {
+   "rank": 23,
+   "priorRank": 29,
+   "state": "Nebraska",
+   "index": 1.12,
+   "pctMedian": 103,
+   "effective": "Feb. 1, 2023"
+  },
+  {
+   "rank": 24,
+   "priorRank": 20,
+   "state": "Alabama",
+   "index": 1.11,
+   "pctMedian": 101,
+   "effective": "March 1, 2023"
+  },
+  {
+   "rank": 25,
+   "priorRank": 16,
+   "state": "Idaho",
+   "index": 1.1,
+   "pctMedian": 101,
+   "effective": "Jan. 1, 2024"
+  },
+  {
+   "rank": 26,
+   "priorRank": 31,
+   "state": "Georgia",
+   "index": 1.09,
+   "pctMedian": 100,
+   "effective": "March 1, 2023"
+  },
+  {
+   "rank": 27,
+   "priorRank": 27,
+   "state": "New Mexico",
+   "index": 1.05,
+   "pctMedian": 96,
+   "effective": "Jan. 1, 2024"
+  },
+  {
+   "rank": 28,
+   "priorRank": 41,
+   "state": "Colorado",
+   "index": 1.05,
+   "pctMedian": 96,
+   "effective": "Jan. 1, 2024"
+  },
+  {
+   "rank": 29,
+   "priorRank": 22,
+   "state": "South Carolina",
+   "index": 1.03,
+   "pctMedian": 94,
+   "effective": "April 1, 2023"
+  },
+  {
+   "rank": 30,
+   "priorRank": 28,
+   "state": "Florida",
+   "index": 1.0,
+   "pctMedian": 92,
+   "effective": "Jan. 1, 2024"
+  },
+  {
+   "rank": 31,
+   "priorRank": 32,
+   "state": "Massachusetts",
+   "index": 0.97,
+   "pctMedian": 89,
+   "effective": "July 1, 2023"
+  },
+  {
+   "rank": 32,
+   "priorRank": 23,
+   "state": "Delaware",
+   "index": 0.97,
+   "pctMedian": 89,
+   "effective": "Dec. 1, 2023"
+  },
+  {
+   "rank": 33,
+   "priorRank": 30,
+   "state": "North Carolina",
+   "index": 0.95,
+   "pctMedian": 87,
+   "effective": "April 1, 2023"
+  },
+  {
+   "rank": 34,
+   "priorRank": 39,
+   "state": "Mississippi",
+   "index": 0.94,
+   "pctMedian": 86,
+   "effective": "March 1, 2023"
+  },
+  {
+   "rank": 35,
+   "priorRank": 35,
+   "state": "Kansas",
+   "index": 0.91,
+   "pctMedian": 83,
+   "effective": "Jan. 1, 2024"
+  },
+  {
+   "rank": 36,
+   "priorRank": 38,
+   "state": "Michigan",
+   "index": 0.9,
+   "pctMedian": 82,
+   "effective": "Jan. 1, 2023"
+  },
+  {
+   "rank": 37,
+   "priorRank": 33,
+   "state": "Maryland",
+   "index": 0.89,
+   "pctMedian": 82,
+   "effective": "Jan. 1, 2024"
+  },
+  {
+   "rank": 38,
+   "priorRank": 42,
+   "state": "Oregon",
+   "index": 0.89,
+   "pctMedian": 82,
+   "effective": "Jan. 1, 2024"
+  },
+  {
+   "rank": 39,
+   "priorRank": 34,
+   "state": "Tennessee",
+   "index": 0.8,
+   "pctMedian": 73,
+   "effective": "March 1, 2023"
+  },
+  {
+   "rank": 40,
+   "priorRank": 43,
+   "state": "Texas",
+   "index": 0.78,
+   "pctMedian": 72,
+   "effective": "July 1, 2023"
+  },
+  {
+   "rank": 41,
+   "priorRank": 46,
+   "state": "Kentucky",
+   "index": 0.76,
+   "pctMedian": 70,
+   "effective": "Jan. 1, 2024"
+  },
+  {
+   "rank": 42,
+   "priorRank": 37,
+   "state": "Nevada",
+   "index": 0.73,
+   "pctMedian": 67,
+   "effective": "Sept. 1, 2023"
+  },
+  {
+   "rank": 43,
+   "priorRank": 40,
+   "state": "District of Columbia",
+   "index": 0.73,
+   "pctMedian": 67,
+   "effective": "Nov. 1, 2023"
+  },
+  {
+   "rank": 44,
+   "priorRank": 36,
+   "state": "Virginia",
+   "index": 0.73,
+   "pctMedian": 67,
+   "effective": "April 1, 2023"
+  },
+  {
+   "rank": 45,
+   "priorRank": 48,
+   "state": "Indiana",
+   "index": 0.71,
+   "pctMedian": 65,
+   "effective": "Jan. 1, 2024"
+  },
+  {
+   "rank": 46,
+   "priorRank": 44,
+   "state": "Arizona",
+   "index": 0.7,
+   "pctMedian": 64,
+   "effective": "Jan. 1, 2024"
+  },
+  {
+   "rank": 47,
+   "priorRank": 47,
+   "state": "Ohio",
+   "index": 0.68,
+   "pctMedian": 63,
+   "effective": "July 1, 2023"
+  },
+  {
+   "rank": 48,
+   "priorRank": 45,
+   "state": "Utah",
+   "index": 0.63,
+   "pctMedian": 57,
+   "effective": "Jan. 1, 2024"
+  },
+  {
+   "rank": 49,
+   "priorRank": 50,
+   "state": "West Virginia",
+   "index": 0.54,
+   "pctMedian": 49,
+   "effective": "Nov. 1, 2023"
+  },
+  {
+   "rank": 50,
+   "priorRank": 49,
+   "state": "Arkansas",
+   "index": 0.53,
+   "pctMedian": 48,
+   "effective": "July 1, 2023"
+  },
+  {
+   "rank": 51,
+   "priorRank": 51,
+   "state": "North Dakota",
+   "index": 0.5,
+   "pctMedian": 45,
+   "effective": "July 1, 2023"
+  }
+ ]
+}

@@ -1,0 +1,1608 @@
+{
+"source": {
+"name": "AHRQ Medical Expenditure Panel Survey \u2014 Insurance Component (MEPS-IC) 2025, private sector, state tables II.B.2.b, II.C.1, II.C.2, II.D.1, II.D.2",
+"url": "https://meps.ahrq.gov/data_stats/summ_tables/insr/state/series_2/2025/ic25_iia_f.pdf",
+"lastReviewed": "2026-10-27",
+"notes": [
+"Values are annual dollars per enrolled employee (premiums/contributions) or percent of employees enrolled at establishments that offer insurance.",
+"\"unreliable\" lists columns AHRQ marks with * (does not meet standard of reliability or precision); null = suppressed (--).",
+"Columns: total = all firm sizes; lt50 = firms with fewer than 50 employees; ge50 = 50 or more."
+]
+},
+"tables": {
+"singlePremium": {
+"US": {
+"total": 9025,
+"lt50": 9034,
+"ge50": 9024,
+"unreliable": []
+},
+"CT": {
+"total": 9987,
+"lt50": 8243,
+"ge50": 10364,
+"unreliable": []
+},
+"ME": {
+"total": 9803,
+"lt50": 9062,
+"ge50": 9983,
+"unreliable": []
+},
+"MA": {
+"total": 10436,
+"lt50": 9965,
+"ge50": 10548,
+"unreliable": []
+},
+"NH": {
+"total": 9502,
+"lt50": 8505,
+"ge50": 9768,
+"unreliable": []
+},
+"RI": {
+"total": 9388,
+"lt50": 9465,
+"ge50": 9369,
+"unreliable": []
+},
+"VT": {
+"total": 10004,
+"lt50": 11460,
+"ge50": 9452,
+"unreliable": []
+},
+"NJ": {
+"total": 9743,
+"lt50": 10415,
+"ge50": 9552,
+"unreliable": []
+},
+"NY": {
+"total": 10913,
+"lt50": 11804,
+"ge50": 10760,
+"unreliable": []
+},
+"PA": {
+"total": 9421,
+"lt50": 8554,
+"ge50": 9619,
+"unreliable": []
+},
+"IL": {
+"total": 9724,
+"lt50": 9865,
+"ge50": 9703,
+"unreliable": []
+},
+"IN": {
+"total": 8355,
+"lt50": 7330,
+"ge50": 8455,
+"unreliable": []
+},
+"MI": {
+"total": 8230,
+"lt50": 8384,
+"ge50": 8193,
+"unreliable": []
+},
+"OH": {
+"total": 8804,
+"lt50": 8379,
+"ge50": 8872,
+"unreliable": []
+},
+"WI": {
+"total": 9557,
+"lt50": 9260,
+"ge50": 9618,
+"unreliable": []
+},
+"IA": {
+"total": 8620,
+"lt50": 8572,
+"ge50": 8629,
+"unreliable": []
+},
+"KS": {
+"total": 8657,
+"lt50": 7572,
+"ge50": 8874,
+"unreliable": []
+},
+"MN": {
+"total": 8586,
+"lt50": 8336,
+"ge50": 8644,
+"unreliable": []
+},
+"MO": {
+"total": 8084,
+"lt50": 8370,
+"ge50": 8039,
+"unreliable": []
+},
+"NE": {
+"total": 8907,
+"lt50": 9253,
+"ge50": 8822,
+"unreliable": []
+},
+"ND": {
+"total": 9318,
+"lt50": 9238,
+"ge50": 9349,
+"unreliable": []
+},
+"SD": {
+"total": 8985,
+"lt50": 7990,
+"ge50": 9225,
+"unreliable": []
+},
+"DE": {
+"total": 9459,
+"lt50": 10589,
+"ge50": 9247,
+"unreliable": []
+},
+"DC": {
+"total": 9762,
+"lt50": 9252,
+"ge50": 9895,
+"unreliable": []
+},
+"FL": {
+"total": 8919,
+"lt50": 9742,
+"ge50": 8795,
+"unreliable": []
+},
+"GA": {
+"total": 8907,
+"lt50": 9801,
+"ge50": 8768,
+"unreliable": []
+},
+"MD": {
+"total": 8760,
+"lt50": 7628,
+"ge50": 9061,
+"unreliable": []
+},
+"NC": {
+"total": 8612,
+"lt50": 7872,
+"ge50": 8728,
+"unreliable": []
+},
+"SC": {
+"total": 8552,
+"lt50": 9020,
+"ge50": 8479,
+"unreliable": []
+},
+"VA": {
+"total": 8970,
+"lt50": 8141,
+"ge50": 9157,
+"unreliable": []
+},
+"WV": {
+"total": 8878,
+"lt50": 8763,
+"ge50": 8897,
+"unreliable": []
+},
+"AL": {
+"total": 8169,
+"lt50": 7854,
+"ge50": 8216,
+"unreliable": []
+},
+"KY": {
+"total": 8936,
+"lt50": 9644,
+"ge50": 8810,
+"unreliable": []
+},
+"MS": {
+"total": 7612,
+"lt50": 7477,
+"ge50": 7637,
+"unreliable": []
+},
+"TN": {
+"total": 8667,
+"lt50": 8365,
+"ge50": 8712,
+"unreliable": []
+},
+"AR": {
+"total": 7804,
+"lt50": 7691,
+"ge50": 7823,
+"unreliable": []
+},
+"LA": {
+"total": 8806,
+"lt50": 9429,
+"ge50": 8624,
+"unreliable": []
+},
+"OK": {
+"total": 8124,
+"lt50": 8231,
+"ge50": 8101,
+"unreliable": []
+},
+"TX": {
+"total": 8543,
+"lt50": 8737,
+"ge50": 8514,
+"unreliable": []
+},
+"AZ": {
+"total": 7734,
+"lt50": 8640,
+"ge50": 7578,
+"unreliable": []
+},
+"CO": {
+"total": 8816,
+"lt50": 8039,
+"ge50": 8977,
+"unreliable": []
+},
+"ID": {
+"total": 8770,
+"lt50": 8815,
+"ge50": 8760,
+"unreliable": []
+},
+"MT": {
+"total": 8899,
+"lt50": 9049,
+"ge50": 8826,
+"unreliable": []
+},
+"NV": {
+"total": 8215,
+"lt50": 8232,
+"ge50": 8213,
+"unreliable": []
+},
+"NM": {
+"total": 9447,
+"lt50": 9459,
+"ge50": 9445,
+"unreliable": []
+},
+"UT": {
+"total": 8448,
+"lt50": 7702,
+"ge50": 8533,
+"unreliable": []
+},
+"WY": {
+"total": 8997,
+"lt50": 8691,
+"ge50": 9155,
+"unreliable": []
+},
+"AK": {
+"total": 10630,
+"lt50": 11082,
+"ge50": 10536,
+"unreliable": []
+},
+"CA": {
+"total": 9162,
+"lt50": 9149,
+"ge50": 9164,
+"unreliable": []
+},
+"HI": {
+"total": 8285,
+"lt50": 8372,
+"ge50": 8250,
+"unreliable": []
+},
+"OR": {
+"total": 9225,
+"lt50": 8594,
+"ge50": 9407,
+"unreliable": []
+},
+"WA": {
+"total": 8712,
+"lt50": 9146,
+"ge50": 8592,
+"unreliable": []
+}
+},
+"singleEmployee": {
+"US": {
+"total": 1817,
+"lt50": 1924,
+"ge50": 1796,
+"unreliable": []
+},
+"CT": {
+"total": 1771,
+"lt50": 1843,
+"ge50": 1755,
+"unreliable": []
+},
+"ME": {
+"total": 1869,
+"lt50": 1963,
+"ge50": 1846,
+"unreliable": []
+},
+"MA": {
+"total": 2038,
+"lt50": 2497,
+"ge50": 1930,
+"unreliable": []
+},
+"NH": {
+"total": 2350,
+"lt50": 2410,
+"ge50": 2335,
+"unreliable": []
+},
+"RI": {
+"total": 2046,
+"lt50": 1902,
+"ge50": 2082,
+"unreliable": []
+},
+"VT": {
+"total": 2187,
+"lt50": 2622,
+"ge50": 2022,
+"unreliable": []
+},
+"NJ": {
+"total": 2223,
+"lt50": 2698,
+"ge50": 2088,
+"unreliable": []
+},
+"NY": {
+"total": 2231,
+"lt50": 2885,
+"ge50": 2119,
+"unreliable": []
+},
+"PA": {
+"total": 1669,
+"lt50": 1774,
+"ge50": 1645,
+"unreliable": []
+},
+"IL": {
+"total": 1858,
+"lt50": 2112,
+"ge50": 1820,
+"unreliable": []
+},
+"IN": {
+"total": 2137,
+"lt50": 1920,
+"ge50": 2158,
+"unreliable": []
+},
+"MI": {
+"total": 1970,
+"lt50": 2075,
+"ge50": 1945,
+"unreliable": []
+},
+"OH": {
+"total": 2016,
+"lt50": 2206,
+"ge50": 1985,
+"unreliable": []
+},
+"WI": {
+"total": 2052,
+"lt50": 1809,
+"ge50": 2102,
+"unreliable": []
+},
+"IA": {
+"total": 2025,
+"lt50": 2150,
+"ge50": 2003,
+"unreliable": []
+},
+"KS": {
+"total": 1784,
+"lt50": 1724,
+"ge50": 1796,
+"unreliable": []
+},
+"MN": {
+"total": 1939,
+"lt50": 2661,
+"ge50": 1770,
+"unreliable": []
+},
+"MO": {
+"total": 1649,
+"lt50": 1671,
+"ge50": 1645,
+"unreliable": []
+},
+"NE": {
+"total": 1722,
+"lt50": 2206,
+"ge50": 1602,
+"unreliable": []
+},
+"ND": {
+"total": 1579,
+"lt50": 1179,
+"ge50": 1737,
+"unreliable": []
+},
+"SD": {
+"total": 1730,
+"lt50": 2002,
+"ge50": 1665,
+"unreliable": []
+},
+"DE": {
+"total": 2120,
+"lt50": 1806,
+"ge50": 2179,
+"unreliable": [
+"lt50"
+]
+},
+"DC": {
+"total": 1863,
+"lt50": 1777,
+"ge50": 1885,
+"unreliable": []
+},
+"FL": {
+"total": 1913,
+"lt50": 2500,
+"ge50": 1825,
+"unreliable": []
+},
+"GA": {
+"total": 1748,
+"lt50": 1994,
+"ge50": 1710,
+"unreliable": []
+},
+"MD": {
+"total": 2065,
+"lt50": 1586,
+"ge50": 2193,
+"unreliable": []
+},
+"NC": {
+"total": 2012,
+"lt50": 2012,
+"ge50": 2013,
+"unreliable": []
+},
+"SC": {
+"total": 1814,
+"lt50": 1881,
+"ge50": 1804,
+"unreliable": []
+},
+"VA": {
+"total": 2054,
+"lt50": 1763,
+"ge50": 2120,
+"unreliable": []
+},
+"WV": {
+"total": 2012,
+"lt50": 1388,
+"ge50": 2118,
+"unreliable": [
+"lt50"
+]
+},
+"AL": {
+"total": 2048,
+"lt50": 2336,
+"ge50": 2005,
+"unreliable": []
+},
+"KY": {
+"total": 1947,
+"lt50": 2306,
+"ge50": 1884,
+"unreliable": [
+"lt50"
+]
+},
+"MS": {
+"total": 1716,
+"lt50": 1566,
+"ge50": 1743,
+"unreliable": []
+},
+"TN": {
+"total": 1645,
+"lt50": 986,
+"ge50": 1743,
+"unreliable": []
+},
+"AR": {
+"total": 1795,
+"lt50": 1404,
+"ge50": 1859,
+"unreliable": []
+},
+"LA": {
+"total": 2259,
+"lt50": 2727,
+"ge50": 2123,
+"unreliable": []
+},
+"OK": {
+"total": 1558,
+"lt50": 1750,
+"ge50": 1517,
+"unreliable": []
+},
+"TX": {
+"total": 1638,
+"lt50": 1583,
+"ge50": 1646,
+"unreliable": []
+},
+"AZ": {
+"total": 1837,
+"lt50": 2503,
+"ge50": 1722,
+"unreliable": [
+"lt50"
+]
+},
+"CO": {
+"total": 1618,
+"lt50": 1295,
+"ge50": 1685,
+"unreliable": []
+},
+"ID": {
+"total": 1686,
+"lt50": 1477,
+"ge50": 1733,
+"unreliable": []
+},
+"MT": {
+"total": 1493,
+"lt50": 1799,
+"ge50": 1343,
+"unreliable": []
+},
+"NV": {
+"total": 1563,
+"lt50": 1422,
+"ge50": 1586,
+"unreliable": []
+},
+"NM": {
+"total": 1767,
+"lt50": 2171,
+"ge50": 1682,
+"unreliable": [
+"lt50"
+]
+},
+"UT": {
+"total": 1591,
+"lt50": 1328,
+"ge50": 1621,
+"unreliable": []
+},
+"WY": {
+"total": 1497,
+"lt50": 1258,
+"ge50": 1620,
+"unreliable": [
+"lt50"
+]
+},
+"AK": {
+"total": 1931,
+"lt50": 1866,
+"ge50": 1945,
+"unreliable": []
+},
+"CA": {
+"total": 1515,
+"lt50": 1602,
+"ge50": 1499,
+"unreliable": []
+},
+"HI": {
+"total": 857,
+"lt50": 404,
+"ge50": 1040,
+"unreliable": [
+"lt50"
+]
+},
+"OR": {
+"total": 1499,
+"lt50": 1448,
+"ge50": 1514,
+"unreliable": []
+},
+"WA": {
+"total": 1381,
+"lt50": 1088,
+"ge50": 1462,
+"unreliable": []
+}
+},
+"familyPremium": {
+"US": {
+"total": 26281,
+"lt50": 24176,
+"ge50": 26602,
+"unreliable": []
+},
+"CT": {
+"total": 28700,
+"lt50": 23892,
+"ge50": 29669,
+"unreliable": []
+},
+"ME": {
+"total": 26106,
+"lt50": 22577,
+"ge50": 26617,
+"unreliable": []
+},
+"MA": {
+"total": 29619,
+"lt50": 27129,
+"ge50": 30238,
+"unreliable": []
+},
+"NH": {
+"total": 28161,
+"lt50": 23407,
+"ge50": 29510,
+"unreliable": []
+},
+"RI": {
+"total": 27361,
+"lt50": 23044,
+"ge50": 28020,
+"unreliable": []
+},
+"VT": {
+"total": 25450,
+"lt50": 28494,
+"ge50": 25016,
+"unreliable": []
+},
+"NJ": {
+"total": 29666,
+"lt50": 26238,
+"ge50": 30043,
+"unreliable": []
+},
+"NY": {
+"total": 29752,
+"lt50": 30351,
+"ge50": 29635,
+"unreliable": []
+},
+"PA": {
+"total": 26623,
+"lt50": 24389,
+"ge50": 27077,
+"unreliable": []
+},
+"IL": {
+"total": 28248,
+"lt50": 27996,
+"ge50": 28288,
+"unreliable": []
+},
+"IN": {
+"total": 23497,
+"lt50": 20362,
+"ge50": 23868,
+"unreliable": []
+},
+"MI": {
+"total": 23800,
+"lt50": 23191,
+"ge50": 23913,
+"unreliable": []
+},
+"OH": {
+"total": 24661,
+"lt50": 20726,
+"ge50": 25377,
+"unreliable": []
+},
+"WI": {
+"total": 27309,
+"lt50": 28362,
+"ge50": 27093,
+"unreliable": []
+},
+"IA": {
+"total": 25181,
+"lt50": 25071,
+"ge50": 25195,
+"unreliable": []
+},
+"KS": {
+"total": 25493,
+"lt50": 19915,
+"ge50": 27038,
+"unreliable": []
+},
+"MN": {
+"total": 25947,
+"lt50": 22393,
+"ge50": 26446,
+"unreliable": []
+},
+"MO": {
+"total": 25520,
+"lt50": 23850,
+"ge50": 25723,
+"unreliable": []
+},
+"NE": {
+"total": 26830,
+"lt50": 27269,
+"ge50": 26754,
+"unreliable": []
+},
+"ND": {
+"total": 24903,
+"lt50": 23944,
+"ge50": 25153,
+"unreliable": []
+},
+"SD": {
+"total": 26110,
+"lt50": 22476,
+"ge50": 26661,
+"unreliable": []
+},
+"DE": {
+"total": 25600,
+"lt50": 22354,
+"ge50": 26070,
+"unreliable": []
+},
+"DC": {
+"total": 29371,
+"lt50": 26474,
+"ge50": 29886,
+"unreliable": []
+},
+"FL": {
+"total": 25396,
+"lt50": 24957,
+"ge50": 25454,
+"unreliable": []
+},
+"GA": {
+"total": 26439,
+"lt50": 27747,
+"ge50": 26308,
+"unreliable": []
+},
+"MD": {
+"total": 24717,
+"lt50": 25156,
+"ge50": 24670,
+"unreliable": []
+},
+"NC": {
+"total": 25311,
+"lt50": 23343,
+"ge50": 25467,
+"unreliable": []
+},
+"SC": {
+"total": 25046,
+"lt50": 23531,
+"ge50": 25209,
+"unreliable": []
+},
+"VA": {
+"total": 27257,
+"lt50": 19835,
+"ge50": 28538,
+"unreliable": []
+},
+"WV": {
+"total": 26094,
+"lt50": 24948,
+"ge50": 26213,
+"unreliable": []
+},
+"AL": {
+"total": 23554,
+"lt50": 19467,
+"ge50": 24093,
+"unreliable": []
+},
+"KY": {
+"total": 24520,
+"lt50": 20839,
+"ge50": 24775,
+"unreliable": []
+},
+"MS": {
+"total": 21932,
+"lt50": 18158,
+"ge50": 22249,
+"unreliable": []
+},
+"TN": {
+"total": 25123,
+"lt50": 24654,
+"ge50": 25166,
+"unreliable": []
+},
+"AR": {
+"total": 22956,
+"lt50": 17908,
+"ge50": 23777,
+"unreliable": []
+},
+"LA": {
+"total": 25647,
+"lt50": 23163,
+"ge50": 26099,
+"unreliable": []
+},
+"OK": {
+"total": 24483,
+"lt50": 23828,
+"ge50": 24628,
+"unreliable": []
+},
+"TX": {
+"total": 25053,
+"lt50": 21949,
+"ge50": 25371,
+"unreliable": []
+},
+"AZ": {
+"total": 23143,
+"lt50": 22869,
+"ge50": 23190,
+"unreliable": []
+},
+"CO": {
+"total": 25055,
+"lt50": 21275,
+"ge50": 25668,
+"unreliable": []
+},
+"ID": {
+"total": 25957,
+"lt50": 22091,
+"ge50": 26821,
+"unreliable": []
+},
+"MT": {
+"total": 21989,
+"lt50": 20292,
+"ge50": 22878,
+"unreliable": []
+},
+"NV": {
+"total": 23075,
+"lt50": 20601,
+"ge50": 23408,
+"unreliable": []
+},
+"NM": {
+"total": 26482,
+"lt50": 27361,
+"ge50": 26403,
+"unreliable": []
+},
+"UT": {
+"total": 25122,
+"lt50": 21266,
+"ge50": 25736,
+"unreliable": []
+},
+"WY": {
+"total": 27084,
+"lt50": 25028,
+"ge50": 27668,
+"unreliable": []
+},
+"AK": {
+"total": 30132,
+"lt50": 39824,
+"ge50": 29538,
+"unreliable": []
+},
+"CA": {
+"total": 27057,
+"lt50": 23389,
+"ge50": 27727,
+"unreliable": []
+},
+"HI": {
+"total": 23603,
+"lt50": 25498,
+"ge50": 23278,
+"unreliable": []
+},
+"OR": {
+"total": 27182,
+"lt50": 21815,
+"ge50": 28022,
+"unreliable": []
+},
+"WA": {
+"total": 27618,
+"lt50": 22978,
+"ge50": 28199,
+"unreliable": []
+}
+},
+"familyEmployee": {
+"US": {
+"total": 7314,
+"lt50": 7760,
+"ge50": 7246,
+"unreliable": []
+},
+"CT": {
+"total": 4979,
+"lt50": 6788,
+"ge50": 4614,
+"unreliable": [
+"lt50"
+]
+},
+"ME": {
+"total": 7079,
+"lt50": 10518,
+"ge50": 6581,
+"unreliable": []
+},
+"MA": {
+"total": 7501,
+"lt50": 7943,
+"ge50": 7392,
+"unreliable": []
+},
+"NH": {
+"total": 7434,
+"lt50": 5703,
+"ge50": 7926,
+"unreliable": [
+"lt50"
+]
+},
+"RI": {
+"total": 7028,
+"lt50": 7194,
+"ge50": 7002,
+"unreliable": []
+},
+"VT": {
+"total": 7870,
+"lt50": 11701,
+"ge50": 7324,
+"unreliable": []
+},
+"NJ": {
+"total": 7053,
+"lt50": 9849,
+"ge50": 6745,
+"unreliable": []
+},
+"NY": {
+"total": 7075,
+"lt50": 9527,
+"ge50": 6596,
+"unreliable": []
+},
+"PA": {
+"total": 6720,
+"lt50": 5659,
+"ge50": 6936,
+"unreliable": []
+},
+"IL": {
+"total": 7838,
+"lt50": 7377,
+"ge50": 7911,
+"unreliable": []
+},
+"IN": {
+"total": 6650,
+"lt50": 5322,
+"ge50": 6808,
+"unreliable": [
+"lt50"
+]
+},
+"MI": {
+"total": 6437,
+"lt50": 7727,
+"ge50": 6199,
+"unreliable": []
+},
+"OH": {
+"total": 6453,
+"lt50": 4392,
+"ge50": 6828,
+"unreliable": [
+"lt50"
+]
+},
+"WI": {
+"total": 6148,
+"lt50": 3464,
+"ge50": 6698,
+"unreliable": []
+},
+"IA": {
+"total": 7533,
+"lt50": 10963,
+"ge50": 7102,
+"unreliable": []
+},
+"KS": {
+"total": 8222,
+"lt50": 9353,
+"ge50": 7908,
+"unreliable": []
+},
+"MN": {
+"total": 7013,
+"lt50": 9801,
+"ge50": 6622,
+"unreliable": []
+},
+"MO": {
+"total": 6797,
+"lt50": 7909,
+"ge50": 6662,
+"unreliable": []
+},
+"NE": {
+"total": 6369,
+"lt50": 4775,
+"ge50": 6641,
+"unreliable": []
+},
+"ND": {
+"total": 5586,
+"lt50": 5409,
+"ge50": 5632,
+"unreliable": []
+},
+"SD": {
+"total": 6892,
+"lt50": 6288,
+"ge50": 6983,
+"unreliable": []
+},
+"DE": {
+"total": 6993,
+"lt50": null,
+"ge50": 7184,
+"unreliable": []
+},
+"DC": {
+"total": 8028,
+"lt50": 7114,
+"ge50": 8191,
+"unreliable": []
+},
+"FL": {
+"total": 7976,
+"lt50": 10263,
+"ge50": 7676,
+"unreliable": []
+},
+"GA": {
+"total": 7224,
+"lt50": 5677,
+"ge50": 7379,
+"unreliable": []
+},
+"MD": {
+"total": 6502,
+"lt50": 10129,
+"ge50": 6107,
+"unreliable": []
+},
+"NC": {
+"total": 8073,
+"lt50": 10336,
+"ge50": 7894,
+"unreliable": []
+},
+"SC": {
+"total": 8269,
+"lt50": null,
+"ge50": 8307,
+"unreliable": []
+},
+"VA": {
+"total": 8692,
+"lt50": 6839,
+"ge50": 9012,
+"unreliable": []
+},
+"WV": {
+"total": 5129,
+"lt50": null,
+"ge50": 4966,
+"unreliable": []
+},
+"AL": {
+"total": 7540,
+"lt50": 5592,
+"ge50": 7797,
+"unreliable": []
+},
+"KY": {
+"total": 5982,
+"lt50": 7769,
+"ge50": 5858,
+"unreliable": []
+},
+"MS": {
+"total": 6228,
+"lt50": 8694,
+"ge50": 6021,
+"unreliable": []
+},
+"TN": {
+"total": 5972,
+"lt50": 9127,
+"ge50": 5680,
+"unreliable": []
+},
+"AR": {
+"total": 7824,
+"lt50": 5480,
+"ge50": 8205,
+"unreliable": []
+},
+"LA": {
+"total": 7808,
+"lt50": 11197,
+"ge50": 7191,
+"unreliable": []
+},
+"OK": {
+"total": 6955,
+"lt50": 7568,
+"ge50": 6820,
+"unreliable": []
+},
+"TX": {
+"total": 7913,
+"lt50": 11247,
+"ge50": 7571,
+"unreliable": []
+},
+"AZ": {
+"total": 8493,
+"lt50": 7732,
+"ge50": 8624,
+"unreliable": []
+},
+"CO": {
+"total": 6733,
+"lt50": 7191,
+"ge50": 6659,
+"unreliable": []
+},
+"ID": {
+"total": 6439,
+"lt50": 6135,
+"ge50": 6506,
+"unreliable": []
+},
+"MT": {
+"total": 4967,
+"lt50": 4365,
+"ge50": 5282,
+"unreliable": [
+"lt50"
+]
+},
+"NV": {
+"total": 7902,
+"lt50": 7528,
+"ge50": 7953,
+"unreliable": []
+},
+"NM": {
+"total": 6761,
+"lt50": null,
+"ge50": 6586,
+"unreliable": []
+},
+"UT": {
+"total": 5567,
+"lt50": 5199,
+"ge50": 5625,
+"unreliable": []
+},
+"WY": {
+"total": 6830,
+"lt50": 7410,
+"ge50": 6666,
+"unreliable": []
+},
+"AK": {
+"total": 6171,
+"lt50": null,
+"ge50": 6272,
+"unreliable": []
+},
+"CA": {
+"total": 7847,
+"lt50": 7166,
+"ge50": 7972,
+"unreliable": []
+},
+"HI": {
+"total": 5531,
+"lt50": 6819,
+"ge50": 5310,
+"unreliable": []
+},
+"OR": {
+"total": 9374,
+"lt50": 8246,
+"ge50": 9550,
+"unreliable": []
+},
+"WA": {
+"total": 8222,
+"lt50": 5989,
+"ge50": 8501,
+"unreliable": []
+}
+},
+"enrolledPct": {
+"US": {
+"total": 54.3,
+"lt50": 52.3,
+"ge50": 54.7,
+"unreliable": []
+},
+"CT": {
+"total": 52.2,
+"lt50": 47.0,
+"ge50": 53.3,
+"unreliable": []
+},
+"ME": {
+"total": 59.7,
+"lt50": 51.0,
+"ge50": 61.8,
+"unreliable": []
+},
+"MA": {
+"total": 51.9,
+"lt50": 52.5,
+"ge50": 51.8,
+"unreliable": []
+},
+"NH": {
+"total": 50.1,
+"lt50": 44.0,
+"ge50": 51.8,
+"unreliable": []
+},
+"RI": {
+"total": 52.4,
+"lt50": 47.8,
+"ge50": 53.4,
+"unreliable": []
+},
+"VT": {
+"total": 56.8,
+"lt50": 51.2,
+"ge50": 58.5,
+"unreliable": []
+},
+"NJ": {
+"total": 55.0,
+"lt50": 46.6,
+"ge50": 57.1,
+"unreliable": []
+},
+"NY": {
+"total": 52.8,
+"lt50": 44.7,
+"ge50": 54.5,
+"unreliable": []
+},
+"PA": {
+"total": 51.9,
+"lt50": 56.6,
+"ge50": 51.0,
+"unreliable": []
+},
+"IL": {
+"total": 54.9,
+"lt50": 54.3,
+"ge50": 55.0,
+"unreliable": []
+},
+"IN": {
+"total": 52.3,
+"lt50": 52.4,
+"ge50": 52.3,
+"unreliable": []
+},
+"MI": {
+"total": 53.4,
+"lt50": 48.2,
+"ge50": 54.7,
+"unreliable": []
+},
+"OH": {
+"total": 53.9,
+"lt50": 49.7,
+"ge50": 54.6,
+"unreliable": []
+},
+"WI": {
+"total": 50.2,
+"lt50": 54.1,
+"ge50": 49.5,
+"unreliable": []
+},
+"IA": {
+"total": 57.2,
+"lt50": 46.9,
+"ge50": 59.3,
+"unreliable": []
+},
+"KS": {
+"total": 56.3,
+"lt50": 52.6,
+"ge50": 57.1,
+"unreliable": []
+},
+"MN": {
+"total": 40.2,
+"lt50": 45.4,
+"ge50": 39.3,
+"unreliable": []
+},
+"MO": {
+"total": 56.8,
+"lt50": 52.2,
+"ge50": 57.5,
+"unreliable": []
+},
+"NE": {
+"total": 49.9,
+"lt50": 46.4,
+"ge50": 50.7,
+"unreliable": []
+},
+"ND": {
+"total": 55.5,
+"lt50": 54.9,
+"ge50": 55.7,
+"unreliable": []
+},
+"SD": {
+"total": 56.6,
+"lt50": 44.2,
+"ge50": 59.6,
+"unreliable": []
+},
+"DE": {
+"total": 52.3,
+"lt50": 45.4,
+"ge50": 53.6,
+"unreliable": []
+},
+"DC": {
+"total": 60.6,
+"lt50": 68.5,
+"ge50": 59.1,
+"unreliable": []
+},
+"FL": {
+"total": 49.5,
+"lt50": 54.5,
+"ge50": 48.8,
+"unreliable": []
+},
+"GA": {
+"total": 57.2,
+"lt50": 50.8,
+"ge50": 58.2,
+"unreliable": []
+},
+"MD": {
+"total": 56.5,
+"lt50": 55.2,
+"ge50": 56.7,
+"unreliable": []
+},
+"NC": {
+"total": 57.9,
+"lt50": 52.5,
+"ge50": 58.7,
+"unreliable": []
+},
+"SC": {
+"total": 49.0,
+"lt50": 50.5,
+"ge50": 48.8,
+"unreliable": []
+},
+"VA": {
+"total": 55.6,
+"lt50": 56.7,
+"ge50": 55.4,
+"unreliable": []
+},
+"WV": {
+"total": 53.0,
+"lt50": 52.3,
+"ge50": 53.1,
+"unreliable": []
+},
+"AL": {
+"total": 60.4,
+"lt50": 50.3,
+"ge50": 62.2,
+"unreliable": []
+},
+"KY": {
+"total": 56.3,
+"lt50": 52.0,
+"ge50": 56.9,
+"unreliable": []
+},
+"MS": {
+"total": 56.2,
+"lt50": 53.0,
+"ge50": 56.7,
+"unreliable": []
+},
+"TN": {
+"total": 61.5,
+"lt50": 55.2,
+"ge50": 62.5,
+"unreliable": []
+},
+"AR": {
+"total": 52.0,
+"lt50": 58.8,
+"ge50": 51.0,
+"unreliable": []
+},
+"LA": {
+"total": 53.6,
+"lt50": 54.1,
+"ge50": 53.5,
+"unreliable": []
+},
+"OK": {
+"total": 49.7,
+"lt50": 51.7,
+"ge50": 49.3,
+"unreliable": []
+},
+"TX": {
+"total": 55.8,
+"lt50": 55.9,
+"ge50": 55.8,
+"unreliable": []
+},
+"AZ": {
+"total": 47.7,
+"lt50": 59.3,
+"ge50": 46.1,
+"unreliable": []
+},
+"CO": {
+"total": 52.3,
+"lt50": 44.0,
+"ge50": 54.1,
+"unreliable": []
+},
+"ID": {
+"total": 64.7,
+"lt50": 59.6,
+"ge50": 65.9,
+"unreliable": []
+},
+"MT": {
+"total": 56.2,
+"lt50": 62.2,
+"ge50": 53.7,
+"unreliable": []
+},
+"NV": {
+"total": 55.2,
+"lt50": 55.3,
+"ge50": 55.2,
+"unreliable": []
+},
+"NM": {
+"total": 49.7,
+"lt50": 53.7,
+"ge50": 49.0,
+"unreliable": []
+},
+"UT": {
+"total": 56.7,
+"lt50": 55.9,
+"ge50": 56.8,
+"unreliable": []
+},
+"WY": {
+"total": 61.9,
+"lt50": 59.6,
+"ge50": 62.9,
+"unreliable": []
+},
+"AK": {
+"total": 54.3,
+"lt50": 42.2,
+"ge50": 56.6,
+"unreliable": []
+},
+"CA": {
+"total": 55.9,
+"lt50": 51.3,
+"ge50": 56.9,
+"unreliable": []
+},
+"HI": {
+"total": 58.7,
+"lt50": 62.5,
+"ge50": 57.6,
+"unreliable": []
+},
+"OR": {
+"total": 61.5,
+"lt50": 61.3,
+"ge50": 61.6,
+"unreliable": []
+},
+"WA": {
+"total": 66.6,
+"lt50": 62.3,
+"ge50": 67.6,
+"unreliable": []
+}
+}
+}
+}

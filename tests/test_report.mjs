@@ -8,6 +8,8 @@ import { makeReportPdf } from '../functions/lib/simple-pdf.js';
 import { makeReportXlsx } from '../functions/lib/simple-xlsx.js';
 import { onRequestPost, onRequestGet, reportConfigured } from '../functions/api/report-request.js';
 import { onRequestGet as statusGet } from '../functions/api/report-status.js';
+import { onRequestGet as healthGet } from '../functions/api/health.js';
+import { _resetForTests as resetLimiter } from '../functions/lib/ratelimit.js';
 globalThis.window = {};
 await import(new URL('../assets/js/cost-lab.js', import.meta.url));
 const { compute } = window.PEOLab;
@@ -88,7 +90,7 @@ const call = async (b = BODY, { origin = 'https://peonomics.com', env = ENV, ct 
   const res = await onRequestPost({ request: new Request('https://peonomics.com/api/report-request', { method: 'POST', headers: { origin, 'content-type': ct }, body: typeof b === 'string' ? b : JSON.stringify(b) }), env });
   return { status: res.status, body: await res.json() };
 };
-const reset = () => { turnstileOk = true; webhookOk = true; resendResp = () => Response.json({ id: 'msg_123' }); mock(); };
+const reset = () => { resetLimiter(); turnstileOk = true; webhookOk = true; resendResp = () => Response.json({ id: 'msg_123' }); mock(); };
 
 await t('success: logs requested+accepted, two attachments, idempotency key, honest status', async () => {
   reset(); const r = await call();
@@ -146,9 +148,26 @@ await t('duplicate requestId reuses the same Idempotency-Key', async () => {
 });
 await t('GET /api/report-request 405; /api/report-status reveals boolean only', async () => {
   assert.equal((await onRequestGet()).status, 405);
-  assert.deepEqual(await (await statusGet({ env: ENV })).json(), { ok: true, available: true });
-  assert.deepEqual(await (await statusGet({ env: {} })).json(), { ok: true, available: false });
+  assert.deepEqual(await (await statusGet({ env: ENV })).json(), { ok: true, available: true, siteKey: null });
+  assert.deepEqual(await (await statusGet({ env: {} })).json(), { ok: true, available: false, siteKey: null });
+  assert.deepEqual(await (await statusGet({ env: { ...ENV, TURNSTILE_SITE_KEY: '0x4AAAAAAAPublicKey01' } })).json(), { ok: true, available: true, siteKey: '0x4AAAAAAAPublicKey01' });
+  assert.equal((await (await statusGet({ env: { TURNSTILE_SITE_KEY: 'not a key <script>' } })).json()).siteKey, null);
   assert.equal(reportConfigured({ ...ENV, REPORT_FROM: '' }), false);
+});
+await t('/api/health returns booleans only, never values', async () => {
+  const j = await (await healthGet({ env: { ...ENV, ANTHROPIC_API_KEY: 'sk-secret', TURNSTILE_SITE_KEY: '0x4AAAAAAAPublicKey01' } })).json();
+  assert.equal(j.reports.ready, true); assert.equal(j.lookup.research, true);
+  const flat = JSON.stringify(j);
+  for (const v of ['sk-secret', 'hook.example', 'reports@peonomics.com', '0x4AAAAAAAPublicKey01']) assert.ok(!flat.includes(v), 'leaked ' + v);
+  assert.equal((await (await healthGet({ env: {} })).json()).reports.ready, false);
+});
+await t('report rate limit: 7th request from one IP in an hour -> 429 before any outbound call', async () => {
+  reset(); let r;
+  for (let k = 0; k < 7; k++) {
+    const res = await onRequestPost({ request: new Request('https://peonomics.com/api/report-request', { method: 'POST', headers: { origin: 'https://peonomics.com', 'content-type': 'application/json', 'cf-connecting-ip': '192.0.2.9' }, body: JSON.stringify(BODY) }), env: ENV });
+    r = res.status;
+  }
+  assert.equal(r, 429);
 });
 globalThis.fetch = real;
 console.log(`report: ${pass} passed`);

@@ -1,0 +1,373 @@
+{
+ "source": {
+  "name": "U.S. Department of Labor, ETA Office of Unemployment Insurance \u2014 Significant Provisions of State UI Laws, effective July 2026",
+  "url": "https://oui.doleta.gov/unemploy/content/sigpros/2020-2029/July2026.pdf",
+  "effective": "2026-07-01",
+  "lastReviewed": "2026-10-27",
+  "notes": [
+   "Footnote 3: rates apply to experience-rated employers and exclude surtaxes, penalties, surcharges and non-UI taxes.",
+   "Footnote 4: new-employer rate shown is the base rate; higher rates may apply by industry or other factors.",
+   "Footnote 8: NH, NJ, TN, VT (marked) use a July 1 \u2013 June 30 rate year; all other states use the calendar year.",
+   "IndAvg = new-employer rate is the industry average (no single number published)."
+  ]
+ },
+ "states": {
+  "AL": {
+   "wageBase": 8000,
+   "minRatePct": 0.2,
+   "maxRatePct": 5.4,
+   "newEmployerRatePct": 2.7,
+   "footnotes": ""
+  },
+  "AK": {
+   "wageBase": 54200,
+   "minRatePct": 1.0,
+   "maxRatePct": 5.4,
+   "newEmployerRatePct": 1.0,
+   "footnotes": ""
+  },
+  "AZ": {
+   "wageBase": 8000,
+   "minRatePct": 0.03,
+   "maxRatePct": 8.36,
+   "newEmployerRatePct": 2.0,
+   "footnotes": ""
+  },
+  "AR": {
+   "wageBase": 7000,
+   "minRatePct": 0.1,
+   "maxRatePct": 6.0,
+   "newEmployerRatePct": 1.8,
+   "footnotes": ""
+  },
+  "CA": {
+   "wageBase": 7000,
+   "minRatePct": 1.5,
+   "maxRatePct": 6.2,
+   "newEmployerRatePct": 3.4,
+   "footnotes": ""
+  },
+  "CO": {
+   "wageBase": 30600,
+   "minRatePct": 0.56,
+   "maxRatePct": 7.34,
+   "newEmployerRatePct": 1.53,
+   "footnotes": ""
+  },
+  "CT": {
+   "wageBase": 27000,
+   "minRatePct": 0.1,
+   "maxRatePct": 10.0,
+   "newEmployerRatePct": 1.9,
+   "footnotes": ""
+  },
+  "DE": {
+   "wageBase": 14500,
+   "minRatePct": 0.4,
+   "maxRatePct": 5.4,
+   "newEmployerRatePct": 1.0,
+   "footnotes": ""
+  },
+  "DC": {
+   "wageBase": 9000,
+   "minRatePct": 1.9,
+   "maxRatePct": 7.4,
+   "newEmployerRatePct": 2.7,
+   "footnotes": ""
+  },
+  "FL": {
+   "wageBase": 7000,
+   "minRatePct": 0.1,
+   "maxRatePct": 5.4,
+   "newEmployerRatePct": 2.7,
+   "footnotes": ""
+  },
+  "GA": {
+   "wageBase": 9500,
+   "minRatePct": 0.04,
+   "maxRatePct": 8.1,
+   "newEmployerRatePct": 2.64,
+   "footnotes": ""
+  },
+  "HI": {
+   "wageBase": 64500,
+   "minRatePct": 0.0,
+   "maxRatePct": 5.6,
+   "newEmployerRatePct": 2.4,
+   "footnotes": ""
+  },
+  "ID": {
+   "wageBase": 58300,
+   "minRatePct": 0.208,
+   "maxRatePct": 5.4,
+   "newEmployerRatePct": 1.0,
+   "footnotes": ""
+  },
+  "IL": {
+   "wageBase": 14250,
+   "minRatePct": 0.2,
+   "maxRatePct": 6.5,
+   "newEmployerRatePct": 2.8,
+   "footnotes": ""
+  },
+  "IN": {
+   "wageBase": 9500,
+   "minRatePct": 0.5,
+   "maxRatePct": 7.4,
+   "newEmployerRatePct": 2.5,
+   "footnotes": ""
+  },
+  "IA": {
+   "wageBase": 20400,
+   "minRatePct": 0.0,
+   "maxRatePct": 5.4,
+   "newEmployerRatePct": 1.0,
+   "footnotes": ""
+  },
+  "KS": {
+   "wageBase": 15100,
+   "minRatePct": 0.0,
+   "maxRatePct": 6.95,
+   "newEmployerRatePct": 1.75,
+   "footnotes": ""
+  },
+  "KY": {
+   "wageBase": 12000,
+   "minRatePct": 0.3,
+   "maxRatePct": 9.0,
+   "newEmployerRatePct": 2.7,
+   "footnotes": ""
+  },
+  "LA": {
+   "wageBase": 7000,
+   "minRatePct": 0.09,
+   "maxRatePct": 6.0,
+   "newEmployerRatePct": null,
+   "footnotes": ""
+  },
+  "ME": {
+   "wageBase": 12000,
+   "minRatePct": 0.0,
+   "maxRatePct": 6.29,
+   "newEmployerRatePct": 2.23,
+   "footnotes": ""
+  },
+  "MD": {
+   "wageBase": 8500,
+   "minRatePct": 0.3,
+   "maxRatePct": 7.5,
+   "newEmployerRatePct": 2.6,
+   "footnotes": ""
+  },
+  "MA": {
+   "wageBase": 15000,
+   "minRatePct": 0.94,
+   "maxRatePct": 14.37,
+   "newEmployerRatePct": 2.42,
+   "footnotes": ""
+  },
+  "MI": {
+   "wageBase": 9000,
+   "minRatePct": 0.06,
+   "maxRatePct": 12.2,
+   "newEmployerRatePct": 2.7,
+   "footnotes": ""
+  },
+  "MN": {
+   "wageBase": 44000,
+   "minRatePct": 0.4,
+   "maxRatePct": 9.3,
+   "newEmployerRatePct": null,
+   "footnotes": ""
+  },
+  "MS": {
+   "wageBase": 14000,
+   "minRatePct": 0.0,
+   "maxRatePct": 5.4,
+   "newEmployerRatePct": 1.0,
+   "footnotes": ""
+  },
+  "MO": {
+   "wageBase": 9000,
+   "minRatePct": 0.0,
+   "maxRatePct": 6.0,
+   "newEmployerRatePct": 2.376,
+   "footnotes": ""
+  },
+  "MT": {
+   "wageBase": 47300,
+   "minRatePct": 0.0,
+   "maxRatePct": 6.12,
+   "newEmployerRatePct": null,
+   "footnotes": ""
+  },
+  "NE": {
+   "wageBase": 9000,
+   "minRatePct": 0.0,
+   "maxRatePct": 5.4,
+   "newEmployerRatePct": 1.25,
+   "footnotes": ""
+  },
+  "NV": {
+   "wageBase": 45400,
+   "minRatePct": 0.25,
+   "maxRatePct": 5.4,
+   "newEmployerRatePct": 2.95,
+   "footnotes": ""
+  },
+  "NH": {
+   "wageBase": 14000,
+   "minRatePct": 0.1,
+   "maxRatePct": 7.0,
+   "newEmployerRatePct": 2.7,
+   "footnotes": "7,8"
+  },
+  "NJ": {
+   "wageBase": 44800,
+   "minRatePct": 0.5,
+   "maxRatePct": 5.8,
+   "newEmployerRatePct": 2.8,
+   "footnotes": "7,8"
+  },
+  "NM": {
+   "wageBase": 34800,
+   "minRatePct": 0.33,
+   "maxRatePct": 5.4,
+   "newEmployerRatePct": null,
+   "footnotes": ""
+  },
+  "NY": {
+   "wageBase": 17600,
+   "minRatePct": 2.025,
+   "maxRatePct": 9.825,
+   "newEmployerRatePct": 4.025,
+   "footnotes": ""
+  },
+  "NC": {
+   "wageBase": 34200,
+   "minRatePct": 0.06,
+   "maxRatePct": 5.76,
+   "newEmployerRatePct": 1.0,
+   "footnotes": ""
+  },
+  "ND": {
+   "wageBase": 46600,
+   "minRatePct": 0.07,
+   "maxRatePct": 9.67,
+   "newEmployerRatePct": 1.0,
+   "footnotes": ""
+  },
+  "OH": {
+   "wageBase": 9000,
+   "minRatePct": 0.4,
+   "maxRatePct": 10.1,
+   "newEmployerRatePct": 2.7,
+   "footnotes": ""
+  },
+  "OK": {
+   "wageBase": 25000,
+   "minRatePct": 0.2,
+   "maxRatePct": 5.8,
+   "newEmployerRatePct": 1.5,
+   "footnotes": ""
+  },
+  "OR": {
+   "wageBase": 56700,
+   "minRatePct": 0.9,
+   "maxRatePct": 5.4,
+   "newEmployerRatePct": 2.4,
+   "footnotes": ""
+  },
+  "PA": {
+   "wageBase": 10000,
+   "minRatePct": 0.75,
+   "maxRatePct": 8.95,
+   "newEmployerRatePct": 3.822,
+   "footnotes": ""
+  },
+  "RI": {
+   "wageBase": 30800,
+   "minRatePct": 0.69,
+   "maxRatePct": 9.19,
+   "newEmployerRatePct": 1.0,
+   "footnotes": "7"
+  },
+  "SC": {
+   "wageBase": 14000,
+   "minRatePct": 0.0,
+   "maxRatePct": 5.4,
+   "newEmployerRatePct": 1.0,
+   "footnotes": ""
+  },
+  "SD": {
+   "wageBase": 15000,
+   "minRatePct": 0.0,
+   "maxRatePct": 8.52,
+   "newEmployerRatePct": 1.2,
+   "footnotes": ""
+  },
+  "TN": {
+   "wageBase": 7000,
+   "minRatePct": 0.01,
+   "maxRatePct": 10.0,
+   "newEmployerRatePct": 2.7,
+   "footnotes": "7,8"
+  },
+  "TX": {
+   "wageBase": 9000,
+   "minRatePct": 0.0,
+   "maxRatePct": 6.0,
+   "newEmployerRatePct": 2.7,
+   "footnotes": ""
+  },
+  "UT": {
+   "wageBase": 50700,
+   "minRatePct": 0.2,
+   "maxRatePct": 7.2,
+   "newEmployerRatePct": null,
+   "footnotes": ""
+  },
+  "VT": {
+   "wageBase": 15400,
+   "minRatePct": 0.4,
+   "maxRatePct": 5.4,
+   "newEmployerRatePct": 1.0,
+   "footnotes": "8"
+  },
+  "VA": {
+   "wageBase": 8000,
+   "minRatePct": 0.1,
+   "maxRatePct": 6.2,
+   "newEmployerRatePct": 2.5,
+   "footnotes": ""
+  },
+  "WA": {
+   "wageBase": 78200,
+   "minRatePct": 0.0,
+   "maxRatePct": 5.4,
+   "newEmployerRatePct": null,
+   "footnotes": ""
+  },
+  "WV": {
+   "wageBase": 9500,
+   "minRatePct": 1.4,
+   "maxRatePct": 7.0,
+   "newEmployerRatePct": 2.5,
+   "footnotes": ""
+  },
+  "WI": {
+   "wageBase": 14000,
+   "minRatePct": 0.0,
+   "maxRatePct": 10.7,
+   "newEmployerRatePct": 2.5,
+   "footnotes": ""
+  },
+  "WY": {
+   "wageBase": 33800,
+   "minRatePct": 0.1,
+   "maxRatePct": 8.5,
+   "newEmployerRatePct": null,
+   "footnotes": ""
+  }
+ }
+}
