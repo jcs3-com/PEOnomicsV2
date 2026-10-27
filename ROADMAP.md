@@ -143,7 +143,8 @@ Not chat history. Not artifacts. When you finish or add work, update this file i
   - Measurement: `assets/js/track.js` + `POST /api/event` (allowlisted events: calc_used, lookup_submitted,
     report_requested, comparator_used, comparator_csv, data_csv, cost_lab_cta; GPC/DNT honored; no PII —
     tested). Stored only if the owner binds Analytics Engine `EVENTS`; otherwise discarded.
-  - Sitemap (66 URLs) and every canonical/og:url verified extensionless and 200 in production.
+  - Sitemap (66 URLs) and every canonical/og:url verified extensionless and 200 in production. /contact had lost its
+    canonical, og:image and JSON-LD (restored). `tests/test_seo.py` now enforces §4 on all 66 indexable pages.
 
 ## 🔲 Open — prioritized
 

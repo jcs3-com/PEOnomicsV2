@@ -150,6 +150,8 @@ node tests/test_model.mjs      # 15: Cost Lab model vs hand calculations, 51 x 6
 node tests/test_report.mjs     # 20: server/client parity (1,224 scenarios), PDF/XLSX, every endpoint path, health, limiter
 node tests/test_apps_script.mjs # 6: real Apps Script in a VM behind real endpoints; dedupe, scenario log, XLSX recalc
 python3 tests/test_data.py     # 466: rates-2026.json rebuild + provenance checks
+python3 tests/test_seo.py      # 926: AI_GUIDE §4 checklist on every indexable page + disclosure + tracker
+node tests/test_event.mjs      # 5: /api/event allowlist, no PII
 python3 tests/test_browser.py  # 104 at 1440 + 360 px with mocked APIs and stubbed Turnstile
 python3 tests/test_browser.py https://peonomics.com --live   # production, read-only
 WRITE_SAMPLES=/some/dir node tests/test_report.mjs           # writes sample PDF + XLSX to inspect
