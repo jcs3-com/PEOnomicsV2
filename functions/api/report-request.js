@@ -5,7 +5,7 @@
    - Business email only (same rules as /api/enrich: functions/lib/validate.js).
    - Cloudflare Turnstile verified server-side, bound to this site's hostnames.
    - Client totals are never trusted: inputs are range-checked and the model
-     is recomputed here (functions/lib/report-model.js) from /data/rates-2025.json.
+     is recomputed here (functions/lib/report-model.js) from /data/rates-2026.json.
    - The request is logged BEFORE sending; the outcome (accepted/failed) after.
      No log -> no email. Provider acceptance is reported as "accepted for
      delivery", never as "delivered".
@@ -87,7 +87,7 @@ export async function onRequestPost({ request, env }) {
   // Validate the scenario before spending a Turnstile verification on it.
   let rates, i, result;
   try {
-    const resp = await env.ASSETS.fetch(new Request(new URL('/data/rates-2025.json', request.url)));
+    const resp = await env.ASSETS.fetch(new Request(new URL('/data/rates-2026.json', request.url)));
     if (!resp.ok) throw new Error('rates unavailable');
     rates = await resp.json();
     i = parseSnapshot(body.snapshot, rates);
@@ -126,7 +126,7 @@ export async function onRequestPost({ request, env }) {
         from: env.REPORT_FROM, to: [parsed.email],
         subject: 'Your PEOnomics employer cost report',
         text: 'Attached are the PDF and editable Excel workbook you requested from the PEOnomics Cost Lab.\n\n' +
-          'They reflect the assumptions you entered and the PEOnomics ' + result.taxYear + ' reference dataset (v' + result.version + ', preliminary). ' +
+          'They reflect the assumptions you entered and the PEOnomics ' + result.taxYear + ' reference data (v' + result.version + '; each default is a published reference value with its own year and source). ' +
           'They are planning estimates, not a quote, and no PEO savings are assumed unless you entered them.\n\n' +
           'We may send one optional survey invitation about 30 days from now; it will include a way to opt out. ' +
           'We do not sell or forward your details to PEO providers.\n\nPEOnomics - https://peonomics.com/',

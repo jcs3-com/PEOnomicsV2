@@ -36,8 +36,8 @@ export function makeReportXlsx(i,r,rates){
     ['WC standalone ($ per $100)',i.wc],['WC PEO ($ per $100) — =standalone unless quoted',i.peoWc??{f:'B15',v:i.wc}],
     ['Healthcare enrollment (%)',i.enrollment],['Employer annual health / covered EE',i.health],['PEO annual health / covered EE — =standalone unless quoted',i.peoHealth??{f:'B18',v:i.health}],
     ['Annual current internal admin',i.currentAdmin],['Annual internal admin avoided',Math.min(i.currentAdmin,i.adminAvoided)],
-    ['PEO fee PEPM',i.pepm],['State tax dataset year',r.taxYear],['Rate dataset version',r.version],
-    ['State tax data note','Historical, preliminary; actual rates differ by employer']
+    ['PEO fee PEPM',i.pepm],['Reference data year',r.taxYear],['Reference data version',r.version],
+    ['Data note','Defaults are published reference values (sources: peonomics.com/data-library); your own rates differ']
   ];
   const inputsRows=bookInputs.map(([label,value],ix)=>{
     const n=ix+1,style=n===1?1:0;
@@ -63,7 +63,7 @@ export function makeReportXlsx(i,r,rates){
   }
   rows.push(row(9,[str('A9','ANNUAL TOTAL',1),fx('B9','SUM(B2:B8)',r.currentTotal,3),fx('C9','SUM(C2:C8)',r.peoTotal,3)]));
   rows.push(row(10,[str('A10','PEO - standalone',1),fx('B10','C9-B9',r.delta,3)]));
-  rows.push(row(12,[str('A12','Source note'),str('B12','2025 historical state inputs unless separately verified')]));
+  rows.push(row(12,[str('A12','Source note'),str('B12','2026 SUTA/FICA/FUTA; 2025 BLS wages and AHRQ health; 2024 WC index x estimate multiplier')]));
   rows.push(row(13,[str('A13','Model behavior'),str('B13','No default PEO savings; edit the Inputs sheet')]));
   const sh2=xmlSheet(rows,'<col min="1" max="1" width="38" customWidth="1"/><col min="2" max="3" width="22" customWidth="1"/>');
   const wb=`<?xml version="1.0" encoding="UTF-8"?><workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"><sheets><sheet name="Inputs" sheetId="1" r:id="rId1"/><sheet name="Model" sheetId="2" r:id="rId2"/></sheets><calcPr calcId="191029" fullCalcOnLoad="1"/></workbook>`;

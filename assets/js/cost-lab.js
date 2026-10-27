@@ -63,44 +63,131 @@
   const PERSONAL = new Set(['gmail.com','googlemail.com','yahoo.com','yahoo.co.uk','ymail.com','rocketmail.com','hotmail.com','hotmail.co.uk','outlook.com','live.com','msn.com','aol.com','icloud.com','me.com','mac.com','mail.com','email.com','proton.me','protonmail.com','pm.me','gmx.com','gmx.net','zoho.com','yandex.com','tutanota.com','fastmail.com','hey.com','comcast.net','verizon.net','att.net','sbcglobal.net','bellsouth.net','cox.net','charter.net','earthlink.net','duck.com']);
 
   let R = null;
+  const BENCH = ['salary', 'suta', 'wc', 'health', 'enrollment'];
   const edited = new Set();          // benchmark fields the visitor has overwritten
-  const defaults = {};               // current dataset value per benchmark field
+  const defaults = {};               // current dataset value per benchmark field (null = none)
+  const basis = {};                  // current basis per benchmark field: stat | bench | est | user
+  const MONEY_FIELDS = new Set(['salary', 'health']);
+  const BAND = n => (n < 50 ? 'lt50' : 'ge50');
+  const BAND_LABEL = { lt50: 'firms under 50 employees', ge50: 'firms with 50+ employees', total: 'all firm sizes' };
+
+  // Writes "text … source" into a hint span, with the source as a real link.
+  function hint(id, text, src) {
+    const el = $(id); el.replaceChildren(text);
+    if (src && src.url) {
+      el.append(' ');
+      const a = document.createElement('a'); a.href = src.url; a.rel = 'noopener'; a.target = '_blank';
+      a.className = 'lab-source'; a.textContent = src.label || 'Source'; el.append(a);
+    }
+  }
+  const pctTxt = r => +(r * 100).toFixed(3) + '%';
+
+  function bandValue(table, unreliable, N) {
+    const b = BAND(N);
+    if (table[b] !== null && table[b] !== undefined && !(unreliable || []).includes(b)) return { value: table[b], band: b };
+    if (table.total !== null && table.total !== undefined && !(unreliable || []).includes('total')) return { value: table.total, band: 'total' };
+    return null;
+  }
 
   function setDefaults() {
     const code = $('state').value, st = R.states[code];
     if (!st) return;
-    const mult = R.wc_industry_multipliers[$('industry').value];
-    const m = typeof mult === 'number' ? mult : 1;
-    defaults.suta = +(st.sui_new_employer_rate * 100).toFixed(4);
-    defaults.wc = +((st.wc_index_per_100 || 0) * m).toFixed(4);
-    defaults.health = R.health.employer_annual_single_avg;
-    for (const k of ['suta', 'wc', 'health']) {
-      if (!edited.has(k)) $(k).value = defaults[k];
+    const ind = $('industry').value;
+    const N = Math.max(1, Math.floor(num('employees')) || 1);
+    const MEPS = { url: 'https://meps.ahrq.gov/data_stats/summ_tables/insr/state/series_2/2025/ic25_iia_f.pdf', label: 'AHRQ MEPS-IC 2025' };
+
+    // SUTA: state new-employer rate (industry-specific where the state publishes one)
+    const sutaRate = (st.sui_rate_by_industry && st.sui_rate_by_industry[ind]) || st.sui_new_employer_rate;
+    defaults.suta = +(sutaRate * 100).toFixed(4);
+    basis.suta = st.sui_confidence === 'low' ? 'est' : 'bench';
+    const comps = (st.sui_components || []).filter(c => !/base rate/i.test(c.name)).map(c => `${c.name} ${pctTxt(c.rate)}`);
+    const srcName = st.sui_basis === 'state_agency' ? 'State agency' : st.sui_basis === 'dol_base_rate' ? 'U.S. DOL' : 'Why';
+    if (st.sui_year === 2026) {
+      hint('sutaHint', `${st.name} 2026 new-employer rate on a $${st.sui_wage_base.toLocaleString('en-US')} wage base` +
+        (comps.length ? ` (includes ${comps.join(', ')})` : '') +
+        (st.sui_rate_by_industry && st.sui_rate_by_industry[ind] ? ` — the ${($('industry').selectedOptions[0]?.textContent || 'industry').toLowerCase()} new-employer rate` : '') +
+        `. ${st.sui_basis === 'dol_base_rate' ? 'Base rate; state surcharges not included. ' : ''}${st.sui_confidence === 'med' && st.sui_basis === 'state_agency' ? st.sui_note + ' ' : ''}Your experience rate will differ.`,
+        { url: st.sui_source.url, label: srcName });
+    } else {
+      hint('sutaHint', `${st.name} assigns new employers their industry's average rate, so there is no single 2026 figure. ` +
+        `Default is the 2025 reference value on the 2026 $${st.sui_wage_base.toLocaleString('en-US')} wage base — enter the rate on your notice.`,
+        { url: st.sui_source.url, label: 'U.S. DOL' });
     }
-    const sutaConf = st.sui_confidence, wcConf = st.wc_confidence;
-    $('sutaHint').textContent = `${st.name} 2025 new-employer rate on a $${st.sui_wage_base.toLocaleString('en-US')} wage base (${CONF[sutaConf] || 'unrated'}). Your experience rate will differ.`;
-    $('wcHint').textContent = `2025 state index ${st.wc_index_per_100} × industry ${m} — a proxy, not a class-code rate (${CONF[wcConf] || 'unrated'}).` +
-      (st.wc_monopolistic ? ' Monopolistic state fund: coverage comes from the state, PEO or not.' : '');
-    $('healthHint').textContent = `2025 KFF small-firm employer share, single coverage, national — not ${st.name}-specific.`;
-    setBasis('sutaBasis', sutaConf); setBasis('wcBasis', wcConf);
+
+    // Workers' comp: Oregon DCBS state index × PEOnomics industry multiplier (estimate)
+    const mult = R.wc_industry_multipliers[ind];
+    const m = typeof mult === 'number' ? mult : 1;
+    defaults.wc = +((st.wc_index_per_100 || 0) * m).toFixed(4);
+    basis.wc = 'est';
+    hint('wcHint', `Oregon DCBS 2024 index for ${st.name} $${st.wc_index_per_100}/$100 (rates as of ${st.wc_rates_effective}; ${st.wc_pct_of_median}% of the U.S. median) × ${m} industry multiplier (PEOnomics estimate). Not a class-code rate.` +
+      (st.wc_monopolistic ? ' Monopolistic state fund: coverage comes from the state, PEO or not.' : ''),
+      { url: 'https://www.oregon.gov/dcbs/cost/Pages/ranking-by-state.aspx', label: 'Oregon DCBS' });
+
+    // Health: MEPS-IC 2025 state employer share of single coverage, by firm size
+    const h = st.health || {};
+    const share = h.single_employer_share ? bandValue(h.single_employer_share, [], N) : null;
+    if (share) {
+      defaults.health = share.value; basis.health = 'bench';
+      const p = h.single_premium[share.band], c = h.single_employee[share.band];
+      hint('healthHint', `${st.name}, ${BAND_LABEL[share.band]}, 2025: single premium $${p.toLocaleString('en-US')} − employee share $${c.toLocaleString('en-US')}. Private sector; not trended to 2026.`, MEPS);
+    } else {
+      defaults.health = R.health.employer_annual_single_avg; basis.health = 'bench';
+      hint('healthHint', `U.S. private-sector employer share of single coverage, 2025 (no reliable ${st.name} figure for this firm size).`, MEPS);
+    }
+
+    // Enrollment: MEPS-IC 2025 share of employees enrolled at establishments that offer coverage
+    const en = h.enrolled_pct ? bandValue(h.enrolled_pct, h.enrolled_pct_unreliable, N) : null;
+    if (en) {
+      defaults.enrollment = en.value; basis.enrollment = 'bench';
+      hint('enrollmentHint', `${en.value}% of private-sector employees at ${st.name} establishments that offer coverage were enrolled (${BAND_LABEL[en.band]}, 2025). Use your own number if you know it.`, MEPS);
+    } else {
+      defaults.enrollment = 60; basis.enrollment = 'user';
+      hint('enrollmentHint', 'Share of employees on the employer plan. 60% is illustrative — no reliable state figure.');
+    }
+
+    // Average wage: BLS QCEW 2025 average annual pay per job, state × industry
+    const w = st.wages && st.wages[ind];
+    if (w && w.value) {
+      defaults.salary = w.value; basis.salary = 'bench';
+      hint('salaryHint', `${st.name} average annual pay per job, ${w.series}, 2025 (includes part-time jobs)` +
+        (w.method === 'disclosed_subsectors' ? ' — BLS suppresses the sector total, so this averages the disclosed subsectors' : '') + '. Use your payroll if you know it.',
+        { url: 'https://www.bls.gov/cew/', label: 'BLS QCEW' });
+    } else {
+      defaults.salary = null; basis.salary = 'user';
+      hint('salaryHint', `BLS does not publish a ${st.name} figure for this industry. Enter your average wage.`);
+    }
+
+    for (const k of BENCH) {
+      if (!edited.has(k) && defaults[k] !== null && defaults[k] !== undefined) $(k).value = defaults[k];
+      setBasis(k);
+    }
     syncEditedUI();
   }
 
-  function setBasis(id, conf) {
-    const el = $(id);
-    const est = conf === 'low';
-    el.className = 'basis ' + (est ? 'basis-est' : 'basis-bench');
-    el.textContent = est ? 'Estimate' : 'Benchmark';
-    el.title = est ? 'Flagged low-confidence in the 2025 dataset; pending primary-source verification.' : 'Published reference value from the 2025 dataset.';
+  const BASIS = {
+    stat: ['basis-stat', 'Statutory', 'Set by law.'],
+    bench: ['basis-bench', 'Benchmark', 'Published reference value — see the source link under the field.'],
+    est: ['basis-est', 'Estimate', 'Partly or wholly a PEOnomics estimate or an older reference value — replace it if you have the real figure.'],
+    user: ['basis-user', 'Your input', 'Your number.']
+  };
+  function currentBasis(k) { return edited.has(k) && String(defaults[k]) !== $(k).value ? 'user' : (basis[k] || 'user'); }
+  function setBasis(k) {
+    const el = $(k + 'Basis'); if (!el) return;
+    const [cls, label, title] = BASIS[currentBasis(k)];
+    el.className = 'basis ' + cls; el.textContent = label; el.title = title;
   }
 
   function syncEditedUI() {
-    for (const k of ['suta', 'wc', 'health']) {
-      const isEdited = edited.has(k) && String(defaults[k]) !== $(k).value;
+    for (const k of BENCH) {
+      const has = defaults[k] !== null && defaults[k] !== undefined;
+      const isEdited = has && edited.has(k) && String(defaults[k]) !== $(k).value;
       document.querySelector(`[data-field="${k}"]`).classList.toggle('is-edited', isEdited);
       const btn = document.querySelector(`[data-restore="${k}"]`);
-      btn.hidden = !isEdited;
-      btn.textContent = `Restore ${k === 'health' ? '$' + Number(defaults[k]).toLocaleString('en-US') : defaults[k]}`;
+      if (btn) {
+        btn.hidden = !isEdited;
+        if (has) btn.textContent = `Restore ${MONEY_FIELDS.has(k) ? '$' + Number(defaults[k]).toLocaleString('en-US') : defaults[k]}`;
+      }
+      setBasis(k);
     }
   }
 
@@ -120,22 +207,24 @@
     try { r = compute(R, i); } catch { return; }
     const st = R.states[i.state];
 
+    const futaEst = (R.federal.futa_credit_reduction_confidence || {})[i.state] === 'low';
+    const tagOf = k => BASIS[currentBasis(k)];
     const rows = [
       ['Employer FICA', 'stat', 'Statutory', r.cur.fica, r.peo.fica],
-      ['FUTA', 'stat', 'Statutory', r.cur.futa, r.peo.futa],
-      ['State unemployment (SUTA)', 'bench', 'Benchmark', r.cur.suta, r.peo.suta],
-      ["Workers' comp", 'bench', 'Benchmark', r.cur.wc, r.peo.wc],
-      ['Employer health', 'bench', 'Benchmark', r.cur.health, r.peo.health],
+      ['FUTA', futaEst ? 'est' : 'stat', futaEst ? 'Estimate' : 'Statutory', r.cur.futa, r.peo.futa],
+      ['State unemployment (SUTA)', tagOf('suta')[0].slice(6), tagOf('suta')[1], r.cur.suta, r.peo.suta],
+      ["Workers' comp", tagOf('wc')[0].slice(6), tagOf('wc')[1], r.cur.wc, r.peo.wc],
+      ['Employer health', tagOf('health')[0].slice(6), tagOf('health')[1], r.cur.health, r.peo.health],
       ['Internal HR/payroll admin', 'user', 'Your input', r.cur.admin, r.peo.admin],
       ['PEO admin fee', 'user', 'Your input', r.cur.fee, r.peo.fee]
     ];
     const body = $('resultRows');
     body.replaceChildren();
-    for (const [label, cls, basis, a, b] of rows) {
+    for (const [label, cls, basisLabel, a, b] of rows) {
       const tr = document.createElement('tr');
       const th = document.createElement('th'); th.scope = 'row';
       th.append(label);
-      const tag = document.createElement('span'); tag.className = `basis basis-${cls} row-basis`; tag.textContent = basis;
+      const tag = document.createElement('span'); tag.className = `basis basis-${cls} row-basis`; tag.textContent = basisLabel;
       th.append(tag);
       const ta = document.createElement('td'); ta.textContent = money(a);
       const tb = document.createElement('td'); tb.textContent = money(b);
@@ -212,7 +301,7 @@
 
   function setState(code) {
     $('state').value = code;
-    edited.delete('suta'); edited.delete('wc');
+    edited.delete('suta'); edited.delete('wc');   // rates are state law: always rebase. Wage/health/enrollment keep your edits.
     setDefaults();
   }
 
@@ -247,9 +336,9 @@
       if (d.company) { $('company').value = d.company; filled.push('company'); }
       if (d.stateGuess && R.states[d.stateGuess]) { setState(d.stateGuess); filled.push('state'); }
       if (d.industryGuess && [...$('industry').options].some(o => o.value === d.industryGuess)) {
-        $('industry').value = d.industryGuess; edited.delete('wc'); setDefaults(); filled.push('industry');
+        $('industry').value = d.industryGuess; edited.delete('wc'); if (R.states[$('state').value]?.sui_rate_by_industry) edited.delete('suta'); setDefaults(); filled.push('industry');
       }
-      if (Number.isFinite(d.employeesGuess) && d.employeesGuess > 0) { $('employees').value = Math.min(100000, Math.round(d.employeesGuess)); filled.push('employees'); }
+      if (Number.isFinite(d.employeesGuess) && d.employeesGuess > 0) { $('employees').value = Math.min(100000, Math.round(d.employeesGuess)); filled.push('employees'); setDefaults(); }
       markFilled(filled);
       draw();
       status(filled.length
@@ -264,14 +353,15 @@
 
   /* ---------- wiring ---------- */
   function resetAssumptions() {
-    edited.clear();
-    for (const [id, v] of [['enrollment', 60], ['pepm', defaults.pepm], ['currentAdmin', 0], ['adminAvoided', 0], ['peoSuta', ''], ['peoWc', ''], ['peoHealth', '']]) $(id).value = v;
+    // Restores cost assumptions; keeps company, state, industry, headcount and an edited wage.
+    for (const k of ['suta', 'wc', 'health', 'enrollment']) edited.delete(k);
+    for (const [id, v] of [['pepm', defaults.pepm], ['currentAdmin', 0], ['adminAvoided', 0], ['peoSuta', ''], ['peoWc', ''], ['peoHealth', '']]) $(id).value = v;
     setDefaults(); draw();
   }
 
   async function init() {
     try {
-      const res = await fetch('/data/rates-2025.json', { cache: 'no-cache' });
+      const res = await fetch('/data/rates-2026.json', { cache: 'no-cache' });
       if (!res.ok) throw new Error('dataset ' + res.status);
       R = await res.json();
     } catch {
@@ -290,26 +380,27 @@
     const meta = R.meta || {};
     const lab = $('datasetLabel'); lab.replaceChildren();
     const strong = document.createElement('strong'); strong.textContent = 'Model data: ';
-    lab.append(strong, `tax year ${meta.tax_year || '?'} · dataset v${meta.version || '?'} · preliminary. Historical reference figures, not current 2026 rates.`);
+    const link = document.createElement('a'); link.href = '/data-library#sources'; link.textContent = 'Sources';
+    lab.append(strong, `${meta.tax_year || '?'} reference data · v${meta.version || '?'} · reviewed ${meta.lastReviewed || '?'}. 2026 tax and unemployment rules; latest published wages (2025), health costs (2025) and workers' comp index (2024). `, link, ' →');
 
     const pa = R.peo_admin || {};
     defaults.pepm = (pa.pepm_low && pa.pepm_high) ? Math.round((pa.pepm_low + pa.pepm_high) / 2) : 150;
     $('pepm').value = defaults.pepm;
     $('pepmHint').textContent = (pa.pepm_low && pa.pepm_high)
-      ? `Default $${defaults.pepm} is the midpoint of a $${pa.pepm_low}–$${pa.pepm_high} practitioner-derived range for 10–100 employees (2025 dataset). Use the fee from your actual quote.`
+      ? `Default $${defaults.pepm} is the midpoint of a $${pa.pepm_low}–$${pa.pepm_high} practitioner-observed range for 10–100 employees (not a published survey). Use the fee from your actual quote.`
       : 'Use the fee from your actual quote.';
 
     setDefaults();
     draw();
 
-    for (const id of ['company', 'employees', 'salary', 'enrollment', 'pepm', 'currentAdmin', 'adminAvoided', 'peoSuta', 'peoWc', 'peoHealth']) {
-      $(id).addEventListener('input', () => { document.querySelector(`[data-field="${id}"]`)?.classList.remove('is-filled'); draw(); });
+    for (const id of ['company', 'employees', 'pepm', 'currentAdmin', 'adminAvoided', 'peoSuta', 'peoWc', 'peoHealth']) {
+      $(id).addEventListener('input', () => { document.querySelector(`[data-field="${id}"]`)?.classList.remove('is-filled'); if (id === 'employees') setDefaults(); draw(); });
     }
-    for (const id of ['suta', 'wc', 'health']) {
+    for (const id of BENCH) {
       $(id).addEventListener('input', () => { edited.add(id); draw(); });
     }
     $('state').addEventListener('change', () => { document.querySelector('[data-field="state"]').classList.remove('is-filled'); setState($('state').value); draw(); });
-    $('industry').addEventListener('change', () => { document.querySelector('[data-field="industry"]').classList.remove('is-filled'); edited.delete('wc'); setDefaults(); draw(); });
+    $('industry').addEventListener('change', () => { document.querySelector('[data-field="industry"]').classList.remove('is-filled'); edited.delete('wc'); if (R.states[$('state').value]?.sui_rate_by_industry) edited.delete('suta'); setDefaults(); draw(); });
     document.querySelectorAll('[data-restore]').forEach(b => b.addEventListener('click', () => {
       const k = b.dataset.restore; edited.delete(k); $(k).value = defaults[k]; draw();
     }));

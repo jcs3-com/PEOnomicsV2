@@ -31,10 +31,10 @@
   <div class="nav-inner">
     <a href="/" class="nav-logo">PEO<span class="accent">nomics</span></a>
     <ul class="nav-links">
-      <li><a href="/compare.html">Compare quotes</a></li>
-      <li><a href="/data-library.html">Data library</a></li>
+      <li><a href="/compare">Compare quotes</a></li>
+      <li><a href="/data-library">Data library</a></li>
       <li><a href="/states/">State rates</a></li>
-      <li><a href="/peo-pricing-explained.html">Pricing, explained</a></li>
+      <li><a href="/peo-pricing-explained">Pricing, explained</a></li>
       <li><a href="#cost-lab" class="nav-cta">Open the Cost Lab</a></li>
     </ul>
   </div>
@@ -55,17 +55,18 @@
   <aside class="ledger on-ink" aria-label="What the model uses">
     <div class="ledger-head">
       <span class="ledger-title">What the model uses</span>
-      <span class="ledger-title">Data year 2025 &middot; preliminary</span>
+      <span class="ledger-title">2026 rules &middot; latest published data</span>
     </div>
     <div class="ledger-body">
-      <div class="lrow"><span class="label">Employer FICA<small>SS 6.2% to $176,100 + Medicare 1.45%</small></span><span class="rate"><span class="basis basis-stat">Statutory</span></span><span class="amt">2025</span></div>
-      <div class="lrow"><span class="label">FUTA<small>0.6% net on first $7,000, + credit reduction</small></span><span class="rate"><span class="basis basis-stat">Statutory</span></span><span class="amt">2025</span></div>
-      <div class="lrow"><span class="label">State unemployment (SUTA)<small>New-employer rate &times; state wage base</small></span><span class="rate"><span class="basis basis-bench">Benchmark</span></span><span class="amt">2025</span></div>
-      <div class="lrow"><span class="label">Workers' comp<small>State index &times; industry proxy, not class codes</small></span><span class="rate"><span class="basis basis-bench">Benchmark</span></span><span class="amt">2025</span></div>
-      <div class="lrow"><span class="label">Employer health<small>KFF small-firm single coverage, national</small></span><span class="rate"><span class="basis basis-bench">Benchmark</span></span><span class="amt">2025</span></div>
+      <div class="lrow"><span class="label">Employer FICA<small>SS 6.2% to $184,500 + Medicare 1.45% (SSA)</small></span><span class="rate"><span class="basis basis-stat">Statutory</span></span><span class="amt">2026</span></div>
+      <div class="lrow"><span class="label">FUTA<small>0.6% net on first $7,000, + credit reduction</small></span><span class="rate"><span class="basis basis-stat">Statutory</span></span><span class="amt">2026</span></div>
+      <div class="lrow"><span class="label">State unemployment (SUTA)<small>New-employer rate &times; wage base (state agencies, U.S. DOL)</small></span><span class="rate"><span class="basis basis-bench">Benchmark</span></span><span class="amt">2026</span></div>
+      <div class="lrow"><span class="label">Average wage<small>State &times; industry pay per job (BLS QCEW)</small></span><span class="rate"><span class="basis basis-bench">Benchmark</span></span><span class="amt">2025</span></div>
+      <div class="lrow"><span class="label">Employer health<small>State employer share &amp; enrollment by firm size (AHRQ MEPS-IC)</small></span><span class="rate"><span class="basis basis-bench">Benchmark</span></span><span class="amt">2025</span></div>
+      <div class="lrow"><span class="label">Workers' comp<small>State index (Oregon DCBS) &times; industry proxy, not class codes</small></span><span class="rate"><span class="basis basis-est">Estimate</span></span><span class="amt">2024</span></div>
       <div class="lrow"><span class="label">PEO fee &amp; internal admin<small>Your numbers. No savings assumed.</small></span><span class="rate"><span class="basis basis-user">Your input</span></span><span class="amt">&mdash;</span></div>
     </div>
-    <div class="ledger-foot">These are 2025 reference figures, not 2026 rates or insurance quotes. Same statutory and insurance costs in both scenarios unless you change them. <a href="#the-math">The math &rarr;</a></div>
+    <div class="ledger-foot">Each figure is labeled with its own year and source &mdash; reference values, not your rates or an insurance quote. Same statutory and insurance costs in both scenarios unless you change them. <a href="#the-math">The math &rarr;</a></div>
   </aside>
 </header>
 
@@ -102,7 +103,7 @@
         <div class="field" data-field="state">
           <label for="state">HQ / Main Worksite State <span class="basis basis-user">Your input</span></label>
           <select id="state"><option>Loading&hellip;</option></select>
-          <p class="hint">One state per model. Drives the SUTA and workers' comp defaults.</p>
+          <p class="hint">One state per model. Drives the SUTA, wage, health and workers' comp defaults.</p>
         </div>
         <div class="field" data-field="industry">
           <label for="industry">Industry / workforce mix <span class="basis basis-user">Your input</span></label>
@@ -114,7 +115,7 @@
             <option value="transportation_logistics">Transportation / logistics</option>
             <option value="construction_trades">Construction / trades</option>
           </select>
-          <p class="hint">Drives the workers' comp proxy.</p>
+          <p class="hint">Drives the wage default and the workers' comp proxy.</p>
         </div>
         <div class="lab-row">
           <div class="field" data-field="employees">
@@ -123,9 +124,9 @@
             <p class="hint">W-2 headcount.</p>
           </div>
           <div class="field" data-field="salary">
-            <label for="salary">Avg. annual wage ($) <span class="basis basis-user">Your input</span></label>
+            <label for="salary">Avg. annual wage ($) <span class="basis basis-bench" id="salaryBasis">Benchmark</span></label>
             <input type="number" id="salary" value="65000" min="0" step="1000" inputmode="numeric">
-            <p class="hint">Illustrative default &mdash; not a state or industry benchmark.</p>
+            <p class="hint"><span id="salaryHint"></span> <button type="button" class="lab-restore" data-restore="salary" hidden>Restore</button></p>
           </div>
         </div>
 
@@ -137,19 +138,19 @@
             <p class="hint"><span id="sutaHint"></span> <button type="button" class="lab-restore" data-restore="suta" hidden>Restore</button></p>
           </div>
           <div class="field" data-field="wc">
-            <label for="wc">Workers' comp ($/$100) <span class="basis basis-bench" id="wcBasis">Benchmark</span></label>
+            <label for="wc">Workers' comp ($/$100) <span class="basis basis-est" id="wcBasis">Estimate</span></label>
             <input type="number" id="wc" min="0" max="100" step="0.01" inputmode="decimal">
             <p class="hint"><span id="wcHint"></span> <button type="button" class="lab-restore" data-restore="wc" hidden>Restore</button></p>
           </div>
         </div>
         <div class="lab-row">
           <div class="field" data-field="enrollment">
-            <label for="enrollment">Health enrollment (%) <span class="basis basis-user">Your input</span></label>
-            <input type="number" id="enrollment" value="60" min="0" max="100" step="1" inputmode="numeric">
-            <p class="hint">Share of employees on the employer plan. 60% is illustrative.</p>
+            <label for="enrollment">Health enrollment (%) <span class="basis basis-bench" id="enrollmentBasis">Benchmark</span></label>
+            <input type="number" id="enrollment" value="60" min="0" max="100" step="0.1" inputmode="decimal">
+            <p class="hint"><span id="enrollmentHint"></span> <button type="button" class="lab-restore" data-restore="enrollment" hidden>Restore</button></p>
           </div>
           <div class="field" data-field="health">
-            <label for="health">Health $ / enrollee / yr <span class="basis basis-bench">Benchmark</span></label>
+            <label for="health">Health $ / enrollee / yr <span class="basis basis-bench" id="healthBasis">Benchmark</span></label>
             <input type="number" id="health" min="0" step="50" inputmode="numeric">
             <p class="hint"><span id="healthHint"></span> <button type="button" class="lab-restore" data-restore="health" hidden>Restore</button></p>
           </div>
@@ -216,7 +217,7 @@
             <ul class="lab-drivers" id="drivers" aria-label="What drives the difference"></ul>
             <p class="lab-note" id="deltaNote"></p>
           </div>
-          <div class="ledger-foot" id="resultFoot"><strong>Read before using:</strong> rates come from the PEOnomics 2025 reference dataset (preliminary). They are historical planning figures &mdash; not 2026 rates, not an insurance quote, not a PEO proposal. FICA uses one average wage for everyone. Verify before deciding. <a href="#the-math">The math &rarr;</a></div>
+          <div class="ledger-foot" id="resultFoot"><strong>Read before using:</strong> defaults are published reference values (2026 tax and unemployment rules; 2025 wages and health costs; 2024 workers' comp index), each sourced under its field. They are planning figures &mdash; not your experience rates, not an insurance quote, not a PEO proposal. FICA uses one average wage for everyone. <a href="#the-math">The math &rarr;</a></div>
         </div>
 
       </div>
@@ -238,7 +239,7 @@
   <div class="shell">
     <div class="sec-eyebrow">The math</div>
     <h2 id="math-title">Every line, as a formula.</h2>
-    <p class="sec-sub">N = employees, W = average annual wage. One state per model. Rates come from <a href="https://github.com/jcs3-com/PEOnomicsV2/blob/main/data/rates-2025.json">data/rates-2025.json</a> unless you overwrite them.</p>
+    <p class="sec-sub">N = employees, W = average annual wage. One state per model. Defaults come from <a href="/data-library">the PEOnomics 2026 reference data</a> (<a href="https://github.com/jcs3-com/PEOnomicsV2/blob/main/data/rates-2026.json">rates-2026.json</a>, every figure with its source) unless you overwrite them.</p>
     <dl class="lab-math">
       <div><dt>Employer FICA</dt><dd class="mono">N &times; [min(W, SS wage base) &times; 6.2% + W &times; 1.45%]</dd></div>
       <div><dt>FUTA</dt><dd class="mono">N &times; min(W, $7,000) &times; (0.6% + state credit reduction)</dd></div>
@@ -248,7 +249,7 @@
       <div><dt>Internal admin</dt><dd class="mono">Current: your figure. With PEO: your figure &minus; what a PEO would replace (never below $0)</dd></div>
       <div><dt>PEO fee</dt><dd class="mono">N &times; PEPM &times; 12 (PEO scenario only)</dd></div>
     </dl>
-    <p class="sec-sub lab-math-note">No line is discounted in the PEO scenario unless you enter a PEO-quoted rate. Simplifications: one average wage for everyone (understates FICA/SUTA differences when pay is spread out), new-employer SUTA instead of your experience rate, a state-industry proxy instead of class-code workers' comp, single-coverage health only.</p>
+    <p class="sec-sub lab-math-note">No line is discounted in the PEO scenario unless you enter a PEO-quoted rate. Simplifications: one average wage for everyone (understates FICA/SUTA differences when pay is spread out), new-employer SUTA instead of your experience rate, a state-industry proxy instead of class-code workers' comp, single-coverage employer cost applied to every enrollee (family coverage costs more), health and wage benchmarks from 2025 not trended to 2026.</p>
   </div>
 </section>
 
@@ -258,12 +259,12 @@
     <h2>Three kinds of number. Labeled every time.</h2>
     <p class="sec-sub">A calculator is only as honest as its inputs. Each line in the lab says where its number comes from.</p>
     <div class="items">
-      <div class="item"><span class="basis basis-stat">Statutory</span><h3>Set by law</h3><p>Employer FICA and FUTA. The same with or without a PEO. Shown with 2025 parameters until the 2026 refresh is verified.</p></div>
-      <div class="item"><span class="basis basis-bench">Benchmark</span><h3>Published reference</h3><p>State new-employer SUTA rates, a workers' comp index, a national health premium. Starting points &mdash; your actual rates will differ.</p></div>
+      <div class="item"><span class="basis basis-stat">Statutory</span><h3>Set by law</h3><p>Employer FICA and FUTA, with 2026 parameters. The same with or without a PEO. California's 2026 FUTA credit reduction is an estimate until DOL finalizes it in November.</p></div>
+      <div class="item"><span class="basis basis-bench">Benchmark</span><h3>Published reference</h3><p>2026 state new-employer SUTA rates, BLS state &times; industry wages, AHRQ state health costs and enrollment. Starting points &mdash; your actual rates will differ.</p></div>
       <div class="item"><span class="basis basis-user">Your input</span><h3>Your call</h3><p>Headcount, wages, the PEO fee, your internal admin cost and what a PEO would genuinely replace. Nothing here is pre-filled in a PEO's favor.</p></div>
-      <div class="item"><span class="basis basis-est">Estimate</span><h3>Low-confidence figure</h3><p>Some state figures are flagged in our dataset as pending primary-source verification. The lab marks them so you know to check.</p></div>
+      <div class="item"><span class="basis basis-est">Estimate</span><h3>Partly modeled</h3><p>Workers' comp (a sourced state index &times; our industry multiplier) and the few states where new employers pay an industry average. Replace with your own figure when you have it.</p></div>
       <div class="item"><span class="basis">Not modeled</span><h3>What this can't see</h3><p>Experience-rated SUTA, class-code workers' comp, plan design, wage distribution above the Social Security base, multi-state payroll.</p></div>
-      <div class="item"><span class="basis">Reference desk</span><h3>Go deeper</h3><p><a href="/states/">State rate pages</a>, <a href="/peo-pricing-explained.html">how PEO pricing works</a>, and <a href="/hidden-costs.html">costs that hide in a quote</a>.</p></div>
+      <div class="item"><span class="basis">Reference desk</span><h3>Go deeper</h3><p><a href="/states/">State rate pages</a>, <a href="/peo-pricing-explained">how PEO pricing works</a>, and <a href="/hidden-costs">costs that hide in a quote</a>.</p></div>
     </div>
   </div>
 </section>
@@ -273,27 +274,27 @@
     <div class="sec-eyebrow">How information is used</div>
     <h2>Comparison is the product.</h2>
     <p>The calculator runs in your browser; your inputs aren't sent anywhere. If you choose the business-email prefill, we record the email, its domain, the company details we found, and the time, in a private log so we can understand how the tool is used. Only the domain &mdash; never the full address &mdash; is used for research.</p>
-    <p>We don't sell or forward that information to PEOs, and using the lab doesn't trigger a sales call. Service providers that host the site and run the research necessarily process the request. A <a href="/privacy.html">draft privacy notice</a> describes this in more detail; a final policy and retention schedule will be confirmed before emailed reports launch.</p>
+    <p>We don't sell or forward that information to PEOs, and using the lab doesn't trigger a sales call. Service providers that host the site and run the research necessarily process the request. A <a href="/privacy">draft privacy notice</a> describes this in more detail; a final policy and retention schedule will be confirmed before emailed reports launch.</p>
   </div>
 </section>
 
 <section class="section"><div class="shell">
   <div class="sec-eyebrow">More free tools</div><h2>Work the numbers your way.</h2>
   <div class="items">
-  <div class="item"><h3>Compare actual PEO proposals</h3><p>Normalize up to three entered quotes. Blank stays blank &mdash; never treated as $0. Runs in your browser.</p><p><a href="/compare.html">Open the Quote Comparator &rarr;</a></p></div>
-  <div class="item"><h3>Use the reference data</h3><p>All 51 jurisdictions&rsquo; SUTA wage bases, new-employer rates and WC indexes, clearly dated, plus sourced 2026 national benchmarks. CSV download.</p><p><a href="/data-library.html">Open the Data Library &rarr;</a></p></div>
+  <div class="item"><h3>Compare actual PEO proposals</h3><p>Normalize up to three entered quotes. Blank stays blank &mdash; never treated as $0. Runs in your browser.</p><p><a href="/compare">Open the Quote Comparator &rarr;</a></p></div>
+  <div class="item"><h3>Use the reference data</h3><p>All 51 jurisdictions: 2026 SUTA wage bases and new-employer rates, wages by industry, health costs and a workers' comp index &mdash; each with its year and source. CSV download.</p><p><a href="/data-library">Open the Data Library &rarr;</a></p></div>
   </div></div></section>
 <footer class="footer">
   <div><span class="footer-brand">PEO<span class="accent">nomics</span></span><br>PEO cost intelligence. Estimates are not quotes or advice.</div>
   <div>
-    <a href="/peo-pricing-explained.html">Pricing, explained</a>
+    <a href="/peo-pricing-explained">Pricing, explained</a>
     <a href="/states/">State rates</a>
-    <a href="/methodology.html">Methodology</a>
-    <a href="/compare.html">Compare quotes</a>
-    <a href="/data-library.html">Data library</a>
-    <a href="/hidden-costs.html">Hidden costs</a>
-    <a href="/about.html">About</a>
-    <a href="/privacy.html">Privacy (draft)</a>
+    <a href="/methodology">Methodology</a>
+    <a href="/compare">Compare quotes</a>
+    <a href="/data-library">Data library</a>
+    <a href="/hidden-costs">Hidden costs</a>
+    <a href="/about">About</a>
+    <a href="/privacy">Privacy (draft)</a>
     <a href="https://github.com/jcs3-com/PEOnomicsV2">Dataset on GitHub</a>
     <a href="https://www.linkedin.com/company/peonomics/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
   </div>

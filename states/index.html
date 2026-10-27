@@ -3,392 +3,471 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PEO Cost Rates by State (2025) | PEOnomics</title>
-<meta name="description" content="2025 SUI wage bases, new-employer rates, and workers' comp index for all 50 states and DC — the dataset behind the PEOnomics quote engine.">
-<link rel="canonical" href="https://peonomics.com/states/">
+<title>Employer Costs by State 2026: SUTA, Wages, Health | PEOnomics</title>
+<meta name="description" content="2026 SUTA wage bases and new-employer rates, BLS average pay, AHRQ employer health cost and a workers&#x27; comp index for all 50 states and DC, each with its source.">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="stylesheet" href="/assets/css/tokens.css">
 <link rel="stylesheet" href="/assets/css/site.css">
+<link rel="stylesheet" href="/assets/css/cost-lab.css">
+<link rel="stylesheet" href="/assets/css/compare.css">
+<link rel="canonical" href="https://peonomics.com/states/">
+<meta property="og:title" content="Employer Costs by State 2026: SUTA, Wages, Health | PEOnomics">
+<meta property="og:description" content="2026 SUTA wage bases and new-employer rates, BLS average pay, AHRQ employer health cost and a workers&#x27; comp index for all 50 states and DC, each with its source.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://peonomics.com/states/">
+<meta property="og:image" content="https://peonomics.com/assets/images/og-default.png">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{"@context": "https://schema.org", "@type": "Dataset", "name": "PEOnomics state employer-cost reference data", "description": "2026 SUTA wage bases and new-employer rates, BLS average pay, AHRQ employer health cost and a workers' comp index for all 50 states and DC, each with its source.", "url": "https://peonomics.com/states/", "isAccessibleForFree": true, "dateModified": "2026-10-27", "temporalCoverage": "2024/2026", "spatialCoverage": "United States", "creator": {"@type": "Organization", "name": "PEOnomics", "url": "https://peonomics.com/"}, "distribution": [{"@type": "DataDownload", "encodingFormat": "application/json", "contentUrl": "https://peonomics.com/data/rates-2026.json"}]}
+</script>
 </head>
 <body>
-<nav class="nav"><div class="nav-inner">
-  <a href="/" class="nav-logo">PEO<span class="accent">nomics</span></a>
-  <ul class="nav-links">
-    <li><a href="/peo-pricing-explained.html">Pricing, explained</a></li>
-    <li><a href="/states/" class="is-active">State rates</a></li>
-    <li><a href="/methodology.html">Methodology</a></li>
-    <li><a href="/#cost-lab" class="nav-cta">Open the Cost Lab</a></li>
-  </ul>
-</div></nav>
-<section class="section"><div class="shell">
-  <div class="sec-eyebrow">2025 rate dataset &middot; v2025.2</div>
-  <h2>Employer rates, all 51 jurisdictions.</h2>
-  <p class="sec-sub">The same dataset that powers the quote engine. SUI new-employer rates and wage bases, plus a workers' comp index per $100 of payroll. Rates marked <em>estimate</em> are pending primary-source verification — corrections welcome via GitHub.</p>
-  <table class="rate-table">
-    <thead><tr><th>Jurisdiction</th><th style="text-align:right">SUI wage base</th><th style="text-align:right">SUI new-employer</th><th style="text-align:right">WC index /$100</th><th>Data status</th></tr></thead>
-    <tbody><tr>
-  <td><a href="/states/al.html" style="font-weight:600;text-decoration:none;">Alabama</a></td>
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">PEO<span class="accent">nomics</span></a>
+    <ul class="nav-links">
+      <li><a href="/compare.html">Compare quotes</a></li>
+      <li><a href="/data-library.html">Data library</a></li>
+      <li><a href="/states/" class="is-active">State rates</a></li>
+      <li><a href="/peo-pricing-explained.html">Pricing, explained</a></li>
+      <li><a href="/#cost-lab" class="nav-cta">Open the Cost Lab</a></li>
+    </ul>
+  </div>
+</nav>
+<main class="section compare-main"><div class="shell">
+  <div class="eyebrow">State reference data &middot; v2026.1</div>
+  <h1>Employer costs by state, <em>sourced.</em></h1>
+  <p class="hero-sub">2026 unemployment-insurance wage bases and new-employer rates, average private-sector pay, employer health cost and a workers&rsquo; comp index for all 50 states and DC. Each column shows its year; every state page links its sources. Reviewed 2026-10-27.</p>
+  <div class="compare-scroll"><table class="rate-table data-table">
+    <caption>State employer-cost reference values</caption>
+    <thead><tr><th scope="col">Jurisdiction</th><th scope="col" class="num">SUTA wage base 2026</th><th scope="col" class="num">New-employer SUTA 2026</th><th scope="col" class="num">Avg. pay, private 2025</th><th scope="col" class="num">Employer health, single &lt;50 / 50+ EEs, 2025</th><th scope="col" class="num">WC index / $100, 2024</th></tr></thead>
+    <tbody>
+<tr>
+  <th scope="row"><a href="/states/al">Alabama</a></th>
   <td class="num mono">$8,000</td>
-  <td class="num mono">2.70%</td>
-  <td class="num mono">$1.10</td>
-  <td><span class="conf med">medium confidence</span></td>
+  <td class="num mono">2.7% <span class="basis basis-bench">DOL base rate</span></td>
+  <td class="num mono">$63,676</td>
+  <td class="num mono">$5,518 / $6,211</td>
+  <td class="num mono">1.11</td>
 </tr>
 <tr>
-  <td><a href="/states/ak.html" style="font-weight:600;text-decoration:none;">Alaska</a></td>
-  <td class="num mono">$51,700</td>
-  <td class="num mono">2.37%</td>
-  <td class="num mono">$1.45</td>
-  <td><span class="conf low">estimate</span></td>
+  <th scope="row"><a href="/states/ak">Alaska</a></th>
+  <td class="num mono">$54,200</td>
+  <td class="num mono">1% <span class="basis basis-bench">DOL base rate</span></td>
+  <td class="num mono">$75,188</td>
+  <td class="num mono">$9,216 / $8,591</td>
+  <td class="num mono">1.16</td>
 </tr>
 <tr>
-  <td><a href="/states/az.html" style="font-weight:600;text-decoration:none;">Arizona</a></td>
+  <th scope="row"><a href="/states/az">Arizona</a></th>
   <td class="num mono">$8,000</td>
-  <td class="num mono">2.00%</td>
-  <td class="num mono">$0.95</td>
-  <td><span class="conf med">medium confidence</span></td>
+  <td class="num mono">2% <span class="basis basis-bench">DOL base rate</span></td>
+  <td class="num mono">$72,784</td>
+  <td class="num mono">&mdash; / $5,856</td>
+  <td class="num mono">0.70</td>
 </tr>
 <tr>
-  <td><a href="/states/ar.html" style="font-weight:600;text-decoration:none;">Arkansas</a></td>
+  <th scope="row"><a href="/states/ar">Arkansas</a></th>
   <td class="num mono">$7,000</td>
-  <td class="num mono">1.90%</td>
-  <td class="num mono">$0.85</td>
-  <td><span class="conf low">estimate</span></td>
+  <td class="num mono">1.8% <span class="basis basis-bench">DOL base rate</span></td>
+  <td class="num mono">$61,643</td>
+  <td class="num mono">$6,287 / $5,964</td>
+  <td class="num mono">0.53</td>
 </tr>
 <tr>
-  <td><a href="/states/ca.html" style="font-weight:600;text-decoration:none;">California</a></td>
+  <th scope="row"><a href="/states/ca">California</a></th>
   <td class="num mono">$7,000</td>
-  <td class="num mono">3.40%</td>
-  <td class="num mono">$1.78</td>
-  <td><span class="conf high">high confidence</span></td>
+  <td class="num mono">3.5% <span class="basis basis-bench">state agency</span></td>
+  <td class="num mono">$97,204</td>
+  <td class="num mono">$7,547 / $7,665</td>
+  <td class="num mono">1.86</td>
 </tr>
 <tr>
-  <td><a href="/states/co.html" style="font-weight:600;text-decoration:none;">Colorado</a></td>
-  <td class="num mono">$27,200</td>
-  <td class="num mono">3.05%</td>
-  <td class="num mono">$0.90</td>
-  <td><span class="conf med">medium confidence</span></td>
+  <th scope="row"><a href="/states/co">Colorado</a></th>
+  <td class="num mono">$30,600</td>
+  <td class="num mono">1.53% <span class="basis basis-bench">DOL base rate</span></td>
+  <td class="num mono">$85,470</td>
+  <td class="num mono">$6,744 / $7,292</td>
+  <td class="num mono">1.05</td>
 </tr>
 <tr>
-  <td><a href="/states/ct.html" style="font-weight:600;text-decoration:none;">Connecticut</a></td>
-  <td class="num mono">$26,100</td>
-  <td class="num mono">2.50%</td>
-  <td class="num mono">$1.45</td>
-  <td><span class="conf low">estimate</span></td>
+  <th scope="row"><a href="/states/ct">Connecticut</a></th>
+  <td class="num mono">$27,000</td>
+  <td class="num mono">1.9% <span class="basis basis-bench">DOL base rate</span></td>
+  <td class="num mono">$92,528</td>
+  <td class="num mono">$6,400 / $8,609</td>
+  <td class="num mono">1.48</td>
 </tr>
 <tr>
-  <td><a href="/states/de.html" style="font-weight:600;text-decoration:none;">Delaware</a></td>
-  <td class="num mono">$10,500</td>
-  <td class="num mono">1.20%</td>
-  <td class="num mono">$1.35</td>
-  <td><span class="conf low">estimate</span></td>
+  <th scope="row"><a href="/states/de">Delaware</a></th>
+  <td class="num mono">$14,500</td>
+  <td class="num mono">1% <span class="basis basis-bench">DOL base rate</span></td>
+  <td class="num mono">$75,821</td>
+  <td class="num mono">&mdash; / $7,068</td>
+  <td class="num mono">0.97</td>
 </tr>
 <tr>
-  <td><a href="/states/dc.html" style="font-weight:600;text-decoration:none;">District of Columbia</a></td>
+  <th scope="row"><a href="/states/dc">District of Columbia</a></th>
   <td class="num mono">$9,000</td>
-  <td class="num mono">2.70%</td>
-  <td class="num mono">$1.05</td>
-  <td><span class="conf med">medium confidence</span></td>
+  <td class="num mono">2.9% <span class="basis basis-bench">state agency</span></td>
+  <td class="num mono">$123,844</td>
+  <td class="num mono">$7,475 / $8,010</td>
+  <td class="num mono">0.73</td>
 </tr>
 <tr>
-  <td><a href="/states/fl.html" style="font-weight:600;text-decoration:none;">Florida</a></td>
+  <th scope="row"><a href="/states/fl">Florida</a></th>
   <td class="num mono">$7,000</td>
-  <td class="num mono">2.70%</td>
-  <td class="num mono">$1.00</td>
-  <td><span class="conf high">high confidence</span></td>
+  <td class="num mono">2.7% <span class="basis basis-bench">state agency</span></td>
+  <td class="num mono">$72,719</td>
+  <td class="num mono">$7,242 / $6,970</td>
+  <td class="num mono">1.00</td>
 </tr>
 <tr>
-  <td><a href="/states/ga.html" style="font-weight:600;text-decoration:none;">Georgia</a></td>
+  <th scope="row"><a href="/states/ga">Georgia</a></th>
   <td class="num mono">$9,500</td>
-  <td class="num mono">2.64%</td>
-  <td class="num mono">$1.30</td>
-  <td><span class="conf med">medium confidence</span></td>
+  <td class="num mono">2.64% <span class="basis basis-bench">DOL base rate</span></td>
+  <td class="num mono">$74,150</td>
+  <td class="num mono">$7,807 / $7,058</td>
+  <td class="num mono">1.09</td>
 </tr>
 <tr>
-  <td><a href="/states/hi.html" style="font-weight:600;text-decoration:none;">Hawaii</a></td>
-  <td class="num mono">$61,800</td>
-  <td class="num mono">3.00%</td>
-  <td class="num mono">$1.65</td>
-  <td><span class="conf low">estimate</span></td>
+  <th scope="row"><a href="/states/hi">Hawaii</a></th>
+  <td class="num mono">$64,500</td>
+  <td class="num mono">2.4% <span class="basis basis-bench">DOL base rate</span></td>
+  <td class="num mono">$67,677</td>
+  <td class="num mono">&mdash; / $7,210</td>
+  <td class="num mono">2.52</td>
 </tr>
 <tr>
-  <td><a href="/states/id.html" style="font-weight:600;text-decoration:none;">Idaho</a></td>
-  <td class="num mono">$55,300</td>
-  <td class="num mono">1.00%</td>
-  <td class="num mono">$1.20</td>
-  <td><span class="conf low">estimate</span></td>
+  <th scope="row"><a href="/states/id">Idaho</a></th>
+  <td class="num mono">$58,300</td>
+  <td class="num mono">1% <span class="basis basis-bench">DOL base rate</span></td>
+  <td class="num mono">$63,240</td>
+  <td class="num mono">$7,338 / $7,027</td>
+  <td class="num mono">1.10</td>
 </tr>
 <tr>
-  <td><a href="/states/il.html" style="font-weight:600;text-decoration:none;">Illinois</a></td>
-  <td class="num mono">$13,916</td>
-  <td class="num mono">3.65%</td>
-  <td class="num mono">$1.35</td>
-  <td><span class="conf med">medium confidence</span></td>
+  <th scope="row"><a href="/states/il">Illinois</a></th>
+  <td class="num mono">$14,250</td>
+  <td class="num mono">2.8% <span class="basis basis-bench">DOL base rate</span></td>
+  <td class="num mono">$81,129</td>
+  <td class="num mono">$7,753 / $7,883</td>
+  <td class="num mono">1.34</td>
 </tr>
 <tr>
-  <td><a href="/states/in.html" style="font-weight:600;text-decoration:none;">Indiana</a></td>
+  <th scope="row"><a href="/states/in">Indiana</a></th>
   <td class="num mono">$9,500</td>
-  <td class="num mono">2.50%</td>
-  <td class="num mono">$0.70</td>
-  <td><span class="conf med">medium confidence</span></td>
+  <td class="num mono">2.5% <span class="basis basis-bench">DOL base rate</span></td>
+  <td class="num mono">$65,792</td>
+  <td class="num mono">$5,410 / $6,297</td>
+  <td class="num mono">0.71</td>
 </tr>
 <tr>
-  <td><a href="/states/ia.html" style="font-weight:600;text-decoration:none;">Iowa</a></td>
-  <td class="num mono">$39,500</td>
-  <td class="num mono">1.00%</td>
-  <td class="num mono">$1.05</td>
-  <td><span class="conf med">medium confidence</span></td>
+  <th scope="row"><a href="/states/ia">Iowa</a></th>
+  <td class="num mono">$20,400</td>
+  <td class="num mono">1% <span class="basis basis-bench">DOL base rate</span></td>
+  <td class="num mono">$63,675</td>
+  <td class="num mono">$6,422 / $6,626</td>
+  <td class="num mono">1.21</td>
 </tr>
 <tr>
-  <td><a href="/states/ks.html" style="font-weight:600;text-decoration:none;">Kansas</a></td>
-  <td class="num mono">$14,000</td>
-  <td class="num mono">2.70%</td>
-  <td class="num mono">$0.95</td>
-  <td><span class="conf med">medium confidence</span></td>
+  <th scope="row"><a href="/states/ks">Kansas</a></th>
+  <td class="num mono">$15,100</td>
+  <td class="num mono">1.75% <span class="basis basis-bench">DOL base rate</span></td>
+  <td class="num mono">$64,719</td>
+  <td class="num mono">$5,848 / $7,078</td>
+  <td class="num mono">0.91</td>
 </tr>
 <tr>
-  <td><a href="/states/ky.html" style="font-weight:600;text-decoration:none;">Kentucky</a></td>
-  <td class="num mono">$11,700</td>
-  <td class="num mono">2.70%</td>
-  <td class="num mono">$1.00</td>
-  <td><span class="conf low">estimate</span></td>
-</tr>
-<tr>
-  <td><a href="/states/la.html" style="font-weight:600;text-decoration:none;">Louisiana</a></td>
-  <td class="num mono">$7,700</td>
-  <td class="num mono">2.00%</td>
-  <td class="num mono">$1.50</td>
-  <td><span class="conf low">estimate</span></td>
-</tr>
-<tr>
-  <td><a href="/states/me.html" style="font-weight:600;text-decoration:none;">Maine</a></td>
+  <th scope="row"><a href="/states/ky">Kentucky</a></th>
   <td class="num mono">$12,000</td>
-  <td class="num mono">2.20%</td>
-  <td class="num mono">$1.10</td>
-  <td><span class="conf low">estimate</span></td>
+  <td class="num mono">2.7% <span class="basis basis-bench">DOL base rate</span></td>
+  <td class="num mono">$62,613</td>
+  <td class="num mono">&mdash; / $6,926</td>
+  <td class="num mono">0.76</td>
 </tr>
 <tr>
-  <td><a href="/states/md.html" style="font-weight:600;text-decoration:none;">Maryland</a></td>
-  <td class="num mono">$8,500</td>
-  <td class="num mono">2.60%</td>
-  <td class="num mono">$1.05</td>
-  <td><span class="conf med">medium confidence</span></td>
-</tr>
-<tr>
-  <td><a href="/states/ma.html" style="font-weight:600;text-decoration:none;">Massachusetts</a></td>
-  <td class="num mono">$15,000</td>
-  <td class="num mono">1.87%</td>
-  <td class="num mono">$1.05</td>
-  <td><span class="conf med">medium confidence</span></td>
-</tr>
-<tr>
-  <td><a href="/states/mi.html" style="font-weight:600;text-decoration:none;">Michigan</a></td>
-  <td class="num mono">$9,500</td>
-  <td class="num mono">2.70%</td>
-  <td class="num mono">$0.95</td>
-  <td><span class="conf med">medium confidence</span></td>
-</tr>
-<tr>
-  <td><a href="/states/mn.html" style="font-weight:600;text-decoration:none;">Minnesota</a></td>
-  <td class="num mono">$43,000</td>
-  <td class="num mono">1.90%</td>
-  <td class="num mono">$1.30</td>
-  <td><span class="conf low">estimate</span></td>
-</tr>
-<tr>
-  <td><a href="/states/ms.html" style="font-weight:600;text-decoration:none;">Mississippi</a></td>
-  <td class="num mono">$14,000</td>
-  <td class="num mono">1.00%</td>
-  <td class="num mono">$1.05</td>
-  <td><span class="conf med">medium confidence</span></td>
-</tr>
-<tr>
-  <td><a href="/states/mo.html" style="font-weight:600;text-decoration:none;">Missouri</a></td>
-  <td class="num mono">$9,500</td>
-  <td class="num mono">2.38%</td>
-  <td class="num mono">$1.10</td>
-  <td><span class="conf med">medium confidence</span></td>
-</tr>
-<tr>
-  <td><a href="/states/mt.html" style="font-weight:600;text-decoration:none;">Montana</a></td>
-  <td class="num mono">$45,100</td>
-  <td class="num mono">1.70%</td>
-  <td class="num mono">$1.60</td>
-  <td><span class="conf low">estimate</span></td>
-</tr>
-<tr>
-  <td><a href="/states/ne.html" style="font-weight:600;text-decoration:none;">Nebraska</a></td>
-  <td class="num mono">$9,000</td>
-  <td class="num mono">1.25%</td>
-  <td class="num mono">$0.95</td>
-  <td><span class="conf med">medium confidence</span></td>
-</tr>
-<tr>
-  <td><a href="/states/nv.html" style="font-weight:600;text-decoration:none;">Nevada</a></td>
-  <td class="num mono">$41,800</td>
-  <td class="num mono">2.95%</td>
-  <td class="num mono">$1.10</td>
-  <td><span class="conf med">medium confidence</span></td>
-</tr>
-<tr>
-  <td><a href="/states/nh.html" style="font-weight:600;text-decoration:none;">New Hampshire</a></td>
-  <td class="num mono">$14,000</td>
-  <td class="num mono">1.70%</td>
-  <td class="num mono">$1.15</td>
-  <td><span class="conf low">estimate</span></td>
-</tr>
-<tr>
-  <td><a href="/states/nj.html" style="font-weight:600;text-decoration:none;">New Jersey</a></td>
-  <td class="num mono">$43,300</td>
-  <td class="num mono">3.40%</td>
-  <td class="num mono">$2.10</td>
-  <td><span class="conf low">estimate</span></td>
-</tr>
-<tr>
-  <td><a href="/states/nm.html" style="font-weight:600;text-decoration:none;">New Mexico</a></td>
-  <td class="num mono">$33,200</td>
-  <td class="num mono">1.00%</td>
-  <td class="num mono">$1.25</td>
-  <td><span class="conf med">medium confidence</span></td>
-</tr>
-<tr>
-  <td><a href="/states/ny.html" style="font-weight:600;text-decoration:none;">New York</a></td>
-  <td class="num mono">$12,800</td>
-  <td class="num mono">4.10%</td>
-  <td class="num mono">$1.50</td>
-  <td><span class="conf med">medium confidence</span></td>
-</tr>
-<tr>
-  <td><a href="/states/nc.html" style="font-weight:600;text-decoration:none;">North Carolina</a></td>
-  <td class="num mono">$32,600</td>
-  <td class="num mono">1.00%</td>
-  <td class="num mono">$0.90</td>
-  <td><span class="conf med">medium confidence</span></td>
-</tr>
-<tr>
-  <td><a href="/states/nd.html" style="font-weight:600;text-decoration:none;">North Dakota</a></td>
-  <td class="num mono">$45,100</td>
-  <td class="num mono">1.13%</td>
-  <td class="num mono">$0.60</td>
-  <td><span class="conf low">estimate</span> &middot; monopolistic WC</td>
-</tr>
-<tr>
-  <td><a href="/states/oh.html" style="font-weight:600;text-decoration:none;">Ohio</a></td>
-  <td class="num mono">$9,000</td>
-  <td class="num mono">2.70%</td>
-  <td class="num mono">$0.75</td>
-  <td><span class="conf high">high confidence</span> &middot; monopolistic WC</td>
-</tr>
-<tr>
-  <td><a href="/states/ok.html" style="font-weight:600;text-decoration:none;">Oklahoma</a></td>
-  <td class="num mono">$28,200</td>
-  <td class="num mono">1.50%</td>
-  <td class="num mono">$1.20</td>
-  <td><span class="conf low">estimate</span></td>
-</tr>
-<tr>
-  <td><a href="/states/or.html" style="font-weight:600;text-decoration:none;">Oregon</a></td>
-  <td class="num mono">$54,300</td>
-  <td class="num mono">2.40%</td>
-  <td class="num mono">$0.95</td>
-  <td><span class="conf med">medium confidence</span></td>
-</tr>
-<tr>
-  <td><a href="/states/pa.html" style="font-weight:600;text-decoration:none;">Pennsylvania</a></td>
-  <td class="num mono">$10,000</td>
-  <td class="num mono">3.82%</td>
-  <td class="num mono">$1.40</td>
-  <td><span class="conf med">medium confidence</span></td>
-</tr>
-<tr>
-  <td><a href="/states/ri.html" style="font-weight:600;text-decoration:none;">Rhode Island</a></td>
-  <td class="num mono">$29,800</td>
-  <td class="num mono">1.10%</td>
-  <td class="num mono">$1.35</td>
-  <td><span class="conf low">estimate</span></td>
-</tr>
-<tr>
-  <td><a href="/states/sc.html" style="font-weight:600;text-decoration:none;">South Carolina</a></td>
-  <td class="num mono">$14,000</td>
-  <td class="num mono">0.45%</td>
-  <td class="num mono">$1.40</td>
-  <td><span class="conf low">estimate</span></td>
-</tr>
-<tr>
-  <td><a href="/states/sd.html" style="font-weight:600;text-decoration:none;">South Dakota</a></td>
-  <td class="num mono">$15,000</td>
-  <td class="num mono">1.20%</td>
-  <td class="num mono">$1.05</td>
-  <td><span class="conf med">medium confidence</span></td>
-</tr>
-<tr>
-  <td><a href="/states/tn.html" style="font-weight:600;text-decoration:none;">Tennessee</a></td>
+  <th scope="row"><a href="/states/la">Louisiana</a></th>
   <td class="num mono">$7,000</td>
-  <td class="num mono">2.70%</td>
-  <td class="num mono">$0.85</td>
-  <td><span class="conf med">medium confidence</span></td>
+  <td class="num mono">2% <span class="basis basis-est">2025 reference</span></td>
+  <td class="num mono">$63,581</td>
+  <td class="num mono">$6,702 / $6,501</td>
+  <td class="num mono">1.41</td>
 </tr>
 <tr>
-  <td><a href="/states/tx.html" style="font-weight:600;text-decoration:none;">Texas</a></td>
+  <th scope="row"><a href="/states/me">Maine</a></th>
+  <td class="num mono">$12,000</td>
+  <td class="num mono">2.23% <span class="basis basis-bench">DOL base rate</span></td>
+  <td class="num mono">$65,967</td>
+  <td class="num mono">$7,099 / $8,137</td>
+  <td class="num mono">1.37</td>
+</tr>
+<tr>
+  <th scope="row"><a href="/states/md">Maryland</a></th>
+  <td class="num mono">$8,500</td>
+  <td class="num mono">2.6% <span class="basis basis-bench">state agency</span></td>
+  <td class="num mono">$78,676</td>
+  <td class="num mono">$6,042 / $6,868</td>
+  <td class="num mono">0.89</td>
+</tr>
+<tr>
+  <th scope="row"><a href="/states/ma">Massachusetts</a></th>
+  <td class="num mono">$15,000</td>
+  <td class="num mono">2.42% <span class="basis basis-bench">DOL base rate</span></td>
+  <td class="num mono">$101,875</td>
+  <td class="num mono">$7,468 / $8,618</td>
+  <td class="num mono">0.97</td>
+</tr>
+<tr>
+  <th scope="row"><a href="/states/mi">Michigan</a></th>
   <td class="num mono">$9,000</td>
-  <td class="num mono">2.70%</td>
-  <td class="num mono">$0.55</td>
-  <td><span class="conf high">high confidence</span></td>
+  <td class="num mono">2.7% <span class="basis basis-bench">DOL base rate</span></td>
+  <td class="num mono">$70,840</td>
+  <td class="num mono">$6,309 / $6,248</td>
+  <td class="num mono">0.90</td>
 </tr>
 <tr>
-  <td><a href="/states/ut.html" style="font-weight:600;text-decoration:none;">Utah</a></td>
-  <td class="num mono">$48,900</td>
-  <td class="num mono">1.40%</td>
-  <td class="num mono">$0.80</td>
-  <td><span class="conf low">estimate</span></td>
+  <th scope="row"><a href="/states/mn">Minnesota</a></th>
+  <td class="num mono">$44,000</td>
+  <td class="num mono">1.9% <span class="basis basis-est">2025 reference</span></td>
+  <td class="num mono">$77,504</td>
+  <td class="num mono">$5,675 / $6,874</td>
+  <td class="num mono">1.25</td>
 </tr>
 <tr>
-  <td><a href="/states/vt.html" style="font-weight:600;text-decoration:none;">Vermont</a></td>
-  <td class="num mono">$14,800</td>
-  <td class="num mono">1.00%</td>
-  <td class="num mono">$1.30</td>
-  <td><span class="conf low">estimate</span></td>
-</tr>
-<tr>
-  <td><a href="/states/va.html" style="font-weight:600;text-decoration:none;">Virginia</a></td>
-  <td class="num mono">$8,000</td>
-  <td class="num mono">2.50%</td>
-  <td class="num mono">$0.75</td>
-  <td><span class="conf med">medium confidence</span></td>
-</tr>
-<tr>
-  <td><a href="/states/wa.html" style="font-weight:600;text-decoration:none;">Washington</a></td>
-  <td class="num mono">$72,800</td>
-  <td class="num mono">1.60%</td>
-  <td class="num mono">$1.20</td>
-  <td><span class="conf low">estimate</span> &middot; monopolistic WC</td>
-</tr>
-<tr>
-  <td><a href="/states/wv.html" style="font-weight:600;text-decoration:none;">West Virginia</a></td>
-  <td class="num mono">$9,521</td>
-  <td class="num mono">2.70%</td>
-  <td class="num mono">$1.15</td>
-  <td><span class="conf low">estimate</span></td>
-</tr>
-<tr>
-  <td><a href="/states/wi.html" style="font-weight:600;text-decoration:none;">Wisconsin</a></td>
+  <th scope="row"><a href="/states/ms">Mississippi</a></th>
   <td class="num mono">$14,000</td>
-  <td class="num mono">3.05%</td>
-  <td class="num mono">$1.25</td>
-  <td><span class="conf med">medium confidence</span></td>
+  <td class="num mono">1% <span class="basis basis-bench">DOL base rate</span></td>
+  <td class="num mono">$52,619</td>
+  <td class="num mono">$5,911 / $5,894</td>
+  <td class="num mono">0.94</td>
 </tr>
 <tr>
-  <td><a href="/states/wy.html" style="font-weight:600;text-decoration:none;">Wyoming</a></td>
-  <td class="num mono">$32,400</td>
-  <td class="num mono">1.40%</td>
-  <td class="num mono">$1.30</td>
-  <td><span class="conf low">estimate</span> &middot; monopolistic WC</td>
+  <th scope="row"><a href="/states/mo">Missouri</a></th>
+  <td class="num mono">$9,000</td>
+  <td class="num mono">2.376% <span class="basis basis-bench">DOL base rate</span></td>
+  <td class="num mono">$67,290</td>
+  <td class="num mono">$6,699 / $6,394</td>
+  <td class="num mono">1.31</td>
 </tr>
-</tbody>
-  </table>
-</div></section>
+<tr>
+  <th scope="row"><a href="/states/mt">Montana</a></th>
+  <td class="num mono">$47,300</td>
+  <td class="num mono">1.7% <span class="basis basis-est">2025 reference</span></td>
+  <td class="num mono">$62,480</td>
+  <td class="num mono">$7,250 / $7,483</td>
+  <td class="num mono">1.34</td>
+</tr>
+<tr>
+  <th scope="row"><a href="/states/ne">Nebraska</a></th>
+  <td class="num mono">$9,000</td>
+  <td class="num mono">1.25% <span class="basis basis-bench">DOL base rate</span></td>
+  <td class="num mono">$62,985</td>
+  <td class="num mono">$7,047 / $7,220</td>
+  <td class="num mono">1.12</td>
+</tr>
+<tr>
+  <th scope="row"><a href="/states/nv">Nevada</a></th>
+  <td class="num mono">$45,400</td>
+  <td class="num mono">2.95% <span class="basis basis-bench">DOL base rate</span></td>
+  <td class="num mono">$68,413</td>
+  <td class="num mono">$6,810 / $6,627</td>
+  <td class="num mono">0.73</td>
+</tr>
+<tr>
+  <th scope="row"><a href="/states/nh">New Hampshire</a></th>
+  <td class="num mono">$14,000</td>
+  <td class="num mono">2.7% <span class="basis basis-bench">DOL base rate</span></td>
+  <td class="num mono">$82,594</td>
+  <td class="num mono">$6,095 / $7,433</td>
+  <td class="num mono">1.22</td>
+</tr>
+<tr>
+  <th scope="row"><a href="/states/nj">New Jersey</a></th>
+  <td class="num mono">$44,800</td>
+  <td class="num mono">2.8% <span class="basis basis-bench">DOL base rate</span></td>
+  <td class="num mono">$86,718</td>
+  <td class="num mono">$7,717 / $7,464</td>
+  <td class="num mono">2.16</td>
+</tr>
+<tr>
+  <th scope="row"><a href="/states/nm">New Mexico</a></th>
+  <td class="num mono">$34,800</td>
+  <td class="num mono">1% <span class="basis basis-est">2025 reference</span></td>
+  <td class="num mono">$61,011</td>
+  <td class="num mono">&mdash; / $7,763</td>
+  <td class="num mono">1.05</td>
+</tr>
+<tr>
+  <th scope="row"><a href="/states/ny">New York</a></th>
+  <td class="num mono">$17,600</td>
+  <td class="num mono">4.1% <span class="basis basis-bench">state agency</span></td>
+  <td class="num mono">$100,938</td>
+  <td class="num mono">$8,919 / $8,641</td>
+  <td class="num mono">1.98</td>
+</tr>
+<tr>
+  <th scope="row"><a href="/states/nc">North Carolina</a></th>
+  <td class="num mono">$34,200</td>
+  <td class="num mono">1% <span class="basis basis-bench">DOL base rate</span></td>
+  <td class="num mono">$72,186</td>
+  <td class="num mono">$5,860 / $6,715</td>
+  <td class="num mono">0.95</td>
+</tr>
+<tr>
+  <th scope="row"><a href="/states/nd">North Dakota</a></th>
+  <td class="num mono">$46,600</td>
+  <td class="num mono">1% <span class="basis basis-bench">DOL base rate</span></td>
+  <td class="num mono">$68,980</td>
+  <td class="num mono">$8,059 / $7,612</td>
+  <td class="num mono">0.50 <span class="basis basis-">state fund</span></td>
+</tr>
+<tr>
+  <th scope="row"><a href="/states/oh">Ohio</a></th>
+  <td class="num mono">$9,000</td>
+  <td class="num mono">2.85% <span class="basis basis-bench">state agency</span></td>
+  <td class="num mono">$67,921</td>
+  <td class="num mono">$6,173 / $6,887</td>
+  <td class="num mono">0.68 <span class="basis basis-">state fund</span></td>
+</tr>
+<tr>
+  <th scope="row"><a href="/states/ok">Oklahoma</a></th>
+  <td class="num mono">$25,000</td>
+  <td class="num mono">1.5% <span class="basis basis-bench">DOL base rate</span></td>
+  <td class="num mono">$60,828</td>
+  <td class="num mono">$6,481 / $6,584</td>
+  <td class="num mono">1.33</td>
+</tr>
+<tr>
+  <th scope="row"><a href="/states/or">Oregon</a></th>
+  <td class="num mono">$56,700</td>
+  <td class="num mono">2.4% <span class="basis basis-bench">DOL base rate</span></td>
+  <td class="num mono">$71,935</td>
+  <td class="num mono">$7,146 / $7,893</td>
+  <td class="num mono">0.89</td>
+</tr>
+<tr>
+  <th scope="row"><a href="/states/pa">Pennsylvania</a></th>
+  <td class="num mono">$10,000</td>
+  <td class="num mono">3.822% <span class="basis basis-bench">DOL base rate</span></td>
+  <td class="num mono">$74,383</td>
+  <td class="num mono">$6,780 / $7,974</td>
+  <td class="num mono">1.14</td>
+</tr>
+<tr>
+  <th scope="row"><a href="/states/ri">Rhode Island</a></th>
+  <td class="num mono">$30,800</td>
+  <td class="num mono">1% <span class="basis basis-bench">DOL base rate</span></td>
+  <td class="num mono">$69,364</td>
+  <td class="num mono">$7,563 / $7,287</td>
+  <td class="num mono">1.38</td>
+</tr>
+<tr>
+  <th scope="row"><a href="/states/sc">South Carolina</a></th>
+  <td class="num mono">$14,000</td>
+  <td class="num mono">1% <span class="basis basis-bench">DOL base rate</span></td>
+  <td class="num mono">$63,446</td>
+  <td class="num mono">$7,139 / $6,675</td>
+  <td class="num mono">1.03</td>
+</tr>
+<tr>
+  <th scope="row"><a href="/states/sd">South Dakota</a></th>
+  <td class="num mono">$15,000</td>
+  <td class="num mono">1.2% <span class="basis basis-bench">DOL base rate</span></td>
+  <td class="num mono">$61,038</td>
+  <td class="num mono">$5,988 / $7,560</td>
+  <td class="num mono">1.13</td>
+</tr>
+<tr>
+  <th scope="row"><a href="/states/tn">Tennessee</a></th>
+  <td class="num mono">$7,000</td>
+  <td class="num mono">2.7% <span class="basis basis-bench">DOL base rate</span></td>
+  <td class="num mono">$70,752</td>
+  <td class="num mono">$7,379 / $6,969</td>
+  <td class="num mono">0.80</td>
+</tr>
+<tr>
+  <th scope="row"><a href="/states/tx">Texas</a></th>
+  <td class="num mono">$9,000</td>
+  <td class="num mono">2.7% <span class="basis basis-bench">state agency</span></td>
+  <td class="num mono">$79,392</td>
+  <td class="num mono">$7,154 / $6,868</td>
+  <td class="num mono">0.78</td>
+</tr>
+<tr>
+  <th scope="row"><a href="/states/ut">Utah</a></th>
+  <td class="num mono">$50,700</td>
+  <td class="num mono">1.4% <span class="basis basis-est">2025 reference</span></td>
+  <td class="num mono">$69,800</td>
+  <td class="num mono">$6,374 / $6,912</td>
+  <td class="num mono">0.63</td>
+</tr>
+<tr>
+  <th scope="row"><a href="/states/vt">Vermont</a></th>
+  <td class="num mono">$15,400</td>
+  <td class="num mono">1% <span class="basis basis-bench">DOL base rate</span></td>
+  <td class="num mono">$66,806</td>
+  <td class="num mono">$8,838 / $7,430</td>
+  <td class="num mono">1.60</td>
+</tr>
+<tr>
+  <th scope="row"><a href="/states/va">Virginia</a></th>
+  <td class="num mono">$8,000</td>
+  <td class="num mono">2.5% <span class="basis basis-bench">state agency</span></td>
+  <td class="num mono">$80,159</td>
+  <td class="num mono">$6,378 / $7,037</td>
+  <td class="num mono">0.73</td>
+</tr>
+<tr>
+  <th scope="row"><a href="/states/wa">Washington</a></th>
+  <td class="num mono">$78,200</td>
+  <td class="num mono">1.6% <span class="basis basis-est">2025 reference</span></td>
+  <td class="num mono">$101,847</td>
+  <td class="num mono">$8,058 / $7,130</td>
+  <td class="num mono">1.35 <span class="basis basis-">state fund</span></td>
+</tr>
+<tr>
+  <th scope="row"><a href="/states/wv">West Virginia</a></th>
+  <td class="num mono">$9,500</td>
+  <td class="num mono">2.5% <span class="basis basis-bench">DOL base rate</span></td>
+  <td class="num mono">$59,825</td>
+  <td class="num mono">&mdash; / $6,779</td>
+  <td class="num mono">0.54</td>
+</tr>
+<tr>
+  <th scope="row"><a href="/states/wi">Wisconsin</a></th>
+  <td class="num mono">$14,000</td>
+  <td class="num mono">2.5% <span class="basis basis-bench">DOL base rate</span></td>
+  <td class="num mono">$66,598</td>
+  <td class="num mono">$7,451 / $7,516</td>
+  <td class="num mono">1.42</td>
+</tr>
+<tr>
+  <th scope="row"><a href="/states/wy">Wyoming</a></th>
+  <td class="num mono">$33,800</td>
+  <td class="num mono">1.4% <span class="basis basis-est">2025 reference</span></td>
+  <td class="num mono">$63,299</td>
+  <td class="num mono">&mdash; / $7,535</td>
+  <td class="num mono">1.41 <span class="basis basis-">state fund</span></td>
+</tr>
+    </tbody>
+  </table></div>
+  <p class="sec-sub">Sources: <a href="https://oui.doleta.gov/unemploy/content/sigpros/2020-2029/July2026.pdf" rel="noopener">U.S. DOL Significant Provisions (July 2026)</a> and state agencies for SUTA; <a href="https://www.bls.gov/cew/" rel="noopener">BLS QCEW 2025</a> for pay; <a href="https://meps.ahrq.gov/data_stats/summ_tables/insr/state/series_2/2025/ic25_iia_f.pdf" rel="noopener">AHRQ MEPS-IC 2025</a> for health; <a href="https://www.oregon.gov/dcbs/cost/Pages/ranking-by-state.aspx" rel="noopener">Oregon DCBS 2024</a> for workers&rsquo; comp. Method and caveats in the <a href="/data-library#sources">Data Library</a>.</p>
+</div></main>
 <footer class="footer">
-  <div><span class="nav-logo" style="font-size:17px;">PEO<span class="accent">nomics</span></span><br>PEO cost intelligence.</div>
-  <div><a href="/states/">State rates</a><a href="/methodology.html">Methodology</a><a href="https://github.com/jcs3-com/PEOnomicsV2">Dataset on GitHub</a></div>
+  <div><span class="footer-brand">PEO<span class="accent">nomics</span></span><br>Free, independent PEO cost comparison. Estimates are not quotes or advice.</div>
+  <div>
+    <a href="/#cost-lab">Cost Lab</a>
+    <a href="/compare.html">Compare quotes</a>
+    <a href="/data-library.html">Data library</a>
+    <a href="/states/">State rates</a>
+    <a href="/peo-pricing-explained.html">Pricing, explained</a>
+    <a href="/hidden-costs.html">Hidden costs</a>
+    <a href="/methodology.html">Methodology &amp; disclosures</a>
+    <a href="/about.html">About</a>
+    <a href="/privacy.html">Privacy (draft)</a>
+    <a href="https://github.com/jcs3-com/PEOnomicsV2">Dataset on GitHub</a>
+  </div>
 </footer>
 </body>
 </html>

@@ -14,7 +14,7 @@ This file documents how the Cost Lab works so the next agent doesn't reverse-eng
 | `assets/js/cost-lab.js` | Model (`compute`, pure) + UI. `window.PEOLab.compute` for tests. `?state=XX` preselects the state. |
 | `assets/js/report-client.js` | "Email this to me": checks `/api/report-status` + public Turnstile key, renders Turnstile, posts the snapshot. |
 | `assets/js/quote-compare.js` | Quote Comparator (pure `window.PEOCompare.evaluateQuotes`). |
-| `assets/js/data-library.js` | Renders `rates-2025.json` (historical) and `benchmarks-2026.json` (sourced national) separately. |
+| `assets/js/data-library.js` | Renders `rates-2026.json` (state + wage tables, source list) and `benchmarks-2026.json`. |
 | `functions/lib/validate.js` | Shared: personal-domain list, business-email parse, SSRF hostname + private-IP rules. |
 | `functions/lib/report-model.js` | Server snapshot validation + the same model as `compute` + PDF line content. |
 | `functions/lib/simple-pdf.js`, `simple-xlsx.js` | Dependency-free PDF (Helvetica/Courier) and XLSX (Inputs + Model, live formulas). |
@@ -22,7 +22,9 @@ This file documents how the Cost Lab works so the next agent doesn't reverse-eng
 | `functions/api/report-request.js` | `POST /api/report-request` — Turnstile → recompute → log → Resend → log outcome. |
 | `functions/api/report-status.js` | `GET /api/report-status` → `{available}` only. |
 | `apps-script/usage-log-v2.gs` | Sheet web app: "Usage Log" events + deduped "Contacts". Setup in its header. |
-| `data/benchmarks-2026.json` | Sourced 2026 federal/national figures with `sourceUrl` + `lastReviewed`. Not used by the Cost Lab model. |
+| `data/rates-2026.json` | **The model dataset** (generated). Every state figure with year + source. |
+| `data/src/*.json`, `tools/build_rates_2026.py`, `tools/data2026/` | Sourced inputs and the builder/extractors that produce rates-2026.json. |
+| `data/benchmarks-2026.json` | Sourced 2026 federal/national figures (Data Library context). |
 | `compare.html`, `data-library.html`, `privacy.html` | New pages (privacy is a noindex draft). |
 | `tests/` | `test_enrich.mjs`, `test_model.mjs`, `test_report.mjs` (node, no deps), `test_browser.py` (Playwright). |
 | `quote.html` | Redirect stub → `/#cost-lab` (noindex; excluded from sitemap). |
@@ -51,19 +53,26 @@ Defaults and their labels:
 
 | Input | Default | Basis tag | Source |
 |---|---|---|---|
-| SUTA % | state `sui_new_employer_rate` | Benchmark / **Estimate** if `sui_confidence=low` | rates-2025.json |
-| WC $/100 | `wc_index_per_100 × wc_industry_multipliers[industry]` | Benchmark / **Estimate** if low | rates-2025.json |
-| Health $/enrollee | `health.employer_annual_single_avg` (7,580) | Benchmark | KFF small-firm single, national |
-| Enrollment | 60% | Your input (illustrative) | none — user should set |
-| Avg wage | $65,000 | Your input (illustrative) | none — not a benchmark |
+| SUTA % | `sui_rate_by_industry[industry]` else `sui_new_employer_rate` (incl. verified surcharges) | Benchmark; **Estimate** where new employers pay an industry average (2025 fallback) | rates-2026.json ← state agencies (8 priority states) / U.S. DOL July 2026 |
+| WC $/100 | `wc_index_per_100 × wc_industry_multipliers[industry]` | **Estimate** (sourced index × unsourced multiplier) | Oregon DCBS 2024 index |
+| Health $/enrollee | `health.single_employer_share[lt50 or ge50]`, else `total`, else U.S. | Benchmark | AHRQ MEPS-IC 2025 state tables (premium − employee contribution) |
+| Enrollment | `health.enrolled_pct[band]` | Benchmark | AHRQ MEPS-IC 2025 Table II.B.2.b |
+| Avg wage | `wages[industry].value` (else the visitor's number) | Benchmark / Your input | BLS QCEW 2025 annual, private |
 | PEPM | midpoint of `peo_admin.pepm_low/high` | Your input | practitioner range |
 | Internal admin | $0 | Your input | optional "Use reference" = PwC 2011 CPI-adjusted PEPY tier |
 | Admin avoided | $0 | Your input | capped at internal admin |
 
-Override rules: editing SUTA/WC/health marks the field edited (shows **Restore**). Changing
-state (by hand or via lookup) rebases SUTA and WC; changing industry rebases WC; health
-overrides survive state changes. "Reset cost assumptions" restores all cost defaults but keeps
-company/state/industry/headcount/wage.
+Override rules: editing wage/SUTA/WC/health/enrollment marks the field edited (basis becomes
+**Your input**, **Restore** appears). Changing state always rebases SUTA and WC (state law);
+changing industry rebases WC (and SUTA where the state publishes an industry rate); wage, health
+and enrollment keep your edits across state/industry/headcount changes. Headcount crossing 50
+rebases un-edited health and enrollment (MEPS-IC firm-size bands). "Reset cost assumptions"
+restores SUTA/WC/health/enrollment and fee/admin fields; keeps company/state/industry/headcount/wage.
+
+Data: `data/rates-2026.json` is **generated** by `tools/build_rates_2026.py` from `data/src/*.json`
+(DOL table, agency-verified priority states, QCEW, MEPS-IC, Oregon). Never hand-edit it; edit the
+source file (with its URL/date) and rebuild. `tests/test_data.py` fails if the committed file
+differs from a fresh build. `data/rates-2025.json` is kept as the historical prior edition.
 
 Rounding: defaults keep 4 decimals (3 decimals lost $8 on MD/office WC: 0.3675 → 0.367).
 
@@ -138,8 +147,10 @@ In `tests/`, no dependencies beyond Node 22 and (for the browser suite) Python P
 ```
 node tests/test_enrich.mjs     # 18: validators, SSRF, fail-closed log, domain-only AI payload
 node tests/test_model.mjs      # 15: Cost Lab model vs hand calculations, 51 x 6 neutrality
-node tests/test_report.mjs     # 18: server/client parity (1,224 scenarios), PDF/XLSX, every endpoint path
-python3 tests/test_browser.py  # 76 at 1440 + 360 px with mocked APIs and stubbed Turnstile
+node tests/test_report.mjs     # 20: server/client parity (1,224 scenarios), PDF/XLSX, every endpoint path, health, limiter
+node tests/test_apps_script.mjs # 6: real Apps Script in a VM behind real endpoints; dedupe, scenario log, XLSX recalc
+python3 tests/test_data.py     # 466: rates-2026.json rebuild + provenance checks
+python3 tests/test_browser.py  # 104 at 1440 + 360 px with mocked APIs and stubbed Turnstile
 python3 tests/test_browser.py https://peonomics.com --live   # production, read-only
 WRITE_SAMPLES=/some/dir node tests/test_report.mjs           # writes sample PDF + XLSX to inspect
 ```

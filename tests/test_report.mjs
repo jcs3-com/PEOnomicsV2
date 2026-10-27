@@ -14,7 +14,7 @@ globalThis.window = {};
 await import(new URL('../assets/js/cost-lab.js', import.meta.url));
 const { compute } = window.PEOLab;
 
-const R = JSON.parse(fs.readFileSync(new URL('../data/rates-2025.json', import.meta.url), 'utf8'));
+const R = JSON.parse(fs.readFileSync(new URL('../data/rates-2026.json', import.meta.url), 'utf8'));
 let pass = 0; const t = async (n, f) => { try { await f(); pass++; } catch (e) { console.error('FAIL', n, '-', e.message); process.exitCode = 1; } };
 const near = (a, b, m) => assert.ok(Math.abs(a - b) < 0.005, `${m}: ${a} vs ${b}`);
 const snap = { state: 'MD', company: 'Example Test Co', industry: 'clerical_professional', employees: 25, wage: 65000, suta: 2.6, wc: 0.3675, enrollment: 60, health: 7580, pepm: 160, currentAdmin: 0, adminAvoided: 0, peoSuta: null, peoWc: null, peoHealth: null };
@@ -60,7 +60,7 @@ const pdf = makeReportPdf(reportLines(s0, r0)), xlsx = makeReportXlsx(s0, r0, R)
 await t('PDF structure', () => {
   const txt = new TextDecoder().decode(pdf);
   assert.ok(txt.startsWith('%PDF-1.4')); assert.match(txt, /%%EOF\n$/);
-  assert.match(txt, /Model tax year 2025, dataset v2025\.2/); assert.match(txt, /Cafe Rouge - "LLC"/);
+  assert.match(txt, /Model tax year 2026, dataset v2026\.1/); assert.match(txt, /Cafe Rouge - "LLC"/);
   assert.match(txt, /No PEO savings assumed/); assert.ok(!/2026 rate/i.test(txt));
 });
 await t('XLSX is a valid zip with two sheets and formulas', () => {

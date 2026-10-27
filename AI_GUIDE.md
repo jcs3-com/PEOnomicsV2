@@ -2,7 +2,7 @@
 
 **Audience:** any AI agent (Claude or otherwise) asked to create, edit, debug, or audit this
 site in any chat. Read this file *first*, before touching anything.
-**Last updated:** 2026-10-27 (Cost Lab P0; push rule reconciled)
+**Last updated:** 2026-10-27 (2026 sourced dataset; extensionless URLs; shared chrome)
 
 ---
 
@@ -49,10 +49,13 @@ site in any chat. Read this file *first*, before touching anything.
   the user to rotate it; do not use it.
 - **Event log (not a lead list):** lookups and report events → Google Sheet via `USAGE_WEBHOOK_URL`
   (`apps-script/usage-log-v2.gs`: "Usage Log" + deduped "Contacts"). No CRM, nothing to PEOs, no survey sent.
-- **Data vintages are never blended:** `data/rates-2025.json` (historical state model) vs
-  `data/benchmarks-2026.json` (sourced national context, each value with `sourceUrl` + `lastReviewed`).
-  Never relabel 2025 values as 2026. Dataset confidence flags display as "high/medium confidence" or
-  "estimate" — never "verified".
+- **Model data = `data/rates-2026.json`, GENERATED** by `tools/build_rates_2026.py` from `data/src/*.json`
+  (each source file records its URL and review date). Never hand-edit it — edit/add a source file and
+  rebuild; `tests/test_data.py` enforces this. Every figure keeps its own edition year (SUTA 2026; BLS
+  wages 2025; MEPS-IC health 2025; Oregon WC 2024); never relabel an older edition as 2026. Where no
+  2026 figure exists the field says so (`sui_year: 2025`, confidence `low`). `data/rates-2025.json` is
+  the historical prior edition. Confidence flags display as "high/medium confidence" or "estimate" —
+  never "verified".
 - **Enrichment:** Claude Haiku + web search on the **domain only**, hardened scraper fallback
   with SSRF controls. Details: `docs/COST_LAB.md`.
 - **The homepage Cost Lab assumes no PEO savings.** Both scenarios carry identical statutory and
@@ -86,7 +89,7 @@ assets/css/compare.css          Comparator / data library / privacy classes (tok
 compare.html data-library.html  Quote Comparator; Data Library. privacy.html = noindex DRAFT notice.
 assets/js/report-client.js      Report button: /api/report-status + Turnstile + POST /api/report-request.
 assets/js/quote-compare.js      Comparator (pure evaluateQuotes on window.PEOCompare).
-assets/js/data-library.js       Renders rates-2025.json and benchmarks-2026.json separately.
+assets/js/data-library.js       Renders rates-2026.json (state tables, sources) and benchmarks-2026.json.
 data/benchmarks-2026.json       Sourced 2026 federal/national figures (not used by the Cost Lab model).
 functions/lib/                  validate.js, report-model.js, simple-pdf.js, simple-xlsx.js (shared code).
 functions/api/report-*.js       report-request (POST) and report-status (GET).
@@ -94,13 +97,16 @@ tests/                          node + Playwright suites; run before every push 
 assets/js/cost-lab.js           Cost Lab model + UI. Pure compute() exposed as window.PEOLab.
 assets/js/engine.js             LEGACY, unreferenced (biased savings model). Do not re-wire.
 assets/js/site.js               Site-wide JS.
-data/rates-2025.json            Versioned payroll-tax rate dataset w/ per-figure confidence flags.
+data/rates-2025.json            HISTORICAL prior edition (not used by the model). data/rates-2026.json = model data (generated).
 functions/api/enrich.js         POST /api/enrich — lookup: validate, enrich, log, fail closed.
 functions/api/lead.js           LEGACY /api/lead (old quote page lead → sheet). Unreferenced.
 apps-script/usage-log-v2.gs     Apps Script for the event-log sheet (USAGE_WEBHOOK_URL).
 apps-script/lead-capture.gs     LEGACY Apps Script for the old lead sheet.
 docs/COST_LAB.md                Cost Lab implementation notes: model, endpoint contract, tests.
-tools/build_states.py           Generator for the 51 state pages from rates-2025.json.
+tools/build_states.py           Generator for the 51 state pages + sitemap from rates-2026.json.
+tools/build_rates_2026.py       Builds data/rates-2026.json from data/src/*.json (sourced inputs).
+tools/site_chrome.py            Canonical nav + footer markup.  tools/normalize_urls.py  extensionless URLs.
+data/src/                       Sourced inputs (DOL, state agencies, BLS QCEW, AHRQ MEPS-IC, Oregon DCBS).
 CNAME                           Fossil from the GitHub Pages era. Harmless on Cloudflare.
 favicon.svg  README.md  .gitignore
 ```
@@ -149,9 +155,13 @@ AI-generated template.
    - article/content → `Article` (and `FAQPage` where there's a Q/A block)
    - ranking pages → `ItemList` / `Article`
    - state pages → `Article` or `FAQPage` with the state in scope
-7. Internal links use root-relative absolute paths (`/#cost-lab`, `/states/`).
+7. Internal links use root-relative, **extensionless** paths (`/compare`, `/states/md`, `/#cost-lab`).
+   Cloudflare Pages 308-redirects `/x.html` → `/x`, so canonical, `og:url`, JSON-LD and sitemap URLs
+   must be extensionless too (`https://peonomics.com/compare`). `python3 tools/normalize_urls.py`
+   fixes any page that regresses; `build_states.py` writes the sitemap that way.
 8. A `robots.txt` and a `sitemap.xml` must exist at the root and stay in sync with the page set
    (generate the sitemap from the same source as the state pages).
+9. Nav and footer come from `tools/site_chrome.py` (generator + `tools/unify_pages.py`). Don't hand-roll a variant.
 
 > Current compliance gaps are tracked in `ROADMAP.md`. Do not assume a page is compliant — check it.
 
@@ -160,11 +170,10 @@ AI-generated template.
 ## 5. Content & data rules
 
 - **State pages are generated.** Do **not** hand-edit `states/<xx>.html`. To change them, edit
-  `data/rates-2025.json` and/or `tools/build_states.py`, then re-run the generator and commit the
-  regenerated output.
-- The rate dataset is **versioned with per-figure confidence flags**. Low-confidence figures must
-  render as `estimate` on the page. Treat the current dataset as preliminary until a primary-source
-  pass is done (see roadmap).
+  `data/src/*` (then `tools/build_rates_2026.py`) and/or `tools/build_states.py`, re-run the generator
+  and commit the regenerated output.
+- The rate dataset is **versioned with per-figure source, year and confidence**. Low-confidence figures
+  render as `estimate`. Workers' comp is always an estimate (sourced state index × unsourced industry multiplier).
 - Any user-facing statistic must be **sourced or flagged**. No invented numbers, ever.
 
 ---

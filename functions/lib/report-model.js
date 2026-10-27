@@ -64,8 +64,9 @@ export function reportLines(i,r) {
     ['peoHealth','PEO annual health per covered employee',i.peoHealth==null?'Same as standalone':money(i.peoHealth)]
   ]) lines.push({t:label+': '+val,type:'body'});
   lines.push({t:'',type:'space'}, {t:'DATA & LIMITATIONS',type:'heading'},
-    {t:'State SUTA / WC defaults come from the '+r.taxYear+' reference dataset (historical, preliminary), not current rates.',type:'body'},
-    {t:'Health default is a national benchmark, not a state-specific premium.',type:'body'},
+    {t:'Defaults: 2026 SUTA from state agencies / U.S. DOL; wages BLS QCEW 2025; health AHRQ MEPS-IC 2025 (state, by firm size);',type:'body'},
+    {t:'workers comp = Oregon DCBS 2024 state index x a PEOnomics industry multiplier (estimate). Sources: peonomics.com/data-library',type:'body'},
+    {t:'New-employer SUTA is not your experience rate. Health uses single-coverage cost for every enrollee.',type:'body'},
     {t:'Actual employer experience rates, class codes, enrollment, and insurance quotes will vary.',type:'body'},
     {t:'No PEO savings assumed unless explicitly entered by the user.',type:'body'},
     {t:'Formulas: https://peonomics.com/#the-math',type:'small'},

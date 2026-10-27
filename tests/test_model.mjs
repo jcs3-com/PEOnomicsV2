@@ -3,7 +3,7 @@ import fs from 'node:fs';
 globalThis.window = {};
 await import(new URL('../assets/js/cost-lab.js', import.meta.url));
 const { compute, adminReferencePepy } = window.PEOLab;
-const R = JSON.parse(fs.readFileSync(new URL('../data/rates-2025.json', import.meta.url),'utf8'));
+const R = JSON.parse(fs.readFileSync(new URL('../data/rates-2026.json', import.meta.url),'utf8'));
 let pass=0; const t=(n,f)=>{try{f();pass++;}catch(e){console.error('FAIL',n,e.message);process.exitCode=1;}};
 const near=(a,b,msg)=>assert.ok(Math.abs(a-b)<0.01,`${msg}: ${a} vs ${b}`);
 const base={state:'MD',employees:25,wage:65000,suta:R.states.MD.sui_new_employer_rate*100,wc:R.states.MD.wc_index_per_100*0.35,enrollment:60,health:7580,pepm:160,currentAdmin:0,adminAvoided:0,peoSuta:null,peoWc:null,peoHealth:null};
