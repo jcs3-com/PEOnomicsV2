@@ -47,9 +47,8 @@ FOOTER = """<footer class="footer">
   <p class="footer-disclosure">The Cost Lab, Quote Comparator and Data Library assume no PEO savings, favor no provider, and send nothing to any PEO.</p>
 </footer>"""
 
-# 2026-10-28: the owner removed the paid-referral sentence from the shared footer. Ranking pages,
-# the about page and the methodology page keep their own disclosure text until the owner decides
-# their wording. Only the owner may change factual claims about the business.
+# 2026-10-28: owner decision — no paid or referral relationship with any PEO, so the referral
+# disclosure was removed site-wide. Only the owner may change factual claims about the business.
 
 
 def footer():

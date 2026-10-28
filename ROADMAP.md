@@ -240,10 +240,9 @@ Not chat history. Not artifacts. When you finish or add work, update this file i
 - **Methodology / disclosure wording** — reconcile the public methodology + any "#1 ranking"
   language with the current PEOnomics-direct fulfillment model **and** the Cost Lab's
   "no PEO hand-off" promise. Owner-only factual claim.
-  - 2026-10-28: owner removed the paid-referral sentence from the shared footer (done, all pages).
-    Still open: the ranking-page banners, about.html and methodology.html disclosure text. The rankings
-    keep XcelHR at #1; the owner is moving into a leadership role at XcelHR, which is an employment
-    connection independent of referral fees. Decide the wording before removing those.
+  - 2026-10-28 (resolved by owner): no paid or referral relationship with any PEO and no employment
+    connection. Disclosure removed site-wide; methodology states no paid relationship. Rankings left as
+    scored. Possible removal of the ranking pages is for the next site-wide strategy update.
 - **Legacy lead endpoint** — delete `/api/lead` + lead sheet webhook, or keep for another use?
 - **Security:** rotate any credentials pasted in past chats (Cloudflare token, R2 keys, GitHub
   PATs). Treat all as burned.
