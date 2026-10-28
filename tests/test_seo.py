@@ -30,7 +30,7 @@ for p in sorted(pages):
         try: json.loads(b)
         except Exception: check(False, f'{rel}: JSON-LD parses')
     check(not re.search(r'href="/[a-z0-9/-]+\.html', s) and 'peonomics.com/' not in re.sub(r'https://peonomics\.com/[a-z0-9/#?=-]*', '', s).replace('peonomics.com/', '', 0), f'{rel}: no .html internal links')
-    check('footer-disclosure' in s and 'XcelHR' in s, f'{rel}: referral disclosure in footer')
+    check('footer-disclosure' in s and 'favor no provider' in s, f'{rel}: tool-neutrality statement in footer')
     check('/assets/js/track.js' in s, f'{rel}: event tracker loaded')
 print(f'seo: {passes} passed, {len(fails)} failed')
 sys.exit(1 if fails else 0)

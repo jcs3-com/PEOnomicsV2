@@ -84,3 +84,7 @@ python3 tools/build_states.py
 The buyer guides and methodology page carry forward the disclosed commercial
 relationship from v1. Keep the disclosure current with how leads are actually
 fulfilled — it's a legal requirement (FTC endorsement guides), not a style choice.
+
+2026-10-28: the owner removed the paid-referral sentence from the shared site footer.
+The ranking pages, about page and methodology page still carry their own disclosure
+text pending the owner's decision on wording (see ROADMAP "Needs a human decision").
