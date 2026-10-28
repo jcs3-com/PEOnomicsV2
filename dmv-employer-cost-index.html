@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DMV Employer Cost Index 2026: DC vs MD vs VA | PEOnomics</title>
+<meta name="description" content="What it costs to employ one person in DC, Maryland and Virginia in 2026: payroll taxes, unemployment insurance, paid leave and minimum wage, every figure sourced.">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="stylesheet" href="/assets/css/tokens.css">
+<link rel="stylesheet" href="/assets/css/site.css">
+<link rel="stylesheet" href="/assets/css/compare.css">
+<style>
+.dmv-hero h1{max-width:22ch;}
+.dmv-hero h1 em{white-space:nowrap;}
+.dmv-hero .hero-sub{max-width:64ch;}
+.dmv-hero .hero-stats{flex-wrap:wrap;}
+.dmv-hero .hero-stat{min-width:0;flex:1 1 180px;}
+.dmv-hero .hero-stat p{font-size:13.5px;color:var(--muted);margin:4px 0 0;max-width:30ch;}
+.dmv-calc{background:var(--bg-elev);border:1px solid var(--border);padding:clamp(16px,3vw,28px);margin-top:20px;}
+.dmv-controls{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0 16px;}
+@media(max-width:720px){.dmv-controls{grid-template-columns:1fr;}}
+.dmv-seg{display:flex;border:1px solid var(--border);}
+.dmv-seg button{flex:1;font-family:var(--f-mono);font-size:14px;padding:10px 8px;border:0;background:var(--bg);color:var(--text);cursor:pointer;}
+.dmv-seg button+button{border-left:1px solid var(--border);}
+.dmv-seg button[aria-pressed="true"]{background:var(--ink);color:var(--ink-text);}
+.data-table tbody th small{display:block;font-family:var(--f-mono);font-size:11.5px;color:var(--muted);margin-top:2px;}
+.data-table tr.dmv-total th,.data-table tr.dmv-total td{font-weight:600;border-top:2px solid var(--text);}
+.data-table tr.dmv-share td,.data-table tr.dmv-share th{color:var(--muted);}
+.dmv-high{color:var(--negative);}
+.dmv-dash{color:var(--muted);}
+.dmv-bars{display:flex;flex-direction:column;gap:10px;margin-top:22px;}
+.dmv-bars-head{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);}
+.dmv-bar{display:grid;grid-template-columns:minmax(0,230px) minmax(0,1fr) minmax(0,110px);gap:12px;align-items:center;font-size:14px;}
+@media(max-width:600px){.dmv-bar{grid-template-columns:minmax(0,1fr) auto;}.dmv-bar .dmv-track{grid-column:1 / -1;order:3;}}
+.dmv-track{height:12px;background:var(--bg-warm);position:relative;overflow:hidden;}
+.dmv-fill{position:absolute;top:0;bottom:0;left:0;background:var(--ink);transition:width var(--d-med) var(--ease-out);}
+.dmv-fill.is-high{background:var(--negative);}
+.dmv-fill.is-tax{background:var(--accent);}
+.dmv-bar-val{text-align:right;}
+.dmv-note{font-size:14px;color:var(--muted);border-left:2px solid var(--border);padding-left:12px;margin:18px 0 0;max-width:72ch;}
+.dmv-legend{display:flex;flex-wrap:wrap;gap:16px;font-size:13px;color:var(--muted);margin:6px 0 0;}
+.dmv-key{display:inline-block;width:11px;height:11px;margin-right:6px;vertical-align:-1px;}
+.dmv-timeline{list-style:none;margin:16px 0 0;padding:0;border-top:1px solid var(--border);max-width:var(--w-prose);}
+.dmv-timeline li{padding:16px 0;border-bottom:1px solid var(--border);display:grid;grid-template-columns:150px minmax(0,1fr);gap:4px 20px;}
+@media(max-width:600px){.dmv-timeline li{grid-template-columns:1fr;}}
+.dmv-timeline time{font-family:var(--f-mono);font-size:12.5px;color:var(--accent-hover);}
+.dmv-timeline p{margin:0;font-size:15px;}
+.dmv-method{margin:14px 0 0;padding-left:18px;max-width:var(--w-prose);font-size:15px;}
+.dmv-method li{margin-bottom:8px;}
+.dmv-cite{display:flex;flex-wrap:wrap;gap:12px;align-items:center;border:1px solid var(--text);background:var(--bg-elev);padding:16px 18px;margin-top:16px;max-width:var(--w-prose);}
+.dmv-cite code{font-family:var(--f-mono);font-size:13px;flex:1 1 280px;min-width:0;overflow-wrap:anywhere;}
+.dmv-copy{font-family:var(--f-mono);font-size:13px;padding:8px 14px;border:1px solid var(--accent);background:transparent;color:var(--accent);cursor:pointer;}
+.dmv-copy:hover{background:var(--accent-dim);}
+</style>
+<link rel="canonical" href="https://peonomics.com/dmv-employer-cost-index">
+<meta property="og:title" content="DMV Employer Cost Index 2026: DC vs MD vs VA | PEOnomics">
+<meta property="og:description" content="A full-time minimum-wage hire costs an employer $41,790 a year in DC and $28,854 in Virginia. Every statutory employer cost in the DMV, sourced.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://peonomics.com/dmv-employer-cost-index">
+<meta property="og:image" content="https://peonomics.com/assets/images/og-default.png">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{"@context": "https://schema.org", "@graph": [{"@type": "Article", "headline": "DMV Employer Cost Index 2026", "description": "What it costs an employer, in statutory payroll taxes, unemployment insurance, mandated paid leave and minimum wage, to keep one employee on payroll in DC, Maryland and Virginia.", "datePublished": "2026-10-28", "dateModified": "2026-10-28", "author": {"@type": "Organization", "name": "PEOnomics"}, "publisher": {"@type": "Organization", "name": "PEOnomics", "url": "https://peonomics.com/"}, "mainEntityOfPage": "https://peonomics.com/dmv-employer-cost-index", "about": [{"@type": "AdministrativeArea", "name": "District of Columbia"}, {"@type": "AdministrativeArea", "name": "Maryland"}, {"@type": "AdministrativeArea", "name": "Virginia"}]}, {"@type": "Dataset", "name": "DMV Employer Cost Index 2026", "url": "https://peonomics.com/dmv-employer-cost-index", "description": "Statutory employer costs per employee in DC, Maryland and Virginia for 2026, with enacted 2027 changes: FICA, FUTA, new-employer unemployment insurance, DC Paid Family Leave, Maryland FAMLI, minimum and tipped wages.", "temporalCoverage": "2026/2027", "dateModified": "2026-10-28", "isAccessibleForFree": true, "creator": {"@type": "Organization", "name": "PEOnomics", "url": "https://peonomics.com/"}, "distribution": [{"@type": "DataDownload", "encodingFormat": "application/json", "contentUrl": "https://peonomics.com/data/dmv-index-2026.json"}, {"@type": "DataDownload", "encodingFormat": "application/json", "contentUrl": "https://peonomics.com/data/rates-2026.json"}]}]}
+</script>
+</head>
+<body>
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">PEO<span class="accent">nomics</span></a>
+    <ul class="nav-links">
+      <li><a href="/compare">Compare quotes</a></li>
+      <li><a href="/data-library">Data library</a></li>
+      <li><a href="/states/">State rates</a></li>
+      <li><a href="/peo-pricing-explained">Pricing, explained</a></li>
+      <li><a href="/#cost-lab" class="nav-cta">Open the Cost Lab</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="section compare-main">
+  <div class="shell">
+
+    <header class="dmv-hero">
+      <div class="eyebrow">DMV Employer Cost Index &middot; 2026 edition &middot; rates reviewed Oct 27, 2026</div>
+      <h1>A minimum-wage hire costs <em>$41,790 a year in DC</em> and $28,854 in Virginia.</h1>
+      <p class="hero-sub">That is a $12,936 gap per full-time employee, before benefits or workers&rsquo; comp. This index tracks every statutory cost an employer pays to keep one person on payroll in the District, Maryland and Virginia: federal payroll taxes, state unemployment insurance, mandated paid leave, and the wage floor itself.</p>
+      <div class="hero-stats" aria-label="Statutory employer cost as a share of a $60,000 salary, 2026">
+        <div class="hero-stat"><span class="num">8.91%</span><small>District of Columbia</small><p>of a $60,000 salary goes to employer taxes and mandated leave</p></div>
+        <div class="hero-stat"><span class="num">8.09%</span><small>Maryland</small><p>rising to 8.54% in 2027 when FAMLI contributions begin</p></div>
+        <div class="hero-stat"><span class="num">8.08%</span><small>Virginia</small><p>no paid-leave payroll tax; the lowest wage floor in the region</p></div>
+      </div>
+    </header>
+
+    <section class="compare-section" aria-labelledby="calc-title">
+      <h2 id="calc-title">What one employee costs you</h2>
+      <p class="sec-sub">Enter a salary and headcount. Every figure is a published statutory rate applied to its legal wage base, from the same 2026 dataset as the Cost Lab. Switch to 2027 to apply rules already enacted.</p>
+      <div class="dmv-calc" id="dmv-calc">
+        <div class="dmv-controls">
+          <div class="field">
+            <label for="dmv-wage">Annual wage per employee</label>
+            <input id="dmv-wage" type="number" inputmode="numeric" min="0" step="1000" value="60000">
+          </div>
+          <div class="field">
+            <label for="dmv-hc">Employees on payroll</label>
+            <input id="dmv-hc" type="number" inputmode="numeric" min="1" step="1" value="20">
+          </div>
+          <div class="field">
+            <label id="dmv-year-label">Rule year</label>
+            <div class="dmv-seg" role="group" aria-labelledby="dmv-year-label">
+              <button type="button" id="dmv-y2026" aria-pressed="true">2026</button>
+              <button type="button" id="dmv-y2027" aria-pressed="false">2027 preview</button>
+            </div>
+          </div>
+        </div>
+        <div class="compare-scroll">
+          <table class="rate-table data-table"><caption>Employer cost per employee per year by jurisdiction</caption>
+            <thead><tr><th scope="col">Employer cost, per employee per year</th><th scope="col" class="num">DC</th><th scope="col" class="num">Maryland</th><th scope="col" class="num">Virginia</th></tr></thead>
+            <tbody id="dmv-rows">
+              <tr><th scope="row">Social Security<small>6.20% up to $184,500</small></th><td class="num mono">$3,720</td><td class="num mono">$3,720</td><td class="num mono">$3,720</td></tr>
+              <tr><th scope="row">Medicare<small>1.45%, no cap</small></th><td class="num mono">$870</td><td class="num mono">$870</td><td class="num mono">$870</td></tr>
+              <tr><th scope="row">Federal unemployment (FUTA)<small>0.6% up to $7,000</small></th><td class="num mono">$42</td><td class="num mono">$42</td><td class="num mono">$42</td></tr>
+              <tr><th scope="row">State unemployment insurance, new employer<small>DC 2.90% to $9,000 · MD 2.60% to $8,500 · VA 2.73% to $8,000</small></th><td class="num mono">$261</td><td class="num mono">$221</td><td class="num mono">$218</td></tr>
+              <tr><th scope="row">DC Paid Family Leave<small>0.75% of all wages, DC only</small></th><td class="num mono">$450</td><td class="num mono"><span class="dmv-dash">&mdash;</span></td><td class="num mono"><span class="dmv-dash">&mdash;</span></td></tr>
+              <tr><th scope="row">Maryland FAMLI, employer share<small>Begins January 1, 2027</small></th><td class="num mono"><span class="dmv-dash">&mdash;</span></td><td class="num mono"><span class="dmv-dash">&mdash;</span></td><td class="num mono"><span class="dmv-dash">&mdash;</span></td></tr>
+              <tr class="dmv-total"><th scope="row">Total per employee</th><td class="num mono dmv-high">$5,343</td><td class="num mono">$4,853</td><td class="num mono">$4,850</td></tr>
+              <tr class="dmv-share"><th scope="row">Share of wage</th><td class="num mono">8.91%</td><td class="num mono">8.09%</td><td class="num mono">8.08%</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="dmv-bars" id="dmv-bars" aria-live="polite"></div>
+        <p class="dmv-note" id="dmv-note">At $60,000 a year, DC costs $9,852 more than Virginia across 20 employees.</p>
+      </div>
+    </section>
+
+    <section class="compare-section" aria-labelledby="floor-title">
+      <h2 id="floor-title">The wage floor, jurisdiction by jurisdiction</h2>
+      <p class="sec-sub">One full-time employee (2,080 hours) at the local minimum wage in effect today, plus the employer&rsquo;s statutory taxes on that wage. Maryland counties set their own floors, so the state splits into five rates.</p>
+      <div class="dmv-legend"><span><span class="dmv-key" style="background:var(--ink)"></span>Wages</span><span><span class="dmv-key" style="background:var(--accent)"></span>Employer taxes and mandated leave</span></div>
+      <div class="dmv-bars" aria-hidden="true">
+        <div class="dmv-bar"><span class="dmv-bar-name">District of Columbia</span><span class="dmv-track"><span class="dmv-fill is-high" style="width:91.58%"></span><span class="dmv-fill is-tax" style="left:91.58%;width:8.42%"></span></span><span class="dmv-bar-val num mono">$41,790</span></div>
+        <div class="dmv-bar"><span class="dmv-bar-name">Montgomery County, 51+ employees</span><span class="dmv-track"><span class="dmv-fill" style="width:89.59%"></span><span class="dmv-fill is-tax" style="left:89.59%;width:7.48%"></span></span><span class="dmv-bar-val num mono">$40,567</span></div>
+        <div class="dmv-bar"><span class="dmv-bar-name">Montgomery County, 11&ndash;50 employees</span><span class="dmv-track"><span class="dmv-fill" style="width:82.13%"></span><span class="dmv-fill is-tax" style="left:82.13%;width:6.91%"></span></span><span class="dmv-bar-val num mono">$37,208</span></div>
+        <div class="dmv-bar"><span class="dmv-bar-name">Howard County</span><span class="dmv-track"><span class="dmv-fill" style="width:79.64%"></span><span class="dmv-fill is-tax" style="left:79.64%;width:6.72%"></span></span><span class="dmv-bar-val num mono">$36,089</span></div>
+        <div class="dmv-bar"><span class="dmv-bar-name">Montgomery County, 10 or fewer</span><span class="dmv-track"><span class="dmv-fill" style="width:79.39%"></span><span class="dmv-fill is-tax" style="left:79.39%;width:6.70%"></span></span><span class="dmv-bar-val num mono">$35,977</span></div>
+        <div class="dmv-bar"><span class="dmv-bar-name">Prince George&rsquo;s County</span><span class="dmv-track"><span class="dmv-fill" style="width:76.15%"></span><span class="dmv-fill is-tax" style="left:76.15%;width:6.46%"></span></span><span class="dmv-bar-val num mono">$34,522</span></div>
+        <div class="dmv-bar"><span class="dmv-bar-name">Maryland, rest of state</span><span class="dmv-track"><span class="dmv-fill" style="width:74.66%"></span><span class="dmv-fill is-tax" style="left:74.66%;width:6.34%"></span></span><span class="dmv-bar-val num mono">$33,850</span></div>
+        <div class="dmv-bar"><span class="dmv-bar-name">Virginia</span><span class="dmv-track"><span class="dmv-fill" style="width:63.56%"></span><span class="dmv-fill is-tax" style="left:63.56%;width:5.49%"></span></span><span class="dmv-bar-val num mono">$28,854</span></div>
+      </div>
+      <div class="compare-scroll">
+        <table class="rate-table data-table" id="dmv-floor"><caption>Minimum-wage full-time employee cost by jurisdiction</caption>
+          <thead><tr><th scope="col">Jurisdiction</th><th scope="col" class="num">Hourly floor</th><th scope="col" class="num">Annual wages</th><th scope="col" class="num">Employer taxes</th><th scope="col" class="num">All-in cost</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">District of Columbia</th><td class="num mono">$18.40</td><td class="num mono">$38,272</td><td class="num mono">$3,518</td><td class="num mono">$41,790</td></tr>
+            <tr><th scope="row">Montgomery County, 51+ employees</th><td class="num mono">$18.00</td><td class="num mono">$37,440</td><td class="num mono">$3,127</td><td class="num mono">$40,567</td></tr>
+            <tr><th scope="row">Montgomery County, 11&ndash;50 employees</th><td class="num mono">$16.50</td><td class="num mono">$34,320</td><td class="num mono">$2,888</td><td class="num mono">$37,208</td></tr>
+            <tr><th scope="row">Howard County</th><td class="num mono">$16.00</td><td class="num mono">$33,280</td><td class="num mono">$2,809</td><td class="num mono">$36,089</td></tr>
+            <tr><th scope="row">Montgomery County, 10 or fewer</th><td class="num mono">$15.95</td><td class="num mono">$33,176</td><td class="num mono">$2,801</td><td class="num mono">$35,977</td></tr>
+            <tr><th scope="row">Prince George&rsquo;s County</th><td class="num mono">$15.30</td><td class="num mono">$31,824</td><td class="num mono">$2,698</td><td class="num mono">$34,522</td></tr>
+            <tr><th scope="row">Maryland, rest of state</th><td class="num mono">$15.00</td><td class="num mono">$31,200</td><td class="num mono">$2,650</td><td class="num mono">$33,850</td></tr>
+            <tr><th scope="row">Virginia</th><td class="num mono">$12.77</td><td class="num mono">$26,562</td><td class="num mono">$2,292</td><td class="num mono">$28,854</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="dmv-note">Rates in effect October 2026. DC, Montgomery, Howard and Prince George&rsquo;s counties adjusted on July 1, 2026; Virginia on January 1, 2026. Montgomery County tiers count employees: 10 or fewer, 11 to 50, and 51 or more.</p>
+    </section>
+
+    <section class="compare-section" aria-labelledby="tip-title">
+      <h2 id="tip-title">Tipped staff: the restaurant gap</h2>
+      <p class="sec-sub">For tipped workers the employer pays a lower cash wage and tips make up the rest of the minimum. The cash wage is the employer&rsquo;s own obligation, and it varies more across the DMV than any other line in this index.</p>
+      <div class="compare-scroll">
+        <table class="rate-table data-table" id="dmv-tipped"><caption>Tipped cash wage by jurisdiction</caption>
+          <thead><tr><th scope="col">Jurisdiction</th><th scope="col" class="num">Tipped cash wage</th><th scope="col" class="num">Per full-time employee per year</th><th scope="col" class="num">Over Virginia</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">District of Columbia</th><td class="num mono">$10.30</td><td class="num mono">$21,424.00</td><td class="num mono">+$16,993.60</td></tr>
+            <tr><th scope="row">Maryland (statewide)</th><td class="num mono">$3.63</td><td class="num mono">$7,550.40</td><td class="num mono">+$3,120.00</td></tr>
+            <tr><th scope="row">Virginia</th><td class="num mono">$2.13</td><td class="num mono">$4,430.40</td><td class="num mono"><span class="dmv-dash">&mdash;</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="dmv-note">A 30-person front-of-house team in DC carries about $509,808 more in annual cash wages than the same team in Virginia, before payroll taxes. Employers also owe FICA on reported tips, which the federal FICA tip credit (IRC &sect;45B) partly offsets for food and beverage businesses.</p>
+    </section>
+
+    <section class="compare-section" aria-labelledby="next-title">
+      <h2 id="next-title">Already enacted for 2027 and 2028</h2>
+      <ul class="dmv-timeline">
+        <li><time datetime="2027-01-01">Jan 1, 2027 &middot; MD</time><p>Maryland FAMLI contributions begin at 0.90% of wages up to the Social Security wage base. Employers with 15 or more employees pay at least half (0.45%) and may withhold up to the other half from pay. Employers with fewer than 15 owe no employer share. Benefits begin by January 3, 2028.</p></li>
+        <li><time datetime="2027-01-01">Jan 1, 2027 &middot; Federal</time><p>The Social Security wage base rises from $184,500 to $192,300. Employer cost rises only for employees paid above $184,500.</p></li>
+        <li><time datetime="2027-01-01">Jan 1, 2027 &middot; VA</time><p>Virginia&rsquo;s minimum wage rises from $12.77 to $13.75, then to $15.00 on January 1, 2028, under HB1 and SB1, signed April 9, 2026.</p></li>
+        <li><time datetime="2026-10-01">Oct 1, 2026 &middot; DC</time><p>DC paid-leave benefits were cut: family leave from 12 weeks to 6, medical leave from 12 to 10, and the maximum weekly benefit from $1,190 to $1,100. The employer contribution stayed at 0.75%, so DC employers pay the same for less coverage.</p></li>
+        <li><time datetime="2027-07-01">Jul 1, 2027 &middot; DC</time><p>DC&rsquo;s minimum wage adjusts again for inflation. The new rate is not yet published.</p></li>
+      </ul>
+    </section>
+
+    <section class="compare-section" aria-labelledby="method-title">
+      <h2 id="method-title">Methodology</h2>
+      <p class="sec-sub">Every number on this page is a published rate multiplied by its capped wage base. There are no estimates or survey figures. Federal and unemployment-insurance rates come from the <a href="/data-library">PEOnomics 2026 dataset</a>; paid-leave and wage-floor figures from <a href="/data/dmv-index-2026.json">dmv-index-2026.json</a>.</p>
+      <div class="compare-scroll">
+        <table class="rate-table data-table"><caption>Rates and wage bases used in the index</caption>
+          <thead><tr><th scope="col">Component</th><th scope="col" class="num">Employer rate</th><th scope="col" class="num">Wage base</th><th scope="col">Applies in</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Social Security</th><td class="num mono">6.20%</td><td class="num mono">$184,500 (2026) &middot; $192,300 (2027)</td><td>DC, MD, VA</td></tr>
+            <tr><th scope="row">Medicare</th><td class="num mono">1.45%</td><td class="num mono">No cap</td><td>DC, MD, VA</td></tr>
+            <tr><th scope="row">FUTA, net of the full state credit</th><td class="num mono">0.60%</td><td class="num mono">$7,000</td><td>DC, MD, VA</td></tr>
+            <tr><th scope="row">DC unemployment insurance: 2.7% new-employer rate plus 0.2% Administrative Funding Assessment</th><td class="num mono">2.90%</td><td class="num mono">$9,000</td><td>DC</td></tr>
+            <tr><th scope="row">DC Paid Family Leave (employer-funded)</th><td class="num mono">0.75%</td><td class="num mono">All covered wages</td><td>DC</td></tr>
+            <tr><th scope="row">Maryland unemployment insurance, new employer</th><td class="num mono">2.60%</td><td class="num mono">$8,500</td><td>MD</td></tr>
+            <tr><th scope="row">Maryland FAMLI, employer share at 15+ employees (from 2027)</th><td class="num mono">0.45%</td><td class="num mono">Social Security base</td><td>MD</td></tr>
+            <tr><th scope="row">Virginia unemployment insurance: 2.50% base plus 0.20% fund-building and 0.03% pool-cost charges</th><td class="num mono">2.73%</td><td class="num mono">$8,000</td><td>VA</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <ul class="dmv-method">
+        <li>Unemployment insurance uses each jurisdiction&rsquo;s new-employer rate so the comparison is like for like. Experienced employers get their own rate: DC 1.9% to 7.4%, Maryland 0.3% to 7.5%, Virginia base rates 0.1% to 6.2%.</li>
+        <li>Maryland&rsquo;s 2.6% new-employer rate does not apply to new construction employers headquartered outside Maryland. Those firms are assigned the average Maryland construction-industry rate, which is never lower than the new-employer rate.</li>
+        <li>FUTA assumes the full 5.4% state credit. No DMV jurisdiction was a credit-reduction state for 2025.</li>
+        <li>The 2027 preview applies rules already enacted and holds 2026 unemployment rates, which each state sets for the coming year.</li>
+        <li>Not included: workers&rsquo; compensation premiums (priced by job class and carrier), health and retirement benefits, employee-paid withholding and local business taxes. These sit on top of the statutory floor measured here. The <a href="/#cost-lab">Cost Lab</a> models them.</li>
+        <li>Full-time means 2,080 paid hours a year.</li>
+      </ul>
+    </section>
+
+    <section class="compare-section" aria-labelledby="cite-title">
+      <h2 id="cite-title">Cite this index</h2>
+      <p class="sec-sub">Reporters, accountants and HR writers are welcome to quote these figures. Please link to this page.</p>
+      <div class="dmv-cite">
+        <code id="dmv-cite-text">PEOnomics, &ldquo;DMV Employer Cost Index,&rdquo; 2026 edition, rates reviewed October 27, 2026. https://peonomics.com/dmv-employer-cost-index</code>
+        <button type="button" class="dmv-copy" id="dmv-copy">Copy citation</button>
+      </div>
+    </section>
+
+    <section class="compare-section" aria-labelledby="src-title">
+      <h2 id="src-title">Sources</h2>
+      <ul class="src-list">
+        <li><strong>DC Department of Employment Services &mdash; tax rate questions</strong><a class="mono" href="https://does.dc.gov/service/tax-rate-questions" rel="noopener">does.dc.gov</a><span>DC new-employer unemployment insurance rate and the 0.2% Administrative Funding Assessment.</span></li>
+        <li><strong>Maryland Department of Labor &mdash; unemployment insurance tax rates</strong><a class="mono" href="https://labor.maryland.gov/employment/uitaxexpratefaqs.shtml" rel="noopener">labor.maryland.gov</a><span>2026 new-employer rate (Table A) and the out-of-state construction rule.</span></li>
+        <li><strong>Virginia Employment Commission &mdash; how tax rates are assigned</strong><a class="mono" href="https://www.vec.virginia.gov/node/131" rel="noopener">vec.virginia.gov</a><span>Virginia 2.5% new-employer base rate.</span></li>
+        <li><strong>OnPay &mdash; Virginia payroll tax and registration guide (2026)</strong><a class="mono" href="https://help.onpay.com/hc/en-us/articles/200108537-Virginia-payroll-tax-and-registration-guide" rel="noopener">help.onpay.com</a><span>Virginia 2026 fund-building (0.20%) and pool-cost (0.03%) charges.</span></li>
+        <li><strong>Epstein Becker Green &mdash; DC rolls back paid-leave benefits (Sep 23, 2026)</strong><a class="mono" href="https://www.ebglaw.com/insights/publications/district-of-columbia-bucks-national-trend-on-paid-leave-rolls-back-benefits" rel="noopener">ebglaw.com</a><span>DC Paid Family Leave employer rate held at 0.75% under the FY2027 law.</span></li>
+        <li><strong>GovDocs &mdash; DC paid family leave changes take effect Oct 1, 2026</strong><a class="mono" href="https://www.govdocs.com/dc-paid-family-leave-changes-take-effect-oct-1-2026/" rel="noopener">govdocs.com</a><span>DC benefit-duration and maximum-benefit changes.</span></li>
+        <li><strong>Jackson Lewis &mdash; Maryland FAMLI contributions begin Jan 2027 (Jul 7, 2026)</strong><a class="mono" href="https://www.jacksonlewis.com/insights/maryland-employers-famli-contributions-begin-jan-2027" rel="noopener">jacksonlewis.com</a><span>FAMLI rate, split, small-employer rule and benefit start.</span></li>
+        <li><strong>Social Security Administration &mdash; contribution and benefit base</strong><a class="mono" href="https://www.ssa.gov/OACT/COLA/cbb.html" rel="noopener">ssa.gov</a><span>2026 wage base of $184,500.</span></li>
+        <li><strong>Journal of Accountancy &mdash; 2027 Social Security wage base (Oct 2026)</strong><a class="mono" href="https://www.journalofaccountancy.com/news/2026/oct/social-security-wage-base-and-cola-announced-for-2027/" rel="noopener">journalofaccountancy.com</a><span>2027 wage base of $192,300.</span></li>
+        <li><strong>PayrollOrg &mdash; FUTA credit reduction states for 2025</strong><a class="mono" href="https://payroll.org/news-resources/news/news-detail/2025/11/11/california-virgin-islands-face-futa-credit-reduction-for-2025" rel="noopener">payroll.org</a><span>Only California and the U.S. Virgin Islands faced a 2025 credit reduction.</span></li>
+        <li><strong>GovDocs &mdash; July 1, 2026 minimum wage updates</strong><a class="mono" href="https://www.govdocs.com/midyear-state-minimum-wage-rate-updates/" rel="noopener">govdocs.com</a><span>DC minimum wage ($18.40) and tipped cash wage ($10.30).</span></li>
+        <li><strong>Maryland Department of Labor &mdash; minimum wage and overtime law</strong><a class="mono" href="https://labor.maryland.gov/labor/wages/wagehrfacts.shtml" rel="noopener">labor.maryland.gov</a><span>State, Montgomery, Howard and Prince George&rsquo;s County rates; tipped cash wage.</span></li>
+        <li><strong>Virginia DOLI &mdash; minimum wage effective January 1, 2026</strong><a class="mono" href="https://doli.virginia.gov/?p=23824092" rel="noopener">doli.virginia.gov</a><span>Virginia minimum wage ($12.77) and tipped cash wage ($2.13).</span></li>
+        <li><strong>Office of the Governor of Virginia &mdash; minimum wage bills signed (Apr 9, 2026)</strong><a class="mono" href="https://www.governor.virginia.gov/newsroom/news-releases/2026/april-releases/name-1116004-en.html" rel="noopener">governor.virginia.gov</a><span>HB1 and SB1: $13.75 in 2027, $15.00 in 2028.</span></li>
+      </ul>
+    </section>
+  </div>
+</main>
+
+<footer class="footer">
+  <div><span class="footer-brand">PEO<span class="accent">nomics</span></span><br>Free, independent PEO cost comparison. Estimates are not quotes or advice.</div>
+  <div>
+    <a href="/#cost-lab">Cost Lab</a>
+    <a href="/compare">Compare quotes</a>
+    <a href="/data-library">Data library</a>
+    <a href="/states/">State rates</a>
+    <a href="/dmv-employer-cost-index">DMV cost index</a>
+    <a href="/peo-pricing-explained">Pricing, explained</a>
+    <a href="/hidden-costs">Hidden costs</a>
+    <a href="/insights">Guides &amp; rankings</a>
+    <a href="/methodology">Methodology &amp; disclosures</a>
+    <a href="/about">About</a>
+    <a href="/privacy">Privacy (draft)</a>
+    <a href="https://github.com/jcs3-com/PEOnomicsV2">Dataset on GitHub</a>
+  </div>
+  <p class="footer-disclosure"><strong>Disclosure.</strong> PEOnomics maintains a paid referral relationship with one PEO, XcelHR, and may earn a fee when readers engage its services. That relationship is disclosed on every ranking page and explained in the <a href="/methodology">methodology</a>. The Cost Lab, Quote Comparator and Data Library assume no PEO savings, favor no provider, and send nothing to any PEO.</p>
+</footer>
+
+<script src="/assets/js/dmv-cost-index.js" defer></script>
+<script src="/assets/js/track.js" defer></script>
+</body>
+</html>

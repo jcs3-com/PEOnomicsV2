@@ -3,7 +3,7 @@
 This file is the **only** source of truth for what is done, open, dropped, or pending a decision.
 Not chat history. Not artifacts. When you finish or add work, update this file in the same commit.
 
-**Last updated:** 2026-10-27 (activation release: health check, shared rate limiter, scenario logging, Turnstile key via env; data/unification/analytics releases follow)
+**Last updated:** 2026-10-28 (DMV Employer Cost Index; VA SUI 2.73%. Prior: activation release: health check, shared rate limiter, scenario logging, Turnstile key via env; data/unification/analytics releases follow)
 
 ---
 
@@ -145,6 +145,15 @@ Not chat history. Not artifacts. When you finish or add work, update this file i
     tested). Stored only if the owner binds Analytics Engine `EVENTS`; otherwise discarded.
   - Sitemap (66 URLs) and every canonical/og:url verified extensionless and 200 in production. /contact had lost its
     canonical, og:image and JSON-LD (restored). `tests/test_seo.py` now enforces §4 on all 66 indexable pages.
+- **DMV Employer Cost Index** (2026-10-28): `/dmv-employer-cost-index` — flagship citable data page. Statutory
+  employer cost per employee in DC, MD and VA (FICA, FUTA, new-employer SUI, DC Paid Family Leave, MD FAMLI from
+  2027), minimum-wage floor by jurisdiction (incl. Montgomery tiers, Howard, Prince George's), tipped cash wage,
+  enacted 2027–2028 changes, methodology, citation block. Federal + SUI figures read from `rates-2026.json`;
+  paid-leave, wage-floor and 2027 wage base from new sourced file `data/dmv-index-2026.json`. Calculator:
+  `assets/js/dmv-cost-index.js` (pure `window.PEODmv.compute`). Tests: `tests/test_dmv_index.py` (every static
+  figure equals a fresh computation) and `tests/test_dmv_index.mjs` (model). Footer link added site-wide.
+  - VA 2026 new-employer SUI corrected to **2.73%** (2.50% base + 0.20% fund-building + 0.03% pool-cost),
+    owner-confirmed; source file updated, confidence stays `med` until checked against a VEC page.
 
 ## 🔲 Open — prioritized
 
@@ -164,6 +173,9 @@ Not chat history. Not artifacts. When you finish or add work, update this file i
       arrive, Excel recalculates, double-click sends once, sheet shows requested/accepted rows.
 
 ### P1 — reports, data integrity, positioning
+- [ ] **DMV index refresh schedule:** Jan 1 (SS base, SUI rates, VA wage, MD FAMLI live) and Jul 1 (DC + MD county
+      minimum wages). Update `data/dmv-index-2026.json` / `data/src/`, re-derive the page's static figures,
+      `tests/test_dmv_index.py` lists every figure that moved. Check VA's 0.20%/0.03% add-ons against a VEC page.
 - [ ] **Delivery webhooks** (Resend `email.delivered/bounced`) → log true delivery status, not just acceptance.
 - [ ] **Finalize privacy notice** (owner): confirm the proposed 12-month retention and the request
       channel actually work, then drop the Draft label and `noindex`. Build deletion/suppression handling.

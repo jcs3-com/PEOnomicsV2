@@ -29,12 +29,19 @@
     "VA": {
       "wageBase": 8000,
       "baseRatePct": 2.5,
-      "surcharges": [],
+      "surcharges": [
+        { "name": "Fund-building charge", "ratePct": 0.2, "wageBase": 8000,
+          "sourceName": "OnPay — Virginia payroll tax and registration guide (2026)",
+          "sourceUrl": "https://help.onpay.com/hc/en-us/articles/200108537-Virginia-payroll-tax-and-registration-guide" },
+        { "name": "Pool-cost charge", "ratePct": 0.03, "wageBase": 8000,
+          "sourceName": "OnPay — Virginia payroll tax and registration guide (2026)",
+          "sourceUrl": "https://help.onpay.com/hc/en-us/articles/200108537-Virginia-payroll-tax-and-registration-guide" }
+      ],
       "effective": "2026-01-01",
       "confidence": "med",
       "sourceName": "Virginia Employment Commission — How are tax rates assigned?",
       "sourceUrl": "https://www.vec.virginia.gov/node/131",
-      "note": "VEC: new employers receive a 2.5% initial base rate 'plus add-ons'. The 2026 add-on percentages were not published on a VEC page we could verify, so they are NOT included — the real rate is likely somewhat higher."
+      "note": "VEC: new employers receive a 2.5% initial base rate 'plus add-ons'. For 2026 the add-ons are a 0.20% fund-building charge and a 0.03% pool-cost charge, 2.73% in total on the first $8,000, per a payroll-provider guide and confirmed by the owner. Not yet checked against a VEC page, so confidence stays medium."
     },
     "CA": {
       "wageBase": 7000,

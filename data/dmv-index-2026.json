@@ -1,0 +1,87 @@
+{
+  "metadata": {
+    "name": "DMV Employer Cost Index",
+    "edition": 2026,
+    "lastReviewed": "2026-10-27",
+    "purpose": "DMV-specific statutory figures for /dmv-employer-cost-index that are not in rates-2026.json. Federal FICA/FUTA and state unemployment-insurance rates are read from rates-2026.json so the index and the Cost Lab never disagree.",
+    "fullTimeHours": 2080
+  },
+  "federal": {
+    "socialSecurityWageBase2027": {
+      "value": 192300,
+      "sourceName": "Journal of Accountancy, Social Security wage base and COLA announced for 2027 (SSA announcement Oct 14, 2026)",
+      "sourceUrl": "https://www.journalofaccountancy.com/news/2026/oct/social-security-wage-base-and-cola-announced-for-2027/",
+      "confidence": "high"
+    }
+  },
+  "paidLeave": {
+    "DC": {
+      "name": "DC Paid Family Leave",
+      "employerRate": 0.0075,
+      "employeeRate": 0,
+      "wageBase": null,
+      "effective": "2026",
+      "note": "Employer-funded. The FY2027 law kept the rate at 0.75% while cutting benefits for claims filed on or after Oct 1, 2026: family leave 12 to 6 weeks, medical leave 12 to 10 weeks, maximum weekly benefit $1,190 to $1,100.",
+      "sources": [
+        { "name": "Epstein Becker Green, DC rolls back paid-leave benefits (Sep 23, 2026)", "url": "https://www.ebglaw.com/insights/publications/district-of-columbia-bucks-national-trend-on-paid-leave-rolls-back-benefits" },
+        { "name": "OnPay, DC Paid Family Leave (updated May 20, 2026)", "url": "https://onpay.com/insights/paid-family-leave-by-state/district-of-columbia/" },
+        { "name": "GovDocs, DC paid family leave changes take effect Oct 1, 2026", "url": "https://www.govdocs.com/dc-paid-family-leave-changes-take-effect-oct-1-2026/" }
+      ],
+      "confidence": "high"
+    },
+    "MD": {
+      "name": "Maryland FAMLI",
+      "totalRate": 0.009,
+      "employerRate": 0.0045,
+      "smallEmployerThreshold": 15,
+      "wageBase": "socialSecurityWageBase",
+      "contributionsBegin": "2027-01-01",
+      "benefitsBegin": "2028-01-03",
+      "note": "Total 0.90% of wages up to the Social Security wage base. Employers with 15 or more employees pay at least half and may withhold up to half (0.45%) from pay. Employers with fewer than 15 owe no employer share but must remit any employee share they withhold. Benefits begin no later than Jan 3, 2028.",
+      "sources": [
+        { "name": "Jackson Lewis, Maryland employers' FAMLI contributions begin Jan 2027 (Jul 7, 2026)", "url": "https://www.jacksonlewis.com/insights/maryland-employers-famli-contributions-begin-jan-2027" },
+        { "name": "Maryland Daily Record, Maryland prepares for paid family leave (Oct 14, 2026)", "url": "https://thedailyrecord.com/2026/10/14/maryland-prepares-paid-family-leave-2028/" }
+      ],
+      "confidence": "high"
+    }
+  },
+  "minimumWage": {
+    "asOf": "2026-10-27",
+    "jurisdictions": [
+      { "key": "dc", "name": "District of Columbia", "state": "DC", "hourly": 18.40, "effective": "2026-07-01",
+        "sourceName": "GovDocs, July 1, 2026 minimum wage updates", "sourceUrl": "https://www.govdocs.com/midyear-state-minimum-wage-rate-updates/" },
+      { "key": "mont-large", "name": "Montgomery County, 51+ employees", "state": "MD", "hourly": 18.00, "effective": "2026-07-01",
+        "sourceName": "Maryland Department of Labor, minimum wage", "sourceUrl": "https://labor.maryland.gov/labor/wages/wagehrfacts.shtml" },
+      { "key": "mont-mid", "name": "Montgomery County, 11–50 employees", "state": "MD", "hourly": 16.50, "effective": "2026-07-01",
+        "sourceName": "Maryland Department of Labor, minimum wage", "sourceUrl": "https://labor.maryland.gov/labor/wages/wagehrfacts.shtml" },
+      { "key": "howard", "name": "Howard County", "state": "MD", "hourly": 16.00, "effective": "2026-07-01",
+        "sourceName": "Maryland Department of Labor, minimum wage", "sourceUrl": "https://labor.maryland.gov/labor/wages/wagehrfacts.shtml" },
+      { "key": "mont-small", "name": "Montgomery County, 10 or fewer", "state": "MD", "hourly": 15.95, "effective": "2026-07-01",
+        "sourceName": "Maryland Department of Labor, minimum wage", "sourceUrl": "https://labor.maryland.gov/labor/wages/wagehrfacts.shtml" },
+      { "key": "pg", "name": "Prince George's County", "state": "MD", "hourly": 15.30, "effective": "2026-07-01",
+        "sourceName": "Maryland Department of Labor, minimum wage", "sourceUrl": "https://labor.maryland.gov/labor/wages/wagehrfacts.shtml" },
+      { "key": "md", "name": "Maryland, rest of state", "state": "MD", "hourly": 15.00, "effective": "2024-01-01",
+        "sourceName": "Maryland Department of Labor, minimum wage", "sourceUrl": "https://labor.maryland.gov/labor/wages/wagehrfacts.shtml" },
+      { "key": "va", "name": "Virginia", "state": "VA", "hourly": 12.77, "effective": "2026-01-01",
+        "sourceName": "Virginia DOLI, minimum wage effective Jan 1, 2026", "sourceUrl": "https://doli.virginia.gov/?p=23824092" }
+    ],
+    "scheduled": [
+      { "state": "VA", "hourly": 13.75, "effective": "2027-01-01",
+        "sourceName": "Office of the Governor of Virginia, HB1/SB1 signed Apr 9, 2026", "sourceUrl": "https://www.governor.virginia.gov/newsroom/news-releases/2026/april-releases/name-1116004-en.html" },
+      { "state": "VA", "hourly": 15.00, "effective": "2028-01-01",
+        "sourceName": "Office of the Governor of Virginia, HB1/SB1 signed Apr 9, 2026", "sourceUrl": "https://www.governor.virginia.gov/newsroom/news-releases/2026/april-releases/name-1116004-en.html" }
+    ],
+    "confidence": "high"
+  },
+  "tippedCashWage": {
+    "jurisdictions": [
+      { "state": "DC", "name": "District of Columbia", "hourly": 10.30, "effective": "2026-07-01",
+        "sourceName": "GovDocs, July 1, 2026 minimum wage updates", "sourceUrl": "https://www.govdocs.com/midyear-state-minimum-wage-rate-updates/" },
+      { "state": "MD", "name": "Maryland (statewide)", "hourly": 3.63, "effective": "2026",
+        "sourceName": "Maryland Department of Labor, minimum wage", "sourceUrl": "https://labor.maryland.gov/labor/wages/wagehrfacts.shtml" },
+      { "state": "VA", "name": "Virginia", "hourly": 2.13, "effective": "2026",
+        "sourceName": "Virginia DOLI, minimum wage effective Jan 1, 2026", "sourceUrl": "https://doli.virginia.gov/?p=23824092" }
+    ],
+    "confidence": "high"
+  }
+}

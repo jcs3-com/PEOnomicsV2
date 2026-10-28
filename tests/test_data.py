@@ -26,7 +26,7 @@ check(R['federal']['fica_ss_wage_base'] == 184500, '2026 SS wage base')
 check(R['meta']['tax_year'] == 2026, 'tax year 2026')
 
 PRIORITY = ['DC', 'MD', 'VA', 'CA', 'TX', 'FL', 'NY', 'OH']
-EXPECT = {'DC': (9000, 0.029), 'MD': (8500, 0.026), 'VA': (8000, 0.025), 'CA': (7000, 0.035),
+EXPECT = {'DC': (9000, 0.029), 'MD': (8500, 0.026), 'VA': (8000, 0.0273), 'CA': (7000, 0.035),
           'TX': (9000, 0.027), 'FL': (7000, 0.027), 'NY': (17600, 0.041), 'OH': (9000, 0.0285)}
 for c, (wb, rate) in EXPECT.items():
     s = R['states'][c]
