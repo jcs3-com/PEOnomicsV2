@@ -14,7 +14,24 @@
   },
   "dormantReleases": [
    "futa-credit-reduction-2026-final"
-  ]
+  ],
+  "rotationSkips": {
+   "state-cost-note": [
+    "AZ: AHRQ flags the under-50 employee contribution unreliable",
+    "KY: AHRQ flags the under-50 employee contribution unreliable",
+    "NM: AHRQ flags the under-50 employee contribution unreliable",
+    "WV: AHRQ flags the under-50 employee contribution unreliable",
+    "HI: AHRQ flags the under-50 employee contribution unreliable",
+    "DE: AHRQ flags the under-50 employee contribution unreliable",
+    "WY: AHRQ flags the under-50 employee contribution unreliable"
+   ],
+   "dmv-industry-pay-note": [
+    "DC/construction_trades: partial: BLS suppressed the sector",
+    "DC/transportation_logistics: data missing",
+    "DC/light_manufacturing: data missing",
+    "MD/light_manufacturing: partial: BLS suppressed the sector"
+   ]
+  }
  },
  "items": [
   {
@@ -27,6 +44,7 @@
    "pubDate": "Wed, 28 Oct 2026 09:00:00 -0400",
    "event": null,
    "daysToEvent": null,
+   "key": null,
    "headline": "New: the DMV Employer Cost Index 2026",
    "cardTitle": "DMV Employer Cost Index 2026",
    "cardSub": "What one employee costs an employer in statutory taxes, paid leave and wage floors in DC, Maryland and Virginia. Every figure sourced.",
@@ -71,6 +89,7 @@
    "pubDate": "Tue, 03 Nov 2026 09:00:00 -0500",
    "event": "2026-11-10",
    "daysToEvent": 7,
+   "key": null,
    "headline": "7 days until DOL sets 2026 FUTA credit reductions",
    "cardTitle": "FUTA credit-reduction determination",
    "cardSub": "",
@@ -111,6 +130,7 @@
    "pubDate": "Thu, 05 Nov 2026 09:00:00 -0500",
    "event": "2027-01-01",
    "daysToEvent": 57,
+   "key": null,
    "headline": "57 days until Maryland FAMLI contributions begin",
    "cardTitle": "Maryland FAMLI contributions begin",
    "cardSub": "",
@@ -153,6 +173,7 @@
    "pubDate": "Tue, 10 Nov 2026 09:00:00 -0500",
    "event": "2026-11-10",
    "daysToEvent": 0,
+   "key": null,
    "headline": "Today: DOL sets 2026 FUTA credit reductions",
    "cardTitle": "FUTA credit-reduction determination",
    "cardSub": "",
@@ -193,6 +214,7 @@
    "pubDate": "Thu, 12 Nov 2026 09:00:00 -0500",
    "event": "2027-01-01",
    "daysToEvent": 50,
+   "key": null,
    "headline": "50 days until the Social Security wage base rises to $192,300",
    "cardTitle": "Social Security wage base rises",
    "cardSub": "",
@@ -234,6 +256,7 @@
    "pubDate": "Tue, 17 Nov 2026 09:00:00 -0500",
    "event": "2027-01-01",
    "daysToEvent": 45,
+   "key": null,
    "headline": "45 days until Virginia's minimum wage rises to $13.75",
    "cardTitle": "Virginia minimum wage rises",
    "cardSub": "",
@@ -276,6 +299,7 @@
    "pubDate": "Thu, 19 Nov 2026 09:00:00 -0500",
    "event": "2027-01-01",
    "daysToEvent": 43,
+   "key": null,
    "headline": "43 days until January 1 renewals",
    "cardTitle": "January 1 benefits and PEO renewals",
    "cardSub": "",
@@ -307,6 +331,51 @@
    "imageBytes": 47428
   },
   {
+   "id": "state-cost-note-dc",
+   "series": "state-cost-note",
+   "kind": "note",
+   "label": "Data note",
+   "liveDate": "2026-11-24",
+   "liveAt": "2026-11-24T09:00:00-05:00",
+   "pubDate": "Tue, 24 Nov 2026 09:00:00 -0500",
+   "event": null,
+   "daysToEvent": null,
+   "key": "DC",
+   "headline": "What one employee costs an employer in Washington, DC, before the extras",
+   "cardTitle": "Washington, DC: the base cost of one employee",
+   "cardSub": "Average private-sector pay, employer FICA and the employer share of single health coverage at firms under 50 employees.",
+   "stats": [
+    [
+     "Avg pay per job",
+     "$123,844"
+    ],
+    [
+     "Employer FICA",
+     "$9,474"
+    ],
+    [
+     "Health, employer share",
+     "$7,475"
+    ]
+   ],
+   "estimates": [],
+   "text": "What one employee costs an employer in Washington, DC, before the extras\n\nIn Washington, DC, three numbers every employer cost starts from:\n\n- Average private-sector pay per job: $123,844 a year (includes part-time jobs)\n- Employer Social Security and Medicare on that pay (7.65%): $9,474\n- Employer share of single health coverage at firms under 50 employees: $7,475 a year\n\nThat is $140,793 before unemployment insurance, workers' comp, retirement, admin or a PEO fee. The Washington, DC page carries the rest, each figure with its source.\n\nSource: BLS QCEW 2025 annual averages, private; AHRQ MEPS-IC 2025, state tables; 26 U.S.C. 3111\n\nWashington, DC: rates, wages and sources: https://peonomics.com/states/dc\n\nPEOnomics · PEO cost intelligence\n\n#SmallBusiness #Payroll #EmployerCosts",
+   "url": "https://peonomics.com/states/dc",
+   "image": "https://peonomics.com/assets/images/posts/state-cost-note-dc.png",
+   "figures": {
+    "ss": 0.062,
+    "med": 0.0145,
+    "ficaRate": 0.0765,
+    "name": "Washington, DC",
+    "wage": 123844,
+    "fica": 9474.066,
+    "health": 7475,
+    "sub": 133318.066,
+    "total": 140793.066
+   },
+   "imageBytes": 61340
+  },
+  {
    "id": "md-famli-2027-2026-12-01",
    "series": "md-famli-2027",
    "kind": "countdown",
@@ -316,6 +385,7 @@
    "pubDate": "Tue, 01 Dec 2026 09:00:00 -0500",
    "event": "2027-01-01",
    "daysToEvent": 31,
+   "key": null,
    "headline": "31 days until Maryland FAMLI contributions begin",
    "cardTitle": "Maryland FAMLI contributions begin",
    "cardSub": "",
@@ -358,6 +428,7 @@
    "pubDate": "Thu, 03 Dec 2026 09:00:00 -0500",
    "event": "2027-01-01",
    "daysToEvent": 29,
+   "key": null,
    "headline": "29 days until the Social Security wage base rises to $192,300",
    "cardTitle": "Social Security wage base rises",
    "cardSub": "",
@@ -399,6 +470,7 @@
    "pubDate": "Tue, 08 Dec 2026 09:00:00 -0500",
    "event": "2027-01-01",
    "daysToEvent": 24,
+   "key": null,
    "headline": "24 days until Virginia's minimum wage rises to $13.75",
    "cardTitle": "Virginia minimum wage rises",
    "cardSub": "",
@@ -441,6 +513,7 @@
    "pubDate": "Thu, 10 Dec 2026 09:00:00 -0500",
    "event": "2027-01-01",
    "daysToEvent": 22,
+   "key": null,
    "headline": "22 days until January 1 renewals",
    "cardTitle": "January 1 benefits and PEO renewals",
    "cardSub": "",
@@ -481,6 +554,7 @@
    "pubDate": "Tue, 15 Dec 2026 09:00:00 -0500",
    "event": "2027-01-01",
    "daysToEvent": 17,
+   "key": null,
    "headline": "17 days until Maryland FAMLI contributions begin",
    "cardTitle": "Maryland FAMLI contributions begin",
    "cardSub": "",
@@ -523,6 +597,7 @@
    "pubDate": "Thu, 17 Dec 2026 09:00:00 -0500",
    "event": "2027-01-01",
    "daysToEvent": 15,
+   "key": null,
    "headline": "15 days until January 1 payroll changes in the DMV",
    "cardTitle": "January 1 payroll changes in the DMV",
    "cardSub": "",
@@ -565,6 +640,7 @@
    "pubDate": "Tue, 22 Dec 2026 09:00:00 -0500",
    "event": "2027-01-01",
    "daysToEvent": 10,
+   "key": null,
    "headline": "10 days until Virginia's minimum wage rises to $13.75",
    "cardTitle": "Virginia minimum wage rises",
    "cardSub": "",
@@ -607,6 +683,7 @@
    "pubDate": "Tue, 29 Dec 2026 09:00:00 -0500",
    "event": "2027-01-01",
    "daysToEvent": 3,
+   "key": null,
    "headline": "3 days until January 1 payroll changes in the DMV",
    "cardTitle": "January 1 payroll changes in the DMV",
    "cardSub": "",
@@ -649,6 +726,7 @@
    "pubDate": "Tue, 05 Jan 2027 09:00:00 -0500",
    "event": "2027-01-01",
    "daysToEvent": -4,
+   "key": null,
    "headline": "Now in effect: January 1 payroll changes in the DMV",
    "cardTitle": "January 1 payroll changes in the DMV",
    "cardSub": "",
@@ -682,6 +760,2543 @@
    "imageBytes": 45038
   },
   {
+   "id": "state-cost-note-md",
+   "series": "state-cost-note",
+   "kind": "note",
+   "label": "Data note",
+   "liveDate": "2027-01-07",
+   "liveAt": "2027-01-07T09:00:00-05:00",
+   "pubDate": "Thu, 07 Jan 2027 09:00:00 -0500",
+   "event": null,
+   "daysToEvent": null,
+   "key": "MD",
+   "headline": "What one employee costs an employer in Maryland, before the extras",
+   "cardTitle": "Maryland: the base cost of one employee",
+   "cardSub": "Average private-sector pay, employer FICA and the employer share of single health coverage at firms under 50 employees.",
+   "stats": [
+    [
+     "Avg pay per job",
+     "$78,676"
+    ],
+    [
+     "Employer FICA",
+     "$6,019"
+    ],
+    [
+     "Health, employer share",
+     "$6,042"
+    ]
+   ],
+   "estimates": [],
+   "text": "What one employee costs an employer in Maryland, before the extras\n\nIn Maryland, three numbers every employer cost starts from:\n\n- Average private-sector pay per job: $78,676 a year (includes part-time jobs)\n- Employer Social Security and Medicare on that pay (7.65%): $6,019\n- Employer share of single health coverage at firms under 50 employees: $6,042 a year\n\nThat is $90,737 before unemployment insurance, workers' comp, retirement, admin or a PEO fee. The Maryland page carries the rest, each figure with its source.\n\nSource: BLS QCEW 2025 annual averages, private; AHRQ MEPS-IC 2025, state tables; 26 U.S.C. 3111\n\nMaryland: rates, wages and sources: https://peonomics.com/states/md\n\nPEOnomics · PEO cost intelligence\n\n#SmallBusiness #Payroll #EmployerCosts",
+   "url": "https://peonomics.com/states/md",
+   "image": "https://peonomics.com/assets/images/posts/state-cost-note-md.png",
+   "figures": {
+    "ss": 0.062,
+    "med": 0.0145,
+    "ficaRate": 0.0765,
+    "name": "Maryland",
+    "wage": 78676,
+    "fica": 6018.714,
+    "health": 6042,
+    "sub": 84694.714,
+    "total": 90736.714
+   },
+   "imageBytes": 58863
+  },
+  {
+   "id": "state-cost-note-va",
+   "series": "state-cost-note",
+   "kind": "note",
+   "label": "Data note",
+   "liveDate": "2027-01-12",
+   "liveAt": "2027-01-12T09:00:00-05:00",
+   "pubDate": "Tue, 12 Jan 2027 09:00:00 -0500",
+   "event": null,
+   "daysToEvent": null,
+   "key": "VA",
+   "headline": "What one employee costs an employer in Virginia, before the extras",
+   "cardTitle": "Virginia: the base cost of one employee",
+   "cardSub": "Average private-sector pay, employer FICA and the employer share of single health coverage at firms under 50 employees.",
+   "stats": [
+    [
+     "Avg pay per job",
+     "$80,159"
+    ],
+    [
+     "Employer FICA",
+     "$6,132"
+    ],
+    [
+     "Health, employer share",
+     "$6,378"
+    ]
+   ],
+   "estimates": [],
+   "text": "What one employee costs an employer in Virginia, before the extras\n\nIn Virginia, three numbers every employer cost starts from:\n\n- Average private-sector pay per job: $80,159 a year (includes part-time jobs)\n- Employer Social Security and Medicare on that pay (7.65%): $6,132\n- Employer share of single health coverage at firms under 50 employees: $6,378 a year\n\nThat is $92,669 before unemployment insurance, workers' comp, retirement, admin or a PEO fee. The Virginia page carries the rest, each figure with its source.\n\nSource: BLS QCEW 2025 annual averages, private; AHRQ MEPS-IC 2025, state tables; 26 U.S.C. 3111\n\nVirginia: rates, wages and sources: https://peonomics.com/states/va\n\nPEOnomics · PEO cost intelligence\n\n#SmallBusiness #Payroll #EmployerCosts",
+   "url": "https://peonomics.com/states/va",
+   "image": "https://peonomics.com/assets/images/posts/state-cost-note-va.png",
+   "figures": {
+    "ss": 0.062,
+    "med": 0.0145,
+    "ficaRate": 0.0765,
+    "name": "Virginia",
+    "wage": 80159,
+    "fica": 6132.1635,
+    "health": 6378,
+    "sub": 86291.1635,
+    "total": 92669.1635
+   },
+   "imageBytes": 59372
+  },
+  {
+   "id": "state-cost-note-ca",
+   "series": "state-cost-note",
+   "kind": "note",
+   "label": "Data note",
+   "liveDate": "2027-01-14",
+   "liveAt": "2027-01-14T09:00:00-05:00",
+   "pubDate": "Thu, 14 Jan 2027 09:00:00 -0500",
+   "event": null,
+   "daysToEvent": null,
+   "key": "CA",
+   "headline": "What one employee costs an employer in California, before the extras",
+   "cardTitle": "California: the base cost of one employee",
+   "cardSub": "Average private-sector pay, employer FICA and the employer share of single health coverage at firms under 50 employees.",
+   "stats": [
+    [
+     "Avg pay per job",
+     "$97,204"
+    ],
+    [
+     "Employer FICA",
+     "$7,436"
+    ],
+    [
+     "Health, employer share",
+     "$7,547"
+    ]
+   ],
+   "estimates": [],
+   "text": "What one employee costs an employer in California, before the extras\n\nIn California, three numbers every employer cost starts from:\n\n- Average private-sector pay per job: $97,204 a year (includes part-time jobs)\n- Employer Social Security and Medicare on that pay (7.65%): $7,436\n- Employer share of single health coverage at firms under 50 employees: $7,547 a year\n\nThat is $112,187 before unemployment insurance, workers' comp, retirement, admin or a PEO fee. The California page carries the rest, each figure with its source.\n\nSource: BLS QCEW 2025 annual averages, private; AHRQ MEPS-IC 2025, state tables; 26 U.S.C. 3111\n\nCalifornia: rates, wages and sources: https://peonomics.com/states/ca\n\nPEOnomics · PEO cost intelligence\n\n#SmallBusiness #Payroll #EmployerCosts",
+   "url": "https://peonomics.com/states/ca",
+   "image": "https://peonomics.com/assets/images/posts/state-cost-note-ca.png",
+   "figures": {
+    "ss": 0.062,
+    "med": 0.0145,
+    "ficaRate": 0.0765,
+    "name": "California",
+    "wage": 97204,
+    "fica": 7436.106,
+    "health": 7547,
+    "sub": 104640.106,
+    "total": 112187.106
+   },
+   "imageBytes": 56872
+  },
+  {
+   "id": "state-cost-note-tx",
+   "series": "state-cost-note",
+   "kind": "note",
+   "label": "Data note",
+   "liveDate": "2027-01-19",
+   "liveAt": "2027-01-19T09:00:00-05:00",
+   "pubDate": "Tue, 19 Jan 2027 09:00:00 -0500",
+   "event": null,
+   "daysToEvent": null,
+   "key": "TX",
+   "headline": "What one employee costs an employer in Texas, before the extras",
+   "cardTitle": "Texas: the base cost of one employee",
+   "cardSub": "Average private-sector pay, employer FICA and the employer share of single health coverage at firms under 50 employees.",
+   "stats": [
+    [
+     "Avg pay per job",
+     "$79,392"
+    ],
+    [
+     "Employer FICA",
+     "$6,073"
+    ],
+    [
+     "Health, employer share",
+     "$7,154"
+    ]
+   ],
+   "estimates": [],
+   "text": "What one employee costs an employer in Texas, before the extras\n\nIn Texas, three numbers every employer cost starts from:\n\n- Average private-sector pay per job: $79,392 a year (includes part-time jobs)\n- Employer Social Security and Medicare on that pay (7.65%): $6,073\n- Employer share of single health coverage at firms under 50 employees: $7,154 a year\n\nThat is $92,619 before unemployment insurance, workers' comp, retirement, admin or a PEO fee. The Texas page carries the rest, each figure with its source.\n\nSource: BLS QCEW 2025 annual averages, private; AHRQ MEPS-IC 2025, state tables; 26 U.S.C. 3111\n\nTexas: rates, wages and sources: https://peonomics.com/states/tx\n\nPEOnomics · PEO cost intelligence\n\n#SmallBusiness #Payroll #EmployerCosts",
+   "url": "https://peonomics.com/states/tx",
+   "image": "https://peonomics.com/assets/images/posts/state-cost-note-tx.png",
+   "figures": {
+    "ss": 0.062,
+    "med": 0.0145,
+    "ficaRate": 0.0765,
+    "name": "Texas",
+    "wage": 79392,
+    "fica": 6073.488,
+    "health": 7154,
+    "sub": 85465.488,
+    "total": 92619.488
+   },
+   "imageBytes": 54217
+  },
+  {
+   "id": "state-cost-note-fl",
+   "series": "state-cost-note",
+   "kind": "note",
+   "label": "Data note",
+   "liveDate": "2027-01-21",
+   "liveAt": "2027-01-21T09:00:00-05:00",
+   "pubDate": "Thu, 21 Jan 2027 09:00:00 -0500",
+   "event": null,
+   "daysToEvent": null,
+   "key": "FL",
+   "headline": "What one employee costs an employer in Florida, before the extras",
+   "cardTitle": "Florida: the base cost of one employee",
+   "cardSub": "Average private-sector pay, employer FICA and the employer share of single health coverage at firms under 50 employees.",
+   "stats": [
+    [
+     "Avg pay per job",
+     "$72,719"
+    ],
+    [
+     "Employer FICA",
+     "$5,563"
+    ],
+    [
+     "Health, employer share",
+     "$7,242"
+    ]
+   ],
+   "estimates": [],
+   "text": "What one employee costs an employer in Florida, before the extras\n\nIn Florida, three numbers every employer cost starts from:\n\n- Average private-sector pay per job: $72,719 a year (includes part-time jobs)\n- Employer Social Security and Medicare on that pay (7.65%): $5,563\n- Employer share of single health coverage at firms under 50 employees: $7,242 a year\n\nThat is $85,524 before unemployment insurance, workers' comp, retirement, admin or a PEO fee. The Florida page carries the rest, each figure with its source.\n\nSource: BLS QCEW 2025 annual averages, private; AHRQ MEPS-IC 2025, state tables; 26 U.S.C. 3111\n\nFlorida: rates, wages and sources: https://peonomics.com/states/fl\n\nPEOnomics · PEO cost intelligence\n\n#SmallBusiness #Payroll #EmployerCosts",
+   "url": "https://peonomics.com/states/fl",
+   "image": "https://peonomics.com/assets/images/posts/state-cost-note-fl.png",
+   "figures": {
+    "ss": 0.062,
+    "med": 0.0145,
+    "ficaRate": 0.0765,
+    "name": "Florida",
+    "wage": 72719,
+    "fica": 5563.0035,
+    "health": 7242,
+    "sub": 78282.0035,
+    "total": 85524.0035
+   },
+   "imageBytes": 56072
+  },
+  {
+   "id": "state-cost-note-ny",
+   "series": "state-cost-note",
+   "kind": "note",
+   "label": "Data note",
+   "liveDate": "2027-01-26",
+   "liveAt": "2027-01-26T09:00:00-05:00",
+   "pubDate": "Tue, 26 Jan 2027 09:00:00 -0500",
+   "event": null,
+   "daysToEvent": null,
+   "key": "NY",
+   "headline": "What one employee costs an employer in New York, before the extras",
+   "cardTitle": "New York: the base cost of one employee",
+   "cardSub": "Average private-sector pay, employer FICA and the employer share of single health coverage at firms under 50 employees.",
+   "stats": [
+    [
+     "Avg pay per job",
+     "$100,938"
+    ],
+    [
+     "Employer FICA",
+     "$7,722"
+    ],
+    [
+     "Health, employer share",
+     "$8,919"
+    ]
+   ],
+   "estimates": [],
+   "text": "What one employee costs an employer in New York, before the extras\n\nIn New York, three numbers every employer cost starts from:\n\n- Average private-sector pay per job: $100,938 a year (includes part-time jobs)\n- Employer Social Security and Medicare on that pay (7.65%): $7,722\n- Employer share of single health coverage at firms under 50 employees: $8,919 a year\n\nThat is $117,579 before unemployment insurance, workers' comp, retirement, admin or a PEO fee. The New York page carries the rest, each figure with its source.\n\nSource: BLS QCEW 2025 annual averages, private; AHRQ MEPS-IC 2025, state tables; 26 U.S.C. 3111\n\nNew York: rates, wages and sources: https://peonomics.com/states/ny\n\nPEOnomics · PEO cost intelligence\n\n#SmallBusiness #Payroll #EmployerCosts",
+   "url": "https://peonomics.com/states/ny",
+   "image": "https://peonomics.com/assets/images/posts/state-cost-note-ny.png",
+   "figures": {
+    "ss": 0.062,
+    "med": 0.0145,
+    "ficaRate": 0.0765,
+    "name": "New York",
+    "wage": 100938,
+    "fica": 7721.757,
+    "health": 8919,
+    "sub": 108659.757,
+    "total": 117578.757
+   },
+   "imageBytes": 58158
+  },
+  {
+   "id": "state-cost-note-pa",
+   "series": "state-cost-note",
+   "kind": "note",
+   "label": "Data note",
+   "liveDate": "2027-01-28",
+   "liveAt": "2027-01-28T09:00:00-05:00",
+   "pubDate": "Thu, 28 Jan 2027 09:00:00 -0500",
+   "event": null,
+   "daysToEvent": null,
+   "key": "PA",
+   "headline": "What one employee costs an employer in Pennsylvania, before the extras",
+   "cardTitle": "Pennsylvania: the base cost of one employee",
+   "cardSub": "Average private-sector pay, employer FICA and the employer share of single health coverage at firms under 50 employees.",
+   "stats": [
+    [
+     "Avg pay per job",
+     "$74,383"
+    ],
+    [
+     "Employer FICA",
+     "$5,690"
+    ],
+    [
+     "Health, employer share",
+     "$6,780"
+    ]
+   ],
+   "estimates": [],
+   "text": "What one employee costs an employer in Pennsylvania, before the extras\n\nIn Pennsylvania, three numbers every employer cost starts from:\n\n- Average private-sector pay per job: $74,383 a year (includes part-time jobs)\n- Employer Social Security and Medicare on that pay (7.65%): $5,690\n- Employer share of single health coverage at firms under 50 employees: $6,780 a year\n\nThat is $86,853 before unemployment insurance, workers' comp, retirement, admin or a PEO fee. The Pennsylvania page carries the rest, each figure with its source.\n\nSource: BLS QCEW 2025 annual averages, private; AHRQ MEPS-IC 2025, state tables; 26 U.S.C. 3111\n\nPennsylvania: rates, wages and sources: https://peonomics.com/states/pa\n\nPEOnomics · PEO cost intelligence\n\n#SmallBusiness #Payroll #EmployerCosts",
+   "url": "https://peonomics.com/states/pa",
+   "image": "https://peonomics.com/assets/images/posts/state-cost-note-pa.png",
+   "figures": {
+    "ss": 0.062,
+    "med": 0.0145,
+    "ficaRate": 0.0765,
+    "name": "Pennsylvania",
+    "wage": 74383,
+    "fica": 5690.2995,
+    "health": 6780,
+    "sub": 80073.2995,
+    "total": 86853.2995
+   },
+   "imageBytes": 58439
+  },
+  {
+   "id": "state-cost-note-il",
+   "series": "state-cost-note",
+   "kind": "note",
+   "label": "Data note",
+   "liveDate": "2027-02-02",
+   "liveAt": "2027-02-02T09:00:00-05:00",
+   "pubDate": "Tue, 02 Feb 2027 09:00:00 -0500",
+   "event": null,
+   "daysToEvent": null,
+   "key": "IL",
+   "headline": "What one employee costs an employer in Illinois, before the extras",
+   "cardTitle": "Illinois: the base cost of one employee",
+   "cardSub": "Average private-sector pay, employer FICA and the employer share of single health coverage at firms under 50 employees.",
+   "stats": [
+    [
+     "Avg pay per job",
+     "$81,129"
+    ],
+    [
+     "Employer FICA",
+     "$6,206"
+    ],
+    [
+     "Health, employer share",
+     "$7,753"
+    ]
+   ],
+   "estimates": [],
+   "text": "What one employee costs an employer in Illinois, before the extras\n\nIn Illinois, three numbers every employer cost starts from:\n\n- Average private-sector pay per job: $81,129 a year (includes part-time jobs)\n- Employer Social Security and Medicare on that pay (7.65%): $6,206\n- Employer share of single health coverage at firms under 50 employees: $7,753 a year\n\nThat is $95,088 before unemployment insurance, workers' comp, retirement, admin or a PEO fee. The Illinois page carries the rest, each figure with its source.\n\nSource: BLS QCEW 2025 annual averages, private; AHRQ MEPS-IC 2025, state tables; 26 U.S.C. 3111\n\nIllinois: rates, wages and sources: https://peonomics.com/states/il\n\nPEOnomics · PEO cost intelligence\n\n#SmallBusiness #Payroll #EmployerCosts",
+   "url": "https://peonomics.com/states/il",
+   "image": "https://peonomics.com/assets/images/posts/state-cost-note-il.png",
+   "figures": {
+    "ss": 0.062,
+    "med": 0.0145,
+    "ficaRate": 0.0765,
+    "name": "Illinois",
+    "wage": 81129,
+    "fica": 6206.3685,
+    "health": 7753,
+    "sub": 87335.3685,
+    "total": 95088.3685
+   },
+   "imageBytes": 55679
+  },
+  {
+   "id": "state-cost-note-oh",
+   "series": "state-cost-note",
+   "kind": "note",
+   "label": "Data note",
+   "liveDate": "2027-02-04",
+   "liveAt": "2027-02-04T09:00:00-05:00",
+   "pubDate": "Thu, 04 Feb 2027 09:00:00 -0500",
+   "event": null,
+   "daysToEvent": null,
+   "key": "OH",
+   "headline": "What one employee costs an employer in Ohio, before the extras",
+   "cardTitle": "Ohio: the base cost of one employee",
+   "cardSub": "Average private-sector pay, employer FICA and the employer share of single health coverage at firms under 50 employees.",
+   "stats": [
+    [
+     "Avg pay per job",
+     "$67,921"
+    ],
+    [
+     "Employer FICA",
+     "$5,196"
+    ],
+    [
+     "Health, employer share",
+     "$6,173"
+    ]
+   ],
+   "estimates": [],
+   "text": "What one employee costs an employer in Ohio, before the extras\n\nIn Ohio, three numbers every employer cost starts from:\n\n- Average private-sector pay per job: $67,921 a year (includes part-time jobs)\n- Employer Social Security and Medicare on that pay (7.65%): $5,196\n- Employer share of single health coverage at firms under 50 employees: $6,173 a year\n\nThat is $79,290 before unemployment insurance, workers' comp, retirement, admin or a PEO fee. The Ohio page carries the rest, each figure with its source.\n\nSource: BLS QCEW 2025 annual averages, private; AHRQ MEPS-IC 2025, state tables; 26 U.S.C. 3111\n\nOhio: rates, wages and sources: https://peonomics.com/states/oh\n\nPEOnomics · PEO cost intelligence\n\n#SmallBusiness #Payroll #EmployerCosts",
+   "url": "https://peonomics.com/states/oh",
+   "image": "https://peonomics.com/assets/images/posts/state-cost-note-oh.png",
+   "figures": {
+    "ss": 0.062,
+    "med": 0.0145,
+    "ficaRate": 0.0765,
+    "name": "Ohio",
+    "wage": 67921,
+    "fica": 5195.9565,
+    "health": 6173,
+    "sub": 73116.9565,
+    "total": 79289.9565
+   },
+   "imageBytes": 52872
+  },
+  {
+   "id": "state-cost-note-nc",
+   "series": "state-cost-note",
+   "kind": "note",
+   "label": "Data note",
+   "liveDate": "2027-02-09",
+   "liveAt": "2027-02-09T09:00:00-05:00",
+   "pubDate": "Tue, 09 Feb 2027 09:00:00 -0500",
+   "event": null,
+   "daysToEvent": null,
+   "key": "NC",
+   "headline": "What one employee costs an employer in North Carolina, before the extras",
+   "cardTitle": "North Carolina: the base cost of one employee",
+   "cardSub": "Average private-sector pay, employer FICA and the employer share of single health coverage at firms under 50 employees.",
+   "stats": [
+    [
+     "Avg pay per job",
+     "$72,186"
+    ],
+    [
+     "Employer FICA",
+     "$5,522"
+    ],
+    [
+     "Health, employer share",
+     "$5,860"
+    ]
+   ],
+   "estimates": [],
+   "text": "What one employee costs an employer in North Carolina, before the extras\n\nIn North Carolina, three numbers every employer cost starts from:\n\n- Average private-sector pay per job: $72,186 a year (includes part-time jobs)\n- Employer Social Security and Medicare on that pay (7.65%): $5,522\n- Employer share of single health coverage at firms under 50 employees: $5,860 a year\n\nThat is $83,568 before unemployment insurance, workers' comp, retirement, admin or a PEO fee. The North Carolina page carries the rest, each figure with its source.\n\nSource: BLS QCEW 2025 annual averages, private; AHRQ MEPS-IC 2025, state tables; 26 U.S.C. 3111\n\nNorth Carolina: rates, wages and sources: https://peonomics.com/states/nc\n\nPEOnomics · PEO cost intelligence\n\n#SmallBusiness #Payroll #EmployerCosts",
+   "url": "https://peonomics.com/states/nc",
+   "image": "https://peonomics.com/assets/images/posts/state-cost-note-nc.png",
+   "figures": {
+    "ss": 0.062,
+    "med": 0.0145,
+    "ficaRate": 0.0765,
+    "name": "North Carolina",
+    "wage": 72186,
+    "fica": 5522.229,
+    "health": 5860,
+    "sub": 77708.229,
+    "total": 83568.229
+   },
+   "imageBytes": 57078
+  },
+  {
+   "id": "state-cost-note-ga",
+   "series": "state-cost-note",
+   "kind": "note",
+   "label": "Data note",
+   "liveDate": "2027-02-11",
+   "liveAt": "2027-02-11T09:00:00-05:00",
+   "pubDate": "Thu, 11 Feb 2027 09:00:00 -0500",
+   "event": null,
+   "daysToEvent": null,
+   "key": "GA",
+   "headline": "What one employee costs an employer in Georgia, before the extras",
+   "cardTitle": "Georgia: the base cost of one employee",
+   "cardSub": "Average private-sector pay, employer FICA and the employer share of single health coverage at firms under 50 employees.",
+   "stats": [
+    [
+     "Avg pay per job",
+     "$74,150"
+    ],
+    [
+     "Employer FICA",
+     "$5,672"
+    ],
+    [
+     "Health, employer share",
+     "$7,807"
+    ]
+   ],
+   "estimates": [],
+   "text": "What one employee costs an employer in Georgia, before the extras\n\nIn Georgia, three numbers every employer cost starts from:\n\n- Average private-sector pay per job: $74,150 a year (includes part-time jobs)\n- Employer Social Security and Medicare on that pay (7.65%): $5,672\n- Employer share of single health coverage at firms under 50 employees: $7,807 a year\n\nThat is $87,629 before unemployment insurance, workers' comp, retirement, admin or a PEO fee. The Georgia page carries the rest, each figure with its source.\n\nSource: BLS QCEW 2025 annual averages, private; AHRQ MEPS-IC 2025, state tables; 26 U.S.C. 3111\n\nGeorgia: rates, wages and sources: https://peonomics.com/states/ga\n\nPEOnomics · PEO cost intelligence\n\n#SmallBusiness #Payroll #EmployerCosts",
+   "url": "https://peonomics.com/states/ga",
+   "image": "https://peonomics.com/assets/images/posts/state-cost-note-ga.png",
+   "figures": {
+    "ss": 0.062,
+    "med": 0.0145,
+    "ficaRate": 0.0765,
+    "name": "Georgia",
+    "wage": 74150,
+    "fica": 5672.474999999999,
+    "health": 7807,
+    "sub": 79822.475,
+    "total": 87629.475
+   },
+   "imageBytes": 57278
+  },
+  {
+   "id": "state-cost-note-mi",
+   "series": "state-cost-note",
+   "kind": "note",
+   "label": "Data note",
+   "liveDate": "2027-02-16",
+   "liveAt": "2027-02-16T09:00:00-05:00",
+   "pubDate": "Tue, 16 Feb 2027 09:00:00 -0500",
+   "event": null,
+   "daysToEvent": null,
+   "key": "MI",
+   "headline": "What one employee costs an employer in Michigan, before the extras",
+   "cardTitle": "Michigan: the base cost of one employee",
+   "cardSub": "Average private-sector pay, employer FICA and the employer share of single health coverage at firms under 50 employees.",
+   "stats": [
+    [
+     "Avg pay per job",
+     "$70,840"
+    ],
+    [
+     "Employer FICA",
+     "$5,419"
+    ],
+    [
+     "Health, employer share",
+     "$6,309"
+    ]
+   ],
+   "estimates": [],
+   "text": "What one employee costs an employer in Michigan, before the extras\n\nIn Michigan, three numbers every employer cost starts from:\n\n- Average private-sector pay per job: $70,840 a year (includes part-time jobs)\n- Employer Social Security and Medicare on that pay (7.65%): $5,419\n- Employer share of single health coverage at firms under 50 employees: $6,309 a year\n\nThat is $82,568 before unemployment insurance, workers' comp, retirement, admin or a PEO fee. The Michigan page carries the rest, each figure with its source.\n\nSource: BLS QCEW 2025 annual averages, private; AHRQ MEPS-IC 2025, state tables; 26 U.S.C. 3111\n\nMichigan: rates, wages and sources: https://peonomics.com/states/mi\n\nPEOnomics · PEO cost intelligence\n\n#SmallBusiness #Payroll #EmployerCosts",
+   "url": "https://peonomics.com/states/mi",
+   "image": "https://peonomics.com/assets/images/posts/state-cost-note-mi.png",
+   "figures": {
+    "ss": 0.062,
+    "med": 0.0145,
+    "ficaRate": 0.0765,
+    "name": "Michigan",
+    "wage": 70840,
+    "fica": 5419.26,
+    "health": 6309,
+    "sub": 76259.26,
+    "total": 82568.26
+   },
+   "imageBytes": 58883
+  },
+  {
+   "id": "state-cost-note-nj",
+   "series": "state-cost-note",
+   "kind": "note",
+   "label": "Data note",
+   "liveDate": "2027-02-18",
+   "liveAt": "2027-02-18T09:00:00-05:00",
+   "pubDate": "Thu, 18 Feb 2027 09:00:00 -0500",
+   "event": null,
+   "daysToEvent": null,
+   "key": "NJ",
+   "headline": "What one employee costs an employer in New Jersey, before the extras",
+   "cardTitle": "New Jersey: the base cost of one employee",
+   "cardSub": "Average private-sector pay, employer FICA and the employer share of single health coverage at firms under 50 employees.",
+   "stats": [
+    [
+     "Avg pay per job",
+     "$86,718"
+    ],
+    [
+     "Employer FICA",
+     "$6,634"
+    ],
+    [
+     "Health, employer share",
+     "$7,717"
+    ]
+   ],
+   "estimates": [],
+   "text": "What one employee costs an employer in New Jersey, before the extras\n\nIn New Jersey, three numbers every employer cost starts from:\n\n- Average private-sector pay per job: $86,718 a year (includes part-time jobs)\n- Employer Social Security and Medicare on that pay (7.65%): $6,634\n- Employer share of single health coverage at firms under 50 employees: $7,717 a year\n\nThat is $101,069 before unemployment insurance, workers' comp, retirement, admin or a PEO fee. The New Jersey page carries the rest, each figure with its source.\n\nSource: BLS QCEW 2025 annual averages, private; AHRQ MEPS-IC 2025, state tables; 26 U.S.C. 3111\n\nNew Jersey: rates, wages and sources: https://peonomics.com/states/nj\n\nPEOnomics · PEO cost intelligence\n\n#SmallBusiness #Payroll #EmployerCosts",
+   "url": "https://peonomics.com/states/nj",
+   "image": "https://peonomics.com/assets/images/posts/state-cost-note-nj.png",
+   "figures": {
+    "ss": 0.062,
+    "med": 0.0145,
+    "ficaRate": 0.0765,
+    "name": "New Jersey",
+    "wage": 86718,
+    "fica": 6633.927,
+    "health": 7717,
+    "sub": 93351.927,
+    "total": 101068.927
+   },
+   "imageBytes": 56829
+  },
+  {
+   "id": "state-cost-note-ma",
+   "series": "state-cost-note",
+   "kind": "note",
+   "label": "Data note",
+   "liveDate": "2027-02-23",
+   "liveAt": "2027-02-23T09:00:00-05:00",
+   "pubDate": "Tue, 23 Feb 2027 09:00:00 -0500",
+   "event": null,
+   "daysToEvent": null,
+   "key": "MA",
+   "headline": "What one employee costs an employer in Massachusetts, before the extras",
+   "cardTitle": "Massachusetts: the base cost of one employee",
+   "cardSub": "Average private-sector pay, employer FICA and the employer share of single health coverage at firms under 50 employees.",
+   "stats": [
+    [
+     "Avg pay per job",
+     "$101,875"
+    ],
+    [
+     "Employer FICA",
+     "$7,793"
+    ],
+    [
+     "Health, employer share",
+     "$7,468"
+    ]
+   ],
+   "estimates": [],
+   "text": "What one employee costs an employer in Massachusetts, before the extras\n\nIn Massachusetts, three numbers every employer cost starts from:\n\n- Average private-sector pay per job: $101,875 a year (includes part-time jobs)\n- Employer Social Security and Medicare on that pay (7.65%): $7,793\n- Employer share of single health coverage at firms under 50 employees: $7,468 a year\n\nThat is $117,136 before unemployment insurance, workers' comp, retirement, admin or a PEO fee. The Massachusetts page carries the rest, each figure with its source.\n\nSource: BLS QCEW 2025 annual averages, private; AHRQ MEPS-IC 2025, state tables; 26 U.S.C. 3111\n\nMassachusetts: rates, wages and sources: https://peonomics.com/states/ma\n\nPEOnomics · PEO cost intelligence\n\n#SmallBusiness #Payroll #EmployerCosts",
+   "url": "https://peonomics.com/states/ma",
+   "image": "https://peonomics.com/assets/images/posts/state-cost-note-ma.png",
+   "figures": {
+    "ss": 0.062,
+    "med": 0.0145,
+    "ficaRate": 0.0765,
+    "name": "Massachusetts",
+    "wage": 101875,
+    "fica": 7793.4375,
+    "health": 7468,
+    "sub": 109668.4375,
+    "total": 117136.4375
+   },
+   "imageBytes": 57774
+  },
+  {
+   "id": "state-cost-note-wa",
+   "series": "state-cost-note",
+   "kind": "note",
+   "label": "Data note",
+   "liveDate": "2027-02-25",
+   "liveAt": "2027-02-25T09:00:00-05:00",
+   "pubDate": "Thu, 25 Feb 2027 09:00:00 -0500",
+   "event": null,
+   "daysToEvent": null,
+   "key": "WA",
+   "headline": "What one employee costs an employer in Washington, before the extras",
+   "cardTitle": "Washington: the base cost of one employee",
+   "cardSub": "Average private-sector pay, employer FICA and the employer share of single health coverage at firms under 50 employees.",
+   "stats": [
+    [
+     "Avg pay per job",
+     "$101,847"
+    ],
+    [
+     "Employer FICA",
+     "$7,791"
+    ],
+    [
+     "Health, employer share",
+     "$8,058"
+    ]
+   ],
+   "estimates": [],
+   "text": "What one employee costs an employer in Washington, before the extras\n\nIn Washington, three numbers every employer cost starts from:\n\n- Average private-sector pay per job: $101,847 a year (includes part-time jobs)\n- Employer Social Security and Medicare on that pay (7.65%): $7,791\n- Employer share of single health coverage at firms under 50 employees: $8,058 a year\n\nThat is $117,696 before unemployment insurance, workers' comp, retirement, admin or a PEO fee. The Washington page carries the rest, each figure with its source.\n\nSource: BLS QCEW 2025 annual averages, private; AHRQ MEPS-IC 2025, state tables; 26 U.S.C. 3111\n\nWashington: rates, wages and sources: https://peonomics.com/states/wa\n\nPEOnomics · PEO cost intelligence\n\n#SmallBusiness #Payroll #EmployerCosts",
+   "url": "https://peonomics.com/states/wa",
+   "image": "https://peonomics.com/assets/images/posts/state-cost-note-wa.png",
+   "figures": {
+    "ss": 0.062,
+    "med": 0.0145,
+    "ficaRate": 0.0765,
+    "name": "Washington",
+    "wage": 101847,
+    "fica": 7791.2955,
+    "health": 8058,
+    "sub": 109638.29550000001,
+    "total": 117696.29550000001
+   },
+   "imageBytes": 57424
+  },
+  {
+   "id": "state-cost-note-tn",
+   "series": "state-cost-note",
+   "kind": "note",
+   "label": "Data note",
+   "liveDate": "2027-03-02",
+   "liveAt": "2027-03-02T09:00:00-05:00",
+   "pubDate": "Tue, 02 Mar 2027 09:00:00 -0500",
+   "event": null,
+   "daysToEvent": null,
+   "key": "TN",
+   "headline": "What one employee costs an employer in Tennessee, before the extras",
+   "cardTitle": "Tennessee: the base cost of one employee",
+   "cardSub": "Average private-sector pay, employer FICA and the employer share of single health coverage at firms under 50 employees.",
+   "stats": [
+    [
+     "Avg pay per job",
+     "$70,752"
+    ],
+    [
+     "Employer FICA",
+     "$5,413"
+    ],
+    [
+     "Health, employer share",
+     "$7,379"
+    ]
+   ],
+   "estimates": [],
+   "text": "What one employee costs an employer in Tennessee, before the extras\n\nIn Tennessee, three numbers every employer cost starts from:\n\n- Average private-sector pay per job: $70,752 a year (includes part-time jobs)\n- Employer Social Security and Medicare on that pay (7.65%): $5,413\n- Employer share of single health coverage at firms under 50 employees: $7,379 a year\n\nThat is $83,544 before unemployment insurance, workers' comp, retirement, admin or a PEO fee. The Tennessee page carries the rest, each figure with its source.\n\nSource: BLS QCEW 2025 annual averages, private; AHRQ MEPS-IC 2025, state tables; 26 U.S.C. 3111\n\nTennessee: rates, wages and sources: https://peonomics.com/states/tn\n\nPEOnomics · PEO cost intelligence\n\n#SmallBusiness #Payroll #EmployerCosts",
+   "url": "https://peonomics.com/states/tn",
+   "image": "https://peonomics.com/assets/images/posts/state-cost-note-tn.png",
+   "figures": {
+    "ss": 0.062,
+    "med": 0.0145,
+    "ficaRate": 0.0765,
+    "name": "Tennessee",
+    "wage": 70752,
+    "fica": 5412.528,
+    "health": 7379,
+    "sub": 76164.528,
+    "total": 83543.528
+   },
+   "imageBytes": 54989
+  },
+  {
+   "id": "state-cost-note-in",
+   "series": "state-cost-note",
+   "kind": "note",
+   "label": "Data note",
+   "liveDate": "2027-03-04",
+   "liveAt": "2027-03-04T09:00:00-05:00",
+   "pubDate": "Thu, 04 Mar 2027 09:00:00 -0500",
+   "event": null,
+   "daysToEvent": null,
+   "key": "IN",
+   "headline": "What one employee costs an employer in Indiana, before the extras",
+   "cardTitle": "Indiana: the base cost of one employee",
+   "cardSub": "Average private-sector pay, employer FICA and the employer share of single health coverage at firms under 50 employees.",
+   "stats": [
+    [
+     "Avg pay per job",
+     "$65,792"
+    ],
+    [
+     "Employer FICA",
+     "$5,033"
+    ],
+    [
+     "Health, employer share",
+     "$5,410"
+    ]
+   ],
+   "estimates": [],
+   "text": "What one employee costs an employer in Indiana, before the extras\n\nIn Indiana, three numbers every employer cost starts from:\n\n- Average private-sector pay per job: $65,792 a year (includes part-time jobs)\n- Employer Social Security and Medicare on that pay (7.65%): $5,033\n- Employer share of single health coverage at firms under 50 employees: $5,410 a year\n\nThat is $76,235 before unemployment insurance, workers' comp, retirement, admin or a PEO fee. The Indiana page carries the rest, each figure with its source.\n\nSource: BLS QCEW 2025 annual averages, private; AHRQ MEPS-IC 2025, state tables; 26 U.S.C. 3111\n\nIndiana: rates, wages and sources: https://peonomics.com/states/in\n\nPEOnomics · PEO cost intelligence\n\n#SmallBusiness #Payroll #EmployerCosts",
+   "url": "https://peonomics.com/states/in",
+   "image": "https://peonomics.com/assets/images/posts/state-cost-note-in.png",
+   "figures": {
+    "ss": 0.062,
+    "med": 0.0145,
+    "ficaRate": 0.0765,
+    "name": "Indiana",
+    "wage": 65792,
+    "fica": 5033.088,
+    "health": 5410,
+    "sub": 70825.088,
+    "total": 76235.088
+   },
+   "imageBytes": 56407
+  },
+  {
+   "id": "state-cost-note-wi",
+   "series": "state-cost-note",
+   "kind": "note",
+   "label": "Data note",
+   "liveDate": "2027-03-09",
+   "liveAt": "2027-03-09T09:00:00-05:00",
+   "pubDate": "Tue, 09 Mar 2027 09:00:00 -0500",
+   "event": null,
+   "daysToEvent": null,
+   "key": "WI",
+   "headline": "What one employee costs an employer in Wisconsin, before the extras",
+   "cardTitle": "Wisconsin: the base cost of one employee",
+   "cardSub": "Average private-sector pay, employer FICA and the employer share of single health coverage at firms under 50 employees.",
+   "stats": [
+    [
+     "Avg pay per job",
+     "$66,598"
+    ],
+    [
+     "Employer FICA",
+     "$5,095"
+    ],
+    [
+     "Health, employer share",
+     "$7,451"
+    ]
+   ],
+   "estimates": [],
+   "text": "What one employee costs an employer in Wisconsin, before the extras\n\nIn Wisconsin, three numbers every employer cost starts from:\n\n- Average private-sector pay per job: $66,598 a year (includes part-time jobs)\n- Employer Social Security and Medicare on that pay (7.65%): $5,095\n- Employer share of single health coverage at firms under 50 employees: $7,451 a year\n\nThat is $79,144 before unemployment insurance, workers' comp, retirement, admin or a PEO fee. The Wisconsin page carries the rest, each figure with its source.\n\nSource: BLS QCEW 2025 annual averages, private; AHRQ MEPS-IC 2025, state tables; 26 U.S.C. 3111\n\nWisconsin: rates, wages and sources: https://peonomics.com/states/wi\n\nPEOnomics · PEO cost intelligence\n\n#SmallBusiness #Payroll #EmployerCosts",
+   "url": "https://peonomics.com/states/wi",
+   "image": "https://peonomics.com/assets/images/posts/state-cost-note-wi.png",
+   "figures": {
+    "ss": 0.062,
+    "med": 0.0145,
+    "ficaRate": 0.0765,
+    "name": "Wisconsin",
+    "wage": 66598,
+    "fica": 5094.747,
+    "health": 7451,
+    "sub": 71692.747,
+    "total": 79143.747
+   },
+   "imageBytes": 57506
+  },
+  {
+   "id": "state-cost-note-mn",
+   "series": "state-cost-note",
+   "kind": "note",
+   "label": "Data note",
+   "liveDate": "2027-03-11",
+   "liveAt": "2027-03-11T09:00:00-05:00",
+   "pubDate": "Thu, 11 Mar 2027 09:00:00 -0500",
+   "event": null,
+   "daysToEvent": null,
+   "key": "MN",
+   "headline": "What one employee costs an employer in Minnesota, before the extras",
+   "cardTitle": "Minnesota: the base cost of one employee",
+   "cardSub": "Average private-sector pay, employer FICA and the employer share of single health coverage at firms under 50 employees.",
+   "stats": [
+    [
+     "Avg pay per job",
+     "$77,504"
+    ],
+    [
+     "Employer FICA",
+     "$5,929"
+    ],
+    [
+     "Health, employer share",
+     "$5,675"
+    ]
+   ],
+   "estimates": [],
+   "text": "What one employee costs an employer in Minnesota, before the extras\n\nIn Minnesota, three numbers every employer cost starts from:\n\n- Average private-sector pay per job: $77,504 a year (includes part-time jobs)\n- Employer Social Security and Medicare on that pay (7.65%): $5,929\n- Employer share of single health coverage at firms under 50 employees: $5,675 a year\n\nThat is $89,108 before unemployment insurance, workers' comp, retirement, admin or a PEO fee. The Minnesota page carries the rest, each figure with its source.\n\nSource: BLS QCEW 2025 annual averages, private; AHRQ MEPS-IC 2025, state tables; 26 U.S.C. 3111\n\nMinnesota: rates, wages and sources: https://peonomics.com/states/mn\n\nPEOnomics · PEO cost intelligence\n\n#SmallBusiness #Payroll #EmployerCosts",
+   "url": "https://peonomics.com/states/mn",
+   "image": "https://peonomics.com/assets/images/posts/state-cost-note-mn.png",
+   "figures": {
+    "ss": 0.062,
+    "med": 0.0145,
+    "ficaRate": 0.0765,
+    "name": "Minnesota",
+    "wage": 77504,
+    "fica": 5929.056,
+    "health": 5675,
+    "sub": 83433.056,
+    "total": 89108.056
+   },
+   "imageBytes": 56553
+  },
+  {
+   "id": "state-cost-note-mo",
+   "series": "state-cost-note",
+   "kind": "note",
+   "label": "Data note",
+   "liveDate": "2027-03-16",
+   "liveAt": "2027-03-16T09:00:00-04:00",
+   "pubDate": "Tue, 16 Mar 2027 09:00:00 -0400",
+   "event": null,
+   "daysToEvent": null,
+   "key": "MO",
+   "headline": "What one employee costs an employer in Missouri, before the extras",
+   "cardTitle": "Missouri: the base cost of one employee",
+   "cardSub": "Average private-sector pay, employer FICA and the employer share of single health coverage at firms under 50 employees.",
+   "stats": [
+    [
+     "Avg pay per job",
+     "$67,290"
+    ],
+    [
+     "Employer FICA",
+     "$5,148"
+    ],
+    [
+     "Health, employer share",
+     "$6,699"
+    ]
+   ],
+   "estimates": [],
+   "text": "What one employee costs an employer in Missouri, before the extras\n\nIn Missouri, three numbers every employer cost starts from:\n\n- Average private-sector pay per job: $67,290 a year (includes part-time jobs)\n- Employer Social Security and Medicare on that pay (7.65%): $5,148\n- Employer share of single health coverage at firms under 50 employees: $6,699 a year\n\nThat is $79,137 before unemployment insurance, workers' comp, retirement, admin or a PEO fee. The Missouri page carries the rest, each figure with its source.\n\nSource: BLS QCEW 2025 annual averages, private; AHRQ MEPS-IC 2025, state tables; 26 U.S.C. 3111\n\nMissouri: rates, wages and sources: https://peonomics.com/states/mo\n\nPEOnomics · PEO cost intelligence\n\n#SmallBusiness #Payroll #EmployerCosts",
+   "url": "https://peonomics.com/states/mo",
+   "image": "https://peonomics.com/assets/images/posts/state-cost-note-mo.png",
+   "figures": {
+    "ss": 0.062,
+    "med": 0.0145,
+    "ficaRate": 0.0765,
+    "name": "Missouri",
+    "wage": 67290,
+    "fica": 5147.6849999999995,
+    "health": 6699,
+    "sub": 72437.685,
+    "total": 79136.685
+   },
+   "imageBytes": 58524
+  },
+  {
+   "id": "state-cost-note-co",
+   "series": "state-cost-note",
+   "kind": "note",
+   "label": "Data note",
+   "liveDate": "2027-03-18",
+   "liveAt": "2027-03-18T09:00:00-04:00",
+   "pubDate": "Thu, 18 Mar 2027 09:00:00 -0400",
+   "event": null,
+   "daysToEvent": null,
+   "key": "CO",
+   "headline": "What one employee costs an employer in Colorado, before the extras",
+   "cardTitle": "Colorado: the base cost of one employee",
+   "cardSub": "Average private-sector pay, employer FICA and the employer share of single health coverage at firms under 50 employees.",
+   "stats": [
+    [
+     "Avg pay per job",
+     "$85,470"
+    ],
+    [
+     "Employer FICA",
+     "$6,538"
+    ],
+    [
+     "Health, employer share",
+     "$6,744"
+    ]
+   ],
+   "estimates": [],
+   "text": "What one employee costs an employer in Colorado, before the extras\n\nIn Colorado, three numbers every employer cost starts from:\n\n- Average private-sector pay per job: $85,470 a year (includes part-time jobs)\n- Employer Social Security and Medicare on that pay (7.65%): $6,538\n- Employer share of single health coverage at firms under 50 employees: $6,744 a year\n\nThat is $98,752 before unemployment insurance, workers' comp, retirement, admin or a PEO fee. The Colorado page carries the rest, each figure with its source.\n\nSource: BLS QCEW 2025 annual averages, private; AHRQ MEPS-IC 2025, state tables; 26 U.S.C. 3111\n\nColorado: rates, wages and sources: https://peonomics.com/states/co\n\nPEOnomics · PEO cost intelligence\n\n#SmallBusiness #Payroll #EmployerCosts",
+   "url": "https://peonomics.com/states/co",
+   "image": "https://peonomics.com/assets/images/posts/state-cost-note-co.png",
+   "figures": {
+    "ss": 0.062,
+    "med": 0.0145,
+    "ficaRate": 0.0765,
+    "name": "Colorado",
+    "wage": 85470,
+    "fica": 6538.455,
+    "health": 6744,
+    "sub": 92008.455,
+    "total": 98752.455
+   },
+   "imageBytes": 57539
+  },
+  {
+   "id": "state-cost-note-sc",
+   "series": "state-cost-note",
+   "kind": "note",
+   "label": "Data note",
+   "liveDate": "2027-03-23",
+   "liveAt": "2027-03-23T09:00:00-04:00",
+   "pubDate": "Tue, 23 Mar 2027 09:00:00 -0400",
+   "event": null,
+   "daysToEvent": null,
+   "key": "SC",
+   "headline": "What one employee costs an employer in South Carolina, before the extras",
+   "cardTitle": "South Carolina: the base cost of one employee",
+   "cardSub": "Average private-sector pay, employer FICA and the employer share of single health coverage at firms under 50 employees.",
+   "stats": [
+    [
+     "Avg pay per job",
+     "$63,446"
+    ],
+    [
+     "Employer FICA",
+     "$4,854"
+    ],
+    [
+     "Health, employer share",
+     "$7,139"
+    ]
+   ],
+   "estimates": [],
+   "text": "What one employee costs an employer in South Carolina, before the extras\n\nIn South Carolina, three numbers every employer cost starts from:\n\n- Average private-sector pay per job: $63,446 a year (includes part-time jobs)\n- Employer Social Security and Medicare on that pay (7.65%): $4,854\n- Employer share of single health coverage at firms under 50 employees: $7,139 a year\n\nThat is $75,439 before unemployment insurance, workers' comp, retirement, admin or a PEO fee. The South Carolina page carries the rest, each figure with its source.\n\nSource: BLS QCEW 2025 annual averages, private; AHRQ MEPS-IC 2025, state tables; 26 U.S.C. 3111\n\nSouth Carolina: rates, wages and sources: https://peonomics.com/states/sc\n\nPEOnomics · PEO cost intelligence\n\n#SmallBusiness #Payroll #EmployerCosts",
+   "url": "https://peonomics.com/states/sc",
+   "image": "https://peonomics.com/assets/images/posts/state-cost-note-sc.png",
+   "figures": {
+    "ss": 0.062,
+    "med": 0.0145,
+    "ficaRate": 0.0765,
+    "name": "South Carolina",
+    "wage": 63446,
+    "fica": 4853.619,
+    "health": 7139,
+    "sub": 68299.619,
+    "total": 75438.619
+   },
+   "imageBytes": 59210
+  },
+  {
+   "id": "state-cost-note-al",
+   "series": "state-cost-note",
+   "kind": "note",
+   "label": "Data note",
+   "liveDate": "2027-03-25",
+   "liveAt": "2027-03-25T09:00:00-04:00",
+   "pubDate": "Thu, 25 Mar 2027 09:00:00 -0400",
+   "event": null,
+   "daysToEvent": null,
+   "key": "AL",
+   "headline": "What one employee costs an employer in Alabama, before the extras",
+   "cardTitle": "Alabama: the base cost of one employee",
+   "cardSub": "Average private-sector pay, employer FICA and the employer share of single health coverage at firms under 50 employees.",
+   "stats": [
+    [
+     "Avg pay per job",
+     "$63,676"
+    ],
+    [
+     "Employer FICA",
+     "$4,871"
+    ],
+    [
+     "Health, employer share",
+     "$5,518"
+    ]
+   ],
+   "estimates": [],
+   "text": "What one employee costs an employer in Alabama, before the extras\n\nIn Alabama, three numbers every employer cost starts from:\n\n- Average private-sector pay per job: $63,676 a year (includes part-time jobs)\n- Employer Social Security and Medicare on that pay (7.65%): $4,871\n- Employer share of single health coverage at firms under 50 employees: $5,518 a year\n\nThat is $74,065 before unemployment insurance, workers' comp, retirement, admin or a PEO fee. The Alabama page carries the rest, each figure with its source.\n\nSource: BLS QCEW 2025 annual averages, private; AHRQ MEPS-IC 2025, state tables; 26 U.S.C. 3111\n\nAlabama: rates, wages and sources: https://peonomics.com/states/al\n\nPEOnomics · PEO cost intelligence\n\n#SmallBusiness #Payroll #EmployerCosts",
+   "url": "https://peonomics.com/states/al",
+   "image": "https://peonomics.com/assets/images/posts/state-cost-note-al.png",
+   "figures": {
+    "ss": 0.062,
+    "med": 0.0145,
+    "ficaRate": 0.0765,
+    "name": "Alabama",
+    "wage": 63676,
+    "fica": 4871.214,
+    "health": 5518,
+    "sub": 68547.214,
+    "total": 74065.214
+   },
+   "imageBytes": 56361
+  },
+  {
+   "id": "state-cost-note-or",
+   "series": "state-cost-note",
+   "kind": "note",
+   "label": "Data note",
+   "liveDate": "2027-03-30",
+   "liveAt": "2027-03-30T09:00:00-04:00",
+   "pubDate": "Tue, 30 Mar 2027 09:00:00 -0400",
+   "event": null,
+   "daysToEvent": null,
+   "key": "OR",
+   "headline": "What one employee costs an employer in Oregon, before the extras",
+   "cardTitle": "Oregon: the base cost of one employee",
+   "cardSub": "Average private-sector pay, employer FICA and the employer share of single health coverage at firms under 50 employees.",
+   "stats": [
+    [
+     "Avg pay per job",
+     "$71,935"
+    ],
+    [
+     "Employer FICA",
+     "$5,503"
+    ],
+    [
+     "Health, employer share",
+     "$7,146"
+    ]
+   ],
+   "estimates": [],
+   "text": "What one employee costs an employer in Oregon, before the extras\n\nIn Oregon, three numbers every employer cost starts from:\n\n- Average private-sector pay per job: $71,935 a year (includes part-time jobs)\n- Employer Social Security and Medicare on that pay (7.65%): $5,503\n- Employer share of single health coverage at firms under 50 employees: $7,146 a year\n\nThat is $84,584 before unemployment insurance, workers' comp, retirement, admin or a PEO fee. The Oregon page carries the rest, each figure with its source.\n\nSource: BLS QCEW 2025 annual averages, private; AHRQ MEPS-IC 2025, state tables; 26 U.S.C. 3111\n\nOregon: rates, wages and sources: https://peonomics.com/states/or\n\nPEOnomics · PEO cost intelligence\n\n#SmallBusiness #Payroll #EmployerCosts",
+   "url": "https://peonomics.com/states/or",
+   "image": "https://peonomics.com/assets/images/posts/state-cost-note-or.png",
+   "figures": {
+    "ss": 0.062,
+    "med": 0.0145,
+    "ficaRate": 0.0765,
+    "name": "Oregon",
+    "wage": 71935,
+    "fica": 5503.0275,
+    "health": 7146,
+    "sub": 77438.0275,
+    "total": 84584.0275
+   },
+   "imageBytes": 58100
+  },
+  {
+   "id": "state-cost-note-la",
+   "series": "state-cost-note",
+   "kind": "note",
+   "label": "Data note",
+   "liveDate": "2027-04-01",
+   "liveAt": "2027-04-01T09:00:00-04:00",
+   "pubDate": "Thu, 01 Apr 2027 09:00:00 -0400",
+   "event": null,
+   "daysToEvent": null,
+   "key": "LA",
+   "headline": "What one employee costs an employer in Louisiana, before the extras",
+   "cardTitle": "Louisiana: the base cost of one employee",
+   "cardSub": "Average private-sector pay, employer FICA and the employer share of single health coverage at firms under 50 employees.",
+   "stats": [
+    [
+     "Avg pay per job",
+     "$63,581"
+    ],
+    [
+     "Employer FICA",
+     "$4,864"
+    ],
+    [
+     "Health, employer share",
+     "$6,702"
+    ]
+   ],
+   "estimates": [],
+   "text": "What one employee costs an employer in Louisiana, before the extras\n\nIn Louisiana, three numbers every employer cost starts from:\n\n- Average private-sector pay per job: $63,581 a year (includes part-time jobs)\n- Employer Social Security and Medicare on that pay (7.65%): $4,864\n- Employer share of single health coverage at firms under 50 employees: $6,702 a year\n\nThat is $75,147 before unemployment insurance, workers' comp, retirement, admin or a PEO fee. The Louisiana page carries the rest, each figure with its source.\n\nSource: BLS QCEW 2025 annual averages, private; AHRQ MEPS-IC 2025, state tables; 26 U.S.C. 3111\n\nLouisiana: rates, wages and sources: https://peonomics.com/states/la\n\nPEOnomics · PEO cost intelligence\n\n#SmallBusiness #Payroll #EmployerCosts",
+   "url": "https://peonomics.com/states/la",
+   "image": "https://peonomics.com/assets/images/posts/state-cost-note-la.png",
+   "figures": {
+    "ss": 0.062,
+    "med": 0.0145,
+    "ficaRate": 0.0765,
+    "name": "Louisiana",
+    "wage": 63581,
+    "fica": 4863.9465,
+    "health": 6702,
+    "sub": 68444.9465,
+    "total": 75146.9465
+   },
+   "imageBytes": 56384
+  },
+  {
+   "id": "state-cost-note-ut",
+   "series": "state-cost-note",
+   "kind": "note",
+   "label": "Data note",
+   "liveDate": "2027-04-06",
+   "liveAt": "2027-04-06T09:00:00-04:00",
+   "pubDate": "Tue, 06 Apr 2027 09:00:00 -0400",
+   "event": null,
+   "daysToEvent": null,
+   "key": "UT",
+   "headline": "What one employee costs an employer in Utah, before the extras",
+   "cardTitle": "Utah: the base cost of one employee",
+   "cardSub": "Average private-sector pay, employer FICA and the employer share of single health coverage at firms under 50 employees.",
+   "stats": [
+    [
+     "Avg pay per job",
+     "$69,800"
+    ],
+    [
+     "Employer FICA",
+     "$5,340"
+    ],
+    [
+     "Health, employer share",
+     "$6,374"
+    ]
+   ],
+   "estimates": [],
+   "text": "What one employee costs an employer in Utah, before the extras\n\nIn Utah, three numbers every employer cost starts from:\n\n- Average private-sector pay per job: $69,800 a year (includes part-time jobs)\n- Employer Social Security and Medicare on that pay (7.65%): $5,340\n- Employer share of single health coverage at firms under 50 employees: $6,374 a year\n\nThat is $81,514 before unemployment insurance, workers' comp, retirement, admin or a PEO fee. The Utah page carries the rest, each figure with its source.\n\nSource: BLS QCEW 2025 annual averages, private; AHRQ MEPS-IC 2025, state tables; 26 U.S.C. 3111\n\nUtah: rates, wages and sources: https://peonomics.com/states/ut\n\nPEOnomics · PEO cost intelligence\n\n#SmallBusiness #Payroll #EmployerCosts",
+   "url": "https://peonomics.com/states/ut",
+   "image": "https://peonomics.com/assets/images/posts/state-cost-note-ut.png",
+   "figures": {
+    "ss": 0.062,
+    "med": 0.0145,
+    "ficaRate": 0.0765,
+    "name": "Utah",
+    "wage": 69800,
+    "fica": 5339.7,
+    "health": 6374,
+    "sub": 75139.7,
+    "total": 81513.7
+   },
+   "imageBytes": 53752
+  },
+  {
+   "id": "state-cost-note-ct",
+   "series": "state-cost-note",
+   "kind": "note",
+   "label": "Data note",
+   "liveDate": "2027-04-08",
+   "liveAt": "2027-04-08T09:00:00-04:00",
+   "pubDate": "Thu, 08 Apr 2027 09:00:00 -0400",
+   "event": null,
+   "daysToEvent": null,
+   "key": "CT",
+   "headline": "What one employee costs an employer in Connecticut, before the extras",
+   "cardTitle": "Connecticut: the base cost of one employee",
+   "cardSub": "Average private-sector pay, employer FICA and the employer share of single health coverage at firms under 50 employees.",
+   "stats": [
+    [
+     "Avg pay per job",
+     "$92,528"
+    ],
+    [
+     "Employer FICA",
+     "$7,078"
+    ],
+    [
+     "Health, employer share",
+     "$6,400"
+    ]
+   ],
+   "estimates": [],
+   "text": "What one employee costs an employer in Connecticut, before the extras\n\nIn Connecticut, three numbers every employer cost starts from:\n\n- Average private-sector pay per job: $92,528 a year (includes part-time jobs)\n- Employer Social Security and Medicare on that pay (7.65%): $7,078\n- Employer share of single health coverage at firms under 50 employees: $6,400 a year\n\nThat is $106,006 before unemployment insurance, workers' comp, retirement, admin or a PEO fee. The Connecticut page carries the rest, each figure with its source.\n\nSource: BLS QCEW 2025 annual averages, private; AHRQ MEPS-IC 2025, state tables; 26 U.S.C. 3111\n\nConnecticut: rates, wages and sources: https://peonomics.com/states/ct\n\nPEOnomics · PEO cost intelligence\n\n#SmallBusiness #Payroll #EmployerCosts",
+   "url": "https://peonomics.com/states/ct",
+   "image": "https://peonomics.com/assets/images/posts/state-cost-note-ct.png",
+   "figures": {
+    "ss": 0.062,
+    "med": 0.0145,
+    "ficaRate": 0.0765,
+    "name": "Connecticut",
+    "wage": 92528,
+    "fica": 7078.392,
+    "health": 6400,
+    "sub": 99606.39199999999,
+    "total": 106006.39199999999
+   },
+   "imageBytes": 57360
+  },
+  {
+   "id": "state-cost-note-nv",
+   "series": "state-cost-note",
+   "kind": "note",
+   "label": "Data note",
+   "liveDate": "2027-04-13",
+   "liveAt": "2027-04-13T09:00:00-04:00",
+   "pubDate": "Tue, 13 Apr 2027 09:00:00 -0400",
+   "event": null,
+   "daysToEvent": null,
+   "key": "NV",
+   "headline": "What one employee costs an employer in Nevada, before the extras",
+   "cardTitle": "Nevada: the base cost of one employee",
+   "cardSub": "Average private-sector pay, employer FICA and the employer share of single health coverage at firms under 50 employees.",
+   "stats": [
+    [
+     "Avg pay per job",
+     "$68,413"
+    ],
+    [
+     "Employer FICA",
+     "$5,234"
+    ],
+    [
+     "Health, employer share",
+     "$6,810"
+    ]
+   ],
+   "estimates": [],
+   "text": "What one employee costs an employer in Nevada, before the extras\n\nIn Nevada, three numbers every employer cost starts from:\n\n- Average private-sector pay per job: $68,413 a year (includes part-time jobs)\n- Employer Social Security and Medicare on that pay (7.65%): $5,234\n- Employer share of single health coverage at firms under 50 employees: $6,810 a year\n\nThat is $80,457 before unemployment insurance, workers' comp, retirement, admin or a PEO fee. The Nevada page carries the rest, each figure with its source.\n\nSource: BLS QCEW 2025 annual averages, private; AHRQ MEPS-IC 2025, state tables; 26 U.S.C. 3111\n\nNevada: rates, wages and sources: https://peonomics.com/states/nv\n\nPEOnomics · PEO cost intelligence\n\n#SmallBusiness #Payroll #EmployerCosts",
+   "url": "https://peonomics.com/states/nv",
+   "image": "https://peonomics.com/assets/images/posts/state-cost-note-nv.png",
+   "figures": {
+    "ss": 0.062,
+    "med": 0.0145,
+    "ficaRate": 0.0765,
+    "name": "Nevada",
+    "wage": 68413,
+    "fica": 5233.5945,
+    "health": 6810,
+    "sub": 73646.5945,
+    "total": 80456.5945
+   },
+   "imageBytes": 57433
+  },
+  {
+   "id": "state-cost-note-ok",
+   "series": "state-cost-note",
+   "kind": "note",
+   "label": "Data note",
+   "liveDate": "2027-04-15",
+   "liveAt": "2027-04-15T09:00:00-04:00",
+   "pubDate": "Thu, 15 Apr 2027 09:00:00 -0400",
+   "event": null,
+   "daysToEvent": null,
+   "key": "OK",
+   "headline": "What one employee costs an employer in Oklahoma, before the extras",
+   "cardTitle": "Oklahoma: the base cost of one employee",
+   "cardSub": "Average private-sector pay, employer FICA and the employer share of single health coverage at firms under 50 employees.",
+   "stats": [
+    [
+     "Avg pay per job",
+     "$60,828"
+    ],
+    [
+     "Employer FICA",
+     "$4,653"
+    ],
+    [
+     "Health, employer share",
+     "$6,481"
+    ]
+   ],
+   "estimates": [],
+   "text": "What one employee costs an employer in Oklahoma, before the extras\n\nIn Oklahoma, three numbers every employer cost starts from:\n\n- Average private-sector pay per job: $60,828 a year (includes part-time jobs)\n- Employer Social Security and Medicare on that pay (7.65%): $4,653\n- Employer share of single health coverage at firms under 50 employees: $6,481 a year\n\nThat is $71,962 before unemployment insurance, workers' comp, retirement, admin or a PEO fee. The Oklahoma page carries the rest, each figure with its source.\n\nSource: BLS QCEW 2025 annual averages, private; AHRQ MEPS-IC 2025, state tables; 26 U.S.C. 3111\n\nOklahoma: rates, wages and sources: https://peonomics.com/states/ok\n\nPEOnomics · PEO cost intelligence\n\n#SmallBusiness #Payroll #EmployerCosts",
+   "url": "https://peonomics.com/states/ok",
+   "image": "https://peonomics.com/assets/images/posts/state-cost-note-ok.png",
+   "figures": {
+    "ss": 0.062,
+    "med": 0.0145,
+    "ficaRate": 0.0765,
+    "name": "Oklahoma",
+    "wage": 60828,
+    "fica": 4653.342,
+    "health": 6481,
+    "sub": 65481.342,
+    "total": 71962.342
+   },
+   "imageBytes": 57927
+  },
+  {
+   "id": "state-cost-note-ia",
+   "series": "state-cost-note",
+   "kind": "note",
+   "label": "Data note",
+   "liveDate": "2027-04-20",
+   "liveAt": "2027-04-20T09:00:00-04:00",
+   "pubDate": "Tue, 20 Apr 2027 09:00:00 -0400",
+   "event": null,
+   "daysToEvent": null,
+   "key": "IA",
+   "headline": "What one employee costs an employer in Iowa, before the extras",
+   "cardTitle": "Iowa: the base cost of one employee",
+   "cardSub": "Average private-sector pay, employer FICA and the employer share of single health coverage at firms under 50 employees.",
+   "stats": [
+    [
+     "Avg pay per job",
+     "$63,675"
+    ],
+    [
+     "Employer FICA",
+     "$4,871"
+    ],
+    [
+     "Health, employer share",
+     "$6,422"
+    ]
+   ],
+   "estimates": [],
+   "text": "What one employee costs an employer in Iowa, before the extras\n\nIn Iowa, three numbers every employer cost starts from:\n\n- Average private-sector pay per job: $63,675 a year (includes part-time jobs)\n- Employer Social Security and Medicare on that pay (7.65%): $4,871\n- Employer share of single health coverage at firms under 50 employees: $6,422 a year\n\nThat is $74,968 before unemployment insurance, workers' comp, retirement, admin or a PEO fee. The Iowa page carries the rest, each figure with its source.\n\nSource: BLS QCEW 2025 annual averages, private; AHRQ MEPS-IC 2025, state tables; 26 U.S.C. 3111\n\nIowa: rates, wages and sources: https://peonomics.com/states/ia\n\nPEOnomics · PEO cost intelligence\n\n#SmallBusiness #Payroll #EmployerCosts",
+   "url": "https://peonomics.com/states/ia",
+   "image": "https://peonomics.com/assets/images/posts/state-cost-note-ia.png",
+   "figures": {
+    "ss": 0.062,
+    "med": 0.0145,
+    "ficaRate": 0.0765,
+    "name": "Iowa",
+    "wage": 63675,
+    "fica": 4871.1375,
+    "health": 6422,
+    "sub": 68546.1375,
+    "total": 74968.1375
+   },
+   "imageBytes": 53213
+  },
+  {
+   "id": "state-cost-note-ks",
+   "series": "state-cost-note",
+   "kind": "note",
+   "label": "Data note",
+   "liveDate": "2027-04-22",
+   "liveAt": "2027-04-22T09:00:00-04:00",
+   "pubDate": "Thu, 22 Apr 2027 09:00:00 -0400",
+   "event": null,
+   "daysToEvent": null,
+   "key": "KS",
+   "headline": "What one employee costs an employer in Kansas, before the extras",
+   "cardTitle": "Kansas: the base cost of one employee",
+   "cardSub": "Average private-sector pay, employer FICA and the employer share of single health coverage at firms under 50 employees.",
+   "stats": [
+    [
+     "Avg pay per job",
+     "$64,719"
+    ],
+    [
+     "Employer FICA",
+     "$4,951"
+    ],
+    [
+     "Health, employer share",
+     "$5,848"
+    ]
+   ],
+   "estimates": [],
+   "text": "What one employee costs an employer in Kansas, before the extras\n\nIn Kansas, three numbers every employer cost starts from:\n\n- Average private-sector pay per job: $64,719 a year (includes part-time jobs)\n- Employer Social Security and Medicare on that pay (7.65%): $4,951\n- Employer share of single health coverage at firms under 50 employees: $5,848 a year\n\nThat is $75,518 before unemployment insurance, workers' comp, retirement, admin or a PEO fee. The Kansas page carries the rest, each figure with its source.\n\nSource: BLS QCEW 2025 annual averages, private; AHRQ MEPS-IC 2025, state tables; 26 U.S.C. 3111\n\nKansas: rates, wages and sources: https://peonomics.com/states/ks\n\nPEOnomics · PEO cost intelligence\n\n#SmallBusiness #Payroll #EmployerCosts",
+   "url": "https://peonomics.com/states/ks",
+   "image": "https://peonomics.com/assets/images/posts/state-cost-note-ks.png",
+   "figures": {
+    "ss": 0.062,
+    "med": 0.0145,
+    "ficaRate": 0.0765,
+    "name": "Kansas",
+    "wage": 64719,
+    "fica": 4951.0035,
+    "health": 5848,
+    "sub": 69670.0035,
+    "total": 75518.0035
+   },
+   "imageBytes": 54723
+  },
+  {
+   "id": "state-cost-note-ar",
+   "series": "state-cost-note",
+   "kind": "note",
+   "label": "Data note",
+   "liveDate": "2027-04-27",
+   "liveAt": "2027-04-27T09:00:00-04:00",
+   "pubDate": "Tue, 27 Apr 2027 09:00:00 -0400",
+   "event": null,
+   "daysToEvent": null,
+   "key": "AR",
+   "headline": "What one employee costs an employer in Arkansas, before the extras",
+   "cardTitle": "Arkansas: the base cost of one employee",
+   "cardSub": "Average private-sector pay, employer FICA and the employer share of single health coverage at firms under 50 employees.",
+   "stats": [
+    [
+     "Avg pay per job",
+     "$61,643"
+    ],
+    [
+     "Employer FICA",
+     "$4,716"
+    ],
+    [
+     "Health, employer share",
+     "$6,287"
+    ]
+   ],
+   "estimates": [],
+   "text": "What one employee costs an employer in Arkansas, before the extras\n\nIn Arkansas, three numbers every employer cost starts from:\n\n- Average private-sector pay per job: $61,643 a year (includes part-time jobs)\n- Employer Social Security and Medicare on that pay (7.65%): $4,716\n- Employer share of single health coverage at firms under 50 employees: $6,287 a year\n\nThat is $72,646 before unemployment insurance, workers' comp, retirement, admin or a PEO fee. The Arkansas page carries the rest, each figure with its source.\n\nSource: BLS QCEW 2025 annual averages, private; AHRQ MEPS-IC 2025, state tables; 26 U.S.C. 3111\n\nArkansas: rates, wages and sources: https://peonomics.com/states/ar\n\nPEOnomics · PEO cost intelligence\n\n#SmallBusiness #Payroll #EmployerCosts",
+   "url": "https://peonomics.com/states/ar",
+   "image": "https://peonomics.com/assets/images/posts/state-cost-note-ar.png",
+   "figures": {
+    "ss": 0.062,
+    "med": 0.0145,
+    "ficaRate": 0.0765,
+    "name": "Arkansas",
+    "wage": 61643,
+    "fica": 4715.6894999999995,
+    "health": 6287,
+    "sub": 66358.6895,
+    "total": 72645.6895
+   },
+   "imageBytes": 55671
+  },
+  {
+   "id": "state-cost-note-ms",
+   "series": "state-cost-note",
+   "kind": "note",
+   "label": "Data note",
+   "liveDate": "2027-04-29",
+   "liveAt": "2027-04-29T09:00:00-04:00",
+   "pubDate": "Thu, 29 Apr 2027 09:00:00 -0400",
+   "event": null,
+   "daysToEvent": null,
+   "key": "MS",
+   "headline": "What one employee costs an employer in Mississippi, before the extras",
+   "cardTitle": "Mississippi: the base cost of one employee",
+   "cardSub": "Average private-sector pay, employer FICA and the employer share of single health coverage at firms under 50 employees.",
+   "stats": [
+    [
+     "Avg pay per job",
+     "$52,619"
+    ],
+    [
+     "Employer FICA",
+     "$4,025"
+    ],
+    [
+     "Health, employer share",
+     "$5,911"
+    ]
+   ],
+   "estimates": [],
+   "text": "What one employee costs an employer in Mississippi, before the extras\n\nIn Mississippi, three numbers every employer cost starts from:\n\n- Average private-sector pay per job: $52,619 a year (includes part-time jobs)\n- Employer Social Security and Medicare on that pay (7.65%): $4,025\n- Employer share of single health coverage at firms under 50 employees: $5,911 a year\n\nThat is $62,555 before unemployment insurance, workers' comp, retirement, admin or a PEO fee. The Mississippi page carries the rest, each figure with its source.\n\nSource: BLS QCEW 2025 annual averages, private; AHRQ MEPS-IC 2025, state tables; 26 U.S.C. 3111\n\nMississippi: rates, wages and sources: https://peonomics.com/states/ms\n\nPEOnomics · PEO cost intelligence\n\n#SmallBusiness #Payroll #EmployerCosts",
+   "url": "https://peonomics.com/states/ms",
+   "image": "https://peonomics.com/assets/images/posts/state-cost-note-ms.png",
+   "figures": {
+    "ss": 0.062,
+    "med": 0.0145,
+    "ficaRate": 0.0765,
+    "name": "Mississippi",
+    "wage": 52619,
+    "fica": 4025.3534999999997,
+    "health": 5911,
+    "sub": 56644.3535,
+    "total": 62555.3535
+   },
+   "imageBytes": 56912
+  },
+  {
+   "id": "state-cost-note-ne",
+   "series": "state-cost-note",
+   "kind": "note",
+   "label": "Data note",
+   "liveDate": "2027-05-04",
+   "liveAt": "2027-05-04T09:00:00-04:00",
+   "pubDate": "Tue, 04 May 2027 09:00:00 -0400",
+   "event": null,
+   "daysToEvent": null,
+   "key": "NE",
+   "headline": "What one employee costs an employer in Nebraska, before the extras",
+   "cardTitle": "Nebraska: the base cost of one employee",
+   "cardSub": "Average private-sector pay, employer FICA and the employer share of single health coverage at firms under 50 employees.",
+   "stats": [
+    [
+     "Avg pay per job",
+     "$62,985"
+    ],
+    [
+     "Employer FICA",
+     "$4,818"
+    ],
+    [
+     "Health, employer share",
+     "$7,047"
+    ]
+   ],
+   "estimates": [],
+   "text": "What one employee costs an employer in Nebraska, before the extras\n\nIn Nebraska, three numbers every employer cost starts from:\n\n- Average private-sector pay per job: $62,985 a year (includes part-time jobs)\n- Employer Social Security and Medicare on that pay (7.65%): $4,818\n- Employer share of single health coverage at firms under 50 employees: $7,047 a year\n\nThat is $74,850 before unemployment insurance, workers' comp, retirement, admin or a PEO fee. The Nebraska page carries the rest, each figure with its source.\n\nSource: BLS QCEW 2025 annual averages, private; AHRQ MEPS-IC 2025, state tables; 26 U.S.C. 3111\n\nNebraska: rates, wages and sources: https://peonomics.com/states/ne\n\nPEOnomics · PEO cost intelligence\n\n#SmallBusiness #Payroll #EmployerCosts",
+   "url": "https://peonomics.com/states/ne",
+   "image": "https://peonomics.com/assets/images/posts/state-cost-note-ne.png",
+   "figures": {
+    "ss": 0.062,
+    "med": 0.0145,
+    "ficaRate": 0.0765,
+    "name": "Nebraska",
+    "wage": 62985,
+    "fica": 4818.3525,
+    "health": 7047,
+    "sub": 67803.3525,
+    "total": 74850.3525
+   },
+   "imageBytes": 57058
+  },
+  {
+   "id": "state-cost-note-id",
+   "series": "state-cost-note",
+   "kind": "note",
+   "label": "Data note",
+   "liveDate": "2027-05-06",
+   "liveAt": "2027-05-06T09:00:00-04:00",
+   "pubDate": "Thu, 06 May 2027 09:00:00 -0400",
+   "event": null,
+   "daysToEvent": null,
+   "key": "ID",
+   "headline": "What one employee costs an employer in Idaho, before the extras",
+   "cardTitle": "Idaho: the base cost of one employee",
+   "cardSub": "Average private-sector pay, employer FICA and the employer share of single health coverage at firms under 50 employees.",
+   "stats": [
+    [
+     "Avg pay per job",
+     "$63,240"
+    ],
+    [
+     "Employer FICA",
+     "$4,838"
+    ],
+    [
+     "Health, employer share",
+     "$7,338"
+    ]
+   ],
+   "estimates": [],
+   "text": "What one employee costs an employer in Idaho, before the extras\n\nIn Idaho, three numbers every employer cost starts from:\n\n- Average private-sector pay per job: $63,240 a year (includes part-time jobs)\n- Employer Social Security and Medicare on that pay (7.65%): $4,838\n- Employer share of single health coverage at firms under 50 employees: $7,338 a year\n\nThat is $75,416 before unemployment insurance, workers' comp, retirement, admin or a PEO fee. The Idaho page carries the rest, each figure with its source.\n\nSource: BLS QCEW 2025 annual averages, private; AHRQ MEPS-IC 2025, state tables; 26 U.S.C. 3111\n\nIdaho: rates, wages and sources: https://peonomics.com/states/id\n\nPEOnomics · PEO cost intelligence\n\n#SmallBusiness #Payroll #EmployerCosts",
+   "url": "https://peonomics.com/states/id",
+   "image": "https://peonomics.com/assets/images/posts/state-cost-note-id.png",
+   "figures": {
+    "ss": 0.062,
+    "med": 0.0145,
+    "ficaRate": 0.0765,
+    "name": "Idaho",
+    "wage": 63240,
+    "fica": 4837.86,
+    "health": 7338,
+    "sub": 68077.86,
+    "total": 75415.86
+   },
+   "imageBytes": 53212
+  },
+  {
+   "id": "state-cost-note-nh",
+   "series": "state-cost-note",
+   "kind": "note",
+   "label": "Data note",
+   "liveDate": "2027-05-11",
+   "liveAt": "2027-05-11T09:00:00-04:00",
+   "pubDate": "Tue, 11 May 2027 09:00:00 -0400",
+   "event": null,
+   "daysToEvent": null,
+   "key": "NH",
+   "headline": "What one employee costs an employer in New Hampshire, before the extras",
+   "cardTitle": "New Hampshire: the base cost of one employee",
+   "cardSub": "Average private-sector pay, employer FICA and the employer share of single health coverage at firms under 50 employees.",
+   "stats": [
+    [
+     "Avg pay per job",
+     "$82,594"
+    ],
+    [
+     "Employer FICA",
+     "$6,318"
+    ],
+    [
+     "Health, employer share",
+     "$6,095"
+    ]
+   ],
+   "estimates": [],
+   "text": "What one employee costs an employer in New Hampshire, before the extras\n\nIn New Hampshire, three numbers every employer cost starts from:\n\n- Average private-sector pay per job: $82,594 a year (includes part-time jobs)\n- Employer Social Security and Medicare on that pay (7.65%): $6,318\n- Employer share of single health coverage at firms under 50 employees: $6,095 a year\n\nThat is $95,007 before unemployment insurance, workers' comp, retirement, admin or a PEO fee. The New Hampshire page carries the rest, each figure with its source.\n\nSource: BLS QCEW 2025 annual averages, private; AHRQ MEPS-IC 2025, state tables; 26 U.S.C. 3111\n\nNew Hampshire: rates, wages and sources: https://peonomics.com/states/nh\n\nPEOnomics · PEO cost intelligence\n\n#SmallBusiness #Payroll #EmployerCosts",
+   "url": "https://peonomics.com/states/nh",
+   "image": "https://peonomics.com/assets/images/posts/state-cost-note-nh.png",
+   "figures": {
+    "ss": 0.062,
+    "med": 0.0145,
+    "ficaRate": 0.0765,
+    "name": "New Hampshire",
+    "wage": 82594,
+    "fica": 6318.441,
+    "health": 6095,
+    "sub": 88912.441,
+    "total": 95007.441
+   },
+   "imageBytes": 59841
+  },
+  {
+   "id": "state-cost-note-me",
+   "series": "state-cost-note",
+   "kind": "note",
+   "label": "Data note",
+   "liveDate": "2027-05-13",
+   "liveAt": "2027-05-13T09:00:00-04:00",
+   "pubDate": "Thu, 13 May 2027 09:00:00 -0400",
+   "event": null,
+   "daysToEvent": null,
+   "key": "ME",
+   "headline": "What one employee costs an employer in Maine, before the extras",
+   "cardTitle": "Maine: the base cost of one employee",
+   "cardSub": "Average private-sector pay, employer FICA and the employer share of single health coverage at firms under 50 employees.",
+   "stats": [
+    [
+     "Avg pay per job",
+     "$65,967"
+    ],
+    [
+     "Employer FICA",
+     "$5,046"
+    ],
+    [
+     "Health, employer share",
+     "$7,099"
+    ]
+   ],
+   "estimates": [],
+   "text": "What one employee costs an employer in Maine, before the extras\n\nIn Maine, three numbers every employer cost starts from:\n\n- Average private-sector pay per job: $65,967 a year (includes part-time jobs)\n- Employer Social Security and Medicare on that pay (7.65%): $5,046\n- Employer share of single health coverage at firms under 50 employees: $7,099 a year\n\nThat is $78,112 before unemployment insurance, workers' comp, retirement, admin or a PEO fee. The Maine page carries the rest, each figure with its source.\n\nSource: BLS QCEW 2025 annual averages, private; AHRQ MEPS-IC 2025, state tables; 26 U.S.C. 3111\n\nMaine: rates, wages and sources: https://peonomics.com/states/me\n\nPEOnomics · PEO cost intelligence\n\n#SmallBusiness #Payroll #EmployerCosts",
+   "url": "https://peonomics.com/states/me",
+   "image": "https://peonomics.com/assets/images/posts/state-cost-note-me.png",
+   "figures": {
+    "ss": 0.062,
+    "med": 0.0145,
+    "ficaRate": 0.0765,
+    "name": "Maine",
+    "wage": 65967,
+    "fica": 5046.4755,
+    "health": 7099,
+    "sub": 71013.4755,
+    "total": 78112.4755
+   },
+   "imageBytes": 53670
+  },
+  {
+   "id": "state-cost-note-ri",
+   "series": "state-cost-note",
+   "kind": "note",
+   "label": "Data note",
+   "liveDate": "2027-05-18",
+   "liveAt": "2027-05-18T09:00:00-04:00",
+   "pubDate": "Tue, 18 May 2027 09:00:00 -0400",
+   "event": null,
+   "daysToEvent": null,
+   "key": "RI",
+   "headline": "What one employee costs an employer in Rhode Island, before the extras",
+   "cardTitle": "Rhode Island: the base cost of one employee",
+   "cardSub": "Average private-sector pay, employer FICA and the employer share of single health coverage at firms under 50 employees.",
+   "stats": [
+    [
+     "Avg pay per job",
+     "$69,364"
+    ],
+    [
+     "Employer FICA",
+     "$5,306"
+    ],
+    [
+     "Health, employer share",
+     "$7,563"
+    ]
+   ],
+   "estimates": [],
+   "text": "What one employee costs an employer in Rhode Island, before the extras\n\nIn Rhode Island, three numbers every employer cost starts from:\n\n- Average private-sector pay per job: $69,364 a year (includes part-time jobs)\n- Employer Social Security and Medicare on that pay (7.65%): $5,306\n- Employer share of single health coverage at firms under 50 employees: $7,563 a year\n\nThat is $82,233 before unemployment insurance, workers' comp, retirement, admin or a PEO fee. The Rhode Island page carries the rest, each figure with its source.\n\nSource: BLS QCEW 2025 annual averages, private; AHRQ MEPS-IC 2025, state tables; 26 U.S.C. 3111\n\nRhode Island: rates, wages and sources: https://peonomics.com/states/ri\n\nPEOnomics · PEO cost intelligence\n\n#SmallBusiness #Payroll #EmployerCosts",
+   "url": "https://peonomics.com/states/ri",
+   "image": "https://peonomics.com/assets/images/posts/state-cost-note-ri.png",
+   "figures": {
+    "ss": 0.062,
+    "med": 0.0145,
+    "ficaRate": 0.0765,
+    "name": "Rhode Island",
+    "wage": 69364,
+    "fica": 5306.346,
+    "health": 7563,
+    "sub": 74670.346,
+    "total": 82233.346
+   },
+   "imageBytes": 57083
+  },
+  {
+   "id": "state-cost-note-mt",
+   "series": "state-cost-note",
+   "kind": "note",
+   "label": "Data note",
+   "liveDate": "2027-05-20",
+   "liveAt": "2027-05-20T09:00:00-04:00",
+   "pubDate": "Thu, 20 May 2027 09:00:00 -0400",
+   "event": null,
+   "daysToEvent": null,
+   "key": "MT",
+   "headline": "What one employee costs an employer in Montana, before the extras",
+   "cardTitle": "Montana: the base cost of one employee",
+   "cardSub": "Average private-sector pay, employer FICA and the employer share of single health coverage at firms under 50 employees.",
+   "stats": [
+    [
+     "Avg pay per job",
+     "$62,480"
+    ],
+    [
+     "Employer FICA",
+     "$4,780"
+    ],
+    [
+     "Health, employer share",
+     "$7,250"
+    ]
+   ],
+   "estimates": [],
+   "text": "What one employee costs an employer in Montana, before the extras\n\nIn Montana, three numbers every employer cost starts from:\n\n- Average private-sector pay per job: $62,480 a year (includes part-time jobs)\n- Employer Social Security and Medicare on that pay (7.65%): $4,780\n- Employer share of single health coverage at firms under 50 employees: $7,250 a year\n\nThat is $74,510 before unemployment insurance, workers' comp, retirement, admin or a PEO fee. The Montana page carries the rest, each figure with its source.\n\nSource: BLS QCEW 2025 annual averages, private; AHRQ MEPS-IC 2025, state tables; 26 U.S.C. 3111\n\nMontana: rates, wages and sources: https://peonomics.com/states/mt\n\nPEOnomics · PEO cost intelligence\n\n#SmallBusiness #Payroll #EmployerCosts",
+   "url": "https://peonomics.com/states/mt",
+   "image": "https://peonomics.com/assets/images/posts/state-cost-note-mt.png",
+   "figures": {
+    "ss": 0.062,
+    "med": 0.0145,
+    "ficaRate": 0.0765,
+    "name": "Montana",
+    "wage": 62480,
+    "fica": 4779.72,
+    "health": 7250,
+    "sub": 67259.72,
+    "total": 74509.72
+   },
+   "imageBytes": 55753
+  },
+  {
+   "id": "state-cost-note-sd",
+   "series": "state-cost-note",
+   "kind": "note",
+   "label": "Data note",
+   "liveDate": "2027-05-25",
+   "liveAt": "2027-05-25T09:00:00-04:00",
+   "pubDate": "Tue, 25 May 2027 09:00:00 -0400",
+   "event": null,
+   "daysToEvent": null,
+   "key": "SD",
+   "headline": "What one employee costs an employer in South Dakota, before the extras",
+   "cardTitle": "South Dakota: the base cost of one employee",
+   "cardSub": "Average private-sector pay, employer FICA and the employer share of single health coverage at firms under 50 employees.",
+   "stats": [
+    [
+     "Avg pay per job",
+     "$61,038"
+    ],
+    [
+     "Employer FICA",
+     "$4,669"
+    ],
+    [
+     "Health, employer share",
+     "$5,988"
+    ]
+   ],
+   "estimates": [],
+   "text": "What one employee costs an employer in South Dakota, before the extras\n\nIn South Dakota, three numbers every employer cost starts from:\n\n- Average private-sector pay per job: $61,038 a year (includes part-time jobs)\n- Employer Social Security and Medicare on that pay (7.65%): $4,669\n- Employer share of single health coverage at firms under 50 employees: $5,988 a year\n\nThat is $71,695 before unemployment insurance, workers' comp, retirement, admin or a PEO fee. The South Dakota page carries the rest, each figure with its source.\n\nSource: BLS QCEW 2025 annual averages, private; AHRQ MEPS-IC 2025, state tables; 26 U.S.C. 3111\n\nSouth Dakota: rates, wages and sources: https://peonomics.com/states/sd\n\nPEOnomics · PEO cost intelligence\n\n#SmallBusiness #Payroll #EmployerCosts",
+   "url": "https://peonomics.com/states/sd",
+   "image": "https://peonomics.com/assets/images/posts/state-cost-note-sd.png",
+   "figures": {
+    "ss": 0.062,
+    "med": 0.0145,
+    "ficaRate": 0.0765,
+    "name": "South Dakota",
+    "wage": 61038,
+    "fica": 4669.407,
+    "health": 5988,
+    "sub": 65707.407,
+    "total": 71695.407
+   },
+   "imageBytes": 58818
+  },
+  {
+   "id": "state-cost-note-nd",
+   "series": "state-cost-note",
+   "kind": "note",
+   "label": "Data note",
+   "liveDate": "2027-05-27",
+   "liveAt": "2027-05-27T09:00:00-04:00",
+   "pubDate": "Thu, 27 May 2027 09:00:00 -0400",
+   "event": null,
+   "daysToEvent": null,
+   "key": "ND",
+   "headline": "What one employee costs an employer in North Dakota, before the extras",
+   "cardTitle": "North Dakota: the base cost of one employee",
+   "cardSub": "Average private-sector pay, employer FICA and the employer share of single health coverage at firms under 50 employees.",
+   "stats": [
+    [
+     "Avg pay per job",
+     "$68,980"
+    ],
+    [
+     "Employer FICA",
+     "$5,277"
+    ],
+    [
+     "Health, employer share",
+     "$8,059"
+    ]
+   ],
+   "estimates": [],
+   "text": "What one employee costs an employer in North Dakota, before the extras\n\nIn North Dakota, three numbers every employer cost starts from:\n\n- Average private-sector pay per job: $68,980 a year (includes part-time jobs)\n- Employer Social Security and Medicare on that pay (7.65%): $5,277\n- Employer share of single health coverage at firms under 50 employees: $8,059 a year\n\nThat is $82,316 before unemployment insurance, workers' comp, retirement, admin or a PEO fee. The North Dakota page carries the rest, each figure with its source.\n\nSource: BLS QCEW 2025 annual averages, private; AHRQ MEPS-IC 2025, state tables; 26 U.S.C. 3111\n\nNorth Dakota: rates, wages and sources: https://peonomics.com/states/nd\n\nPEOnomics · PEO cost intelligence\n\n#SmallBusiness #Payroll #EmployerCosts",
+   "url": "https://peonomics.com/states/nd",
+   "image": "https://peonomics.com/assets/images/posts/state-cost-note-nd.png",
+   "figures": {
+    "ss": 0.062,
+    "med": 0.0145,
+    "ficaRate": 0.0765,
+    "name": "North Dakota",
+    "wage": 68980,
+    "fica": 5276.97,
+    "health": 8059,
+    "sub": 74256.97,
+    "total": 82315.97
+   },
+   "imageBytes": 57463
+  },
+  {
+   "id": "state-cost-note-ak",
+   "series": "state-cost-note",
+   "kind": "note",
+   "label": "Data note",
+   "liveDate": "2027-06-01",
+   "liveAt": "2027-06-01T09:00:00-04:00",
+   "pubDate": "Tue, 01 Jun 2027 09:00:00 -0400",
+   "event": null,
+   "daysToEvent": null,
+   "key": "AK",
+   "headline": "What one employee costs an employer in Alaska, before the extras",
+   "cardTitle": "Alaska: the base cost of one employee",
+   "cardSub": "Average private-sector pay, employer FICA and the employer share of single health coverage at firms under 50 employees.",
+   "stats": [
+    [
+     "Avg pay per job",
+     "$75,188"
+    ],
+    [
+     "Employer FICA",
+     "$5,752"
+    ],
+    [
+     "Health, employer share",
+     "$9,216"
+    ]
+   ],
+   "estimates": [],
+   "text": "What one employee costs an employer in Alaska, before the extras\n\nIn Alaska, three numbers every employer cost starts from:\n\n- Average private-sector pay per job: $75,188 a year (includes part-time jobs)\n- Employer Social Security and Medicare on that pay (7.65%): $5,752\n- Employer share of single health coverage at firms under 50 employees: $9,216 a year\n\nThat is $90,156 before unemployment insurance, workers' comp, retirement, admin or a PEO fee. The Alaska page carries the rest, each figure with its source.\n\nSource: BLS QCEW 2025 annual averages, private; AHRQ MEPS-IC 2025, state tables; 26 U.S.C. 3111\n\nAlaska: rates, wages and sources: https://peonomics.com/states/ak\n\nPEOnomics · PEO cost intelligence\n\n#SmallBusiness #Payroll #EmployerCosts",
+   "url": "https://peonomics.com/states/ak",
+   "image": "https://peonomics.com/assets/images/posts/state-cost-note-ak.png",
+   "figures": {
+    "ss": 0.062,
+    "med": 0.0145,
+    "ficaRate": 0.0765,
+    "name": "Alaska",
+    "wage": 75188,
+    "fica": 5751.882,
+    "health": 9216,
+    "sub": 80939.882,
+    "total": 90155.882
+   },
+   "imageBytes": 55582
+  },
+  {
+   "id": "state-cost-note-vt",
+   "series": "state-cost-note",
+   "kind": "note",
+   "label": "Data note",
+   "liveDate": "2027-06-03",
+   "liveAt": "2027-06-03T09:00:00-04:00",
+   "pubDate": "Thu, 03 Jun 2027 09:00:00 -0400",
+   "event": null,
+   "daysToEvent": null,
+   "key": "VT",
+   "headline": "What one employee costs an employer in Vermont, before the extras",
+   "cardTitle": "Vermont: the base cost of one employee",
+   "cardSub": "Average private-sector pay, employer FICA and the employer share of single health coverage at firms under 50 employees.",
+   "stats": [
+    [
+     "Avg pay per job",
+     "$66,806"
+    ],
+    [
+     "Employer FICA",
+     "$5,111"
+    ],
+    [
+     "Health, employer share",
+     "$8,838"
+    ]
+   ],
+   "estimates": [],
+   "text": "What one employee costs an employer in Vermont, before the extras\n\nIn Vermont, three numbers every employer cost starts from:\n\n- Average private-sector pay per job: $66,806 a year (includes part-time jobs)\n- Employer Social Security and Medicare on that pay (7.65%): $5,111\n- Employer share of single health coverage at firms under 50 employees: $8,838 a year\n\nThat is $80,755 before unemployment insurance, workers' comp, retirement, admin or a PEO fee. The Vermont page carries the rest, each figure with its source.\n\nSource: BLS QCEW 2025 annual averages, private; AHRQ MEPS-IC 2025, state tables; 26 U.S.C. 3111\n\nVermont: rates, wages and sources: https://peonomics.com/states/vt\n\nPEOnomics · PEO cost intelligence\n\n#SmallBusiness #Payroll #EmployerCosts",
+   "url": "https://peonomics.com/states/vt",
+   "image": "https://peonomics.com/assets/images/posts/state-cost-note-vt.png",
+   "figures": {
+    "ss": 0.062,
+    "med": 0.0145,
+    "ficaRate": 0.0765,
+    "name": "Vermont",
+    "wage": 66806,
+    "fica": 5110.659,
+    "health": 8838,
+    "sub": 71916.659,
+    "total": 80754.659
+   },
+   "imageBytes": 55870
+  },
+  {
+   "id": "dmv-industry-pay-note-dc-hospitality_food",
+   "series": "dmv-industry-pay-note",
+   "kind": "note",
+   "label": "Data note",
+   "liveDate": "2027-06-08",
+   "liveAt": "2027-06-08T09:00:00-04:00",
+   "pubDate": "Tue, 08 Jun 2027 09:00:00 -0400",
+   "event": null,
+   "daysToEvent": null,
+   "key": "DC/hospitality_food",
+   "headline": "What a restaurant and bar job pays in Washington, DC",
+   "cardTitle": "Washington, DC: restaurant and bar pay",
+   "cardSub": "Average annual pay per job (includes part-time), BLS QCEW 2025, private sector.",
+   "stats": [
+    [
+     "Avg pay, this industry",
+     "$41,861"
+    ],
+    [
+     "All private",
+     "$123,844"
+    ],
+    [
+     "Employer FICA",
+     "$3,202"
+    ]
+   ],
+   "estimates": [],
+   "text": "What a restaurant and bar job pays in Washington, DC\n\nAverage pay per restaurant and bar job in Washington, DC: $41,861 a year, against $123,844 across all private industries (includes part-time jobs).\n\nEmployer Social Security and Medicare on that pay: $3,202. Unemployment insurance, comp and benefits are priced off payroll, so this is the first number to check in any PEO quote.\n\nSource: BLS QCEW 2025 annual averages, private; 26 U.S.C. 3111\n\nModel your own payroll: https://peonomics.com/states/dc\n\nPEOnomics · PEO cost intelligence\n\n#SmallBusiness #Payroll #DMV",
+   "url": "https://peonomics.com/states/dc",
+   "image": "https://peonomics.com/assets/images/posts/dmv-industry-pay-note-dc-hospitality_food.png",
+   "figures": {
+    "ss": 0.062,
+    "med": 0.0145,
+    "ficaRate": 0.0765,
+    "name": "Washington, DC",
+    "wage": 41861,
+    "all": 123844,
+    "fica": 3202.3665
+   },
+   "imageBytes": 57328
+  },
+  {
+   "id": "dmv-industry-pay-note-md-hospitality_food",
+   "series": "dmv-industry-pay-note",
+   "kind": "note",
+   "label": "Data note",
+   "liveDate": "2027-06-10",
+   "liveAt": "2027-06-10T09:00:00-04:00",
+   "pubDate": "Thu, 10 Jun 2027 09:00:00 -0400",
+   "event": null,
+   "daysToEvent": null,
+   "key": "MD/hospitality_food",
+   "headline": "What a restaurant and bar job pays in Maryland",
+   "cardTitle": "Maryland: restaurant and bar pay",
+   "cardSub": "Average annual pay per job (includes part-time), BLS QCEW 2025, private sector.",
+   "stats": [
+    [
+     "Avg pay, this industry",
+     "$29,028"
+    ],
+    [
+     "All private",
+     "$78,676"
+    ],
+    [
+     "Employer FICA",
+     "$2,221"
+    ]
+   ],
+   "estimates": [],
+   "text": "What a restaurant and bar job pays in Maryland\n\nAverage pay per restaurant and bar job in Maryland: $29,028 a year, against $78,676 across all private industries (includes part-time jobs).\n\nEmployer Social Security and Medicare on that pay: $2,221. Unemployment insurance, comp and benefits are priced off payroll, so this is the first number to check in any PEO quote.\n\nSource: BLS QCEW 2025 annual averages, private; 26 U.S.C. 3111\n\nModel your own payroll: https://peonomics.com/states/md\n\nPEOnomics · PEO cost intelligence\n\n#SmallBusiness #Payroll #DMV",
+   "url": "https://peonomics.com/states/md",
+   "image": "https://peonomics.com/assets/images/posts/dmv-industry-pay-note-md-hospitality_food.png",
+   "figures": {
+    "ss": 0.062,
+    "med": 0.0145,
+    "ficaRate": 0.0765,
+    "name": "Maryland",
+    "wage": 29028,
+    "all": 78676,
+    "fica": 2220.642
+   },
+   "imageBytes": 50781
+  },
+  {
+   "id": "dmv-industry-pay-note-va-hospitality_food",
+   "series": "dmv-industry-pay-note",
+   "kind": "note",
+   "label": "Data note",
+   "liveDate": "2027-06-15",
+   "liveAt": "2027-06-15T09:00:00-04:00",
+   "pubDate": "Tue, 15 Jun 2027 09:00:00 -0400",
+   "event": null,
+   "daysToEvent": null,
+   "key": "VA/hospitality_food",
+   "headline": "What a restaurant and bar job pays in Virginia",
+   "cardTitle": "Virginia: restaurant and bar pay",
+   "cardSub": "Average annual pay per job (includes part-time), BLS QCEW 2025, private sector.",
+   "stats": [
+    [
+     "Avg pay, this industry",
+     "$27,553"
+    ],
+    [
+     "All private",
+     "$80,159"
+    ],
+    [
+     "Employer FICA",
+     "$2,108"
+    ]
+   ],
+   "estimates": [],
+   "text": "What a restaurant and bar job pays in Virginia\n\nAverage pay per restaurant and bar job in Virginia: $27,553 a year, against $80,159 across all private industries (includes part-time jobs).\n\nEmployer Social Security and Medicare on that pay: $2,108. Unemployment insurance, comp and benefits are priced off payroll, so this is the first number to check in any PEO quote.\n\nSource: BLS QCEW 2025 annual averages, private; 26 U.S.C. 3111\n\nModel your own payroll: https://peonomics.com/states/va\n\nPEOnomics · PEO cost intelligence\n\n#SmallBusiness #Payroll #DMV",
+   "url": "https://peonomics.com/states/va",
+   "image": "https://peonomics.com/assets/images/posts/dmv-industry-pay-note-va-hospitality_food.png",
+   "figures": {
+    "ss": 0.062,
+    "med": 0.0145,
+    "ficaRate": 0.0765,
+    "name": "Virginia",
+    "wage": 27553,
+    "all": 80159,
+    "fica": 2107.8044999999997
+   },
+   "imageBytes": 52609
+  },
+  {
+   "id": "dmv-industry-pay-note-md-construction_trades",
+   "series": "dmv-industry-pay-note",
+   "kind": "note",
+   "label": "Data note",
+   "liveDate": "2027-06-17",
+   "liveAt": "2027-06-17T09:00:00-04:00",
+   "pubDate": "Thu, 17 Jun 2027 09:00:00 -0400",
+   "event": null,
+   "daysToEvent": null,
+   "key": "MD/construction_trades",
+   "headline": "What a construction job pays in Maryland",
+   "cardTitle": "Maryland: construction pay",
+   "cardSub": "Average annual pay per job (includes part-time), BLS QCEW 2025, private sector.",
+   "stats": [
+    [
+     "Avg pay, this industry",
+     "$86,149"
+    ],
+    [
+     "All private",
+     "$78,676"
+    ],
+    [
+     "Employer FICA",
+     "$6,590"
+    ]
+   ],
+   "estimates": [],
+   "text": "What a construction job pays in Maryland\n\nAverage pay per construction job in Maryland: $86,149 a year, against $78,676 across all private industries (includes part-time jobs).\n\nEmployer Social Security and Medicare on that pay: $6,590. Unemployment insurance, comp and benefits are priced off payroll, so this is the first number to check in any PEO quote.\n\nSource: BLS QCEW 2025 annual averages, private; 26 U.S.C. 3111\n\nModel your own payroll: https://peonomics.com/states/md\n\nPEOnomics · PEO cost intelligence\n\n#SmallBusiness #Payroll #DMV",
+   "url": "https://peonomics.com/states/md",
+   "image": "https://peonomics.com/assets/images/posts/dmv-industry-pay-note-md-construction_trades.png",
+   "figures": {
+    "ss": 0.062,
+    "med": 0.0145,
+    "ficaRate": 0.0765,
+    "name": "Maryland",
+    "wage": 86149,
+    "all": 78676,
+    "fica": 6590.3985
+   },
+   "imageBytes": 51265
+  },
+  {
+   "id": "dmv-industry-pay-note-va-construction_trades",
+   "series": "dmv-industry-pay-note",
+   "kind": "note",
+   "label": "Data note",
+   "liveDate": "2027-06-22",
+   "liveAt": "2027-06-22T09:00:00-04:00",
+   "pubDate": "Tue, 22 Jun 2027 09:00:00 -0400",
+   "event": null,
+   "daysToEvent": null,
+   "key": "VA/construction_trades",
+   "headline": "What a construction job pays in Virginia",
+   "cardTitle": "Virginia: construction pay",
+   "cardSub": "Average annual pay per job (includes part-time), BLS QCEW 2025, private sector.",
+   "stats": [
+    [
+     "Avg pay, this industry",
+     "$82,626"
+    ],
+    [
+     "All private",
+     "$80,159"
+    ],
+    [
+     "Employer FICA",
+     "$6,321"
+    ]
+   ],
+   "estimates": [],
+   "text": "What a construction job pays in Virginia\n\nAverage pay per construction job in Virginia: $82,626 a year, against $80,159 across all private industries (includes part-time jobs).\n\nEmployer Social Security and Medicare on that pay: $6,321. Unemployment insurance, comp and benefits are priced off payroll, so this is the first number to check in any PEO quote.\n\nSource: BLS QCEW 2025 annual averages, private; 26 U.S.C. 3111\n\nModel your own payroll: https://peonomics.com/states/va\n\nPEOnomics · PEO cost intelligence\n\n#SmallBusiness #Payroll #DMV",
+   "url": "https://peonomics.com/states/va",
+   "image": "https://peonomics.com/assets/images/posts/dmv-industry-pay-note-va-construction_trades.png",
+   "figures": {
+    "ss": 0.062,
+    "med": 0.0145,
+    "ficaRate": 0.0765,
+    "name": "Virginia",
+    "wage": 82626,
+    "all": 80159,
+    "fica": 6320.889
+   },
+   "imageBytes": 51601
+  },
+  {
+   "id": "dmv-industry-pay-note-dc-clerical_professional",
+   "series": "dmv-industry-pay-note",
+   "kind": "note",
+   "label": "Data note",
+   "liveDate": "2027-06-24",
+   "liveAt": "2027-06-24T09:00:00-04:00",
+   "pubDate": "Thu, 24 Jun 2027 09:00:00 -0400",
+   "event": null,
+   "daysToEvent": null,
+   "key": "DC/clerical_professional",
+   "headline": "What a professional services job pays in Washington, DC",
+   "cardTitle": "Washington, DC: professional services pay",
+   "cardSub": "Average annual pay per job (includes part-time), BLS QCEW 2025, private sector.",
+   "stats": [
+    [
+     "Avg pay, this industry",
+     "$198,031"
+    ],
+    [
+     "All private",
+     "$123,844"
+    ],
+    [
+     "Employer FICA",
+     "$15,149"
+    ]
+   ],
+   "estimates": [],
+   "text": "What a professional services job pays in Washington, DC\n\nAverage pay per professional services job in Washington, DC: $198,031 a year, against $123,844 across all private industries (includes part-time jobs).\n\nEmployer Social Security and Medicare on that pay: $15,149. Unemployment insurance, comp and benefits are priced off payroll, so this is the first number to check in any PEO quote.\n\nSource: BLS QCEW 2025 annual averages, private; 26 U.S.C. 3111\n\nModel your own payroll: https://peonomics.com/states/dc\n\nPEOnomics · PEO cost intelligence\n\n#SmallBusiness #Payroll #DMV",
+   "url": "https://peonomics.com/states/dc",
+   "image": "https://peonomics.com/assets/images/posts/dmv-industry-pay-note-dc-clerical_professional.png",
+   "figures": {
+    "ss": 0.062,
+    "med": 0.0145,
+    "ficaRate": 0.0765,
+    "name": "Washington, DC",
+    "wage": 198031,
+    "all": 123844,
+    "fica": 15149.3715
+   },
+   "imageBytes": 61175
+  },
+  {
+   "id": "dmv-industry-pay-note-md-clerical_professional",
+   "series": "dmv-industry-pay-note",
+   "kind": "note",
+   "label": "Data note",
+   "liveDate": "2027-06-29",
+   "liveAt": "2027-06-29T09:00:00-04:00",
+   "pubDate": "Tue, 29 Jun 2027 09:00:00 -0400",
+   "event": null,
+   "daysToEvent": null,
+   "key": "MD/clerical_professional",
+   "headline": "What a professional services job pays in Maryland",
+   "cardTitle": "Maryland: professional services pay",
+   "cardSub": "Average annual pay per job (includes part-time), BLS QCEW 2025, private sector.",
+   "stats": [
+    [
+     "Avg pay, this industry",
+     "$128,976"
+    ],
+    [
+     "All private",
+     "$78,676"
+    ],
+    [
+     "Employer FICA",
+     "$9,867"
+    ]
+   ],
+   "estimates": [],
+   "text": "What a professional services job pays in Maryland\n\nAverage pay per professional services job in Maryland: $128,976 a year, against $78,676 across all private industries (includes part-time jobs).\n\nEmployer Social Security and Medicare on that pay: $9,867. Unemployment insurance, comp and benefits are priced off payroll, so this is the first number to check in any PEO quote.\n\nSource: BLS QCEW 2025 annual averages, private; 26 U.S.C. 3111\n\nModel your own payroll: https://peonomics.com/states/md\n\nPEOnomics · PEO cost intelligence\n\n#SmallBusiness #Payroll #DMV",
+   "url": "https://peonomics.com/states/md",
+   "image": "https://peonomics.com/assets/images/posts/dmv-industry-pay-note-md-clerical_professional.png",
+   "figures": {
+    "ss": 0.062,
+    "med": 0.0145,
+    "ficaRate": 0.0765,
+    "name": "Maryland",
+    "wage": 128976,
+    "all": 78676,
+    "fica": 9866.664
+   },
+   "imageBytes": 52112
+  },
+  {
+   "id": "dmv-industry-pay-note-va-clerical_professional",
+   "series": "dmv-industry-pay-note",
+   "kind": "note",
+   "label": "Data note",
+   "liveDate": "2027-07-01",
+   "liveAt": "2027-07-01T09:00:00-04:00",
+   "pubDate": "Thu, 01 Jul 2027 09:00:00 -0400",
+   "event": null,
+   "daysToEvent": null,
+   "key": "VA/clerical_professional",
+   "headline": "What a professional services job pays in Virginia",
+   "cardTitle": "Virginia: professional services pay",
+   "cardSub": "Average annual pay per job (includes part-time), BLS QCEW 2025, private sector.",
+   "stats": [
+    [
+     "Avg pay, this industry",
+     "$139,606"
+    ],
+    [
+     "All private",
+     "$80,159"
+    ],
+    [
+     "Employer FICA",
+     "$10,680"
+    ]
+   ],
+   "estimates": [],
+   "text": "What a professional services job pays in Virginia\n\nAverage pay per professional services job in Virginia: $139,606 a year, against $80,159 across all private industries (includes part-time jobs).\n\nEmployer Social Security and Medicare on that pay: $10,680. Unemployment insurance, comp and benefits are priced off payroll, so this is the first number to check in any PEO quote.\n\nSource: BLS QCEW 2025 annual averages, private; 26 U.S.C. 3111\n\nModel your own payroll: https://peonomics.com/states/va\n\nPEOnomics · PEO cost intelligence\n\n#SmallBusiness #Payroll #DMV",
+   "url": "https://peonomics.com/states/va",
+   "image": "https://peonomics.com/assets/images/posts/dmv-industry-pay-note-va-clerical_professional.png",
+   "figures": {
+    "ss": 0.062,
+    "med": 0.0145,
+    "ficaRate": 0.0765,
+    "name": "Virginia",
+    "wage": 139606,
+    "all": 80159,
+    "fica": 10679.859
+   },
+   "imageBytes": 53350
+  },
+  {
+   "id": "dmv-industry-pay-note-dc-retail_services",
+   "series": "dmv-industry-pay-note",
+   "kind": "note",
+   "label": "Data note",
+   "liveDate": "2027-07-06",
+   "liveAt": "2027-07-06T09:00:00-04:00",
+   "pubDate": "Tue, 06 Jul 2027 09:00:00 -0400",
+   "event": null,
+   "daysToEvent": null,
+   "key": "DC/retail_services",
+   "headline": "What a retail job pays in Washington, DC",
+   "cardTitle": "Washington, DC: retail pay",
+   "cardSub": "Average annual pay per job (includes part-time), BLS QCEW 2025, private sector.",
+   "stats": [
+    [
+     "Avg pay, this industry",
+     "$52,831"
+    ],
+    [
+     "All private",
+     "$123,844"
+    ],
+    [
+     "Employer FICA",
+     "$4,042"
+    ]
+   ],
+   "estimates": [],
+   "text": "What a retail job pays in Washington, DC\n\nAverage pay per retail job in Washington, DC: $52,831 a year, against $123,844 across all private industries (includes part-time jobs).\n\nEmployer Social Security and Medicare on that pay: $4,042. Unemployment insurance, comp and benefits are priced off payroll, so this is the first number to check in any PEO quote.\n\nSource: BLS QCEW 2025 annual averages, private; 26 U.S.C. 3111\n\nModel your own payroll: https://peonomics.com/states/dc\n\nPEOnomics · PEO cost intelligence\n\n#SmallBusiness #Payroll #DMV",
+   "url": "https://peonomics.com/states/dc",
+   "image": "https://peonomics.com/assets/images/posts/dmv-industry-pay-note-dc-retail_services.png",
+   "figures": {
+    "ss": 0.062,
+    "med": 0.0145,
+    "ficaRate": 0.0765,
+    "name": "Washington, DC",
+    "wage": 52831,
+    "all": 123844,
+    "fica": 4041.5715
+   },
+   "imageBytes": 53902
+  },
+  {
+   "id": "dmv-industry-pay-note-md-retail_services",
+   "series": "dmv-industry-pay-note",
+   "kind": "note",
+   "label": "Data note",
+   "liveDate": "2027-07-08",
+   "liveAt": "2027-07-08T09:00:00-04:00",
+   "pubDate": "Thu, 08 Jul 2027 09:00:00 -0400",
+   "event": null,
+   "daysToEvent": null,
+   "key": "MD/retail_services",
+   "headline": "What a retail job pays in Maryland",
+   "cardTitle": "Maryland: retail pay",
+   "cardSub": "Average annual pay per job (includes part-time), BLS QCEW 2025, private sector.",
+   "stats": [
+    [
+     "Avg pay, this industry",
+     "$44,351"
+    ],
+    [
+     "All private",
+     "$78,676"
+    ],
+    [
+     "Employer FICA",
+     "$3,393"
+    ]
+   ],
+   "estimates": [],
+   "text": "What a retail job pays in Maryland\n\nAverage pay per retail job in Maryland: $44,351 a year, against $78,676 across all private industries (includes part-time jobs).\n\nEmployer Social Security and Medicare on that pay: $3,393. Unemployment insurance, comp and benefits are priced off payroll, so this is the first number to check in any PEO quote.\n\nSource: BLS QCEW 2025 annual averages, private; 26 U.S.C. 3111\n\nModel your own payroll: https://peonomics.com/states/md\n\nPEOnomics · PEO cost intelligence\n\n#SmallBusiness #Payroll #DMV",
+   "url": "https://peonomics.com/states/md",
+   "image": "https://peonomics.com/assets/images/posts/dmv-industry-pay-note-md-retail_services.png",
+   "figures": {
+    "ss": 0.062,
+    "med": 0.0145,
+    "ficaRate": 0.0765,
+    "name": "Maryland",
+    "wage": 44351,
+    "all": 78676,
+    "fica": 3392.8514999999998
+   },
+   "imageBytes": 49100
+  },
+  {
+   "id": "dmv-industry-pay-note-va-retail_services",
+   "series": "dmv-industry-pay-note",
+   "kind": "note",
+   "label": "Data note",
+   "liveDate": "2027-07-13",
+   "liveAt": "2027-07-13T09:00:00-04:00",
+   "pubDate": "Tue, 13 Jul 2027 09:00:00 -0400",
+   "event": null,
+   "daysToEvent": null,
+   "key": "VA/retail_services",
+   "headline": "What a retail job pays in Virginia",
+   "cardTitle": "Virginia: retail pay",
+   "cardSub": "Average annual pay per job (includes part-time), BLS QCEW 2025, private sector.",
+   "stats": [
+    [
+     "Avg pay, this industry",
+     "$40,722"
+    ],
+    [
+     "All private",
+     "$80,159"
+    ],
+    [
+     "Employer FICA",
+     "$3,115"
+    ]
+   ],
+   "estimates": [],
+   "text": "What a retail job pays in Virginia\n\nAverage pay per retail job in Virginia: $40,722 a year, against $80,159 across all private industries (includes part-time jobs).\n\nEmployer Social Security and Medicare on that pay: $3,115. Unemployment insurance, comp and benefits are priced off payroll, so this is the first number to check in any PEO quote.\n\nSource: BLS QCEW 2025 annual averages, private; 26 U.S.C. 3111\n\nModel your own payroll: https://peonomics.com/states/va\n\nPEOnomics · PEO cost intelligence\n\n#SmallBusiness #Payroll #DMV",
+   "url": "https://peonomics.com/states/va",
+   "image": "https://peonomics.com/assets/images/posts/dmv-industry-pay-note-va-retail_services.png",
+   "figures": {
+    "ss": 0.062,
+    "med": 0.0145,
+    "ficaRate": 0.0765,
+    "name": "Virginia",
+    "wage": 40722,
+    "all": 80159,
+    "fica": 3115.2329999999997
+   },
+   "imageBytes": 49712
+  },
+  {
+   "id": "dmv-industry-pay-note-md-transportation_logistics",
+   "series": "dmv-industry-pay-note",
+   "kind": "note",
+   "label": "Data note",
+   "liveDate": "2027-07-15",
+   "liveAt": "2027-07-15T09:00:00-04:00",
+   "pubDate": "Thu, 15 Jul 2027 09:00:00 -0400",
+   "event": null,
+   "daysToEvent": null,
+   "key": "MD/transportation_logistics",
+   "headline": "What a transportation and warehousing job pays in Maryland",
+   "cardTitle": "Maryland: transportation and warehousing pay",
+   "cardSub": "Average annual pay per job (includes part-time), BLS QCEW 2025, private sector.",
+   "stats": [
+    [
+     "Avg pay, this industry",
+     "$62,879"
+    ],
+    [
+     "All private",
+     "$78,676"
+    ],
+    [
+     "Employer FICA",
+     "$4,810"
+    ]
+   ],
+   "estimates": [],
+   "text": "What a transportation and warehousing job pays in Maryland\n\nAverage pay per transportation and warehousing job in Maryland: $62,879 a year, against $78,676 across all private industries (includes part-time jobs).\n\nEmployer Social Security and Medicare on that pay: $4,810. Unemployment insurance, comp and benefits are priced off payroll, so this is the first number to check in any PEO quote.\n\nSource: BLS QCEW 2025 annual averages, private; 26 U.S.C. 3111\n\nModel your own payroll: https://peonomics.com/states/md\n\nPEOnomics · PEO cost intelligence\n\n#SmallBusiness #Payroll #DMV",
+   "url": "https://peonomics.com/states/md",
+   "image": "https://peonomics.com/assets/images/posts/dmv-industry-pay-note-md-transportation_logistics.png",
+   "figures": {
+    "ss": 0.062,
+    "med": 0.0145,
+    "ficaRate": 0.0765,
+    "name": "Maryland",
+    "wage": 62879,
+    "all": 78676,
+    "fica": 4810.2435
+   },
+   "imageBytes": 61018
+  },
+  {
+   "id": "dmv-industry-pay-note-va-transportation_logistics",
+   "series": "dmv-industry-pay-note",
+   "kind": "note",
+   "label": "Data note",
+   "liveDate": "2027-07-20",
+   "liveAt": "2027-07-20T09:00:00-04:00",
+   "pubDate": "Tue, 20 Jul 2027 09:00:00 -0400",
+   "event": null,
+   "daysToEvent": null,
+   "key": "VA/transportation_logistics",
+   "headline": "What a transportation and warehousing job pays in Virginia",
+   "cardTitle": "Virginia: transportation and warehousing pay",
+   "cardSub": "Average annual pay per job (includes part-time), BLS QCEW 2025, private sector.",
+   "stats": [
+    [
+     "Avg pay, this industry",
+     "$61,809"
+    ],
+    [
+     "All private",
+     "$80,159"
+    ],
+    [
+     "Employer FICA",
+     "$4,728"
+    ]
+   ],
+   "estimates": [],
+   "text": "What a transportation and warehousing job pays in Virginia\n\nAverage pay per transportation and warehousing job in Virginia: $61,809 a year, against $80,159 across all private industries (includes part-time jobs).\n\nEmployer Social Security and Medicare on that pay: $4,728. Unemployment insurance, comp and benefits are priced off payroll, so this is the first number to check in any PEO quote.\n\nSource: BLS QCEW 2025 annual averages, private; 26 U.S.C. 3111\n\nModel your own payroll: https://peonomics.com/states/va\n\nPEOnomics · PEO cost intelligence\n\n#SmallBusiness #Payroll #DMV",
+   "url": "https://peonomics.com/states/va",
+   "image": "https://peonomics.com/assets/images/posts/dmv-industry-pay-note-va-transportation_logistics.png",
+   "figures": {
+    "ss": 0.062,
+    "med": 0.0145,
+    "ficaRate": 0.0765,
+    "name": "Virginia",
+    "wage": 61809,
+    "all": 80159,
+    "fica": 4728.3885
+   },
+   "imageBytes": 60942
+  },
+  {
+   "id": "dmv-industry-pay-note-va-light_manufacturing",
+   "series": "dmv-industry-pay-note",
+   "kind": "note",
+   "label": "Data note",
+   "liveDate": "2027-07-22",
+   "liveAt": "2027-07-22T09:00:00-04:00",
+   "pubDate": "Thu, 22 Jul 2027 09:00:00 -0400",
+   "event": null,
+   "daysToEvent": null,
+   "key": "VA/light_manufacturing",
+   "headline": "What a manufacturing job pays in Virginia",
+   "cardTitle": "Virginia: manufacturing pay",
+   "cardSub": "Average annual pay per job (includes part-time), BLS QCEW 2025, private sector.",
+   "stats": [
+    [
+     "Avg pay, this industry",
+     "$79,282"
+    ],
+    [
+     "All private",
+     "$80,159"
+    ],
+    [
+     "Employer FICA",
+     "$6,065"
+    ]
+   ],
+   "estimates": [],
+   "text": "What a manufacturing job pays in Virginia\n\nAverage pay per manufacturing job in Virginia: $79,282 a year, against $80,159 across all private industries (includes part-time jobs).\n\nEmployer Social Security and Medicare on that pay: $6,065. Unemployment insurance, comp and benefits are priced off payroll, so this is the first number to check in any PEO quote.\n\nSource: BLS QCEW 2025 annual averages, private; 26 U.S.C. 3111\n\nModel your own payroll: https://peonomics.com/states/va\n\nPEOnomics · PEO cost intelligence\n\n#SmallBusiness #Payroll #DMV",
+   "url": "https://peonomics.com/states/va",
+   "image": "https://peonomics.com/assets/images/posts/dmv-industry-pay-note-va-light_manufacturing.png",
+   "figures": {
+    "ss": 0.062,
+    "med": 0.0145,
+    "ficaRate": 0.0765,
+    "name": "Virginia",
+    "wage": 79282,
+    "all": 80159,
+    "fica": 6065.073
+   },
+   "imageBytes": 51011
+  },
+  {
    "id": "va-min-wage-2028-2027-10-01",
    "series": "va-min-wage-2028",
    "kind": "countdown",
@@ -691,6 +3306,7 @@
    "pubDate": "Fri, 01 Oct 2027 09:00:00 -0400",
    "event": "2028-01-01",
    "daysToEvent": 92,
+   "key": null,
    "headline": "92 days until Virginia's minimum wage reaches $15.00",
    "cardTitle": "Virginia minimum wage reaches $15",
    "cardSub": "",
@@ -731,6 +3347,7 @@
    "pubDate": "Tue, 05 Oct 2027 09:00:00 -0400",
    "event": "2028-01-03",
    "daysToEvent": 90,
+   "key": null,
    "headline": "90 days until Maryland FAMLI benefits begin",
    "cardTitle": "Maryland FAMLI benefits begin",
    "cardSub": "",
@@ -771,6 +3388,7 @@
    "pubDate": "Tue, 30 Nov 2027 09:00:00 -0500",
    "event": "2028-01-03",
    "daysToEvent": 34,
+   "key": null,
    "headline": "34 days until Maryland FAMLI benefits begin",
    "cardTitle": "Maryland FAMLI benefits begin",
    "cardSub": "",
@@ -811,6 +3429,7 @@
    "pubDate": "Thu, 02 Dec 2027 09:00:00 -0500",
    "event": "2028-01-01",
    "daysToEvent": 30,
+   "key": null,
    "headline": "30 days until Virginia's minimum wage reaches $15.00",
    "cardTitle": "Virginia minimum wage reaches $15",
    "cardSub": "",

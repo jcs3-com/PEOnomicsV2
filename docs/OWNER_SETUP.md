@@ -100,7 +100,9 @@ LinkedIn sign-in).
 4. **Weekly audit (5 minutes):** open `https://peonomics.com/api/feed?audit=1`. It shows what is live and
    everything going live in the next 35 days, with the full text. To change or stop a post, edit
    `data/posts/series.json`, run `python3 tools/build_posts.py`, commit. Pause everything: turn the Zap off.
-5. **Mark a data release:** set its `date` in `data/posts/series.json` (dormant releases are listed in the audit),
+5. **Cadence:** two posts a week, Tuesday and Thursday at 9:00 ET. Countdowns and releases come first; data notes
+   fill the rest. To change the days or rate, edit `cadence` in `data/posts/series.json` and rebuild.
+6. **Mark a data release:** set its `date` in `data/posts/series.json` (dormant releases are listed in the audit),
    rebuild, commit. The builder refuses a release whose data is not ready (e.g. the 2026 FUTA final needs
    California's credit reduction updated and marked `high` confidence first).
 

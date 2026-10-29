@@ -62,7 +62,7 @@ def resolve(ref, data):
     return node
 
 
-OPS = {'mul': lambda a, b: a * b, 'sub': lambda a, b: a - b, 'add': lambda a, b: a + b}
+OPS = {'mul': lambda a, b: a * b, 'sub': lambda a, b: a - b, 'add': lambda a, b: a + b, 'min': min}
 
 
 def figures(spec, data):
@@ -109,6 +109,10 @@ def render(tpl, figs, n=None):
             return '{:,}'.format(n)
         if name not in figs:
             raise BuildError(f'template uses unknown figure {{{name}}}')
+        if kind is None:
+            if not isinstance(figs[name], str) or re.search(r'\d', figs[name]):
+                raise BuildError(f'{{{name}}} needs a format (only digit-free text figures may be used bare)')
+            return figs[name]
         return FORMATS[kind](figs[name])
     out = re.sub(r'\{(\w+)(?::(\w+))?\}', sub, tpl)
     if re.search(r'[{}]', out):
@@ -141,11 +145,12 @@ def build(today=None):
     hh, mm = (int(x) for x in meta['postTime'].split(':'))
     items, dormant = [], []
 
-    def add(item_id, series_id, kind, day, headline, body, s, figs, estimates, n, event):
+    def add(item_id, series_id, kind, day, headline, body, s, figs, estimates, n, event, key=None):
         if day.weekday() >= 5:
             raise BuildError(f'{item_id} lands on a weekend ({day})')
         if not page_exists(s['url']):
             raise BuildError(f'{item_id} links to {s["url"]}, which is not a page in the repo')
+        s = dict(s, cta=render(s['cta'], figs, n))
         text = compose(meta, headline, body, s)
         if estimates and 'estimate' not in body.lower():
             raise BuildError(f'{item_id} uses estimate figures {estimates} but never says "estimate"')
@@ -157,7 +162,7 @@ def build(today=None):
             'id': item_id, 'series': series_id, 'kind': kind, 'label': s['series'],
             'liveDate': day.isoformat(), 'liveAt': live.isoformat(), 'pubDate': format_datetime(live),
             'event': event.isoformat() if event else None, 'daysToEvent': n,
-            'headline': headline, 'cardTitle': s['cardTitle'], 'cardSub': render(s.get('cardSub', ''), figs, n), 'stats': stats,
+            'key': key, 'headline': headline, 'cardTitle': render(s['cardTitle'], figs, n), 'cardSub': render(s.get('cardSub', ''), figs, n), 'stats': stats,
             'estimates': [stats[i][0] for i, (a, b) in enumerate(s.get('stats', [])) if any('{' + e + ':' in b for e in estimates)],
             'text': text, 'url': meta['site'] + s['url'],
             'image': f'{meta["site"]}/assets/images/posts/{item_id}.png',
@@ -193,6 +198,8 @@ def build(today=None):
         day = dt.date.fromisoformat(r['date'])
         add(r['id'], r['id'], 'release', day, render(r['headline'], figs), render(r['body'], figs), r, figs, est, None, None)
 
+    skipped = fill(S, data, items, add)
+
     items.sort(key=lambda x: x['liveAt'])
     days = [x['liveDate'] for x in items]
     dupes = sorted({d for d in days if days.count(d) > 1})
@@ -206,9 +213,99 @@ def build(today=None):
             'channel': {'title': f'{meta["brand"]} · {meta["tagline"]}', 'link': meta['site'] + '/',
                         'description': 'Sourced payroll and employer-cost countdowns and data releases for DC, Maryland and Virginia employers.'},
             'dormantReleases': dormant,
+            'rotationSkips': skipped,
         },
         'items': items,
     }
+
+
+def bind(obj, key, labels=None):
+    """Substitutes {key}, {k0}, {k1}, {keyLower} and {label} (labels[k1]) in a rotation's strings."""
+    parts = key.split('/')
+    subs = {'key': key, 'keyLower': parts[0].lower(), **{f'k{i}': p for i, p in enumerate(parts)}}
+    if labels and len(parts) > 1:
+        subs['label'] = labels[parts[1]]
+    if isinstance(obj, str):
+        return re.sub(r'\{(key|keyLower|label|k\d)\}', lambda m: subs.get(m.group(1), m.group(0)), obj)
+    if isinstance(obj, list):
+        return [bind(x, key, labels) for x in obj]
+    if isinstance(obj, dict):
+        return {k: bind(v, key, labels) for k, v in obj.items() if k != 'labels'}
+    return obj
+
+
+def rotation_keys(rot, data):
+    if 'keys' in rot:
+        return list(rot['keys'])
+    pool = resolve(rot['keysFrom'], data)
+    first = [k for k in rot.get('first', []) if k in pool]
+    rest = [k for k in pool if k not in first]
+    if rot.get('sortBy'):
+        def val(k):
+            node = pool[k]
+            for p in rot['sortBy'].split('.'):
+                node = node[p]
+            return node
+        rest.sort(key=lambda k: -val(k))
+    return first + rest
+
+
+def fill(S, data, items, add):
+    """Tops every week up to cadence.perWeek using the rotations, on cadence.weekdays only.
+    A rotation posts only between validFrom and validUntil (its data edition's shelf life) and
+    skips any key whose figures are missing or flagged by its skipIf rules."""
+    cad = S.get('cadence')
+    if not cad:
+        return {}
+    skip_days = set(cad.get('skipDates', []))
+    queues, skipped = [], {}
+    for rot in S.get('rotations', []):
+        q = []
+        for key in rotation_keys(rot, data):
+            r = bind(rot, key, rot.get('labels'))
+            why = None
+            for rule in r.get('skipIf', []):
+                try:
+                    v = resolve(rule['ref'], data)
+                except (BuildError, TypeError):
+                    why = 'data missing'
+                    break
+                if ('contains' in rule and rule['contains'] in (v or [])) or ('equals' in rule and v == rule['equals']):
+                    why = rule.get('reason', 'skipIf')
+            if not why:
+                try:
+                    figs, est = figures(r['figures'], data)
+                except (BuildError, KeyError, TypeError) as e:
+                    why = f'data missing: {e}'
+            if why:
+                skipped.setdefault(rot['id'], []).append(f'{key}: {why}')
+                continue
+            ov = rot.get('nameOverrides', {}).get(key.split('/')[0])
+            if ov and 'name' in figs:
+                figs['name'] = ov
+            q.append((key, r, figs, est))
+        queues.append((rot, q))
+    taken = {it['liveDate'] for it in items}
+    week = {}
+    for it in items:
+        y, w, _ = dt.date.fromisoformat(it['liveDate']).isocalendar()
+        week[(y, w)] = week.get((y, w), 0) + 1
+    day = dt.date.fromisoformat(cad['fillFrom'])
+    end = max(dt.date.fromisoformat(r['validUntil']) for r, _ in queues)
+    while day <= end:
+        y, w, _ = day.isocalendar()
+        iso = day.isoformat()
+        if day.weekday() in cad['weekdays'] and iso not in skip_days and iso not in taken and week.get((y, w), 0) < cad['perWeek']:
+            for rot, q in queues:
+                if q and rot['validFrom'] <= iso <= rot['validUntil']:
+                    key, r, figs, est = q.pop(0)
+                    add(f'{rot["id"]}-{key.lower().replace("/", "-")}', rot['id'], 'note', day,
+                        render(r['headline'], figs), render(r['body'], figs), r, figs, est, None, None, key)
+                    taken.add(iso)
+                    week[(y, w)] = week.get((y, w), 0) + 1
+                    break
+        day += dt.timedelta(days=1)
+    return skipped
 
 
 # ---------------------------------------------------------------- cards
@@ -273,7 +370,7 @@ def draw_cards(sched):
         lab = f'{it["label"].upper()}'
         lf = font('IBMPlexMono_600SemiBold', 20)
         d.text((72, 62), lab, font=lf, fill=T['accent'])
-        right = fmt_date(it['event']).upper() if it['event'] else fmt_date(it['liveDate']).upper()
+        right = fmt_date(it['event']).upper() if it['event'] else ('DMV · ' if it['kind'] == 'note' and it.get('key', '')[:2] in ('DC', 'MD', 'VA') else '') + fmt_date(it['liveDate']).upper()
         d.text((W - 72 - d.textlength(right, font=lf), 62), right, font=lf, fill=T['muted'])
         d.line([72, 98, W - 72, 98], fill=T['border'], width=1)
 

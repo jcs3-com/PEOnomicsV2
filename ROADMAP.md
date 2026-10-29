@@ -165,6 +165,13 @@ Not chat history. Not artifacts. When you finish or add work, update this file i
   reset; 2028 VA $15 and FAMLI benefits). Audit view `/api/feed?audit=1`. Tests: `tests/test_posts.py` (228,
   independent numeral provenance; refuses unflagged low-confidence figures and unready releases) and
   `tests/test_feed.mjs` (8). Owner Zap setup: `docs/OWNER_SETUP.md` §7.
+  - **Two posts a week (2026-10-28):** `cadence` in series.json tops every week up to 2 posts (Tue/Thu 9:00 ET,
+    US holidays skipped) from data-note **rotations**, each limited to its data edition's shelf life:
+    *state cost note* (avg private pay, employer FICA, employer share of single health coverage at firms <50; 44
+    states, DMV first then by employment; 7 skipped where AHRQ flags the <50 cell unreliable) through 2027-06-30, and
+    *DMV industry pay* (14 of 18 DC/MD/VA × industry cells; suppressed/partial cells skipped) through 2027-08-31.
+    78 posts scheduled Oct 28 2026 – Dec 2 2027. Rotation posts link to the state pages. The DMV launch post went out
+    manually on 2026-10-28 (LinkedIn share 7521407288482484225); its release date is set to that day.
 
 ## 🔲 Open — prioritized
 
@@ -215,6 +222,10 @@ Not chat history. Not artifacts. When you finish or add work, update this file i
       published: Jul 1, 2027 DC + MD county wage floors (once announced), 2028 SS wage base (SSA, Oct 2027), 2027
       SUI rates. (c) Add a release for each dataset refresh (rates-2027, QCEW 2026, MEPS-IC 2026). (d) Weekly
       audit at `/api/feed?audit=1`. Corrections must be rebuilt before the affected go-live day.
+- [ ] **Refill the 2027 queue as data lands** (the feed thins to countdowns only from Aug 2027): add a *state SUI
+      2027* rotation after the DOL Significant Provisions January 2027 edition and the DMV agency rate pages are
+      sourced; extend the state cost note when MEPS-IC 2026 (~mid-2027) and QCEW 2026 (~Sept 2027) are rebuilt
+      (bump each rotation's validFrom/validUntil). The audit view lists what's queued.
 - [ ] **Answer-site distribution (manual only):** Reddit, Quora, forums, Facebook groups — answer specific questions
       and link the relevant page. Never automate it (bans; low-quality signal). Personal LinkedIn profile is out of scope by owner direction.
 

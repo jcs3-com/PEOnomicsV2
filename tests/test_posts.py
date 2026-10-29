@@ -86,11 +86,12 @@ def provenance_ok(it, spec, event):
         nums += [d.year, d.day]
     if event:
         nums.append((event - dt.date.fromisoformat(it['liveDate'])).days)
+    nums += [float(k) for k in spec.get('definitions', {})]
     bad = [tok for tok in numerals(it['text']) if not traced(tok, nums)]
     return bad
 
 
-specs = {s['id']: s for s in S['countdowns'] + S['releases']}
+specs = {s['id']: s for s in S['countdowns'] + S['releases'] + S.get('rotations', [])}
 
 # 1. schedule is current
 fresh = B.build()
@@ -103,6 +104,8 @@ check(len(SCHED['items']) > 0, 'schedule has posts')
 days = []
 for it in SCHED['items']:
     spec = specs[it['series']]
+    if it.get('key'):
+        spec = B.bind(spec, it['key'], spec.get('labels'))
     event = dt.date.fromisoformat(spec['event']) if 'event' in spec else None
     bad = provenance_ok(it, spec, event)
     check(not bad, f'{it["id"]}: untraceable numbers {bad}')
@@ -127,6 +130,24 @@ for it in SCHED['items']:
     check(ok and open(p, 'rb').read(8) == b'\x89PNG\r\n\x1a\n' and B.png_size(p) == (1200, 627), f'{it["id"]}: card 1200x627 PNG')
     check(ok and it.get('imageBytes') == os.path.getsize(p), f'{it["id"]}: imageBytes matches card')
 check(len(days) == len(set(days)), 'one post per day at most')
+# cadence: fillers never push a week past perWeek, only land on cadence weekdays, never on skip dates,
+# and every rotation post sits inside its rotation's validity window
+cad = S['cadence']
+weeks, fixed = {}, {}
+for it in SCHED['items']:
+    wk = dt.date.fromisoformat(it['liveDate']).isocalendar()[:2]
+    weeks[wk] = weeks.get(wk, 0) + 1
+    if it['kind'] != 'note':
+        fixed[wk] = fixed.get(wk, 0) + 1
+for wk, n in weeks.items():
+    check(n <= max(cad['perWeek'], fixed.get(wk, 0)), f'week {wk}: {n} posts exceeds cadence')
+for it in SCHED['items']:
+    if it['kind'] == 'note':
+        rot = specs[it['series']]
+        d = dt.date.fromisoformat(it['liveDate'])
+        check(d.weekday() in cad['weekdays'] and it['liveDate'] not in cad['skipDates'], f'{it["id"]}: off-cadence day')
+        check(rot['validFrom'] <= it['liveDate'] <= rot['validUntil'], f'{it["id"]}: outside its data shelf life')
+check(len({it['id'] for it in SCHED['items']}) == len(SCHED['items']), 'unique post ids')
 cards = {f for f in os.listdir(os.path.join(ROOT, 'assets', 'images', 'posts')) if f.endswith('.png')}
 check(cards == {it['id'] + '.png' for it in SCHED['items']}, 'no orphan or missing cards')
 

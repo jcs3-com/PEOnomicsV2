@@ -12,7 +12,7 @@
       "dmv": "data/dmv-index-2026.json",
       "bench": "data/benchmarks-2026.json"
     },
-    "howTo": "Countdown: an event date + offsets (days before/after; weekends move to the Friday before). Release: set 'date' to mark it; it renders only if every 'requires' confidence is met. Rebuild: python3 tools/build_posts.py"
+    "howTo": "Countdown: an event date + offsets (days before/after; weekends move to the Friday before). Release: set 'date' to mark it; it renders only if every 'requires' confidence is met. Rebuild: python3 tools/build_posts.py Cadence: every week is topped up to cadence.perWeek posts on cadence.weekdays (0=Mon) from the rotations, each only inside its validFrom-validUntil window (the shelf life of its data edition). 'definitions' lists numerals that are definitions, not figures (e.g. a survey's firm-size break)."
   },
   "countdowns": [
     {
@@ -564,6 +564,219 @@
         "California"
       ],
       "cardSub": "Final DOL figures for states that still owe federal unemployment loans."
+    }
+  ],
+  "cadence": {
+    "weekdays": [
+      1,
+      3
+    ],
+    "perWeek": 2,
+    "fillFrom": "2026-11-02",
+    "skipDates": [
+      "2026-11-26",
+      "2026-12-24",
+      "2026-12-31",
+      "2027-05-31",
+      "2027-07-05",
+      "2027-11-25",
+      "2027-12-23",
+      "2027-12-30"
+    ],
+    "note": "Tue/Thu at postTime. Skips US holidays and the holiday weeks' dead days."
+  },
+  "rotations": [
+    {
+      "id": "state-cost-note",
+      "series": "Data note",
+      "validFrom": "2026-11-02",
+      "validUntil": "2027-06-30",
+      "shelfLife": "QCEW 2025 annual (replaced ~Sept 2027) and MEPS-IC 2025 (replaced ~mid-2027): stop at the earlier.",
+      "keysFrom": "rates:states",
+      "first": [
+        "DC",
+        "MD",
+        "VA"
+      ],
+      "sortBy": "wages.all_private.employment",
+      "skipIf": [
+        {
+          "ref": "rates:states.{key}.health.single_employee_unreliable",
+          "contains": "lt50",
+          "reason": "AHRQ flags the under-50 employee contribution unreliable"
+        },
+        {
+          "ref": "rates:states.{key}.health.single_premium_unreliable",
+          "contains": "lt50",
+          "reason": "AHRQ flags the under-50 premium unreliable"
+        }
+      ],
+      "definitions": {
+        "50": "MEPS-IC firm-size break (establishments of firms with fewer than 50 employees)"
+      },
+      "headline": "What one employee costs an employer in {name}, before the extras",
+      "cardTitle": "{name}: the base cost of one employee",
+      "cardSub": "Average private-sector pay, employer FICA and the employer share of single health coverage at firms under 50 employees.",
+      "figures": {
+        "ss": "rates:federal.fica_ss_rate",
+        "med": "rates:federal.fica_medicare_rate",
+        "ficaRate": {
+          "op": "add",
+          "args": [
+            "ss",
+            "med"
+          ]
+        },
+        "name": "rates:states.{key}.name",
+        "wage": "rates:states.{key}.wages.all_private.value",
+        "fica": {
+          "op": "mul",
+          "args": [
+            "wage",
+            "ficaRate"
+          ]
+        },
+        "health": "rates:states.{key}.health.single_employer_share.lt50",
+        "sub": {
+          "op": "add",
+          "args": [
+            "wage",
+            "fica"
+          ]
+        },
+        "total": {
+          "op": "add",
+          "args": [
+            "sub",
+            "health"
+          ]
+        }
+      },
+      "body": "In {name}, three numbers every employer cost starts from:\n\n- Average private-sector pay per job: {wage:usd0} a year (includes part-time jobs)\n- Employer Social Security and Medicare on that pay ({ficaRate:pct2}): {fica:usd0}\n- Employer share of single health coverage at firms under 50 employees: {health:usd0} a year\n\nThat is {total:usd0} before unemployment insurance, workers' comp, retirement, admin or a PEO fee. The {name} page carries the rest, each figure with its source.",
+      "stats": [
+        [
+          "Avg pay per job",
+          "{wage:usd0}"
+        ],
+        [
+          "Employer FICA",
+          "{fica:usd0}"
+        ],
+        [
+          "Health, employer share",
+          "{health:usd0}"
+        ]
+      ],
+      "sources": [
+        "BLS QCEW 2025 annual averages, private",
+        "AHRQ MEPS-IC 2025, state tables",
+        "26 U.S.C. 3111"
+      ],
+      "cta": "{name}: rates, wages and sources",
+      "url": "/states/{keyLower}",
+      "hashtags": [
+        "SmallBusiness",
+        "Payroll",
+        "EmployerCosts"
+      ],
+      "nameOverrides": {
+        "DC": "Washington, DC"
+      }
+    },
+    {
+      "id": "dmv-industry-pay-note",
+      "series": "Data note",
+      "validFrom": "2026-11-02",
+      "validUntil": "2027-08-31",
+      "shelfLife": "QCEW 2025 annual; replaced by the 2026 annual release ~Sept 2027.",
+      "keys": [
+        "DC/hospitality_food",
+        "MD/hospitality_food",
+        "VA/hospitality_food",
+        "DC/construction_trades",
+        "MD/construction_trades",
+        "VA/construction_trades",
+        "DC/clerical_professional",
+        "MD/clerical_professional",
+        "VA/clerical_professional",
+        "DC/retail_services",
+        "MD/retail_services",
+        "VA/retail_services",
+        "DC/transportation_logistics",
+        "MD/transportation_logistics",
+        "VA/transportation_logistics",
+        "DC/light_manufacturing",
+        "MD/light_manufacturing",
+        "VA/light_manufacturing"
+      ],
+      "labels": {
+        "clerical_professional": "professional services",
+        "retail_services": "retail",
+        "hospitality_food": "restaurant and bar",
+        "light_manufacturing": "manufacturing",
+        "transportation_logistics": "transportation and warehousing",
+        "construction_trades": "construction"
+      },
+      "skipIf": [
+        {
+          "ref": "rates:states.{k0}.wages.{k1}.method",
+          "equals": "disclosed_subsectors",
+          "reason": "partial: BLS suppressed the sector"
+        }
+      ],
+      "headline": "What a {label} job pays in {name}",
+      "cardTitle": "{name}: {label} pay",
+      "cardSub": "Average annual pay per job (includes part-time), BLS QCEW 2025, private sector.",
+      "figures": {
+        "ss": "rates:federal.fica_ss_rate",
+        "med": "rates:federal.fica_medicare_rate",
+        "ficaRate": {
+          "op": "add",
+          "args": [
+            "ss",
+            "med"
+          ]
+        },
+        "name": "rates:states.{k0}.name",
+        "wage": "rates:states.{k0}.wages.{k1}.value",
+        "all": "rates:states.{k0}.wages.all_private.value",
+        "fica": {
+          "op": "mul",
+          "args": [
+            "wage",
+            "ficaRate"
+          ]
+        }
+      },
+      "body": "Average pay per {label} job in {name}: {wage:usd0} a year, against {all:usd0} across all private industries (includes part-time jobs).\n\nEmployer Social Security and Medicare on that pay: {fica:usd0}. Unemployment insurance, comp and benefits are priced off payroll, so this is the first number to check in any PEO quote.",
+      "stats": [
+        [
+          "Avg pay, this industry",
+          "{wage:usd0}"
+        ],
+        [
+          "All private",
+          "{all:usd0}"
+        ],
+        [
+          "Employer FICA",
+          "{fica:usd0}"
+        ]
+      ],
+      "sources": [
+        "BLS QCEW 2025 annual averages, private",
+        "26 U.S.C. 3111"
+      ],
+      "cta": "Model your own payroll",
+      "url": "/states/{keyLower}",
+      "hashtags": [
+        "SmallBusiness",
+        "Payroll",
+        "DMV"
+      ],
+      "nameOverrides": {
+        "DC": "Washington, DC"
+      }
     }
   ]
 }
