@@ -22,9 +22,9 @@
    "series": "dmv-employer-cost-index-2026",
    "kind": "release",
    "label": "Data release",
-   "liveDate": "2026-10-30",
-   "liveAt": "2026-10-30T09:00:00-04:00",
-   "pubDate": "Fri, 30 Oct 2026 09:00:00 -0400",
+   "liveDate": "2026-10-28",
+   "liveAt": "2026-10-28T09:00:00-04:00",
+   "pubDate": "Wed, 28 Oct 2026 09:00:00 -0400",
    "event": null,
    "daysToEvent": null,
    "headline": "New: the DMV Employer Cost Index 2026",
@@ -59,7 +59,7 @@
     "famli": 0.009,
     "famliStart": "2027-01-01"
    },
-   "imageBytes": 59299
+   "imageBytes": 59333
   },
   {
    "id": "futa-credit-reduction-2026-2026-11-03",
