@@ -1,0 +1,569 @@
+{
+  "meta": {
+    "purpose": "Templates for the auto-posted LinkedIn feed (/api/feed). Hand-authored. Every number in a post comes from a data file through a ref below; tools/build_posts.py renders data/post-schedule.json and the card images, and tests/test_posts.py proves each number traces to its source.",
+    "brand": "PEOnomics",
+    "tagline": "PEO cost intelligence",
+    "site": "https://peonomics.com",
+    "timezone": "America/New_York",
+    "postTime": "09:00",
+    "feedWindowDays": 21,
+    "refs": {
+      "rates": "data/rates-2026.json",
+      "dmv": "data/dmv-index-2026.json",
+      "bench": "data/benchmarks-2026.json"
+    },
+    "howTo": "Countdown: an event date + offsets (days before/after; weekends move to the Friday before). Release: set 'date' to mark it; it renders only if every 'requires' confidence is met. Rebuild: python3 tools/build_posts.py"
+  },
+  "countdowns": [
+    {
+      "id": "futa-credit-reduction-2026",
+      "event": "2026-11-10",
+      "offsets": [
+        -7,
+        0
+      ],
+      "series": "Countdown",
+      "headline": {
+        "before": "{n} days until DOL sets 2026 FUTA credit reductions",
+        "today": "Today: DOL sets 2026 FUTA credit reductions"
+      },
+      "cardTitle": "FUTA credit-reduction determination",
+      "figures": {
+        "futaNet": "rates:federal.futa_net_rate",
+        "futaBase": "rates:federal.futa_wage_base",
+        "ca": {
+          "ref": "rates:federal.futa_credit_reduction_states.CA",
+          "conf": "rates:federal.futa_credit_reduction_confidence.CA",
+          "estimate": true
+        }
+      },
+      "body": "Nov. 10 is the date the Department of Labor checks which states still owe federal unemployment loans. Employers in those states lose part of their FUTA credit and pay more for 2026.\n\nBase FUTA: {futaNet:pct1} on the first {futaBase:usd0} per employee.\nCalifornia's statutory step for 2026: an extra {ca:pct1}, an estimate until DOL confirms.",
+      "stats": [
+        [
+          "Net FUTA",
+          "{futaNet:pct1}"
+        ],
+        [
+          "Wage base",
+          "{futaBase:usd0}"
+        ],
+        [
+          "CA step (estimate)",
+          "+{ca:pct1}"
+        ]
+      ],
+      "sources": [
+        "U.S. Department of Labor",
+        "Federal Register 2026-00342"
+      ],
+      "cta": "Every state's rates, sourced",
+      "url": "/data-library",
+      "hashtags": [
+        "Payroll",
+        "FUTA",
+        "SmallBusiness"
+      ]
+    },
+    {
+      "id": "md-famli-2027",
+      "event": "2027-01-01",
+      "offsets": [
+        -57,
+        -31,
+        -17
+      ],
+      "series": "Countdown",
+      "headline": {
+        "before": "{n} days until Maryland FAMLI contributions begin"
+      },
+      "cardTitle": "Maryland FAMLI contributions begin",
+      "figures": {
+        "total": "dmv:paidLeave.MD.totalRate",
+        "er": "dmv:paidLeave.MD.employerRate",
+        "thr": "dmv:paidLeave.MD.smallEmployerThreshold",
+        "start": "dmv:paidLeave.MD.contributionsBegin",
+        "benefits": "dmv:paidLeave.MD.benefitsBegin",
+        "base27": "dmv:federal.socialSecurityWageBase2027.value",
+        "erMax": {
+          "op": "mul",
+          "args": [
+            "er",
+            "base27"
+          ]
+        }
+      },
+      "body": "Starting {start:date}, Maryland employers remit FAMLI contributions: {total:pct2} of wages up to the Social Security wage base ({base27:usd0} in 2027).\n\nEmployers with {thr:int} or more employees pay at least half ({er:pct2}) and may withhold the rest from pay. That is up to {erMax:usd2} per employee at the wage cap. Smaller employers owe no employer share but must remit what they withhold. Benefits begin by {benefits:date}.",
+      "stats": [
+        [
+          "Total rate",
+          "{total:pct2}"
+        ],
+        [
+          "Employer share",
+          "{er:pct2}"
+        ],
+        [
+          "Per head at cap",
+          "{erMax:usd2}"
+        ]
+      ],
+      "sources": [
+        "Maryland FAMLI law via Jackson Lewis",
+        "SSA 2027 wage base"
+      ],
+      "cta": "DC, MD and VA employer costs, side by side",
+      "url": "/dmv-employer-cost-index",
+      "hashtags": [
+        "Maryland",
+        "PaidLeave",
+        "Payroll"
+      ]
+    },
+    {
+      "id": "ss-wage-base-2027",
+      "event": "2027-01-01",
+      "offsets": [
+        -50,
+        -29
+      ],
+      "series": "Countdown",
+      "headline": {
+        "before": "{n} days until the Social Security wage base rises to {base27:usd0}"
+      },
+      "cardTitle": "Social Security wage base rises",
+      "figures": {
+        "rate": "rates:federal.fica_ss_rate",
+        "base26": "rates:federal.fica_ss_wage_base",
+        "base27": "dmv:federal.socialSecurityWageBase2027.value",
+        "max26": {
+          "op": "mul",
+          "args": [
+            "rate",
+            "base26"
+          ]
+        },
+        "max27": {
+          "op": "mul",
+          "args": [
+            "rate",
+            "base27"
+          ]
+        },
+        "diff": {
+          "op": "sub",
+          "args": [
+            "max27",
+            "max26"
+          ]
+        }
+      },
+      "body": "On Jan. 1, 2027 the cap on wages subject to the {rate:pct1} employer Social Security tax moves from {base26:usd0} to {base27:usd0}.\n\nFor each employee paid above the cap, the employer's maximum Social Security tax goes from {max26:usd2} to {max27:usd2}: {diff:usd2} more per head.",
+      "stats": [
+        [
+          "2026 cap",
+          "{base26:usd0}"
+        ],
+        [
+          "2027 cap",
+          "{base27:usd0}"
+        ],
+        [
+          "More per head",
+          "{diff:usd2}"
+        ]
+      ],
+      "sources": [
+        "Social Security Administration"
+      ],
+      "cta": "See what it does to your payroll",
+      "url": "/#cost-lab",
+      "hashtags": [
+        "Payroll",
+        "SocialSecurity",
+        "SmallBusiness"
+      ]
+    },
+    {
+      "id": "va-min-wage-2027",
+      "event": "2027-01-01",
+      "offsets": [
+        -45,
+        -24,
+        -10
+      ],
+      "series": "Countdown",
+      "headline": {
+        "before": "{n} days until Virginia's minimum wage rises to {new:usd2}"
+      },
+      "cardTitle": "Virginia minimum wage rises",
+      "figures": {
+        "cur": "dmv:minimumWage.jurisdictions[key=va].hourly",
+        "new": "dmv:minimumWage.scheduled[0].hourly",
+        "next": "dmv:minimumWage.scheduled[1].hourly",
+        "nextEff": "dmv:minimumWage.scheduled[1].effective",
+        "hrs": "dmv:metadata.fullTimeHours",
+        "step": {
+          "op": "sub",
+          "args": [
+            "new",
+            "cur"
+          ]
+        },
+        "annual": {
+          "op": "mul",
+          "args": [
+            "step",
+            "hrs"
+          ]
+        }
+      },
+      "body": "Virginia's minimum wage moves from {cur:usd2} to {new:usd2} an hour on Jan. 1, 2027, then to {next:usd2} on {nextEff:date}.\n\nFor a full-time worker at the floor ({hrs:int} hours a year), that is {annual:usd0} more in annual wages, before payroll taxes rise with it.",
+      "stats": [
+        [
+          "Today",
+          "{cur:usd2}"
+        ],
+        [
+          "Jan. 1, 2027",
+          "{new:usd2}"
+        ],
+        [
+          "Per FTE / yr",
+          "+{annual:usd0}"
+        ]
+      ],
+      "sources": [
+        "Office of the Governor of Virginia, HB1/SB1"
+      ],
+      "cta": "Wage floors for every DMV jurisdiction",
+      "url": "/dmv-employer-cost-index",
+      "hashtags": [
+        "Virginia",
+        "MinimumWage",
+        "SmallBusiness"
+      ]
+    },
+    {
+      "id": "jan1-renewals-2027",
+      "event": "2027-01-01",
+      "offsets": [
+        -43,
+        -22
+      ],
+      "series": "Countdown",
+      "headline": {
+        "before": "{n} days until January 1 renewals"
+      },
+      "cardTitle": "January 1 benefits and PEO renewals",
+      "figures": {
+        "single": "bench:healthNational.annualSinglePremium.value",
+        "family": "bench:healthNational.annualFamilyPremium.value",
+        "singleEr": "bench:healthNational.annualSingleEmployerShareDerived.value",
+        "familyEr": "bench:healthNational.annualFamilyEmployerShareDerived.value",
+        "kffYear": "bench:healthNational.annualSinglePremium.year"
+      },
+      "variants": [
+        {
+          "body": "If your benefits or PEO agreement renews Jan. 1, check the numbers now, not at signing.\n\nFor scale: the average {kffYear:year} employer-sponsored premium is {single:usd0} for single coverage and {family:usd0} for family. Employers carry {singleEr:usd0} and {familyEr:usd0} of that on average.\n\nThe Cost Lab puts your own costs next to a PEO quote, with no assumed savings.",
+          "cta": "Run your numbers",
+          "url": "/#cost-lab"
+        },
+        {
+          "body": "Renewal quotes in hand? Put them side by side before Jan. 1.\n\nThe average {kffYear:year} employer share of a health premium is {singleEr:usd0} for single coverage and {familyEr:usd0} for family. A fee quoted per employee per month and one quoted as a percent of payroll are not comparable until you convert them.\n\nThe Quote Comparator does that for up to three proposals, in your browser.",
+          "cta": "Compare quotes",
+          "url": "/compare"
+        }
+      ],
+      "stats": [
+        [
+          "Single premium",
+          "{single:usd0}"
+        ],
+        [
+          "Employer share",
+          "{singleEr:usd0}"
+        ],
+        [
+          "Family employer share",
+          "{familyEr:usd0}"
+        ]
+      ],
+      "sources": [
+        "KFF Employer Health Benefits Survey 2026"
+      ],
+      "hashtags": [
+        "Benefits",
+        "PEO",
+        "SmallBusiness"
+      ]
+    },
+    {
+      "id": "jan1-dmv-reset-2027",
+      "event": "2027-01-01",
+      "offsets": [
+        -15,
+        -3,
+        4
+      ],
+      "series": "Countdown",
+      "headline": {
+        "before": "{n} days until January 1 payroll changes in the DMV",
+        "after": "Now in effect: January 1 payroll changes in the DMV"
+      },
+      "cardTitle": "January 1 payroll changes in the DMV",
+      "figures": {
+        "base26": "rates:federal.fica_ss_wage_base",
+        "base27": "dmv:federal.socialSecurityWageBase2027.value",
+        "famli": "dmv:paidLeave.MD.totalRate",
+        "thr": "dmv:paidLeave.MD.smallEmployerThreshold",
+        "er": "dmv:paidLeave.MD.employerRate",
+        "vaCur": "dmv:minimumWage.jurisdictions[key=va].hourly",
+        "vaNew": "dmv:minimumWage.scheduled[0].hourly"
+      },
+      "body": "Three changes for DC, Maryland and Virginia employers:\n\n- Social Security wage base: {base26:usd0} to {base27:usd0}\n- Maryland FAMLI: {famli:pct2} of wages; employers with {thr:int}+ employees pay at least {er:pct2}\n- Virginia minimum wage: {vaCur:usd2} to {vaNew:usd2}\n\nUnemployment-insurance rates and county wage floors are on the index.",
+      "stats": [
+        [
+          "SS wage base",
+          "{base27:usd0}"
+        ],
+        [
+          "MD FAMLI",
+          "{famli:pct2}"
+        ],
+        [
+          "VA minimum",
+          "{vaNew:usd2}"
+        ]
+      ],
+      "sources": [
+        "SSA",
+        "Maryland FAMLI law",
+        "Office of the Governor of Virginia"
+      ],
+      "cta": "The full DMV Employer Cost Index",
+      "url": "/dmv-employer-cost-index",
+      "hashtags": [
+        "Payroll",
+        "DMV",
+        "SmallBusiness"
+      ]
+    },
+    {
+      "id": "va-min-wage-2028",
+      "event": "2028-01-01",
+      "offsets": [
+        -92,
+        -30
+      ],
+      "series": "Countdown",
+      "headline": {
+        "before": "{n} days until Virginia's minimum wage reaches {w:usd2}"
+      },
+      "cardTitle": "Virginia minimum wage reaches $15",
+      "figures": {
+        "w": "dmv:minimumWage.scheduled[1].hourly",
+        "prev": "dmv:minimumWage.scheduled[0].hourly",
+        "hrs": "dmv:metadata.fullTimeHours",
+        "step": {
+          "op": "sub",
+          "args": [
+            "w",
+            "prev"
+          ]
+        },
+        "annual": {
+          "op": "mul",
+          "args": [
+            "step",
+            "hrs"
+          ]
+        }
+      },
+      "body": "Virginia's minimum wage steps from {prev:usd2} to {w:usd2} an hour on Jan. 1, 2028.\n\nAt {hrs:int} hours a year, that is {annual:usd0} more per full-time employee at the floor, before payroll taxes.",
+      "stats": [
+        [
+          "2027",
+          "{prev:usd2}"
+        ],
+        [
+          "2028",
+          "{w:usd2}"
+        ],
+        [
+          "Per FTE / yr",
+          "+{annual:usd0}"
+        ]
+      ],
+      "sources": [
+        "Office of the Governor of Virginia, HB1/SB1"
+      ],
+      "cta": "DMV wage floors and employer costs",
+      "url": "/dmv-employer-cost-index",
+      "hashtags": [
+        "Virginia",
+        "MinimumWage",
+        "SmallBusiness"
+      ]
+    },
+    {
+      "id": "md-famli-benefits-2028",
+      "event": "2028-01-03",
+      "offsets": [
+        -90,
+        -34
+      ],
+      "series": "Countdown",
+      "headline": {
+        "before": "{n} days until Maryland FAMLI benefits begin"
+      },
+      "cardTitle": "Maryland FAMLI benefits begin",
+      "figures": {
+        "total": "dmv:paidLeave.MD.totalRate",
+        "er": "dmv:paidLeave.MD.employerRate",
+        "thr": "dmv:paidLeave.MD.smallEmployerThreshold",
+        "start": "dmv:paidLeave.MD.contributionsBegin",
+        "benefits": "dmv:paidLeave.MD.benefitsBegin"
+      },
+      "body": "Maryland FAMLI benefits begin by {benefits:date}. Contributions began {start:date}: {total:pct2} of wages, with employers of {thr:int} or more paying at least {er:pct2}.\n\nLeave policies, payroll setup and coverage for absent staff need to be settled before claims start.",
+      "stats": [
+        [
+          "Total rate",
+          "{total:pct2}"
+        ],
+        [
+          "Employer share",
+          "{er:pct2}"
+        ],
+        [
+          "Employer threshold",
+          "{thr:int}+"
+        ]
+      ],
+      "sources": [
+        "Maryland FAMLI law via Jackson Lewis"
+      ],
+      "cta": "DMV employer costs, sourced",
+      "url": "/dmv-employer-cost-index",
+      "hashtags": [
+        "Maryland",
+        "PaidLeave",
+        "HR"
+      ]
+    }
+  ],
+  "releases": [
+    {
+      "id": "dmv-employer-cost-index-2026",
+      "date": "2026-10-30",
+      "series": "Data release",
+      "headline": "New: the DMV Employer Cost Index 2026",
+      "cardTitle": "DMV Employer Cost Index 2026",
+      "figures": {
+        "dc": {
+          "ref": "rates:states.DC.sui_new_employer_rate",
+          "conf": "rates:states.DC.sui_confidence"
+        },
+        "dcBase": "rates:states.DC.sui_wage_base",
+        "md": {
+          "ref": "rates:states.MD.sui_new_employer_rate",
+          "conf": "rates:states.MD.sui_confidence"
+        },
+        "mdBase": "rates:states.MD.sui_wage_base",
+        "va": {
+          "ref": "rates:states.VA.sui_new_employer_rate",
+          "conf": "rates:states.VA.sui_confidence"
+        },
+        "vaBase": "rates:states.VA.sui_wage_base",
+        "pfl": "dmv:paidLeave.DC.employerRate",
+        "famli": "dmv:paidLeave.MD.totalRate",
+        "famliStart": "dmv:paidLeave.MD.contributionsBegin"
+      },
+      "body": "What does one employee cost an employer in statutory taxes in DC, Maryland and Virginia? We built the answer from primary sources.\n\n- New-employer unemployment insurance: DC {dc:pct2} on {dcBase:usd0}, MD {md:pct2} on {mdBase:usd0}, VA {va:pct2} on {vaBase:usd0}\n- DC Paid Family Leave: {pfl:pct2} of wages, employer-paid\n- Maryland FAMLI: {famli:pct2} from {famliStart:year}\n\nEvery figure links to its source. Free, no sign-up.",
+      "stats": [
+        [
+          "DC new-employer UI",
+          "{dc:pct2}"
+        ],
+        [
+          "MD new-employer UI",
+          "{md:pct2}"
+        ],
+        [
+          "VA new-employer UI",
+          "{va:pct2}"
+        ]
+      ],
+      "sources": [
+        "DC DOES",
+        "Maryland Department of Labor",
+        "Virginia Employment Commission"
+      ],
+      "cta": "Read the index",
+      "url": "/dmv-employer-cost-index",
+      "hashtags": [
+        "DMV",
+        "Payroll",
+        "SmallBusiness"
+      ],
+      "cardSub": "What one employee costs an employer in statutory taxes, paid leave and wage floors in DC, Maryland and Virginia. Every figure sourced."
+    },
+    {
+      "id": "futa-credit-reduction-2026-final",
+      "date": null,
+      "series": "Data release",
+      "headline": "DOL has set the 2026 FUTA credit reductions",
+      "cardTitle": "2026 FUTA credit reductions",
+      "requires": {
+        "rates:federal.futa_credit_reduction_confidence.CA": "high"
+      },
+      "figures": {
+        "ca": {
+          "ref": "rates:federal.futa_credit_reduction_states.CA",
+          "conf": "rates:federal.futa_credit_reduction_confidence.CA"
+        },
+        "futaNet": "rates:federal.futa_net_rate",
+        "futaBase": "rates:federal.futa_wage_base",
+        "caNet": {
+          "op": "add",
+          "args": [
+            "futaNet",
+            "ca"
+          ]
+        },
+        "caPerHead": {
+          "op": "mul",
+          "args": [
+            "caNet",
+            "futaBase"
+          ]
+        }
+      },
+      "body": "California employers lose {ca:pct1} of their FUTA credit for 2026, for an effective FUTA rate of {caNet:pct1} on the first {futaBase:usd0}: {caPerHead:usd2} per employee, due with the annual FUTA return.\n\nThe Cost Lab and Data Library now use the final figure.",
+      "stats": [
+        [
+          "CA credit reduction",
+          "{ca:pct1}"
+        ],
+        [
+          "Effective FUTA",
+          "{caNet:pct1}"
+        ],
+        [
+          "Per employee",
+          "{caPerHead:usd2}"
+        ]
+      ],
+      "sources": [
+        "U.S. Department of Labor"
+      ],
+      "cta": "Updated state rates",
+      "url": "/data-library",
+      "hashtags": [
+        "Payroll",
+        "FUTA",
+        "California"
+      ],
+      "cardSub": "Final DOL figures for states that still owe federal unemployment loans."
+    }
+  ]
+}

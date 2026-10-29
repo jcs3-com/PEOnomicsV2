@@ -1,0 +1,845 @@
+{
+ "meta": {
+  "generatedBy": "tools/build_posts.py from data/posts/series.json",
+  "dataVersions": {
+   "rates": "2026-10-27",
+   "dmv": "2026-10-27",
+   "bench": "2026-10-27"
+  },
+  "feedWindowDays": 21,
+  "channel": {
+   "title": "PEOnomics · PEO cost intelligence",
+   "link": "https://peonomics.com/",
+   "description": "Sourced payroll and employer-cost countdowns and data releases for DC, Maryland and Virginia employers."
+  },
+  "dormantReleases": [
+   "futa-credit-reduction-2026-final"
+  ]
+ },
+ "items": [
+  {
+   "id": "dmv-employer-cost-index-2026",
+   "series": "dmv-employer-cost-index-2026",
+   "kind": "release",
+   "label": "Data release",
+   "liveDate": "2026-10-30",
+   "liveAt": "2026-10-30T09:00:00-04:00",
+   "pubDate": "Fri, 30 Oct 2026 09:00:00 -0400",
+   "event": null,
+   "daysToEvent": null,
+   "headline": "New: the DMV Employer Cost Index 2026",
+   "cardTitle": "DMV Employer Cost Index 2026",
+   "cardSub": "What one employee costs an employer in statutory taxes, paid leave and wage floors in DC, Maryland and Virginia. Every figure sourced.",
+   "stats": [
+    [
+     "DC new-employer UI",
+     "2.90%"
+    ],
+    [
+     "MD new-employer UI",
+     "2.60%"
+    ],
+    [
+     "VA new-employer UI",
+     "2.73%"
+    ]
+   ],
+   "estimates": [],
+   "text": "New: the DMV Employer Cost Index 2026\n\nWhat does one employee cost an employer in statutory taxes in DC, Maryland and Virginia? We built the answer from primary sources.\n\n- New-employer unemployment insurance: DC 2.90% on $9,000, MD 2.60% on $8,500, VA 2.73% on $8,000\n- DC Paid Family Leave: 0.75% of wages, employer-paid\n- Maryland FAMLI: 0.90% from 2027\n\nEvery figure links to its source. Free, no sign-up.\n\nSource: DC DOES; Maryland Department of Labor; Virginia Employment Commission\n\nRead the index: https://peonomics.com/dmv-employer-cost-index\n\nPEOnomics · PEO cost intelligence\n\n#DMV #Payroll #SmallBusiness",
+   "url": "https://peonomics.com/dmv-employer-cost-index",
+   "image": "https://peonomics.com/assets/images/posts/dmv-employer-cost-index-2026.png",
+   "figures": {
+    "dc": 0.029,
+    "dcBase": 9000,
+    "md": 0.026,
+    "mdBase": 8500,
+    "va": 0.0273,
+    "vaBase": 8000,
+    "pfl": 0.0075,
+    "famli": 0.009,
+    "famliStart": "2027-01-01"
+   },
+   "imageBytes": 59299
+  },
+  {
+   "id": "futa-credit-reduction-2026-2026-11-03",
+   "series": "futa-credit-reduction-2026",
+   "kind": "countdown",
+   "label": "Countdown",
+   "liveDate": "2026-11-03",
+   "liveAt": "2026-11-03T09:00:00-05:00",
+   "pubDate": "Tue, 03 Nov 2026 09:00:00 -0500",
+   "event": "2026-11-10",
+   "daysToEvent": 7,
+   "headline": "7 days until DOL sets 2026 FUTA credit reductions",
+   "cardTitle": "FUTA credit-reduction determination",
+   "cardSub": "",
+   "stats": [
+    [
+     "Net FUTA",
+     "0.6%"
+    ],
+    [
+     "Wage base",
+     "$7,000"
+    ],
+    [
+     "CA step (estimate)",
+     "+1.5%"
+    ]
+   ],
+   "estimates": [
+    "CA step (estimate)"
+   ],
+   "text": "7 days until DOL sets 2026 FUTA credit reductions\n\nNov. 10 is the date the Department of Labor checks which states still owe federal unemployment loans. Employers in those states lose part of their FUTA credit and pay more for 2026.\n\nBase FUTA: 0.6% on the first $7,000 per employee.\nCalifornia's statutory step for 2026: an extra 1.5%, an estimate until DOL confirms.\n\nSource: U.S. Department of Labor; Federal Register 2026-00342\n\nEvery state's rates, sourced: https://peonomics.com/data-library\n\nPEOnomics · PEO cost intelligence\n\n#Payroll #FUTA #SmallBusiness",
+   "url": "https://peonomics.com/data-library",
+   "image": "https://peonomics.com/assets/images/posts/futa-credit-reduction-2026-2026-11-03.png",
+   "figures": {
+    "futaNet": 0.006,
+    "futaBase": 7000,
+    "ca": 0.015
+   },
+   "imageBytes": 43830
+  },
+  {
+   "id": "md-famli-2027-2026-11-05",
+   "series": "md-famli-2027",
+   "kind": "countdown",
+   "label": "Countdown",
+   "liveDate": "2026-11-05",
+   "liveAt": "2026-11-05T09:00:00-05:00",
+   "pubDate": "Thu, 05 Nov 2026 09:00:00 -0500",
+   "event": "2027-01-01",
+   "daysToEvent": 57,
+   "headline": "57 days until Maryland FAMLI contributions begin",
+   "cardTitle": "Maryland FAMLI contributions begin",
+   "cardSub": "",
+   "stats": [
+    [
+     "Total rate",
+     "0.90%"
+    ],
+    [
+     "Employer share",
+     "0.45%"
+    ],
+    [
+     "Per head at cap",
+     "$865.35"
+    ]
+   ],
+   "estimates": [],
+   "text": "57 days until Maryland FAMLI contributions begin\n\nStarting Jan. 1, 2027, Maryland employers remit FAMLI contributions: 0.90% of wages up to the Social Security wage base ($192,300 in 2027).\n\nEmployers with 15 or more employees pay at least half (0.45%) and may withhold the rest from pay. That is up to $865.35 per employee at the wage cap. Smaller employers owe no employer share but must remit what they withhold. Benefits begin by Jan. 3, 2028.\n\nSource: Maryland FAMLI law via Jackson Lewis; SSA 2027 wage base\n\nDC, MD and VA employer costs, side by side: https://peonomics.com/dmv-employer-cost-index\n\nPEOnomics · PEO cost intelligence\n\n#Maryland #PaidLeave #Payroll",
+   "url": "https://peonomics.com/dmv-employer-cost-index",
+   "image": "https://peonomics.com/assets/images/posts/md-famli-2027-2026-11-05.png",
+   "figures": {
+    "total": 0.009,
+    "er": 0.0045,
+    "thr": 15,
+    "start": "2027-01-01",
+    "benefits": "2028-01-03",
+    "base27": 192300,
+    "erMax": 865.3499999999999
+   },
+   "imageBytes": 48637
+  },
+  {
+   "id": "futa-credit-reduction-2026-2026-11-10",
+   "series": "futa-credit-reduction-2026",
+   "kind": "countdown",
+   "label": "Countdown",
+   "liveDate": "2026-11-10",
+   "liveAt": "2026-11-10T09:00:00-05:00",
+   "pubDate": "Tue, 10 Nov 2026 09:00:00 -0500",
+   "event": "2026-11-10",
+   "daysToEvent": 0,
+   "headline": "Today: DOL sets 2026 FUTA credit reductions",
+   "cardTitle": "FUTA credit-reduction determination",
+   "cardSub": "",
+   "stats": [
+    [
+     "Net FUTA",
+     "0.6%"
+    ],
+    [
+     "Wage base",
+     "$7,000"
+    ],
+    [
+     "CA step (estimate)",
+     "+1.5%"
+    ]
+   ],
+   "estimates": [
+    "CA step (estimate)"
+   ],
+   "text": "Today: DOL sets 2026 FUTA credit reductions\n\nNov. 10 is the date the Department of Labor checks which states still owe federal unemployment loans. Employers in those states lose part of their FUTA credit and pay more for 2026.\n\nBase FUTA: 0.6% on the first $7,000 per employee.\nCalifornia's statutory step for 2026: an extra 1.5%, an estimate until DOL confirms.\n\nSource: U.S. Department of Labor; Federal Register 2026-00342\n\nEvery state's rates, sourced: https://peonomics.com/data-library\n\nPEOnomics · PEO cost intelligence\n\n#Payroll #FUTA #SmallBusiness",
+   "url": "https://peonomics.com/data-library",
+   "image": "https://peonomics.com/assets/images/posts/futa-credit-reduction-2026-2026-11-10.png",
+   "figures": {
+    "futaNet": 0.006,
+    "futaBase": 7000,
+    "ca": 0.015
+   },
+   "imageBytes": 44984
+  },
+  {
+   "id": "ss-wage-base-2027-2026-11-12",
+   "series": "ss-wage-base-2027",
+   "kind": "countdown",
+   "label": "Countdown",
+   "liveDate": "2026-11-12",
+   "liveAt": "2026-11-12T09:00:00-05:00",
+   "pubDate": "Thu, 12 Nov 2026 09:00:00 -0500",
+   "event": "2027-01-01",
+   "daysToEvent": 50,
+   "headline": "50 days until the Social Security wage base rises to $192,300",
+   "cardTitle": "Social Security wage base rises",
+   "cardSub": "",
+   "stats": [
+    [
+     "2026 cap",
+     "$184,500"
+    ],
+    [
+     "2027 cap",
+     "$192,300"
+    ],
+    [
+     "More per head",
+     "$483.60"
+    ]
+   ],
+   "estimates": [],
+   "text": "50 days until the Social Security wage base rises to $192,300\n\nOn Jan. 1, 2027 the cap on wages subject to the 6.2% employer Social Security tax moves from $184,500 to $192,300.\n\nFor each employee paid above the cap, the employer's maximum Social Security tax goes from $11,439.00 to $11,922.60: $483.60 more per head.\n\nSource: Social Security Administration\n\nSee what it does to your payroll: https://peonomics.com/#cost-lab\n\nPEOnomics · PEO cost intelligence\n\n#Payroll #SocialSecurity #SmallBusiness",
+   "url": "https://peonomics.com/#cost-lab",
+   "image": "https://peonomics.com/assets/images/posts/ss-wage-base-2027-2026-11-12.png",
+   "figures": {
+    "rate": 0.062,
+    "base26": 184500,
+    "base27": 192300,
+    "max26": 11439.0,
+    "max27": 11922.6,
+    "diff": 483.60000000000036
+   },
+   "imageBytes": 47723
+  },
+  {
+   "id": "va-min-wage-2027-2026-11-17",
+   "series": "va-min-wage-2027",
+   "kind": "countdown",
+   "label": "Countdown",
+   "liveDate": "2026-11-17",
+   "liveAt": "2026-11-17T09:00:00-05:00",
+   "pubDate": "Tue, 17 Nov 2026 09:00:00 -0500",
+   "event": "2027-01-01",
+   "daysToEvent": 45,
+   "headline": "45 days until Virginia's minimum wage rises to $13.75",
+   "cardTitle": "Virginia minimum wage rises",
+   "cardSub": "",
+   "stats": [
+    [
+     "Today",
+     "$12.77"
+    ],
+    [
+     "Jan. 1, 2027",
+     "$13.75"
+    ],
+    [
+     "Per FTE / yr",
+     "+$2,038"
+    ]
+   ],
+   "estimates": [],
+   "text": "45 days until Virginia's minimum wage rises to $13.75\n\nVirginia's minimum wage moves from $12.77 to $13.75 an hour on Jan. 1, 2027, then to $15.00 on Jan. 1, 2028.\n\nFor a full-time worker at the floor (2,080 hours a year), that is $2,038 more in annual wages, before payroll taxes rise with it.\n\nSource: Office of the Governor of Virginia, HB1/SB1\n\nWage floors for every DMV jurisdiction: https://peonomics.com/dmv-employer-cost-index\n\nPEOnomics · PEO cost intelligence\n\n#Virginia #MinimumWage #SmallBusiness",
+   "url": "https://peonomics.com/dmv-employer-cost-index",
+   "image": "https://peonomics.com/assets/images/posts/va-min-wage-2027-2026-11-17.png",
+   "figures": {
+    "cur": 12.77,
+    "new": 13.75,
+    "next": 15.0,
+    "nextEff": "2028-01-01",
+    "hrs": 2080,
+    "step": 0.9800000000000004,
+    "annual": 2038.400000000001
+   },
+   "imageBytes": 40960
+  },
+  {
+   "id": "jan1-renewals-2027-2026-11-19",
+   "series": "jan1-renewals-2027",
+   "kind": "countdown",
+   "label": "Countdown",
+   "liveDate": "2026-11-19",
+   "liveAt": "2026-11-19T09:00:00-05:00",
+   "pubDate": "Thu, 19 Nov 2026 09:00:00 -0500",
+   "event": "2027-01-01",
+   "daysToEvent": 43,
+   "headline": "43 days until January 1 renewals",
+   "cardTitle": "January 1 benefits and PEO renewals",
+   "cardSub": "",
+   "stats": [
+    [
+     "Single premium",
+     "$9,804"
+    ],
+    [
+     "Employer share",
+     "$8,132"
+    ],
+    [
+     "Family employer share",
+     "$20,832"
+    ]
+   ],
+   "estimates": [],
+   "text": "43 days until January 1 renewals\n\nIf your benefits or PEO agreement renews Jan. 1, check the numbers now, not at signing.\n\nFor scale: the average 2026 employer-sponsored premium is $9,804 for single coverage and $28,303 for family. Employers carry $8,132 and $20,832 of that on average.\n\nThe Cost Lab puts your own costs next to a PEO quote, with no assumed savings.\n\nSource: KFF Employer Health Benefits Survey 2026\n\nRun your numbers: https://peonomics.com/#cost-lab\n\nPEOnomics · PEO cost intelligence\n\n#Benefits #PEO #SmallBusiness",
+   "url": "https://peonomics.com/#cost-lab",
+   "image": "https://peonomics.com/assets/images/posts/jan1-renewals-2027-2026-11-19.png",
+   "figures": {
+    "single": 9804,
+    "family": 28303,
+    "singleEr": 8132,
+    "familyEr": 20832,
+    "kffYear": 2026
+   },
+   "imageBytes": 47428
+  },
+  {
+   "id": "md-famli-2027-2026-12-01",
+   "series": "md-famli-2027",
+   "kind": "countdown",
+   "label": "Countdown",
+   "liveDate": "2026-12-01",
+   "liveAt": "2026-12-01T09:00:00-05:00",
+   "pubDate": "Tue, 01 Dec 2026 09:00:00 -0500",
+   "event": "2027-01-01",
+   "daysToEvent": 31,
+   "headline": "31 days until Maryland FAMLI contributions begin",
+   "cardTitle": "Maryland FAMLI contributions begin",
+   "cardSub": "",
+   "stats": [
+    [
+     "Total rate",
+     "0.90%"
+    ],
+    [
+     "Employer share",
+     "0.45%"
+    ],
+    [
+     "Per head at cap",
+     "$865.35"
+    ]
+   ],
+   "estimates": [],
+   "text": "31 days until Maryland FAMLI contributions begin\n\nStarting Jan. 1, 2027, Maryland employers remit FAMLI contributions: 0.90% of wages up to the Social Security wage base ($192,300 in 2027).\n\nEmployers with 15 or more employees pay at least half (0.45%) and may withhold the rest from pay. That is up to $865.35 per employee at the wage cap. Smaller employers owe no employer share but must remit what they withhold. Benefits begin by Jan. 3, 2028.\n\nSource: Maryland FAMLI law via Jackson Lewis; SSA 2027 wage base\n\nDC, MD and VA employer costs, side by side: https://peonomics.com/dmv-employer-cost-index\n\nPEOnomics · PEO cost intelligence\n\n#Maryland #PaidLeave #Payroll",
+   "url": "https://peonomics.com/dmv-employer-cost-index",
+   "image": "https://peonomics.com/assets/images/posts/md-famli-2027-2026-12-01.png",
+   "figures": {
+    "total": 0.009,
+    "er": 0.0045,
+    "thr": 15,
+    "start": "2027-01-01",
+    "benefits": "2028-01-03",
+    "base27": 192300,
+    "erMax": 865.3499999999999
+   },
+   "imageBytes": 48588
+  },
+  {
+   "id": "ss-wage-base-2027-2026-12-03",
+   "series": "ss-wage-base-2027",
+   "kind": "countdown",
+   "label": "Countdown",
+   "liveDate": "2026-12-03",
+   "liveAt": "2026-12-03T09:00:00-05:00",
+   "pubDate": "Thu, 03 Dec 2026 09:00:00 -0500",
+   "event": "2027-01-01",
+   "daysToEvent": 29,
+   "headline": "29 days until the Social Security wage base rises to $192,300",
+   "cardTitle": "Social Security wage base rises",
+   "cardSub": "",
+   "stats": [
+    [
+     "2026 cap",
+     "$184,500"
+    ],
+    [
+     "2027 cap",
+     "$192,300"
+    ],
+    [
+     "More per head",
+     "$483.60"
+    ]
+   ],
+   "estimates": [],
+   "text": "29 days until the Social Security wage base rises to $192,300\n\nOn Jan. 1, 2027 the cap on wages subject to the 6.2% employer Social Security tax moves from $184,500 to $192,300.\n\nFor each employee paid above the cap, the employer's maximum Social Security tax goes from $11,439.00 to $11,922.60: $483.60 more per head.\n\nSource: Social Security Administration\n\nSee what it does to your payroll: https://peonomics.com/#cost-lab\n\nPEOnomics · PEO cost intelligence\n\n#Payroll #SocialSecurity #SmallBusiness",
+   "url": "https://peonomics.com/#cost-lab",
+   "image": "https://peonomics.com/assets/images/posts/ss-wage-base-2027-2026-12-03.png",
+   "figures": {
+    "rate": 0.062,
+    "base26": 184500,
+    "base27": 192300,
+    "max26": 11439.0,
+    "max27": 11922.6,
+    "diff": 483.60000000000036
+   },
+   "imageBytes": 47394
+  },
+  {
+   "id": "va-min-wage-2027-2026-12-08",
+   "series": "va-min-wage-2027",
+   "kind": "countdown",
+   "label": "Countdown",
+   "liveDate": "2026-12-08",
+   "liveAt": "2026-12-08T09:00:00-05:00",
+   "pubDate": "Tue, 08 Dec 2026 09:00:00 -0500",
+   "event": "2027-01-01",
+   "daysToEvent": 24,
+   "headline": "24 days until Virginia's minimum wage rises to $13.75",
+   "cardTitle": "Virginia minimum wage rises",
+   "cardSub": "",
+   "stats": [
+    [
+     "Today",
+     "$12.77"
+    ],
+    [
+     "Jan. 1, 2027",
+     "$13.75"
+    ],
+    [
+     "Per FTE / yr",
+     "+$2,038"
+    ]
+   ],
+   "estimates": [],
+   "text": "24 days until Virginia's minimum wage rises to $13.75\n\nVirginia's minimum wage moves from $12.77 to $13.75 an hour on Jan. 1, 2027, then to $15.00 on Jan. 1, 2028.\n\nFor a full-time worker at the floor (2,080 hours a year), that is $2,038 more in annual wages, before payroll taxes rise with it.\n\nSource: Office of the Governor of Virginia, HB1/SB1\n\nWage floors for every DMV jurisdiction: https://peonomics.com/dmv-employer-cost-index\n\nPEOnomics · PEO cost intelligence\n\n#Virginia #MinimumWage #SmallBusiness",
+   "url": "https://peonomics.com/dmv-employer-cost-index",
+   "image": "https://peonomics.com/assets/images/posts/va-min-wage-2027-2026-12-08.png",
+   "figures": {
+    "cur": 12.77,
+    "new": 13.75,
+    "next": 15.0,
+    "nextEff": "2028-01-01",
+    "hrs": 2080,
+    "step": 0.9800000000000004,
+    "annual": 2038.400000000001
+   },
+   "imageBytes": 40742
+  },
+  {
+   "id": "jan1-renewals-2027-2026-12-10",
+   "series": "jan1-renewals-2027",
+   "kind": "countdown",
+   "label": "Countdown",
+   "liveDate": "2026-12-10",
+   "liveAt": "2026-12-10T09:00:00-05:00",
+   "pubDate": "Thu, 10 Dec 2026 09:00:00 -0500",
+   "event": "2027-01-01",
+   "daysToEvent": 22,
+   "headline": "22 days until January 1 renewals",
+   "cardTitle": "January 1 benefits and PEO renewals",
+   "cardSub": "",
+   "stats": [
+    [
+     "Single premium",
+     "$9,804"
+    ],
+    [
+     "Employer share",
+     "$8,132"
+    ],
+    [
+     "Family employer share",
+     "$20,832"
+    ]
+   ],
+   "estimates": [],
+   "text": "22 days until January 1 renewals\n\nRenewal quotes in hand? Put them side by side before Jan. 1.\n\nThe average 2026 employer share of a health premium is $8,132 for single coverage and $20,832 for family. A fee quoted per employee per month and one quoted as a percent of payroll are not comparable until you convert them.\n\nThe Quote Comparator does that for up to three proposals, in your browser.\n\nSource: KFF Employer Health Benefits Survey 2026\n\nCompare quotes: https://peonomics.com/compare\n\nPEOnomics · PEO cost intelligence\n\n#Benefits #PEO #SmallBusiness",
+   "url": "https://peonomics.com/compare",
+   "image": "https://peonomics.com/assets/images/posts/jan1-renewals-2027-2026-12-10.png",
+   "figures": {
+    "single": 9804,
+    "family": 28303,
+    "singleEr": 8132,
+    "familyEr": 20832,
+    "kffYear": 2026
+   },
+   "imageBytes": 45348
+  },
+  {
+   "id": "md-famli-2027-2026-12-15",
+   "series": "md-famli-2027",
+   "kind": "countdown",
+   "label": "Countdown",
+   "liveDate": "2026-12-15",
+   "liveAt": "2026-12-15T09:00:00-05:00",
+   "pubDate": "Tue, 15 Dec 2026 09:00:00 -0500",
+   "event": "2027-01-01",
+   "daysToEvent": 17,
+   "headline": "17 days until Maryland FAMLI contributions begin",
+   "cardTitle": "Maryland FAMLI contributions begin",
+   "cardSub": "",
+   "stats": [
+    [
+     "Total rate",
+     "0.90%"
+    ],
+    [
+     "Employer share",
+     "0.45%"
+    ],
+    [
+     "Per head at cap",
+     "$865.35"
+    ]
+   ],
+   "estimates": [],
+   "text": "17 days until Maryland FAMLI contributions begin\n\nStarting Jan. 1, 2027, Maryland employers remit FAMLI contributions: 0.90% of wages up to the Social Security wage base ($192,300 in 2027).\n\nEmployers with 15 or more employees pay at least half (0.45%) and may withhold the rest from pay. That is up to $865.35 per employee at the wage cap. Smaller employers owe no employer share but must remit what they withhold. Benefits begin by Jan. 3, 2028.\n\nSource: Maryland FAMLI law via Jackson Lewis; SSA 2027 wage base\n\nDC, MD and VA employer costs, side by side: https://peonomics.com/dmv-employer-cost-index\n\nPEOnomics · PEO cost intelligence\n\n#Maryland #PaidLeave #Payroll",
+   "url": "https://peonomics.com/dmv-employer-cost-index",
+   "image": "https://peonomics.com/assets/images/posts/md-famli-2027-2026-12-15.png",
+   "figures": {
+    "total": 0.009,
+    "er": 0.0045,
+    "thr": 15,
+    "start": "2027-01-01",
+    "benefits": "2028-01-03",
+    "base27": 192300,
+    "erMax": 865.3499999999999
+   },
+   "imageBytes": 46579
+  },
+  {
+   "id": "jan1-dmv-reset-2027-2026-12-17",
+   "series": "jan1-dmv-reset-2027",
+   "kind": "countdown",
+   "label": "Countdown",
+   "liveDate": "2026-12-17",
+   "liveAt": "2026-12-17T09:00:00-05:00",
+   "pubDate": "Thu, 17 Dec 2026 09:00:00 -0500",
+   "event": "2027-01-01",
+   "daysToEvent": 15,
+   "headline": "15 days until January 1 payroll changes in the DMV",
+   "cardTitle": "January 1 payroll changes in the DMV",
+   "cardSub": "",
+   "stats": [
+    [
+     "SS wage base",
+     "$192,300"
+    ],
+    [
+     "MD FAMLI",
+     "0.90%"
+    ],
+    [
+     "VA minimum",
+     "$13.75"
+    ]
+   ],
+   "estimates": [],
+   "text": "15 days until January 1 payroll changes in the DMV\n\nThree changes for DC, Maryland and Virginia employers:\n\n- Social Security wage base: $184,500 to $192,300\n- Maryland FAMLI: 0.90% of wages; employers with 15+ employees pay at least 0.45%\n- Virginia minimum wage: $12.77 to $13.75\n\nUnemployment-insurance rates and county wage floors are on the index.\n\nSource: SSA; Maryland FAMLI law; Office of the Governor of Virginia\n\nThe full DMV Employer Cost Index: https://peonomics.com/dmv-employer-cost-index\n\nPEOnomics · PEO cost intelligence\n\n#Payroll #DMV #SmallBusiness",
+   "url": "https://peonomics.com/dmv-employer-cost-index",
+   "image": "https://peonomics.com/assets/images/posts/jan1-dmv-reset-2027-2026-12-17.png",
+   "figures": {
+    "base26": 184500,
+    "base27": 192300,
+    "famli": 0.009,
+    "thr": 15,
+    "er": 0.0045,
+    "vaCur": 12.77,
+    "vaNew": 13.75
+   },
+   "imageBytes": 46676
+  },
+  {
+   "id": "va-min-wage-2027-2026-12-22",
+   "series": "va-min-wage-2027",
+   "kind": "countdown",
+   "label": "Countdown",
+   "liveDate": "2026-12-22",
+   "liveAt": "2026-12-22T09:00:00-05:00",
+   "pubDate": "Tue, 22 Dec 2026 09:00:00 -0500",
+   "event": "2027-01-01",
+   "daysToEvent": 10,
+   "headline": "10 days until Virginia's minimum wage rises to $13.75",
+   "cardTitle": "Virginia minimum wage rises",
+   "cardSub": "",
+   "stats": [
+    [
+     "Today",
+     "$12.77"
+    ],
+    [
+     "Jan. 1, 2027",
+     "$13.75"
+    ],
+    [
+     "Per FTE / yr",
+     "+$2,038"
+    ]
+   ],
+   "estimates": [],
+   "text": "10 days until Virginia's minimum wage rises to $13.75\n\nVirginia's minimum wage moves from $12.77 to $13.75 an hour on Jan. 1, 2027, then to $15.00 on Jan. 1, 2028.\n\nFor a full-time worker at the floor (2,080 hours a year), that is $2,038 more in annual wages, before payroll taxes rise with it.\n\nSource: Office of the Governor of Virginia, HB1/SB1\n\nWage floors for every DMV jurisdiction: https://peonomics.com/dmv-employer-cost-index\n\nPEOnomics · PEO cost intelligence\n\n#Virginia #MinimumWage #SmallBusiness",
+   "url": "https://peonomics.com/dmv-employer-cost-index",
+   "image": "https://peonomics.com/assets/images/posts/va-min-wage-2027-2026-12-22.png",
+   "figures": {
+    "cur": 12.77,
+    "new": 13.75,
+    "next": 15.0,
+    "nextEff": "2028-01-01",
+    "hrs": 2080,
+    "step": 0.9800000000000004,
+    "annual": 2038.400000000001
+   },
+   "imageBytes": 41477
+  },
+  {
+   "id": "jan1-dmv-reset-2027-2026-12-29",
+   "series": "jan1-dmv-reset-2027",
+   "kind": "countdown",
+   "label": "Countdown",
+   "liveDate": "2026-12-29",
+   "liveAt": "2026-12-29T09:00:00-05:00",
+   "pubDate": "Tue, 29 Dec 2026 09:00:00 -0500",
+   "event": "2027-01-01",
+   "daysToEvent": 3,
+   "headline": "3 days until January 1 payroll changes in the DMV",
+   "cardTitle": "January 1 payroll changes in the DMV",
+   "cardSub": "",
+   "stats": [
+    [
+     "SS wage base",
+     "$192,300"
+    ],
+    [
+     "MD FAMLI",
+     "0.90%"
+    ],
+    [
+     "VA minimum",
+     "$13.75"
+    ]
+   ],
+   "estimates": [],
+   "text": "3 days until January 1 payroll changes in the DMV\n\nThree changes for DC, Maryland and Virginia employers:\n\n- Social Security wage base: $184,500 to $192,300\n- Maryland FAMLI: 0.90% of wages; employers with 15+ employees pay at least 0.45%\n- Virginia minimum wage: $12.77 to $13.75\n\nUnemployment-insurance rates and county wage floors are on the index.\n\nSource: SSA; Maryland FAMLI law; Office of the Governor of Virginia\n\nThe full DMV Employer Cost Index: https://peonomics.com/dmv-employer-cost-index\n\nPEOnomics · PEO cost intelligence\n\n#Payroll #DMV #SmallBusiness",
+   "url": "https://peonomics.com/dmv-employer-cost-index",
+   "image": "https://peonomics.com/assets/images/posts/jan1-dmv-reset-2027-2026-12-29.png",
+   "figures": {
+    "base26": 184500,
+    "base27": 192300,
+    "famli": 0.009,
+    "thr": 15,
+    "er": 0.0045,
+    "vaCur": 12.77,
+    "vaNew": 13.75
+   },
+   "imageBytes": 46380
+  },
+  {
+   "id": "jan1-dmv-reset-2027-2027-01-05",
+   "series": "jan1-dmv-reset-2027",
+   "kind": "countdown",
+   "label": "Countdown",
+   "liveDate": "2027-01-05",
+   "liveAt": "2027-01-05T09:00:00-05:00",
+   "pubDate": "Tue, 05 Jan 2027 09:00:00 -0500",
+   "event": "2027-01-01",
+   "daysToEvent": -4,
+   "headline": "Now in effect: January 1 payroll changes in the DMV",
+   "cardTitle": "January 1 payroll changes in the DMV",
+   "cardSub": "",
+   "stats": [
+    [
+     "SS wage base",
+     "$192,300"
+    ],
+    [
+     "MD FAMLI",
+     "0.90%"
+    ],
+    [
+     "VA minimum",
+     "$13.75"
+    ]
+   ],
+   "estimates": [],
+   "text": "Now in effect: January 1 payroll changes in the DMV\n\nThree changes for DC, Maryland and Virginia employers:\n\n- Social Security wage base: $184,500 to $192,300\n- Maryland FAMLI: 0.90% of wages; employers with 15+ employees pay at least 0.45%\n- Virginia minimum wage: $12.77 to $13.75\n\nUnemployment-insurance rates and county wage floors are on the index.\n\nSource: SSA; Maryland FAMLI law; Office of the Governor of Virginia\n\nThe full DMV Employer Cost Index: https://peonomics.com/dmv-employer-cost-index\n\nPEOnomics · PEO cost intelligence\n\n#Payroll #DMV #SmallBusiness",
+   "url": "https://peonomics.com/dmv-employer-cost-index",
+   "image": "https://peonomics.com/assets/images/posts/jan1-dmv-reset-2027-2027-01-05.png",
+   "figures": {
+    "base26": 184500,
+    "base27": 192300,
+    "famli": 0.009,
+    "thr": 15,
+    "er": 0.0045,
+    "vaCur": 12.77,
+    "vaNew": 13.75
+   },
+   "imageBytes": 45038
+  },
+  {
+   "id": "va-min-wage-2028-2027-10-01",
+   "series": "va-min-wage-2028",
+   "kind": "countdown",
+   "label": "Countdown",
+   "liveDate": "2027-10-01",
+   "liveAt": "2027-10-01T09:00:00-04:00",
+   "pubDate": "Fri, 01 Oct 2027 09:00:00 -0400",
+   "event": "2028-01-01",
+   "daysToEvent": 92,
+   "headline": "92 days until Virginia's minimum wage reaches $15.00",
+   "cardTitle": "Virginia minimum wage reaches $15",
+   "cardSub": "",
+   "stats": [
+    [
+     "2027",
+     "$13.75"
+    ],
+    [
+     "2028",
+     "$15.00"
+    ],
+    [
+     "Per FTE / yr",
+     "+$2,600"
+    ]
+   ],
+   "estimates": [],
+   "text": "92 days until Virginia's minimum wage reaches $15.00\n\nVirginia's minimum wage steps from $13.75 to $15.00 an hour on Jan. 1, 2028.\n\nAt 2,080 hours a year, that is $2,600 more per full-time employee at the floor, before payroll taxes.\n\nSource: Office of the Governor of Virginia, HB1/SB1\n\nDMV wage floors and employer costs: https://peonomics.com/dmv-employer-cost-index\n\nPEOnomics · PEO cost intelligence\n\n#Virginia #MinimumWage #SmallBusiness",
+   "url": "https://peonomics.com/dmv-employer-cost-index",
+   "image": "https://peonomics.com/assets/images/posts/va-min-wage-2028-2027-10-01.png",
+   "figures": {
+    "w": 15.0,
+    "prev": 13.75,
+    "hrs": 2080,
+    "step": 1.25,
+    "annual": 2600.0
+   },
+   "imageBytes": 45099
+  },
+  {
+   "id": "md-famli-benefits-2028-2027-10-05",
+   "series": "md-famli-benefits-2028",
+   "kind": "countdown",
+   "label": "Countdown",
+   "liveDate": "2027-10-05",
+   "liveAt": "2027-10-05T09:00:00-04:00",
+   "pubDate": "Tue, 05 Oct 2027 09:00:00 -0400",
+   "event": "2028-01-03",
+   "daysToEvent": 90,
+   "headline": "90 days until Maryland FAMLI benefits begin",
+   "cardTitle": "Maryland FAMLI benefits begin",
+   "cardSub": "",
+   "stats": [
+    [
+     "Total rate",
+     "0.90%"
+    ],
+    [
+     "Employer share",
+     "0.45%"
+    ],
+    [
+     "Employer threshold",
+     "15+"
+    ]
+   ],
+   "estimates": [],
+   "text": "90 days until Maryland FAMLI benefits begin\n\nMaryland FAMLI benefits begin by Jan. 3, 2028. Contributions began Jan. 1, 2027: 0.90% of wages, with employers of 15 or more paying at least 0.45%.\n\nLeave policies, payroll setup and coverage for absent staff need to be settled before claims start.\n\nSource: Maryland FAMLI law via Jackson Lewis\n\nDMV employer costs, sourced: https://peonomics.com/dmv-employer-cost-index\n\nPEOnomics · PEO cost intelligence\n\n#Maryland #PaidLeave #HR",
+   "url": "https://peonomics.com/dmv-employer-cost-index",
+   "image": "https://peonomics.com/assets/images/posts/md-famli-benefits-2028-2027-10-05.png",
+   "figures": {
+    "total": 0.009,
+    "er": 0.0045,
+    "thr": 15,
+    "start": "2027-01-01",
+    "benefits": "2028-01-03"
+   },
+   "imageBytes": 45519
+  },
+  {
+   "id": "md-famli-benefits-2028-2027-11-30",
+   "series": "md-famli-benefits-2028",
+   "kind": "countdown",
+   "label": "Countdown",
+   "liveDate": "2027-11-30",
+   "liveAt": "2027-11-30T09:00:00-05:00",
+   "pubDate": "Tue, 30 Nov 2027 09:00:00 -0500",
+   "event": "2028-01-03",
+   "daysToEvent": 34,
+   "headline": "34 days until Maryland FAMLI benefits begin",
+   "cardTitle": "Maryland FAMLI benefits begin",
+   "cardSub": "",
+   "stats": [
+    [
+     "Total rate",
+     "0.90%"
+    ],
+    [
+     "Employer share",
+     "0.45%"
+    ],
+    [
+     "Employer threshold",
+     "15+"
+    ]
+   ],
+   "estimates": [],
+   "text": "34 days until Maryland FAMLI benefits begin\n\nMaryland FAMLI benefits begin by Jan. 3, 2028. Contributions began Jan. 1, 2027: 0.90% of wages, with employers of 15 or more paying at least 0.45%.\n\nLeave policies, payroll setup and coverage for absent staff need to be settled before claims start.\n\nSource: Maryland FAMLI law via Jackson Lewis\n\nDMV employer costs, sourced: https://peonomics.com/dmv-employer-cost-index\n\nPEOnomics · PEO cost intelligence\n\n#Maryland #PaidLeave #HR",
+   "url": "https://peonomics.com/dmv-employer-cost-index",
+   "image": "https://peonomics.com/assets/images/posts/md-famli-benefits-2028-2027-11-30.png",
+   "figures": {
+    "total": 0.009,
+    "er": 0.0045,
+    "thr": 15,
+    "start": "2027-01-01",
+    "benefits": "2028-01-03"
+   },
+   "imageBytes": 43047
+  },
+  {
+   "id": "va-min-wage-2028-2027-12-02",
+   "series": "va-min-wage-2028",
+   "kind": "countdown",
+   "label": "Countdown",
+   "liveDate": "2027-12-02",
+   "liveAt": "2027-12-02T09:00:00-05:00",
+   "pubDate": "Thu, 02 Dec 2027 09:00:00 -0500",
+   "event": "2028-01-01",
+   "daysToEvent": 30,
+   "headline": "30 days until Virginia's minimum wage reaches $15.00",
+   "cardTitle": "Virginia minimum wage reaches $15",
+   "cardSub": "",
+   "stats": [
+    [
+     "2027",
+     "$13.75"
+    ],
+    [
+     "2028",
+     "$15.00"
+    ],
+    [
+     "Per FTE / yr",
+     "+$2,600"
+    ]
+   ],
+   "estimates": [],
+   "text": "30 days until Virginia's minimum wage reaches $15.00\n\nVirginia's minimum wage steps from $13.75 to $15.00 an hour on Jan. 1, 2028.\n\nAt 2,080 hours a year, that is $2,600 more per full-time employee at the floor, before payroll taxes.\n\nSource: Office of the Governor of Virginia, HB1/SB1\n\nDMV wage floors and employer costs: https://peonomics.com/dmv-employer-cost-index\n\nPEOnomics · PEO cost intelligence\n\n#Virginia #MinimumWage #SmallBusiness",
+   "url": "https://peonomics.com/dmv-employer-cost-index",
+   "image": "https://peonomics.com/assets/images/posts/va-min-wage-2028-2027-12-02.png",
+   "figures": {
+    "w": 15.0,
+    "prev": 13.75,
+    "hrs": 2080,
+    "step": 1.25,
+    "annual": 2600.0
+   },
+   "imageBytes": 46001
+  }
+ ]
+}

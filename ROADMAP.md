@@ -3,7 +3,7 @@
 This file is the **only** source of truth for what is done, open, dropped, or pending a decision.
 Not chat history. Not artifacts. When you finish or add work, update this file in the same commit.
 
-**Last updated:** 2026-10-28 (DMV Employer Cost Index; VA SUI 2.73%. Prior: activation release: health check, shared rate limiter, scenario logging, Turnstile key via env; data/unification/analytics releases follow)
+**Last updated:** 2026-10-28 (Auto-post feed for the LinkedIn page; DMV Employer Cost Index; VA SUI 2.73%. Prior: activation release: health check, shared rate limiter, scenario logging, Turnstile key via env; data/unification/analytics releases follow)
 
 ---
 
@@ -155,6 +155,17 @@ Not chat history. Not artifacts. When you finish or add work, update this file i
   - VA 2026 new-employer SUI corrected to **2.73%** (2.50% base + 0.20% fund-building + 0.03% pool-cost),
     owner-confirmed; source file updated, confidence stays `med` until checked against a VEC page.
 
+- **Auto-post feed — LinkedIn page** (2026-10-28): `GET /api/feed` (RSS) serves templated posts at their go-live
+  time (9:00 ET), so posting runs with no deploys or cron; Zapier (free plan) publishes each new item to the
+  PEOnomics page. Two formats: **Countdown** (days to a dated change) and **Data release** (dormant until the
+  owner sets its date). Templates in `data/posts/series.json` carry no typed numbers: every figure is a ref into
+  rates-2026 / dmv-index-2026 / benchmarks-2026. `tools/build_posts.py` renders `data/post-schedule.json` + one
+  1200×627 card per post in the tokens.css palette and site faces. Schedule: 20 posts, Oct 30 2026 – Dec 2 2027
+  (DMV index launch; FUTA determination; MD FAMLI; SS wage base; VA minimum wage; Jan 1 renewals; Jan 1 DMV
+  reset; 2028 VA $15 and FAMLI benefits). Audit view `/api/feed?audit=1`. Tests: `tests/test_posts.py` (228,
+  independent numeral provenance; refuses unflagged low-confidence figures and unready releases) and
+  `tests/test_feed.mjs` (8). Owner Zap setup: `docs/OWNER_SETUP.md` §7.
+
 ## 🔲 Open — prioritized
 
 ### P0.1 — owner-only setup (credentials; Claude must not handle them) — step-by-step in `docs/OWNER_SETUP.md`
@@ -169,6 +180,9 @@ Not chat history. Not artifacts. When you finish or add work, update this file i
 - [ ] **Analytics Engine binding** `EVENTS` (dataset `peonomics_events`) so product events are stored; then a
       saved SQL query for weekly counts. **Search Console** domain property via DNS TXT + submit sitemap.
       (No Search Console connector exists for Claude; owner step in `docs/OWNER_SETUP.md` §6.)
+- [ ] **Zapier Zap for the LinkedIn page** (`docs/OWNER_SETUP.md` §7): RSS `https://peonomics.com/api/feed` →
+      LinkedIn *Create Company Update* on the PEOnomics page. First post goes live Oct 30, 2026 9:00 ET. Don't run
+      Zapier's action test early (it publishes).
 - [ ] **Real inbox test** to the owner's own business mailbox once all four secrets exist: PDF + XLSX
       arrive, Excel recalculates, double-click sends once, sheet shows requested/accepted rows.
 
@@ -195,6 +209,14 @@ Not chat history. Not artifacts. When you finish or add work, update this file i
 - [ ] **Reconcile positioning across pages.** `methodology.html` is a *ranking* methodology with a
       referral-fee disclosure (XcelHR); the homepage promises no PEO hand-off from the lab. Both
       can be true, but the site needs one coherent story. Owner-only factual claims.
+
+- [ ] **Auto-post upkeep:** (a) after DOL's Nov 10 determination, update CA FUTA in `data/src/`, mark it `high`,
+      set a date on release `futa-credit-reduction-2026-final`, rebuild posts. (b) Add countdowns as figures get
+      published: Jul 1, 2027 DC + MD county wage floors (once announced), 2028 SS wage base (SSA, Oct 2027), 2027
+      SUI rates. (c) Add a release for each dataset refresh (rates-2027, QCEW 2026, MEPS-IC 2026). (d) Weekly
+      audit at `/api/feed?audit=1`. Corrections must be rebuilt before the affected go-live day.
+- [ ] **Answer-site distribution (manual only):** Reddit, Quora, forums, Facebook groups — answer specific questions
+      and link the relevant page. Never automate it (bans; low-quality signal). Personal LinkedIn profile is out of scope by owner direction.
 
 ### P2 — hygiene & polish
 - [ ] **Per-page OG images.** All pages currently share `og-default.png`. Page-specific cards

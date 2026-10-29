@@ -84,6 +84,26 @@ Confirm:
    Settings › Bindings › Add › Analytics Engine › variable `EVENTS` › dataset `peonomics_events`.
    Without the binding the endpoint accepts and discards events (no error, no personal data).
 
+## 7. Auto-posting to the PEOnomics LinkedIn page (Zapier, free plan)
+
+The feed runs itself: `https://peonomics.com/api/feed` lists each post from its go-live time (9:00 ET on
+its date) onward. Zapier publishes each new item once. You set this up once; Claude cannot (it needs your
+LinkedIn sign-in).
+
+1. Zapier › **Create Zap**. Trigger: **RSS by Zapier** › *New Item in Feed* › Feed URL
+   `https://peonomics.com/api/feed` › "What triggers a new feed item": *Different Guid/URL*.
+2. Action: **LinkedIn** › *Create Company Update* › Company: **PEOnomics** (the page, not your profile).
+   Map: Comment = *Description*; Content URL = *Link*; Content Title = *Title*; Image URL = the
+   enclosure / media URL field (`…/assets/images/posts/<id>.png`). Visibility: Anyone.
+3. **Do not run Zapier's action test before Oct 30**: the test publishes for real. Skip the test, turn the Zap
+   on, and check the page after the first post (Oct 30, 9:00–9:15 ET).
+4. **Weekly audit (5 minutes):** open `https://peonomics.com/api/feed?audit=1`. It shows what is live and
+   everything going live in the next 35 days, with the full text. To change or stop a post, edit
+   `data/posts/series.json`, run `python3 tools/build_posts.py`, commit. Pause everything: turn the Zap off.
+5. **Mark a data release:** set its `date` in `data/posts/series.json` (dormant releases are listed in the audit),
+   rebuild, commit. The builder refuses a release whose data is not ready (e.g. the 2026 FUTA final needs
+   California's credit reduction updated and marked `high` confidence first).
+
 ## Credentials to rotate (from earlier chats)
 
 Any Cloudflare API token, R2 access keys, GitHub PATs or webhook URLs ever pasted into a chat are

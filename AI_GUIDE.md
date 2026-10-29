@@ -2,7 +2,7 @@
 
 **Audience:** any AI agent (Claude or otherwise) asked to create, edit, debug, or audit this
 site in any chat. Read this file *first*, before touching anything.
-**Last updated:** 2026-10-27 (2026 sourced dataset; extensionless URLs; shared chrome)
+**Last updated:** 2026-10-28 (auto-post feed for the LinkedIn page; prior: 2026 sourced dataset, extensionless URLs, shared chrome)
 
 ---
 
@@ -42,7 +42,8 @@ site in any chat. Read this file *first*, before touching anything.
   `POST /api/report-request` (Turnstile → server recompute → log → Resend PDF+XLSX),
   `GET /api/report-status` (`{available, siteKey}` — public Turnstile key only), `GET /api/health` (booleans:
   which secrets production sees, never values), `POST /api/event` (allowlisted, PII-free product events →
-  Analytics Engine binding `EVENTS` if present) and `/api/lead` (legacy, unreferenced).
+  Analytics Engine binding `EVENTS` if present), `GET /api/feed` (auto-post RSS for the LinkedIn page; `?audit=1` = weekly
+  audit text) and `/api/lead` (legacy, unreferenced).
   Shared code lives in `functions/lib/` (no route handlers there). No standalone Workers.
 - **Secrets** (`ANTHROPIC_API_KEY`, `USAGE_WEBHOOK_URL`, `RESEND_API_KEY`, `REPORT_FROM`,
   `TURNSTILE_SECRET`, legacy `LEAD_WEBHOOK_URL`) live as **Cloudflare Pages secrets**. An agent must not
@@ -116,6 +117,9 @@ tools/build_states.py           Generator for the 51 state pages + sitemap from 
 tools/build_rates_2026.py       Builds data/rates-2026.json from data/src/*.json (sourced inputs).
 tools/site_chrome.py            Canonical nav + footer markup.  tools/normalize_urls.py  extensionless URLs.
 data/src/                       Sourced inputs (DOL, state agencies, BLS QCEW, AHRQ MEPS-IC, Oregon DCBS).
+data/posts/series.json          Auto-post templates (hand-authored): countdowns + releases, figures by ref only.
+tools/build_posts.py            Builds data/post-schedule.json + assets/images/posts/*.png (GENERATED; needs Pillow + npm for fonts).
+functions/api/feed.js           GET /api/feed — RSS of posts whose go-live time has passed (Zapier → LinkedIn page).
 CNAME                           Fossil from the GitHub Pages era. Harmless on Cloudflare.
 favicon.svg  README.md  .gitignore
 ```
@@ -184,6 +188,12 @@ AI-generated template.
 - The rate dataset is **versioned with per-figure source, year and confidence**. Low-confidence figures
   render as `estimate`. Workers' comp is always an estimate (sourced state index × unsourced industry multiplier).
 - Any user-facing statistic must be **sourced or flagged**. No invented numbers, ever.
+- **Auto-posts (LinkedIn page).** Never type a number into `data/posts/series.json`: every figure is a ref into a
+  data file (or `mul`/`sub`/`add` of refs). Low-confidence figures need `"estimate": true` and the word "estimate"
+  in the post. Rebuild with `python3 tools/build_posts.py`; `tests/test_posts.py` re-derives every numeral. A post
+  goes live when its time arrives — no deploy needed — so a data correction must be rebuilt *before* its go-live
+  day. Posts target the **PEOnomics LinkedIn page only**, never the owner's personal profile. Q&A sites, forums and
+  groups are **manual only**: never automate posting there.
 
 ---
 
