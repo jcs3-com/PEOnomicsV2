@@ -80,8 +80,31 @@ def traced(tok, nums):
     return any(abs(round(c + 1e-9, dec) - t) < 1e-9 for c in nums)
 
 
+LABEL = {'60d': ('60 days', 60), '30d': ('30 days', 30), '1m': ('1 month', 1), '1w': ('1 week', 1)}
+
+
+def month_before(e):
+    y, m = (e.year, e.month - 1) if e.month > 1 else (e.year - 1, 12)
+    return dt.date(y, m, e.day)
+
+
+def milestone_ok(code, event, day):
+    """Independent re-derivation of the owner's milestone rule."""
+    return {'60d': (event - day).days == 60, '30d': (event - day).days == 30,
+            '1w': (event - day).days == 7, '1m': month_before(event) == day}.get(code, False)
+
+
+def event_of(spec):
+    if 'event' not in spec:
+        return None
+    ev = spec['event']
+    return dt.date.fromisoformat(get(ev) if ':' in ev else ev)
+
+
 def provenance_ok(it, spec, event):
     nums, dates, _ = candidates(spec['figures'])
+    if it.get('milestone') and milestone_ok(it['milestone'], event, dt.date.fromisoformat(it['liveDate'])):
+        nums.append(LABEL[it['milestone']][1])
     for d in dates + ([event] if event else []) + [dt.date.fromisoformat(it['liveDate'])] * (event is None):
         nums += [d.year, d.day]
     if event:
@@ -106,7 +129,7 @@ for it in SCHED['items']:
     spec = specs[it['series']]
     if it.get('key'):
         spec = B.bind(spec, it['key'], spec.get('labels'))
-    event = dt.date.fromisoformat(spec['event']) if 'event' in spec else None
+    event = event_of(spec)
     bad = provenance_ok(it, spec, event)
     check(not bad, f'{it["id"]}: untraceable numbers {bad}')
     _, _, conf = candidates(spec['figures'])
@@ -117,8 +140,14 @@ for it in SCHED['items']:
     check(day.weekday() < 5, f'{it["id"]}: weekend post {day}')
     if event:
         check(it['daysToEvent'] == (event - day).days, f'{it["id"]}: day count')
-        n = it['daysToEvent']
-        check((str(n) in it['headline']) if n > 0 else ('Today' in it['headline'] or 'Now in effect' in it['headline']), f'{it["id"]}: headline states the count')
+        if it['kind'] == 'countdown':  # owner rule: only exact 60 days / 30 days / 1 month / 1 week
+            check(it.get('milestone') in LABEL and milestone_ok(it['milestone'], event, day), f'{it["id"]}: not an exact milestone')
+            check(it['headline'].startswith(LABEL.get(it.get('milestone'), ('?',))[0] + ' until'), f'{it["id"]}: headline names the milestone')
+        else:
+            n = it['daysToEvent']
+            md = B.FORMATS['md'](event.isoformat())
+            check((md in it['headline']) if n > 0 else ('Today' in it['headline'] or 'Now in effect' in it['headline']), f'{it["id"]}: dated headline names the date')
+    check(not re.match(r'^\d+ (days?|weeks?|months?) until', it['headline']) or it['kind'] == 'countdown', f'{it["id"]}: day count outside a milestone post')
     days.append(day)
     check(it['url'].startswith('https://peonomics.com/') and '.html' not in it['url'], f'{it["id"]}: absolute extensionless link')
     check(B.page_exists(it['url'][len('https://peonomics.com'):]), f'{it["id"]}: link target exists')
@@ -130,23 +159,32 @@ for it in SCHED['items']:
     check(ok and open(p, 'rb').read(8) == b'\x89PNG\r\n\x1a\n' and B.png_size(p) == (1200, 627), f'{it["id"]}: card 1200x627 PNG')
     check(ok and it.get('imageBytes') == os.path.getsize(p), f'{it["id"]}: imageBytes matches card')
 check(len(days) == len(set(days)), 'one post per day at most')
-# cadence: fillers never push a week past perWeek, only land on cadence weekdays, never on skip dates,
-# and every rotation post sits inside its rotation's validity window
+# cadence: weekly caps (quiet periods included), no-post days, weekdays, rotation shelf life
 cad = S['cadence']
-weeks, fixed = {}, {}
+def cap(monday):
+    days = [(monday + dt.timedelta(days=i)).isoformat() for i in range(7)]
+    for q in cad.get('quietPeriods', []):
+        if any(q['from'] <= d <= q['to'] for d in days):
+            return q['perWeek']
+    return cad['perWeek']
+weeks = {}
 for it in SCHED['items']:
-    wk = dt.date.fromisoformat(it['liveDate']).isocalendar()[:2]
-    weeks[wk] = weeks.get(wk, 0) + 1
-    if it['kind'] != 'note':
-        fixed[wk] = fixed.get(wk, 0) + 1
-for wk, n in weeks.items():
-    check(n <= max(cad['perWeek'], fixed.get(wk, 0)), f'week {wk}: {n} posts exceeds cadence')
-for it in SCHED['items']:
+    d = dt.date.fromisoformat(it['liveDate'])
+    m = d - dt.timedelta(days=d.weekday())
+    weeks[m] = weeks.get(m, 0) + 1
+    check(it['liveDate'] not in cad['noPostDates'], f'{it["id"]}: on a no-post day')
     if it['kind'] == 'note':
         rot = specs[it['series']]
-        d = dt.date.fromisoformat(it['liveDate'])
-        check(d.weekday() in cad['weekdays'] and it['liveDate'] not in cad['skipDates'], f'{it["id"]}: off-cadence day')
         check(rot['validFrom'] <= it['liveDate'] <= rot['validUntil'], f'{it["id"]}: outside its data shelf life')
+for m, n in weeks.items():
+    check(n <= cap(m), f'week of {m}: {n} posts, cap {cap(m)}')
+for day in ['2026-11-25', '2026-11-26', '2026-12-07'] + [f'2026-12-{d}' for d in range(23, 32)] + ['2027-01-01']:
+    check(day in cad['noPostDates'], f'owner no-post day {day} listed')
+gap_total = sum(g['open'] for g in SCHED['meta']['gaps'])
+check(gap_total == SCHED['meta']['openSlots'], 'open-slot total matches gap list')
+for g in SCHED['meta']['gaps']:
+    for d in g['suggest']:
+        check(d not in cad['noPostDates'] and dt.date.fromisoformat(d).weekday() < 5 and d not in {i['liveDate'] for i in SCHED['items']}, f'gap suggestion {d} is a usable day')
 check(len({it['id'] for it in SCHED['items']}) == len(SCHED['items']), 'unique post ids')
 cards = {f for f in os.listdir(os.path.join(ROOT, 'assets', 'images', 'posts')) if f.endswith('.png')}
 check(cards == {it['id'] + '.png' for it in SCHED['items']}, 'no orphan or missing cards')
@@ -154,7 +192,7 @@ check(cards == {it['id'] + '.png' for it in SCHED['items']}, 'no orphan or missi
 # 3. the checker and the builder refuse bad input
 fake = dict(SCHED['items'][0], text=SCHED['items'][0]['text'].replace('\n\n', '\n\nSave 37% today.\n\n', 1))
 spec0 = specs[fake['series']]
-check(provenance_ok(fake, spec0, dt.date.fromisoformat(spec0['event']) if 'event' in spec0 else None) == ['37'], 'typed-in number is caught')
+check(provenance_ok(fake, spec0, event_of(spec0)) == ['37'], 'typed-in number is caught')
 
 orig = copy.deepcopy(S)
 try:
@@ -171,8 +209,25 @@ try:
         check(ready, 'marked release with unready data must be refused')
     except B.BuildError as e:
         check('not ready' in str(e) or 'more than one post' in str(e), f'release refusal reason: {e}')
+    S4 = copy.deepcopy(orig)  # a milestone on a no-post day is refused, never shifted
+    S4['countdowns'][0]['milestones'] = ['1w']
+    json.dump(S4, open(B.SERIES, 'w'))
+    try:
+        B.build()
+        check(False, 'milestone on Thanksgiving must be refused')
+    except B.BuildError as e:
+        check('no-post day' in str(e), f'no-post refusal reason: {e}')
+    S5 = copy.deepcopy(orig)  # day offsets (non-milestone counts) are retired
+    S5['countdowns'][0]['offsets'] = [-43]
+    json.dump(S5, open(B.SERIES, 'w'))
+    try:
+        B.build()
+        check(False, 'offsets must be refused')
+    except B.BuildError as e:
+        check('offsets are retired' in str(e), f'offset refusal reason: {e}')
     S3 = copy.deepcopy(orig)
-    S3['countdowns'][0]['figures']['futaNet'] = {'ref': 'rates:federal.futa_credit_reduction_states.CA', 'conf': 'rates:federal.futa_credit_reduction_confidence.CA'}
+    fi = next(i for i, c in enumerate(S3['countdowns']) if c['id'] == 'futa-credit-reduction-2026')
+    S3['countdowns'][fi]['figures']['futaNet'] = {'ref': 'rates:federal.futa_credit_reduction_states.CA', 'conf': 'rates:federal.futa_credit_reduction_confidence.CA'}
     json.dump(S3, open(B.SERIES, 'w'))
     try:
         B.build()

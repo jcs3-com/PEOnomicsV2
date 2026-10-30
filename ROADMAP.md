@@ -173,6 +173,16 @@ Not chat history. Not artifacts. When you finish or add work, update this file i
     78 posts scheduled Oct 28 2026 – Dec 2 2027. Rotation posts link to the state pages. The DMV launch post went out
     manually on 2026-10-28 (LinkedIn share 7521407288482484225); its release date is set to that day.
 
+- **Post calendar v2 (2026-10-29, owner rules):** countdowns post only on exact milestones (60 days, 30 days,
+  1 month, 1 week; `milestones` in series.json; the builder refuses day offsets and refuses a milestone on a
+  weekend/no-post day). Otherwise a post is *dated* ("Tuesday, Nov. 10: …", label "Key date"). No-post days:
+  Thanksgiving + eve, Dec 7, Dec 23–Jan 1, federal holidays; one post a week Dec 7–Jan 1. New: binders countdown
+  (1 month to the early-December binder deadline for Jan. 1 renewals; date from the owner, `data/posts/owner-dates.json`,
+  copy says "early December"). FUTA moved to Nov 5 as a dated post; FUTA "today" and the two renewal countdowns
+  retired (duplicates); FAMLI dated Dec 15; DMV Jan. 1 roundup Dec 22 + Jan 5. Rotations alternate; weak posts
+  pulled (31 smaller-state notes; DMV transportation/manufacturing pay). Open slots are listed in
+  `data/post-schedule.json` meta.gaps (77 from Mar 9, 2027).
+
 ## 🔲 Open — prioritized
 
 ### P0.1 — owner-only setup (credentials; Claude must not handle them) — step-by-step in `docs/OWNER_SETUP.md`
@@ -222,6 +232,7 @@ Not chat history. Not artifacts. When you finish or add work, update this file i
       published: Jul 1, 2027 DC + MD county wage floors (once announced), 2028 SS wage base (SSA, Oct 2027), 2027
       SUI rates. (c) Add a release for each dataset refresh (rates-2027, QCEW 2026, MEPS-IC 2026). (d) Weekly
       audit at `/api/feed?audit=1`. Corrections must be rebuilt before the affected go-live day.
+- [ ] **Fill the 77 open post slots (Mar 9 – Dec 2027)** with owner-directed material; `meta.gaps` lists each week.
 - [ ] **Refill the 2027 queue as data lands** (the feed thins to countdowns only from Aug 2027): add a *state SUI
       2027* rotation after the DOL Significant Provisions January 2027 edition and the DMV agency rate pages are
       sourced; extend the state cost note when MEPS-IC 2026 (~mid-2027) and QCEW 2026 (~Sept 2027) are rebuilt

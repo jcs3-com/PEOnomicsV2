@@ -190,8 +190,9 @@ AI-generated template.
 - Any user-facing statistic must be **sourced or flagged**. No invented numbers, ever.
 - **Auto-posts (LinkedIn page).** Never type a number into `data/posts/series.json`: every figure is a ref into a
   data file (or `mul`/`sub`/`add` of refs). Low-confidence figures need `"estimate": true` and the word "estimate"
-  in the post. Rebuild with `python3 tools/build_posts.py`; `tests/test_posts.py` re-derives every numeral. `cadence` fills each
-  week to two posts from `rotations`; a rotation's `validUntil` must not pass its data edition's replacement, so the
+  in the post. Rebuild with `python3 tools/build_posts.py`; `tests/test_posts.py` re-derives every numeral. Countdowns run only on exact
+  milestones (60d, 30d, 1m, 1w); anything else is a dated post. `cadence` (no-post days, quiet periods) caps each
+  week and fills it from `rotations`; a rotation's `validUntil` must not pass its data edition's replacement, so the
   feed goes quiet rather than posting stale figures. A post
   goes live when its time arrives — no deploy needed — so a data correction must be rebuilt *before* its go-live
   day. Posts target the **PEOnomics LinkedIn page only**, never the owner's personal profile. Q&A sites, forums and

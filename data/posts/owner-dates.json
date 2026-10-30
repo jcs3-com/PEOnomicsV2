@@ -1,0 +1,15 @@
+{
+  "meta": {
+    "purpose": "Practice dates the owner states (not a government source). Used only by the auto-post feed; never shown as a statistic on the site.",
+    "lastReviewed": "2026-10-29"
+  },
+  "jan1Renewal": {
+    "value": "2027-01-01",
+    "note": "Benefit plan / PEO renewals effective January 1."
+  },
+  "binderDeadlineJan1Renewals": {
+    "value": "2026-12-03",
+    "note": "Owner: for Jan. 1 renewals, final plan selections and the binder payment are typically due about a month out, in early December. Carrier deadlines vary; posts say 'early December', never this exact date.",
+    "source": "Owner (PEO practitioner), 2026-10-29"
+  }
+}

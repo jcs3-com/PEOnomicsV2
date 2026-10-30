@@ -98,13 +98,35 @@ FORMATS = {
     'pct2': lambda v: '{:.2f}%'.format(round(v * 100 + 1e-9, 2)),
     'int': lambda v: '{:,}'.format(int(v)),
     'date': fmt_date,
+    'md': lambda v: fmt_date(v).rsplit(',', 1)[0],
+    'wd': lambda v: dt.date.fromisoformat(str(v)).strftime('%A'),
     'year': lambda v: str(v) if isinstance(v, int) else str(dt.date.fromisoformat(str(v)).year),
 }
 
 
-def render(tpl, figs, n=None):
+# Countdowns run only on exact milestones (owner rule): the post goes out on the day the
+# milestone is true, never "43 days". code -> (label used in copy, card number, card unit)
+MILESTONES = {'60d': ('60 days', '60', 'DAYS'), '30d': ('30 days', '30', 'DAYS'),
+              '1m': ('1 month', '1', 'MONTH'), '1w': ('1 week', '1', 'WEEK')}
+
+
+def milestone_date(event, code):
+    if code == '1m':
+        y, m = (event.year, event.month - 1) if event.month > 1 else (event.year - 1, 12)
+        try:
+            return dt.date(y, m, event.day)
+        except ValueError:
+            raise BuildError(f'no "1 month" date before {event} (day {event.day} missing in month {m})')
+    return event - dt.timedelta(days={'60d': 60, '30d': 30, '1w': 7}[code])
+
+
+def render(tpl, figs, n=None, when=None):
     def sub(m):
         name, kind = m.group(1), m.group(2)
+        if name == 'when':
+            if when is None:
+                raise BuildError('{when} is only for milestone countdown headlines')
+            return when
         if name == 'n':
             return '{:,}'.format(n)
         if name not in figs:
@@ -145,9 +167,14 @@ def build(today=None):
     hh, mm = (int(x) for x in meta['postTime'].split(':'))
     items, dormant = [], []
 
-    def add(item_id, series_id, kind, day, headline, body, s, figs, estimates, n, event, key=None):
+    cad = S['cadence']
+    no_post = set(cad['noPostDates'])
+
+    def add(item_id, series_id, kind, day, headline, body, s, figs, estimates, n, event, key=None, milestone=None):
         if day.weekday() >= 5:
             raise BuildError(f'{item_id} lands on a weekend ({day})')
+        if day.isoformat() in no_post:
+            raise BuildError(f'{item_id} lands on a no-post day ({day})')
         if not page_exists(s['url']):
             raise BuildError(f'{item_id} links to {s["url"]}, which is not a page in the repo')
         s = dict(s, cta=render(s['cta'], figs, n))
@@ -161,7 +188,8 @@ def build(today=None):
         items.append({
             'id': item_id, 'series': series_id, 'kind': kind, 'label': s['series'],
             'liveDate': day.isoformat(), 'liveAt': live.isoformat(), 'pubDate': format_datetime(live),
-            'event': event.isoformat() if event else None, 'daysToEvent': n,
+            'event': event.isoformat() if event else None, 'daysToEvent': n, 'milestone': milestone,
+            'cardTag': render(s['cardTag'], figs) if s.get('cardTag') else None,
             'key': key, 'headline': headline, 'cardTitle': render(s['cardTitle'], figs, n), 'cardSub': render(s.get('cardSub', ''), figs, n), 'stats': stats,
             'estimates': [stats[i][0] for i, (a, b) in enumerate(s.get('stats', [])) if any('{' + e + ':' in b for e in estimates)],
             'text': text, 'url': meta['site'] + s['url'],
@@ -170,22 +198,29 @@ def build(today=None):
         })
 
     for s in S['countdowns']:
-        event = dt.date.fromisoformat(s['event'])
+        ev = s['event']
+        event = dt.date.fromisoformat(resolve(ev, data) if ':' in ev else ev)
         figs, est = figures(s['figures'], data)
-        variants = s.get('variants') or [{'body': s['body'], 'cta': s.get('cta'), 'url': s.get('url')}]
-        for i, off in enumerate(sorted(s['offsets'])):
-            day = event + dt.timedelta(days=off)
-            if off < 0:
-                while day.weekday() >= 5:  # weekend -> the Friday before
-                    day -= dt.timedelta(days=1)
-            n = (event - day).days
-            key = 'before' if n > 0 else 'today' if n == 0 else 'after'
-            if key not in s['headline']:
-                raise BuildError(f'{s["id"]} offset {off} needs a "{key}" headline')
-            v = variants[i % len(variants)]
-            sv = dict(s, cta=v.get('cta') or s.get('cta'), url=v.get('url') or s.get('url'))
+        figs['event'] = event.isoformat()
+        if 'offsets' in s:
+            raise BuildError(f'{s["id"]}: day offsets are retired; use milestones (60d, 30d, 1m, 1w) or dated posts')
+        for code in s.get('milestones', []):
+            if code not in MILESTONES:
+                raise BuildError(f'{s["id"]}: unknown milestone {code}')
+            day = milestone_date(event, code)
+            label = MILESTONES[code][0]
             add(f'{s["id"]}-{day.isoformat()}', s['id'], 'countdown', day,
-                render(s['headline'][key], figs, n), render(v['body'], figs, n), sv, figs, est, n, event)
+                render(s['headline']['countdown'], figs, when=label), render(s['body'], figs), s, figs, est,
+                (event - day).days, event, milestone=code)
+        for d in s.get('dated', []):
+            day = dt.date.fromisoformat(d)
+            n = (event - day).days
+            key = 'upcoming' if n > 0 else 'today' if n == 0 else 'after'
+            if key not in s['headline']:
+                raise BuildError(f'{s["id"]} dated post {d} needs a "{key}" headline')
+            body = s.get('bodyAfter', s['body']) if n < 0 else s['body']
+            add(f'{s["id"]}-{day.isoformat()}', s['id'], 'dated', day,
+                render(s['headline'][key], figs), render(body, figs), dict(s, series='Key date'), figs, est, n, event)
 
     for r in S['releases']:
         if not r.get('date'):
@@ -198,13 +233,19 @@ def build(today=None):
         day = dt.date.fromisoformat(r['date'])
         add(r['id'], r['id'], 'release', day, render(r['headline'], figs), render(r['body'], figs), r, figs, est, None, None)
 
-    skipped = fill(S, data, items, add)
+    for it in items:  # fixed posts must respect the weekly caps too
+        wk = week_of(dt.date.fromisoformat(it['liveDate']))
+        n_wk = sum(1 for x in items if week_of(dt.date.fromisoformat(x['liveDate'])) == wk)
+        if n_wk > week_cap(cad, wk):
+            raise BuildError(f'week of {wk} has {n_wk} fixed posts; cap is {week_cap(cad, wk)}')
+    skipped, pulled = fill(S, data, items, add)
 
     items.sort(key=lambda x: x['liveAt'])
     days = [x['liveDate'] for x in items]
     dupes = sorted({d for d in days if days.count(d) > 1})
     if dupes:
-        raise BuildError(f'more than one post on {dupes}; change an offset')
+        raise BuildError(f'more than one post on {dupes}; move one')
+    gaps = find_gaps(cad, items)
     return {
         'meta': {
             'generatedBy': 'tools/build_posts.py from data/posts/series.json',
@@ -214,6 +255,9 @@ def build(today=None):
                         'description': 'Sourced payroll and employer-cost countdowns and data releases for DC, Maryland and Virginia employers.'},
             'dormantReleases': dormant,
             'rotationSkips': skipped,
+            'pulled': pulled,
+            'gaps': gaps,
+            'openSlots': sum(g['open'] for g in gaps),
         },
         'items': items,
     }
@@ -250,18 +294,61 @@ def rotation_keys(rot, data):
     return first + rest
 
 
+def week_of(day):
+    return (day - dt.timedelta(days=day.weekday())).isoformat()
+
+
+def week_cap(cad, monday):
+    m = dt.date.fromisoformat(monday)
+    days = [(m + dt.timedelta(days=i)).isoformat() for i in range(7)]
+    for q in cad.get('quietPeriods', []):
+        if any(q['from'] <= d <= q['to'] for d in days):
+            return q['perWeek']
+    return cad['perWeek']
+
+
+def open_days(cad, monday):
+    """Weekdays in the week that may carry a post, in fill-preference order."""
+    m = dt.date.fromisoformat(monday)
+    order = cad['fillWeekdays'] + [d for d in range(5) if d not in cad['fillWeekdays']]
+    out = []
+    for wd in order:
+        d = m + dt.timedelta(days=wd)
+        if d.isoformat() not in cad['noPostDates']:
+            out.append(d)
+    return out
+
+
+def find_gaps(cad, items):
+    """Weeks from fillFrom to horizon with fewer posts than their cap (and an open day to put one on)."""
+    taken = {it['liveDate'] for it in items}
+    count = {}
+    for it in items:
+        wk = week_of(dt.date.fromisoformat(it['liveDate']))
+        count[wk] = count.get(wk, 0) + 1
+    gaps, mon = [], dt.date.fromisoformat(week_of(dt.date.fromisoformat(cad['fillFrom'])))
+    while mon <= dt.date.fromisoformat(cad['horizon']):
+        wk = mon.isoformat()
+        free = [d for d in open_days(cad, wk) if d.isoformat() not in taken and d.isoformat() >= cad['fillFrom']]
+        n_open = min(week_cap(cad, wk) - count.get(wk, 0), len(free))
+        if n_open > 0:
+            gaps.append({'week': wk, 'open': n_open, 'suggest': sorted(d.isoformat() for d in free[:n_open])})
+        mon += dt.timedelta(days=7)
+    return gaps
+
+
 def fill(S, data, items, add):
-    """Tops every week up to cadence.perWeek using the rotations, on cadence.weekdays only.
-    A rotation posts only between validFrom and validUntil (its data edition's shelf life) and
-    skips any key whose figures are missing or flagged by its skipIf rules."""
-    cad = S.get('cadence')
-    if not cad:
-        return {}
-    skip_days = set(cad.get('skipDates', []))
-    queues, skipped = [], {}
+    """Tops every week up to its cap (cadence.perWeek, or a quiet period's perWeek) from the rotations,
+    taking them in turn so formats alternate. Days: cadence.fillWeekdays first, then other weekdays;
+    never a no-post day. A rotation posts only between validFrom and validUntil (its data edition's
+    shelf life); a key is skipped when its data is missing or flagged (skipIf) and pulled when the
+    owner judged it weak (exclude / limit). Whatever cannot be filled is reported as a gap."""
+    cad = S['cadence']
+    queues, skipped, pulled = [], {}, {}
     for rot in S.get('rotations', []):
         q = []
-        for key in rotation_keys(rot, data):
+        keys = rotation_keys(rot, data)
+        for key in keys:
             r = bind(rot, key, rot.get('labels'))
             why = None
             for rule in r.get('skipIf', []):
@@ -280,32 +367,48 @@ def fill(S, data, items, add):
             if why:
                 skipped.setdefault(rot['id'], []).append(f'{key}: {why}')
                 continue
+            if key in rot.get('exclude', {}):
+                pulled.setdefault(rot['id'], []).append(f'{key}: {rot["exclude"][key]}')
+                continue
+            if rot.get('limit') and len(q) >= rot['limit']:
+                pulled.setdefault(rot['id'], []).append(f'{key}: {rot.get("limitReason", "over limit")}')
+                continue
             ov = rot.get('nameOverrides', {}).get(key.split('/')[0])
             if ov and 'name' in figs:
                 figs['name'] = ov
             q.append((key, r, figs, est))
         queues.append((rot, q))
     taken = {it['liveDate'] for it in items}
-    week = {}
+    count = {}
     for it in items:
-        y, w, _ = dt.date.fromisoformat(it['liveDate']).isocalendar()
-        week[(y, w)] = week.get((y, w), 0) + 1
-    day = dt.date.fromisoformat(cad['fillFrom'])
-    end = max(dt.date.fromisoformat(r['validUntil']) for r, _ in queues)
-    while day <= end:
-        y, w, _ = day.isocalendar()
-        iso = day.isoformat()
-        if day.weekday() in cad['weekdays'] and iso not in skip_days and iso not in taken and week.get((y, w), 0) < cad['perWeek']:
-            for rot, q in queues:
+        wk = week_of(dt.date.fromisoformat(it['liveDate']))
+        count[wk] = count.get(wk, 0) + 1
+    turn = 0
+    mon = dt.date.fromisoformat(week_of(dt.date.fromisoformat(cad['fillFrom'])))
+    end = min(dt.date.fromisoformat(cad['horizon']), max(dt.date.fromisoformat(r['validUntil']) for r, _ in queues))
+    while mon <= end:
+        wk = mon.isoformat()
+        for day in open_days(cad, wk):
+            iso = day.isoformat()
+            if count.get(wk, 0) >= week_cap(cad, wk):
+                break
+            if iso in taken or iso < cad['fillFrom']:
+                continue
+            for k in range(len(queues)):
+                rot, q = queues[(turn + k) % len(queues)]
                 if q and rot['validFrom'] <= iso <= rot['validUntil']:
                     key, r, figs, est = q.pop(0)
                     add(f'{rot["id"]}-{key.lower().replace("/", "-")}', rot['id'], 'note', day,
                         render(r['headline'], figs), render(r['body'], figs), r, figs, est, None, None, key)
                     taken.add(iso)
-                    week[(y, w)] = week.get((y, w), 0) + 1
+                    count[wk] = count.get(wk, 0) + 1
+                    turn = (turn + k + 1) % len(queues)
                     break
-        day += dt.timedelta(days=1)
-    return skipped
+        mon += dt.timedelta(days=7)
+    for rot, q in queues:
+        for key, *_ in q:
+            pulled.setdefault(rot['id'], []).append(f'{key}: not scheduled (rotation shelf life ended)')
+    return skipped, pulled
 
 
 # ---------------------------------------------------------------- cards
@@ -370,18 +473,28 @@ def draw_cards(sched):
         lab = f'{it["label"].upper()}'
         lf = font('IBMPlexMono_600SemiBold', 20)
         d.text((72, 62), lab, font=lf, fill=T['accent'])
-        right = fmt_date(it['event']).upper() if it['event'] else ('DMV · ' if it['kind'] == 'note' and it.get('key', '')[:2] in ('DC', 'MD', 'VA') else '') + fmt_date(it['liveDate']).upper()
+        right = it['cardTag'].upper() if it.get('cardTag') else fmt_date(it['event']).upper() if it['event'] else ('DMV · ' if it['kind'] == 'note' and it.get('key', '')[:2] in ('DC', 'MD', 'VA') else '') + fmt_date(it['liveDate']).upper()
         d.text((W - 72 - d.textlength(right, font=lf), 62), right, font=lf, fill=T['muted'])
         d.line([72, 98, W - 72, 98], fill=T['border'], width=1)
 
         stats_top = 372
-        if it['kind'] == 'countdown':
+        if it['kind'] in ('countdown', 'dated'):
             n = it['daysToEvent']
-            big = str(n) if n > 0 else ('TODAY' if n == 0 else 'IN EFFECT')
-            bf = font('IBMPlexMono_600SemiBold', 176 if n > 0 else 74)
-            d.text((66, 112 if n > 0 else 170), big, font=bf, fill=T['text'])
-            if n > 0:
-                d.text((76, 318), 'DAY' if n == 1 else 'DAYS', font=font('IBMPlexMono_500Medium', 24), fill=T['muted'])
+            if it['kind'] == 'countdown':
+                _, big, unit = MILESTONES[it['milestone']]
+                bf = font('IBMPlexMono_600SemiBold', 176)
+                d.text((66, 112), big, font=bf, fill=T['text'])
+                d.text((76, 318), unit, font=font('IBMPlexMono_500Medium', 24), fill=T['muted'])
+            elif n > 0:
+                ev = dt.date.fromisoformat(it['event'])
+                big = ev.strftime('%b').upper() + ' ' + str(ev.day)
+                bf = font('IBMPlexMono_600SemiBold', 104)
+                d.text((66, 150), big, font=bf, fill=T['text'])
+                d.text((76, 290), ev.strftime('%A').upper(), font=font('IBMPlexMono_500Medium', 24), fill=T['muted'])
+            else:
+                big = 'TODAY' if n == 0 else 'IN EFFECT'
+                bf = font('IBMPlexMono_600SemiBold', 74)
+                d.text((66, 170), big, font=bf, fill=T['text'])
             x0 = 72 + max(d.textlength(big, font=bf), 200) + 40
             d.line([x0, 124, x0, 340], fill=T['border'], width=1)
             tf = font('Newsreader_600SemiBold', 50)

@@ -10,22 +10,64 @@
     "refs": {
       "rates": "data/rates-2026.json",
       "dmv": "data/dmv-index-2026.json",
-      "bench": "data/benchmarks-2026.json"
+      "bench": "data/benchmarks-2026.json",
+      "owner": "data/posts/owner-dates.json"
     },
-    "howTo": "Countdown: an event date + offsets (days before/after; weekends move to the Friday before). Release: set 'date' to mark it; it renders only if every 'requires' confidence is met. Rebuild: python3 tools/build_posts.py Cadence: every week is topped up to cadence.perWeek posts on cadence.weekdays (0=Mon) from the rotations, each only inside its validFrom-validUntil window (the shelf life of its data edition). 'definitions' lists numerals that are definitions, not figures (e.g. a survey's firm-size break)."
+    "howTo": "Countdowns post only on exact milestones: milestones = 60d, 30d, 1m (same date one month earlier), 1w. A milestone on a weekend or no-post day is an error: pick another milestone or make it a dated post. Dated posts ('dated': [dates]) name the event date instead of a day count (headline keys upcoming/today/after). Release: set 'date' to mark it; it renders only if every 'requires' confidence is met. Cadence: up to perWeek posts a week (quietPeriods override), never on noPostDates; rotations fill the rest in turn; anything unfilled is reported in post-schedule.json meta.gaps. Rebuild: python3 tools/build_posts.py"
   },
   "countdowns": [
     {
-      "id": "futa-credit-reduction-2026",
-      "event": "2026-11-10",
-      "offsets": [
-        -7,
-        0
+      "id": "binders-jan1-2027",
+      "event": "owner:binderDeadlineJan1Renewals.value",
+      "milestones": [
+        "1m"
       ],
       "series": "Countdown",
       "headline": {
-        "before": "{n} days until DOL sets 2026 FUTA credit reductions",
-        "today": "Today: DOL sets 2026 FUTA credit reductions"
+        "countdown": "{when} until binders are due for {renewal:md} renewals"
+      },
+      "cardTitle": "Binders due for {renewal:md} renewals",
+      "cardTag": "{renewal:md} renewals",
+      "figures": {
+        "renewal": "owner:jan1Renewal.value",
+        "kffYear": "bench:healthNational.annualSinglePremium.year",
+        "single": "bench:healthNational.annualSinglePremium.value",
+        "family": "bench:healthNational.annualFamilyPremium.value",
+        "singleEr": "bench:healthNational.annualSingleEmployerShareDerived.value",
+        "familyEr": "bench:healthNational.annualFamilyEmployerShareDerived.value"
+      },
+      "body": "If your health plan renews {renewal:md}, finalize it this week. Carriers typically want final plan selections and the binder payment in early December, and your people need time to see their options and pick a plan before then.\n\nThis week:\n- Lock the plan lineup and what the company contributes\n- Put each option and its cost per paycheck in front of your people\n- Set their election deadline a few days ahead of the binder date\n\nFor scale: the average {kffYear:year} employer-sponsored premium is {single:usd0} for single coverage and {family:usd0} for family. Employers pay {singleEr:usd0} and {familyEr:usd0} of that on average.",
+      "stats": [
+        [
+          "Single premium",
+          "{single:usd0}"
+        ],
+        [
+          "Family premium",
+          "{family:usd0}"
+        ],
+        [
+          "Employer share, family",
+          "{familyEr:usd0}"
+        ]
+      ],
+      "sources": [
+        "KFF Employer Health Benefits Survey 2026"
+      ],
+      "cta": "Renewal quotes in hand? Compare them side by side",
+      "url": "/compare",
+      "hashtags": [
+        "Benefits",
+        "OpenEnrollment",
+        "SmallBusiness"
+      ]
+    },
+    {
+      "id": "futa-credit-reduction-2026",
+      "event": "2026-11-10",
+      "series": "Countdown",
+      "headline": {
+        "upcoming": "{event:wd}, {event:md}: the Labor Department sets 2026 FUTA credit reductions"
       },
       "cardTitle": "FUTA credit-reduction determination",
       "figures": {
@@ -37,7 +79,7 @@
           "estimate": true
         }
       },
-      "body": "Nov. 10 is the date the Department of Labor checks which states still owe federal unemployment loans. Employers in those states lose part of their FUTA credit and pay more for 2026.\n\nBase FUTA: {futaNet:pct1} on the first {futaBase:usd0} per employee.\nCalifornia's statutory step for 2026: an extra {ca:pct1}, an estimate until DOL confirms.",
+      "body": "{event:md} is the date the Department of Labor checks which states still owe federal unemployment loans. Employers in those states lose part of their FUTA credit and pay more for 2026.\n\nBase FUTA: {futaNet:pct1} on the first {futaBase:usd0} per employee.\nCalifornia's statutory step for 2026: an extra {ca:pct1}, an estimate until DOL confirms.",
       "stats": [
         [
           "Net FUTA",
@@ -62,73 +104,17 @@
         "Payroll",
         "FUTA",
         "SmallBusiness"
-      ]
-    },
-    {
-      "id": "md-famli-2027",
-      "event": "2027-01-01",
-      "offsets": [
-        -57,
-        -31,
-        -17
       ],
-      "series": "Countdown",
-      "headline": {
-        "before": "{n} days until Maryland FAMLI contributions begin"
-      },
-      "cardTitle": "Maryland FAMLI contributions begin",
-      "figures": {
-        "total": "dmv:paidLeave.MD.totalRate",
-        "er": "dmv:paidLeave.MD.employerRate",
-        "thr": "dmv:paidLeave.MD.smallEmployerThreshold",
-        "start": "dmv:paidLeave.MD.contributionsBegin",
-        "benefits": "dmv:paidLeave.MD.benefitsBegin",
-        "base27": "dmv:federal.socialSecurityWageBase2027.value",
-        "erMax": {
-          "op": "mul",
-          "args": [
-            "er",
-            "base27"
-          ]
-        }
-      },
-      "body": "Starting {start:date}, Maryland employers remit FAMLI contributions: {total:pct2} of wages up to the Social Security wage base ({base27:usd0} in 2027).\n\nEmployers with {thr:int} or more employees pay at least half ({er:pct2}) and may withhold the rest from pay. That is up to {erMax:usd2} per employee at the wage cap. Smaller employers owe no employer share but must remit what they withhold. Benefits begin by {benefits:date}.",
-      "stats": [
-        [
-          "Total rate",
-          "{total:pct2}"
-        ],
-        [
-          "Employer share",
-          "{er:pct2}"
-        ],
-        [
-          "Per head at cap",
-          "{erMax:usd2}"
-        ]
-      ],
-      "sources": [
-        "Maryland FAMLI law via Jackson Lewis",
-        "SSA 2027 wage base"
-      ],
-      "cta": "DC, MD and VA employer costs, side by side",
-      "url": "/dmv-employer-cost-index",
-      "hashtags": [
-        "Maryland",
-        "PaidLeave",
-        "Payroll"
+      "dated": [
+        "2026-11-05"
       ]
     },
     {
       "id": "ss-wage-base-2027",
       "event": "2027-01-01",
-      "offsets": [
-        -50,
-        -29
-      ],
       "series": "Countdown",
       "headline": {
-        "before": "{n} days until the Social Security wage base rises to {base27:usd0}"
+        "countdown": "{when} until the Social Security wage base rises to {base27:usd0}"
       },
       "cardTitle": "Social Security wage base rises",
       "figures": {
@@ -181,19 +167,17 @@
         "Payroll",
         "SocialSecurity",
         "SmallBusiness"
+      ],
+      "milestones": [
+        "1m"
       ]
     },
     {
       "id": "va-min-wage-2027",
       "event": "2027-01-01",
-      "offsets": [
-        -45,
-        -24,
-        -10
-      ],
       "series": "Countdown",
       "headline": {
-        "before": "{n} days until Virginia's minimum wage rises to {new:usd2}"
+        "countdown": "{when} until Virginia's minimum wage rises to {new:usd2}"
       },
       "cardTitle": "Virginia minimum wage rises",
       "figures": {
@@ -241,74 +225,71 @@
         "Virginia",
         "MinimumWage",
         "SmallBusiness"
+      ],
+      "milestones": [
+        "30d"
       ]
     },
     {
-      "id": "jan1-renewals-2027",
+      "id": "md-famli-2027",
       "event": "2027-01-01",
-      "offsets": [
-        -43,
-        -22
-      ],
       "series": "Countdown",
       "headline": {
-        "before": "{n} days until January 1 renewals"
+        "upcoming": "Starting {event:md}, Maryland employers pay into FAMLI"
       },
-      "cardTitle": "January 1 benefits and PEO renewals",
+      "cardTitle": "Maryland FAMLI contributions begin",
       "figures": {
-        "single": "bench:healthNational.annualSinglePremium.value",
-        "family": "bench:healthNational.annualFamilyPremium.value",
-        "singleEr": "bench:healthNational.annualSingleEmployerShareDerived.value",
-        "familyEr": "bench:healthNational.annualFamilyEmployerShareDerived.value",
-        "kffYear": "bench:healthNational.annualSinglePremium.year"
-      },
-      "variants": [
-        {
-          "body": "If your benefits or PEO agreement renews Jan. 1, check the numbers now, not at signing.\n\nFor scale: the average {kffYear:year} employer-sponsored premium is {single:usd0} for single coverage and {family:usd0} for family. Employers carry {singleEr:usd0} and {familyEr:usd0} of that on average.\n\nThe Cost Lab puts your own costs next to a PEO quote, with no assumed savings.",
-          "cta": "Run your numbers",
-          "url": "/#cost-lab"
-        },
-        {
-          "body": "Renewal quotes in hand? Put them side by side before Jan. 1.\n\nThe average {kffYear:year} employer share of a health premium is {singleEr:usd0} for single coverage and {familyEr:usd0} for family. A fee quoted per employee per month and one quoted as a percent of payroll are not comparable until you convert them.\n\nThe Quote Comparator does that for up to three proposals, in your browser.",
-          "cta": "Compare quotes",
-          "url": "/compare"
+        "total": "dmv:paidLeave.MD.totalRate",
+        "er": "dmv:paidLeave.MD.employerRate",
+        "thr": "dmv:paidLeave.MD.smallEmployerThreshold",
+        "start": "dmv:paidLeave.MD.contributionsBegin",
+        "benefits": "dmv:paidLeave.MD.benefitsBegin",
+        "base27": "dmv:federal.socialSecurityWageBase2027.value",
+        "erMax": {
+          "op": "mul",
+          "args": [
+            "er",
+            "base27"
+          ]
         }
-      ],
+      },
+      "body": "Starting {start:date}, Maryland employers remit FAMLI contributions: {total:pct2} of wages up to the Social Security wage base ({base27:usd0} in 2027).\n\nEmployers with {thr:int} or more employees pay at least half ({er:pct2}) and may withhold the rest from pay. That is up to {erMax:usd2} per employee at the wage cap. Smaller employers owe no employer share but must remit what they withhold. Benefits begin by {benefits:date}.",
       "stats": [
         [
-          "Single premium",
-          "{single:usd0}"
+          "Total rate",
+          "{total:pct2}"
         ],
         [
           "Employer share",
-          "{singleEr:usd0}"
+          "{er:pct2}"
         ],
         [
-          "Family employer share",
-          "{familyEr:usd0}"
+          "Per head at cap",
+          "{erMax:usd2}"
         ]
       ],
       "sources": [
-        "KFF Employer Health Benefits Survey 2026"
+        "Maryland FAMLI law via Jackson Lewis",
+        "SSA 2027 wage base"
       ],
+      "cta": "DC, MD and VA employer costs, side by side",
+      "url": "/dmv-employer-cost-index",
       "hashtags": [
-        "Benefits",
-        "PEO",
-        "SmallBusiness"
+        "Maryland",
+        "PaidLeave",
+        "Payroll"
+      ],
+      "dated": [
+        "2026-12-15"
       ]
     },
     {
       "id": "jan1-dmv-reset-2027",
       "event": "2027-01-01",
-      "offsets": [
-        -15,
-        -3,
-        4
-      ],
       "series": "Countdown",
       "headline": {
-        "before": "{n} days until January 1 payroll changes in the DMV",
-        "after": "Now in effect: January 1 payroll changes in the DMV"
+        "upcoming": "Starting {event:md}: three payroll changes for DMV employers",
+        "after": "Now in effect: the {event:md} payroll changes for DMV employers"
       },
       "cardTitle": "January 1 payroll changes in the DMV",
       "figures": {
@@ -346,18 +327,18 @@
         "Payroll",
         "DMV",
         "SmallBusiness"
+      ],
+      "dated": [
+        "2026-12-22",
+        "2027-01-05"
       ]
     },
     {
       "id": "va-min-wage-2028",
       "event": "2028-01-01",
-      "offsets": [
-        -92,
-        -30
-      ],
       "series": "Countdown",
       "headline": {
-        "before": "{n} days until Virginia's minimum wage reaches {w:usd2}"
+        "countdown": "{when} until Virginia's minimum wage reaches {w:usd2}"
       },
       "cardTitle": "Virginia minimum wage reaches $15",
       "figures": {
@@ -403,18 +384,18 @@
         "Virginia",
         "MinimumWage",
         "SmallBusiness"
+      ],
+      "milestones": [
+        "60d",
+        "1m"
       ]
     },
     {
       "id": "md-famli-benefits-2028",
       "event": "2028-01-03",
-      "offsets": [
-        -90,
-        -34
-      ],
       "series": "Countdown",
       "headline": {
-        "before": "{n} days until Maryland FAMLI benefits begin"
+        "countdown": "{when} until Maryland FAMLI benefits begin"
       },
       "cardTitle": "Maryland FAMLI benefits begin",
       "figures": {
@@ -448,6 +429,10 @@
         "Maryland",
         "PaidLeave",
         "HR"
+      ],
+      "milestones": [
+        "60d",
+        "1m"
       ]
     }
   ],
@@ -567,23 +552,60 @@
     }
   ],
   "cadence": {
-    "weekdays": [
+    "perWeek": 2,
+    "fillWeekdays": [
       1,
       3
     ],
-    "perWeek": 2,
     "fillFrom": "2026-11-02",
-    "skipDates": [
-      "2026-11-26",
-      "2026-12-24",
-      "2026-12-31",
-      "2027-05-31",
-      "2027-07-05",
-      "2027-11-25",
-      "2027-12-23",
-      "2027-12-30"
+    "horizon": "2027-12-31",
+    "quietPeriods": [
+      {
+        "from": "2026-12-07",
+        "to": "2027-01-01",
+        "perWeek": 1
+      },
+      {
+        "from": "2027-12-07",
+        "to": "2028-01-01",
+        "perWeek": 1
+      }
     ],
-    "note": "Tue/Thu at postTime. Skips US holidays and the holiday weeks' dead days."
+    "noPostDates": [
+      "2026-11-25",
+      "2026-11-26",
+      "2026-12-07",
+      "2026-12-23",
+      "2026-12-24",
+      "2026-12-25",
+      "2026-12-26",
+      "2026-12-27",
+      "2026-12-28",
+      "2026-12-29",
+      "2026-12-30",
+      "2026-12-31",
+      "2027-01-01",
+      "2027-01-18",
+      "2027-02-15",
+      "2027-05-31",
+      "2027-06-18",
+      "2027-07-05",
+      "2027-09-06",
+      "2027-10-11",
+      "2027-11-11",
+      "2027-11-24",
+      "2027-11-25",
+      "2027-12-07",
+      "2027-12-23",
+      "2027-12-24",
+      "2027-12-27",
+      "2027-12-28",
+      "2027-12-29",
+      "2027-12-30",
+      "2027-12-31",
+      "2028-01-01"
+    ],
+    "note": "Owner rules: Thanksgiving and the day before, Dec 7, Dec 23-Jan 1 are no-post days; one post a week from Dec 7 to Jan 1; federal holidays off."
   },
   "rotations": [
     {
@@ -681,7 +703,9 @@
       ],
       "nameOverrides": {
         "DC": "Washington, DC"
-      }
+      },
+      "limit": 13,
+      "limitReason": "pulled as weak: smaller-state cost note, far from the DMV owner-operator audience (kept DC, MD, VA and the ten largest states)"
     },
     {
       "id": "dmv-industry-pay-note",
@@ -748,7 +772,7 @@
           ]
         }
       },
-      "body": "Average pay per {label} job in {name}: {wage:usd0} a year, against {all:usd0} across all private industries (includes part-time jobs).\n\nEmployer Social Security and Medicare on that pay: {fica:usd0}. Unemployment insurance, comp and benefits are priced off payroll, so this is the first number to check in any PEO quote.",
+      "body": "Average pay per {label} job in {name}: {wage:usd0} a year, against {all:usd0} across all private industries (includes part-time jobs).\n\nEmployer Social Security and Medicare on that pay: {fica:usd0}. Payroll taxes, unemployment insurance and workers' comp are all priced as a share of pay, so this is the first number to check in any PEO quote.",
       "stats": [
         [
           "Avg pay, this industry",
@@ -776,6 +800,14 @@
       ],
       "nameOverrides": {
         "DC": "Washington, DC"
+      },
+      "exclude": {
+        "DC/transportation_logistics": "pulled as weak: few DMV owner-operators in this industry",
+        "MD/transportation_logistics": "pulled as weak: few DMV owner-operators in this industry",
+        "VA/transportation_logistics": "pulled as weak: few DMV owner-operators in this industry",
+        "DC/light_manufacturing": "pulled as weak: few DMV owner-operators in this industry",
+        "MD/light_manufacturing": "pulled as weak: few DMV owner-operators in this industry",
+        "VA/light_manufacturing": "pulled as weak: few DMV owner-operators in this industry"
       }
     }
   ]
