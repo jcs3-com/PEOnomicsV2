@@ -232,6 +232,11 @@ Not chat history. Not artifacts. When you finish or add work, update this file i
       published: Jul 1, 2027 DC + MD county wage floors (once announced), 2028 SS wage base (SSA, Oct 2027), 2027
       SUI rates. (c) Add a release for each dataset refresh (rates-2027, QCEW 2026, MEPS-IC 2026). (d) Weekly
       audit at `/api/feed?audit=1`. Corrections must be rebuilt before the affected go-live day.
+- [ ] **2 CFR 200 final rule (dormant release `uniform-guidance-final`):** OMB's rewrite (proposed 2026-05-29, FR 2026-10817)
+      is barred from finalization through 2026-12-11. When it's published: update `data/posts/regulatory-watch.json`
+      (status final, effective date, final FR doc), check the release copy against the final text, set the release date.
+- [ ] **NAPEO amplification (manual):** owner sends NAPEO post links; Claude drafts a quote-repost with added context
+      (or a plain repost), tags NAPEO, posts on approval. Needs NAPEO's LinkedIn company page URL for the mention.
 - [ ] **Fill the 77 open post slots (Mar 9 – Dec 2027)** with owner-directed material; `meta.gaps` lists each week.
 - [ ] **Refill the 2027 queue as data lands** (the feed thins to countdowns only from Aug 2027): add a *state SUI
       2027* rotation after the DOL Significant Provisions January 2027 edition and the DMV agency rate pages are

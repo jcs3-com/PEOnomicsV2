@@ -5,7 +5,8 @@
    "rates": "2026-10-27",
    "dmv": "2026-10-27",
    "bench": "2026-10-27",
-   "owner": "2026-10-29"
+   "owner": "2026-10-29",
+   "reg": "2026-10-29"
   },
   "feedWindowDays": 21,
   "channel": {
@@ -14,7 +15,8 @@
    "description": "Sourced payroll and employer-cost countdowns and data releases for DC, Maryland and Virginia employers."
   },
   "dormantReleases": [
-   "futa-credit-reduction-2026-final"
+   "futa-credit-reduction-2026-final",
+   "uniform-guidance-final"
   ],
   "rotationSkips": {
    "state-cost-note": [

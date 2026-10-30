@@ -1,0 +1,22 @@
+{
+  "meta": {
+    "purpose": "Pending rules the auto-post feed waits on. A release in series.json goes live only when its 'requires' status here is met.",
+    "lastReviewed": "2026-10-29"
+  },
+  "uniformGuidance": {
+    "name": "OMB Regulation for Federal Financial Assistance (rewrite of 2 CFR Part 200)",
+    "status": "proposed",
+    "proposed": "2026-05-29",
+    "federalRegisterDoc": "2026-10817",
+    "commentsClosed": "2026-07-13",
+    "pausedUntil": "2026-12-11",
+    "pauseNote": "Congress barred OMB from finalizing the rule through Dec. 11, 2026 (stopgap appropriations). Status after that depends on the next funding law.",
+    "effective": null,
+    "sources": [
+      {"name": "Federal Register 2026-10817, Regulation for Federal Financial Assistance (proposed rule)", "url": "https://www.federalregister.gov/documents/2026/05/29/2026-10817/regulation-for-federal-financial-assistance"},
+      {"name": "GFOA, Regulation for Federal Financial Assistance (moratorium until Dec. 11, 2026)", "url": "https://www.gfoa.org/2cfr"},
+      {"name": "OpenGrants, OMB's 2 CFR 200 rewrite is on hold until December 11 (Oct. 27, 2026)", "url": "https://opengrants.io/omb-2-cfr-200-rewrite-on-hold-until-december-11/"}
+    ],
+    "toMark": "When OMB publishes the final rule: set status to 'final', fill effective (ISO date) and the final rule's Federal Register doc, check the release copy against the final text, set the release date in series.json, rebuild."
+  }
+}

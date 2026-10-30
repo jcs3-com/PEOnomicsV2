@@ -11,7 +11,8 @@
       "rates": "data/rates-2026.json",
       "dmv": "data/dmv-index-2026.json",
       "bench": "data/benchmarks-2026.json",
-      "owner": "data/posts/owner-dates.json"
+      "owner": "data/posts/owner-dates.json",
+      "reg": "data/posts/regulatory-watch.json"
     },
     "howTo": "Countdowns post only on exact milestones: milestones = 60d, 30d, 1m (same date one month earlier), 1w. A milestone on a weekend or no-post day is an error: pick another milestone or make it a dated post. Dated posts ('dated': [dates]) name the event date instead of a day count (headline keys upcoming/today/after). Release: set 'date' to mark it; it renders only if every 'requires' confidence is met. Cadence: up to perWeek posts a week (quietPeriods override), never on noPostDates; rotations fill the rest in turn; anything unfilled is reported in post-schedule.json meta.gaps. Rebuild: python3 tools/build_posts.py"
   },
@@ -549,6 +550,52 @@
         "California"
       ],
       "cardSub": "Final DOL figures for states that still owe federal unemployment loans."
+    },
+    {
+      "id": "uniform-guidance-final",
+      "date": null,
+      "series": "Data release",
+      "requires": {
+        "reg:uniformGuidance.status": "final"
+      },
+      "definitions": {
+        "2": "Title 2 of the CFR",
+        "200": "Part 200",
+        "200.430": "2 CFR 200.430, compensation for personal services",
+        "200.431": "2 CFR 200.431, fringe benefits"
+      },
+      "headline": "Final: OMB's rewrite of the federal grant rules takes effect {effective:md}",
+      "cardTitle": "2 CFR 200 rewrite is final",
+      "cardSub": "The federal grant rules nonprofits charge payroll under, rewritten. Effective {effective:date}.",
+      "figures": {
+        "proposed": "reg:uniformGuidance.proposed",
+        "effective": "reg:uniformGuidance.effective"
+      },
+      "body": "OMB has finalized its rewrite of 2 CFR 200, the rules behind most federal grants and cooperative agreements. It takes effect {effective:date}.\n\nIf your nonprofit charges salaries to federal awards, the sections that govern how pay and benefits are split across awards (200.430 and 200.431) sit inside this part. Before your next drawdown:\n\n- Check your time-and-effort records against the final text\n- Check that fringe still follows the same pattern as the salaries charged to each award\n- Ask your payroll provider or PEO what they changed on their side",
+      "stats": [
+        [
+          "Proposed",
+          "{proposed:md}"
+        ],
+        [
+          "Final",
+          "Published"
+        ],
+        [
+          "Effective",
+          "{effective:md}"
+        ]
+      ],
+      "sources": [
+        "Federal Register, Regulation for Federal Financial Assistance"
+      ],
+      "cta": "Your payroll costs, sourced",
+      "url": "/#cost-lab",
+      "hashtags": [
+        "Nonprofit",
+        "GrantManagement",
+        "UniformGuidance"
+      ]
     }
   ],
   "cadence": {
