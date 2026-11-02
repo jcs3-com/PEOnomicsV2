@@ -3,7 +3,7 @@
 This file is the **only** source of truth for what is done, open, dropped, or pending a decision.
 Not chat history. Not artifacts. When you finish or add work, update this file in the same commit.
 
-**Last updated:** 2026-10-28 (Auto-post feed for the LinkedIn page; DMV Employer Cost Index; VA SUI 2.73%. Prior: activation release: health check, shared rate limiter, scenario logging, Turnstile key via env; data/unification/analytics releases follow)
+**Last updated:** 2026-11-02 (Homepage first screen simplified to email box + slider Cost Lab. Prior: auto-post feed for the LinkedIn page; DMV Employer Cost Index; VA SUI 2.73%. Prior: activation release: health check, shared rate limiter, scenario logging, Turnstile key via env; data/unification/analytics releases follow)
 
 ---
 
@@ -182,6 +182,18 @@ Not chat history. Not artifacts. When you finish or add work, update this file i
   retired (duplicates); FAMLI dated Dec 15; DMV Jan. 1 roundup Dec 22 + Jan 5. Rotations alternate; weak posts
   pulled (31 smaller-state notes; DMV transportation/manufacturing pay). Open slots are listed in
   `data/post-schedule.json` meta.gaps (77 from Mar 9, 2027).
+
+- **Homepage simplified (2026-11-02, owner request: "way too busy"):** first screen is now only the headline,
+  one email box (the existing domain prefill, `#businessEmail`) and a slider Cost Lab — state, industry, and
+  sliders for employees / avg. wage / PEO fee (PEPM) with the three totals. Each slider mirrors its number field
+  (number stays the source of truth; typed values beyond the slider range are kept exactly). Everything else moved
+  below the fold under `#breakdown`: company, SUTA/WC/health/enrollment, admin, PEO-side rates, sources for the
+  first-screen defaults, the itemized ledger, report/print. Removed from the homepage: the "What the model uses"
+  hero ledger, the "Three kinds of number" reading guide, and the "More free tools" block (tools stay in nav/footer;
+  the per-line basis tags and `#the-math` carry the same information). `#the-math` and `#privacy` (disclosure text
+  unchanged) remain. `/#cost-lab` now lands on the first screen. Model, IDs and defaults unchanged ($346,665 /
+  +$48,000 MD default). `tests/test_browser.py` adds first-screen checks (email + totals above the fold on desktop,
+  slider ↔ field sync).
 
 ## 🔲 Open — prioritized
 

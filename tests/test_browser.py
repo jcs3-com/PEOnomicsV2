@@ -58,6 +58,17 @@ with sync_playwright() as p:
         check(pg.locator('label[for=state]').inner_text().startswith('HQ / Main Worksite State') and pg.locator('#labForm select').count() == 2, f'{name}: single geo selector')
         check(pg.locator('#currentTotal').inner_text() == '$346,665' and pg.locator('#delta').inner_text() == '+$48,000', f'{name}: default totals (2026 data: MD, 25 EEs, office) {pg.locator("#currentTotal").inner_text()}')
         check(pg.locator('h1').count() == 1, f'{name}: one h1 on home')
+        # ---- first screen: email box + slider lab, nothing else (2026-11-02) ----
+        vh = pg.viewport_size['height']
+        eb = pg.locator('#businessEmail').bounding_box()
+        check(eb and eb['y'] + eb['height'] <= vh, f'{name}: email box visible on first load')
+        if w >= 1000:
+            db = pg.locator('#delta').bounding_box()
+            check(db and db['y'] + db['height'] <= vh, f'{name}: totals visible on first load (desktop)')
+        check(pg.locator('#cost-lab input[type=range]').count() == 3 and pg.locator('#cost-lab .ledger').count() == 1, f'{name}: three sliders + totals in the first screen')
+        pg.locator('#employeesRange').fill('10'); check(pg.input_value('#employees') == '10' and pg.locator('#delta').inner_text() == '+$19,200', f'{name}: employees slider drives the model')
+        pg.fill('#employees', '600'); check(pg.input_value('#employeesRange') == '250' and pg.input_value('#employees') == '600', f'{name}: typed value beyond slider kept exactly')
+        pg.fill('#employees', '25'); check(pg.input_value('#employeesRange') == '25' and pg.locator('#delta').inner_text() == '+$48,000', f'{name}: slider follows typed value')
         check(not any('apollo' in u for u in reqs), f'{name}: no apollo')
         check(no_overflow(pg), f'{name}: home overflow')
         pg.fill('#employees', '10'); check(pg.locator('#delta').inner_text() == '+$19,200', f'{name}: live recalc')

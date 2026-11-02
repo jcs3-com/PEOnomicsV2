@@ -282,6 +282,19 @@
       $('applyAdminRef').dataset.value = String(Math.round(ref.pepy * r.N));
     }
     syncEditedUI();
+    syncSliders();
+  }
+
+  // Range sliders mirror their number field (data-for). The number field stays the
+  // source of truth, so typed values beyond the slider's range are kept exactly.
+  function syncSliders() {
+    document.querySelectorAll('input[type=range][data-for]').forEach(r => {
+      const v = parseFloat($(r.dataset.for).value);
+      const min = +r.min, max = +r.max;
+      const c = Number.isFinite(v) ? Math.min(max, Math.max(min, v)) : min;
+      r.value = c;
+      r.style.setProperty('--pct', (max > min ? (c - min) / (max - min) * 100 : 0) + '%');
+    });
   }
 
   /* ---------- lookup ---------- */
@@ -328,10 +341,10 @@
       if (!res.ok || !d.ok) {
         const msg = {
           business_email_required: "Use a company address — personal or invalid domains can't identify a business.",
-          log_not_configured: 'Company lookup is offline while we finish connecting it. Nothing was recorded. Enter your details below — the calculator works the same.',
-          log_unavailable: "The lookup couldn't be recorded, so it didn't run. Enter your details below — the calculator works the same.",
+          log_not_configured: 'Company lookup is offline while we finish connecting it. Nothing was recorded. Enter your details — the calculator works the same.',
+          log_unavailable: "The lookup couldn't be recorded, so it didn't run. Enter your details — the calculator works the same.",
           rate_limited: 'Too many lookups from this connection. Try again in a few minutes, or enter details manually.'
-        }[d.error] || 'Lookup is unavailable right now. Enter your details below — the calculator works the same.';
+        }[d.error] || 'Lookup is unavailable right now. Enter your details — the calculator works the same.';
         status(msg, 'err');
         return;
       }
@@ -346,9 +359,9 @@
       draw();
       status(filled.length
         ? `Prefilled ${filled.map(k => FIELD_LABEL[k]).join(', ')} from public information about ${d.domain}. Check each highlighted field — every one is editable.`
-        : `We couldn't find public details for ${d.domain}. Enter them below.`, filled.length ? 'ok' : '');
+        : `We couldn't find public details for ${d.domain}. Enter them by hand.`, filled.length ? 'ok' : '');
     } catch {
-      status('Lookup is unavailable right now. Enter your details below — the calculator works the same.', 'err');
+      status('Lookup is unavailable right now. Enter your details — the calculator works the same.', 'err');
     } finally {
       btn.disabled = false;
     }
@@ -410,9 +423,14 @@
     $('applyAdminRef').addEventListener('click', () => { $('currentAdmin').value = $('applyAdminRef').dataset.value || 0; draw(); });
     $('resetBtn').addEventListener('click', resetAssumptions);
     $('printReport').addEventListener('click', () => window.print());
-    $('labForm').addEventListener('submit', e => e.preventDefault());
-    $('labForm').addEventListener('input', () => { touched = true; }, { capture: true });
-    $('labForm').addEventListener('change', () => { touched = true; draw(); }, { capture: true });
+    document.querySelectorAll('input[type=range][data-for]').forEach(r => r.addEventListener('input', () => {
+      const t = $(r.dataset.for); t.value = r.value; t.dispatchEvent(new Event('input', { bubbles: true }));
+    }));
+    for (const f of [$('labForm'), $('labMore')].filter(Boolean)) {
+      f.addEventListener('submit', e => e.preventDefault());
+      f.addEventListener('input', () => { touched = true; }, { capture: true });
+      f.addEventListener('change', () => { touched = true; draw(); }, { capture: true });
+    }
     $('lookupForm').addEventListener('submit', lookup);
   }
 

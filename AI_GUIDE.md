@@ -76,7 +76,7 @@ site in any chat. Read this file *first*, before touching anything.
 ## 2. File map
 
 ```
-index.html                      Homepage + Cost Lab. REFERENCE IMPLEMENTATION of the identity.
+index.html                      Homepage: email box + slider Cost Lab first screen; full breakdown below (#breakdown). REFERENCE IMPLEMENTATION.
 quote.html                      Redirect stub → /#cost-lab (noindex, not in sitemap).
 about.html contact.html         Org / contact pages.
 insights.html methodology.html  Editorial / methodology content.

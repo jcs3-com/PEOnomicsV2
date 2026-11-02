@@ -9,6 +9,52 @@
 .lab-textlink:hover{border-color:var(--text);}
 .ledger .lrow .rate{white-space:nowrap;}
 
+/* ---------- homepage first screen: email + slider lab, nothing else ---------- */
+.home-hero{padding-top:clamp(28px,5vh,64px);padding-bottom:clamp(36px,6vh,72px);align-items:center;scroll-margin-top:64px;}
+.home-intro .hero-sub{margin-bottom:26px;}
+.home-intro .quote-box{max-width:480px;}
+.home-intro .quote-note{max-width:480px;}
+.home-status{max-width:480px;}
+.home-status.ok{color:var(--positive);}
+.home-status.err{color:var(--negative);}
+.home-status:empty{display:none;}
+.home-intro .quote-note a{color:var(--text);}
+.home-lab{padding:22px 22px 0;display:flex;flex-direction:column;}
+.home-form .field{margin-bottom:14px;}
+.home-form .lab-row{gap:0 14px;align-items:end;}
+.slide-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:8px;}
+.slide-head label{margin:0;flex-wrap:wrap;justify-content:flex-start!important;}
+.slide-head input[type=number]{width:120px;flex:none;text-align:right;padding:6px 10px;}
+.slide-head .lab-restore{font-weight:400;}
+@media(max-width:920px){.home-hero{grid-template-columns:minmax(0,1fr);gap:28px;}}
+@media(max-width:560px){.home-intro .eyebrow{display:none;}.home-intro .hero-sub{font-size:15.5px;margin-bottom:18px;}
+  .home-form .lab-row{grid-template-columns:minmax(0,1fr) minmax(0,1fr);}
+  .home-form select{padding:9px 8px;font-size:13px;}
+  .slide-head input[type=number]{width:100px;}}
+.field input.slider{padding:0;border:none;background:transparent;border-radius:0;}
+.field input.slider:focus{outline:none;}
+.slider{-webkit-appearance:none;appearance:none;width:100%;height:20px;margin:0;background:transparent;cursor:pointer;display:block;}
+.slider:focus{outline:none;}
+.slider::-webkit-slider-runnable-track{height:3px;border-radius:var(--r-sm);
+  background:linear-gradient(to right,var(--accent) var(--pct,0%),var(--border) var(--pct,0%));}
+.slider::-moz-range-track{height:3px;border-radius:var(--r-sm);background:var(--border);}
+.slider::-moz-range-progress{height:3px;background:var(--accent);}
+.slider::-webkit-slider-thumb{-webkit-appearance:none;width:16px;height:16px;margin-top:-6.5px;border-radius:var(--r-sm);
+  background:var(--bg-elev);border:2px solid var(--accent);transition:background var(--d-fast) var(--ease-out);}
+.slider::-moz-range-thumb{width:12px;height:12px;border-radius:var(--r-sm);background:var(--bg-elev);border:2px solid var(--accent);}
+.slider:hover::-webkit-slider-thumb,.slider:active::-webkit-slider-thumb{background:var(--accent);}
+.slider:focus-visible::-webkit-slider-thumb{outline:2px solid var(--accent);outline-offset:2px;}
+.slider:focus-visible::-moz-range-thumb{outline:2px solid var(--accent);outline-offset:2px;}
+.home-result{margin:8px -22px 0;box-shadow:none;padding:14px 22px 16px;}
+.home-result .trow .label{color:var(--ink-text);}
+.home-result .trow .amt{color:var(--ink-text);}
+.home-result .trow small{display:block;font-size:11px;color:var(--ink-faint);font-family:var(--f-mono);}
+.home-result .trow.delta .amt{font-size:22px;}
+.home-result .lab-note{font-size:12.5px;}
+.home-more{display:inline-block;margin-top:10px;font-family:var(--f-mono);font-size:11.5px;letter-spacing:.04em;
+  color:var(--ink-text);text-decoration:none;border-bottom:1px solid var(--ink-rule);}
+.home-more:hover{border-color:var(--ink-text);}
+
 /* ---------- basis tags (statutory / benchmark / assumption) ---------- */
 .basis{display:inline-block;font-family:var(--f-mono);font-size:10px;line-height:1.5;letter-spacing:.08em;
   text-transform:uppercase;padding:1px 6px;border:1px solid var(--border);color:var(--muted);
@@ -109,7 +155,9 @@
 
 /* ---------- print: the scenario, not the chrome ---------- */
 @media print{
-  .nav,.hero,.lab-lookup,.lab-cta,.lab-guide,.band-ink,.footer,.lab-actions,.lab-restore{display:none!important;}
+  .nav,.home-intro,.home-more,.slider,.lab-lookup,.lab-cta,.lab-guide,.band-ink,.footer,.lab-actions,.lab-restore{display:none!important;}
+  .home-hero{display:block;padding:0 0 16px;}
+  .home-result{margin:8px 0 0;}
   body,.band-raised{background:var(--bg-elev);}
   .section{padding:0;}
   .lab-grid{grid-template-columns:1fr 1fr;gap:16px;}
@@ -129,3 +177,7 @@
 
 /* ---------- report verification widget ---------- */
 .lab-challenge{margin-top:12px;min-height:0;}
+
+/* ---------- breakdown: source notes for the first-screen inputs ---------- */
+.lab-form > .hint{font-size:12px;color:var(--muted);line-height:1.45;margin:0 0 10px;}
+.lab-form > .hint strong{color:var(--text);font-weight:600;}
