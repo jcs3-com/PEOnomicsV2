@@ -15,7 +15,7 @@ Not chat history. Not artifacts. When you finish or add work, update this file i
 - Core content pages + ranking pages (best-peo-*).
 - Pages Function code for `/api/enrich` and `/api/lead`; Apps Script lead-capture in repo.
 - Cloudflare Pages ↔ GitHub `main` auto-deploy pipeline.
-- Operating model: `AI_GUIDE.md` + Path A handoff.
+- Operating model: `AI_GUIDE.md`; Claude ships and deploys from the Claude app (owner, 2026-11-03), Path A only as fallback.
 - **P0 — SEO floor (this batch):**
   - `rel="canonical"` added to all 13 non-state pages (state pages already had it).
   - Open Graph added to index, quote, hidden-costs (the 3 that lacked it).

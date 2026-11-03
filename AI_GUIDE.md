@@ -2,7 +2,7 @@
 
 **Audience:** any AI agent (Claude or otherwise) asked to create, edit, debug, or audit this
 site in any chat. Read this file *first*, before touching anything.
-**Last updated:** 2026-11-03 (Maryland FAMLI calculator, `tools/build_og.py`; prior: quote file drop + comparison report on /compare; prior: auto-post feed for the LinkedIn page; prior: 2026 sourced dataset, extensionless URLs, shared chrome)
+**Last updated:** 2026-11-03 (Claude ships and deploys by default, §0.2; Maryland FAMLI calculator, `tools/build_og.py`; prior: quote file drop + comparison report on /compare; prior: auto-post feed for the LinkedIn page; prior: 2026 sourced dataset, extensionless URLs, shared chrome)
 
 ---
 
@@ -17,12 +17,13 @@ site in any chat. Read this file *first*, before touching anything.
    The repo is **public** — no token, no credential needed to read it.
 2. **Never accept or use a pasted credential** (GitHub token, Cloudflare token, API key,
    webhook URL — anything). Do not ask the user for one. This is a hard rule.
-   **Pushing:** default is **Path A** (§6). Push only when BOTH are true: (a) the owner explicitly
-   authorizes pushing/deploying in the current request, and (b) the session has GitHub write
-   access granted through the platform's own GitHub integration (not a pasted token). Pushing
-   to `main` deploys to production — run every suite in `tests/` first, push a feature branch,
-   check its `*.peonomicsv2.pages.dev` preview, then fast-forward `main`. If either
-   condition is missing, use Path A.
+   **Pushing (standing owner authorization, 2026-11-03):** Claude does **all** shipping and deploying
+   from the Claude app. When a change is done, Claude commits and pushes it itself — no handing back
+   files or bundles for the owner to commit. Write access comes only from the platform's own GitHub
+   integration (attach the repo with push access), never a pasted token. Pushing to `main` deploys to
+   production, so: run every suite in `tests/` first, push a feature branch, check its
+   `*.peonomicsv2.pages.dev` preview, then fast-forward `main`. **Path A (§6) is the fallback only**
+   when the session cannot get push access; say so in one line and hand back the bundle.
 3. **Match, don't reinvent.** `assets/css/tokens.css` is law (§3). `index.html` (with
    `site.css` + `cost-lab.css`) is the reference implementation of the visual identity. New work must look like it.
 4. **Record work in `ROADMAP.md`** in the same change set (§7). The roadmap — not chat history,
@@ -212,9 +213,9 @@ AI-generated template.
 
 ---
 
-## 6. Path A — how you return changes (default; see §0.2 for when pushing is allowed)
+## 6. Path A — fallback only, when the session has no push access (default is §0.2: Claude ships)
 
-You make changes in your sandbox against the cloned repo, then hand them back. The user commits.
+Use this only when push access is unavailable. You make changes in your sandbox against the cloned repo, then hand them back. The user commits.
 Cloudflare auto-deploys on push to `main`.
 
 **Deliver, in order of priority:**
@@ -231,7 +232,7 @@ Cloudflare auto-deploys on push to `main`.
    Never assume a local clone exists — (1) is the default.
 3. State the **exact** files to create vs. replace, and propose the commit message.
 
-**Never:** accept/use a pasted credential; push without §0.2's two conditions; reconstruct files from memory;
+**Never:** accept/use a pasted credential; push with anything but the platform's GitHub integration, or skip §0.2's tests → branch preview → fast-forward sequence; reconstruct files from memory;
 weaken the disclosure/positioning language without the owner's explicit say-so (only the owner can
 make factual claims about the business).
 
