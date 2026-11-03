@@ -22,6 +22,11 @@ if not BASE:
     BASE = f'http://127.0.0.1:{port}'; time.sleep(0.8)
 
 fails, passes = [], 0
+# Live mode: production may have reports switched on; assert the state it actually reports.
+LIVE_ON = False
+if LIVE:
+    try: LIVE_ON = json.loads(subprocess.run(['curl', '-s', '-m', '15', BASE + '/api/report-status'], capture_output=True, text=True).stdout).get('available') is True
+    except Exception: LIVE_ON = False
 # Quote files for the drop/choose tests, generated from tests/fixtures by LibreOffice (skipped if absent).
 FILES = None
 def make_files():
@@ -48,6 +53,8 @@ def check(cond, msg):
     if cond: passes += 1
     else: fails.append(msg); print('FAIL', msg)
 
+# Turnstile's own iframe logs CSP and devtools-probe noise; it is not a site error.
+TURNSTILE_NOISE = lambda t: 'challenges.cloudflare.com' in t or 'data:,' in t or t.startswith('%c')
 TURNSTILE_STUB = "window.turnstile={render:(el,o)=>{const b=document.createElement('button');b.id='tsStub';b.type='button';b.textContent='verify';b.onclick=()=>o.callback('stub-token-123456');el.append(b);return 'w1';},reset:()=>{}};"
 
 def no_overflow(pg):
@@ -60,7 +67,7 @@ with sync_playwright() as p:
         pg = ctx.new_page()
         errors, reqs = [], []
         pg.on('pageerror', lambda e: errors.append(str(e)))
-        pg.on('console', lambda m: errors.append(m.text) if m.type == 'error' and 'cloudflareinsights' not in m.text and 'Failed to load resource' not in m.text else None)
+        pg.on('console', lambda m: errors.append(m.text) if m.type == 'error' and 'cloudflareinsights' not in m.text and 'Failed to load resource' not in m.text and not TURNSTILE_NOISE(m.text) else None)
         pg.on('request', lambda r: reqs.append(r.url))
         state = {'available': False, 'report': (200, {'ok': True, 'status': 'accepted_for_delivery'}), 'posted': [], 'events': []}
         if not LIVE:
@@ -112,8 +119,11 @@ with sync_playwright() as p:
         pg.select_option('#state', 'MD'); pg.fill('#employees', '10')
         check(pg.locator('#emailReport').is_disabled(), f'{name}: report button disabled by default')
         note = pg.locator('#emailNote').inner_text()
-        check('being connected' in note and 'Nothing is sent' in note, f'{name}: honest unconfigured note: {note}')
-        check(not any('challenges.cloudflare.com' in u for u in reqs), f'{name}: Turnstile not loaded when unconfigured')
+        if LIVE_ON:
+            check('survey' in note and pg.locator('#emailReport').is_disabled(), f'{name}: live reports on: disclosure shown, button waits for verification')
+        else:
+            check('being connected' in note and 'Nothing is sent' in note, f'{name}: honest unconfigured note: {note}')
+            check(not any('challenges.cloudflare.com' in u for u in reqs), f'{name}: Turnstile not loaded when unconfigured')
         check(pg.locator('a[href="/compare"]').count() >= 1 and pg.locator('a[href="/data-library"]').count() >= 1 and pg.locator('a[href$=".html"]').count() == 0, f'{name}: tool links, no .html redirects')
 
         if not LIVE:
@@ -193,7 +203,8 @@ with sync_playwright() as p:
             pg.wait_for_function("document.querySelector('#C-status .card-error') && /image/.test(document.querySelector('#C-status').textContent)")
             check(pg.input_value('#C-fee') == '', f'{name}: image refused')
             # report: unconfigured by default -> honest, disabled
-            check(pg.locator('#sendReport').is_disabled() and 'being connected' in pg.locator('#reportNote').inner_text(), f'{name}: compare report honest when unconfigured')
+            if LIVE_ON: check(pg.locator('#sendReport').is_disabled() and 'copy comes to PEOnomics' in pg.locator('#reportNote').inner_text(), f'{name}: compare report live: copy disclosed, waits for verification')
+            else: check(pg.locator('#sendReport').is_disabled() and 'being connected' in pg.locator('#reportNote').inner_text(), f'{name}: compare report honest when unconfigured')
             if not LIVE:
                 state['available'] = True; state['posted'].clear()
                 pg.reload(); pg.wait_for_selector('.compare-card')
