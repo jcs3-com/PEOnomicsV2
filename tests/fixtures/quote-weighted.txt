@@ -1,0 +1,14 @@
+Oasis, a Paychex Company — Client Pricing Summary
+Total employees: 32
+Paid weekly
+Admin Fee
+$38.50 per check
+Setup Fee: $0.00
+SUI Rate 3.4% | FUTA 0.6% | FICA 7.65%
+Workers Compensation by class
+Code | Description | Payroll | Rate
+8810 | Clerical | $1,400,000 | $0.12 per $100
+5645 | Framing | $600,000 | $9.40 per $100
+Benefits: Employer pays $9,600 annually per covered employee
+EPLI premium $1,920 per year
+Technology fee: $250 per month

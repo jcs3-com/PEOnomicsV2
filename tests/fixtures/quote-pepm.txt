@@ -1,0 +1,26 @@
+Insperity Workforce Optimization — Pricing Proposal
+Prepared for: Harbor Street Dental Group, LLC
+Proposal date: October 14, 2026 | Valid 30 days
+
+Census summary
+Number of employees: 25
+Estimated annual gross payroll: $1,625,000
+Pay frequency: Bi-weekly
+Employees enrolled in medical: 15
+
+Service fees
+Administrative fee | $149.00 per employee per month
+Implementation fee | Waived
+Technology fee | $8.00 per employee per month
+Year-end W-2 processing | $3.00 per W-2
+
+Employer taxes and insurance
+FICA (Social Security + Medicare) | 7.65% | up to wage base
+FUTA | 0.6% on first $7,000
+SUTA (Maryland) | 2.60% on first $8,500
+Workers' compensation (class 8832, blended) | $0.31 per $100 of payroll
+Experience modifier | 0.95
+
+Benefits
+Employer medical contribution | $612.40 per enrolled employee per month
+EPLI | Included in administrative fee

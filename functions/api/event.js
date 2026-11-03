@@ -14,6 +14,7 @@ export const EVENTS = new Set([
   'report_requested',   // "Email this to me" clicked (outcome only)
   'comparator_used',    // first comparison with >= 1 complete proposal
   'comparator_csv',
+  'quote_parsed',       // a quote file was read in the browser (outcome + file kind only; never content)
   'data_csv',
   'cost_lab_cta'        // click from a content/state page into the Cost Lab
 ]);

@@ -22,6 +22,27 @@ if not BASE:
     BASE = f'http://127.0.0.1:{port}'; time.sleep(0.8)
 
 fails, passes = [], 0
+# Quote files for the drop/choose tests, generated from tests/fixtures by LibreOffice (skipped if absent).
+FILES = None
+def make_files():
+    import shutil, tempfile
+    so = shutil.which('soffice')
+    if not so: print('  (LibreOffice not found — quote file browser checks skipped)'); return None
+    d = tempfile.mkdtemp(prefix='peon-files-'); fx = os.path.join(ROOT, 'tests', 'fixtures')
+    shutil.copy(os.path.join(fx, 'quote-pepm.txt'), os.path.join(d, 'insperity_proposal.txt'))
+    shutil.copy(os.path.join(fx, 'quote-pct.txt'), os.path.join(d, 'trinet.csv'))
+    shutil.copy(os.path.join(fx, 'quote-weighted.txt'), os.path.join(d, 'oasis.txt'))
+    subprocess.run([so, '--headless', '--convert-to', 'pdf', '--outdir', d, os.path.join(d, 'insperity_proposal.txt')], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, timeout=120)
+    subprocess.run([so, '--headless', '--infilter=CSV:124,34,76,1', '--convert-to', 'xlsx', '--outdir', d, os.path.join(d, 'trinet.csv')], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, timeout=120)
+    # image-only PDF (no text layer) and a PNG, to check the refusals
+    import struct, zlib
+    png = b'\x89PNG\r\n\x1a\n' + b''.join(struct.pack('>I', len(c[1])) + c[0] + c[1] + struct.pack('>I', zlib.crc32(c[0] + c[1]) & 0xffffffff)
+        for c in [(b'IHDR', struct.pack('>IIBBBBB', 1, 1, 8, 2, 0, 0, 0)), (b'IDAT', zlib.compress(b'\x00\xff\xff\xff')), (b'IEND', b'')])
+    open(os.path.join(d, 'photo.png'), 'wb').write(png)
+    open(os.path.join(d, 'scan.pdf'), 'wb').write(b'%PDF-1.4\n1 0 obj<</Type/Catalog/Pages 2 0 R>>endobj 2 0 obj<</Type/Pages/Kids[3 0 R]/Count 1>>endobj 3 0 obj<</Type/Page/Parent 2 0 R/MediaBox[0 0 612 792]>>endobj\ntrailer<</Root 1 0 R>>\n%%EOF\n')
+    ok = all(os.path.exists(os.path.join(d, f)) for f in ['insperity_proposal.pdf', 'trinet.xlsx'])
+    return d if ok else None
+FILES = make_files()
 def check(cond, msg):
     global passes
     if cond: passes += 1
@@ -143,6 +164,51 @@ with sync_playwright() as p:
         csv = open(d.value.path()).read()
         check('Three-year total' in csv and 'INCOMPLETE' in csv, f'{name}: comparator CSV')
         check(no_overflow(pg), f'{name}: compare overflow')
+
+        # ---- Quote files: drop/choose real PDF + XLSX + TXT, read in the browser ----
+        if FILES:
+            saved = (state['available'], state['report']); state['available'] = False; state['report'] = (200, {'ok': True, 'status': 'accepted_for_delivery'})
+            pg.goto(BASE + '/compare.html'); pg.wait_for_selector('.compare-card')
+            uploads_before = [u for u in reqs if '/api/' in u and 'event' not in u and 'report-status' not in u]
+            pg.set_input_files('#quoteFiles', [os.path.join(FILES, 'insperity_proposal.pdf'), os.path.join(FILES, 'trinet.xlsx'), os.path.join(FILES, 'oasis.txt')])
+            pg.wait_for_function("document.querySelectorAll('.card-read').length===3", timeout=45000)
+            check(pg.input_value('#A-provider') == 'Insperity' and pg.input_value('#A-fee') == '149' and pg.input_value('#A-health') == '7348.8', f'{name}: PDF parsed into Proposal A')
+            check(pg.input_value('#B-feeBasis') == 'pct' and pg.input_value('#B-fee') == '3.25' and pg.input_value('#B-suta') == '2.7', f'{name}: XLSX parsed into Proposal B')
+            check(pg.input_value('#C-wc') == '2.904' and pg.input_value('#C-fee') == '166.83', f'{name}: TXT parsed into Proposal C (weighted WC, per-check fee)')
+            check(pg.input_value('#c-employees') == '25' and pg.input_value('#c-sutaBase') == '8500', f'{name}: assumptions from Proposal A file, in order')
+            check('Proposal C' in pg.locator('#assumptionNotes .is-conflict').inner_text() and '32' in pg.locator('#assumptionNotes').inner_text(), f'{name}: headcount conflict flagged')
+            check('from file' in pg.locator('#A-fee-ev').inner_text().lower() and '$149.00 per employee per month' in pg.locator('#A-fee-ev').inner_text(), f'{name}: evidence line shown')
+            check('check' in pg.locator('#C-fee-ev').inner_text().lower() and '52' in pg.locator('#C-fee-ev').inner_text(), f'{name}: converted figure marked Check with the arithmetic')
+            check('3 complete proposals' in pg.locator('#comparisonStatus').inner_text(), f'{name}: live comparison from files')
+            check('apart in year one' in pg.locator('#reportTeaser').inner_text(), f'{name}: report teaser computed live')
+            sent_after = [u for u in reqs if '/api/' in u and 'event' not in u and 'report-status' not in u]
+            check(len(sent_after) == len(uploads_before), f'{name}: no file or figure sent to the server while parsing')
+            pg.fill('#A-fee', '150'); check('edited' in pg.locator('#A-fee-ev').inner_text().lower(), f'{name}: editing a parsed field marks it Edited')
+            pg.locator('.compare-card').nth(2).locator('.card-clear').click()
+            check(pg.input_value('#C-fee') == '' and pg.locator('#C-status').inner_text() == '', f'{name}: Clear empties a card')
+            pg.set_input_files('#C-file', os.path.join(FILES, 'scan.pdf'))
+            pg.wait_for_function("document.querySelector('#C-status .card-error')", timeout=30000)
+            check('scan' in pg.locator('#C-status').inner_text().lower(), f'{name}: image-only PDF explained, nothing invented')
+            pg.set_input_files('#C-file', os.path.join(FILES, 'photo.png'))
+            pg.wait_for_function("document.querySelector('#C-status .card-error') && /image/.test(document.querySelector('#C-status').textContent)")
+            check(pg.input_value('#C-fee') == '', f'{name}: image refused')
+            # report: unconfigured by default -> honest, disabled
+            check(pg.locator('#sendReport').is_disabled() and 'being connected' in pg.locator('#reportNote').inner_text(), f'{name}: compare report honest when unconfigured')
+            if not LIVE:
+                state['available'] = True; state['posted'].clear()
+                pg.reload(); pg.wait_for_selector('.compare-card')
+                pg.set_input_files('#quoteFiles', [os.path.join(FILES, 'insperity_proposal.pdf'), os.path.join(FILES, 'trinet.xlsx')])
+                pg.wait_for_function("document.querySelectorAll('.card-read').length===2", timeout=45000)
+                pg.wait_for_selector('#tsStub'); check(pg.locator('#sendReport').is_disabled(), f'{name}: report disabled before verification')
+                pg.click('#tsStub'); check(pg.locator('#sendReport').is_enabled(), f'{name}: report enabled after verification + 2 complete')
+                pg.fill('#reportEmail', 'me@gmail.com'); pg.click('#sendReport')
+                check('company email' in pg.locator('#reportNote').inner_text() and not state['posted'], f'{name}: personal email refused client-side')
+                pg.fill('#reportEmail', 'owner@samplebusiness.com'); pg.click('#sendReport')
+                pg.wait_for_function("/Accepted for delivery/.test(document.getElementById('reportNote').textContent)")
+                body = state['posted'][-1]
+                check(body['kind'] == 'compare' and body['compare']['quotes'][0]['src'].get('fee') == 'file' and body['compare']['quotes'][1]['feeBasis'] == 'pct', f'{name}: compare payload carries inputs + provenance')
+                check('text' not in json.dumps(body).lower() or 'administrative fee |' not in json.dumps(body), f'{name}: payload carries no file text')
+            state['available'], state['report'] = saved
 
         # ---- Data Library ----
         pg.goto(BASE + '/data-library.html'); pg.wait_for_function("document.querySelectorAll('#stateRows tr').length>40")

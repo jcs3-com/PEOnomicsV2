@@ -3,7 +3,7 @@
 This file is the **only** source of truth for what is done, open, dropped, or pending a decision.
 Not chat history. Not artifacts. When you finish or add work, update this file in the same commit.
 
-**Last updated:** 2026-11-02 (Homepage first screen simplified to email box + slider Cost Lab. Prior: auto-post feed for the LinkedIn page; DMV Employer Cost Index; VA SUI 2.73%. Prior: activation release: health check, shared rate limiter, scenario logging, Turnstile key via env; data/unification/analytics releases follow)
+**Last updated:** 2026-11-03 (Quote Comparator: drag-and-drop quote files parsed in the browser + emailed comparison report. Prior: Homepage first screen simplified to email box + slider Cost Lab. Prior: auto-post feed for the LinkedIn page; DMV Employer Cost Index; VA SUI 2.73%. Prior: activation release: health check, shared rate limiter, scenario logging, Turnstile key via env; data/unification/analytics releases follow)
 
 ---
 
@@ -195,6 +195,31 @@ Not chat history. Not artifacts. When you finish or add work, update this file i
   +$48,000 MD default). `tests/test_browser.py` adds first-screen checks (email + totals above the fold on desktop,
   slider ↔ field sync).
 
+- **Quote Comparator: drop quote files + full report (2026-11-03, owner request):**
+  - `/compare` takes up to three quote files (drop zone, "Choose files", or drop/load per proposal card). PDF (pdf.js
+    3.11.174 from jsDelivr, SRI-pinned, `isEvalSupported:false`, lazy-loaded only when a PDF is dropped), XLSX/XLSM and
+    DOCX (own ZIP + XML reader; % cell formats honored), CSV/TSV/TXT. **Files are read in the browser and never
+    uploaded.** Scans/images and legacy .xls/.doc are refused with a reason; nothing is invented.
+  - `quote-parse.js` `extractQuote()`: deterministic label/unit rules, no LLM. Each filled field shows **From file** +
+    the source line, or **Check** + the conversion (per-check fee × pay dates ÷ 12, monthly × 12, group EPLI ÷ headcount,
+    contribution % × employee-only premium, payroll-weighted WC across class codes). Several WC class rates without
+    payroll → no fill + warning (never averaged). Bundled ("all-inclusive") pricing → warning, rate not put in the admin
+    fee. FUTA/FICA/experience-mod/termination-fee figures are excluded. Blank = not stated still holds.
+  - Files fill common assumptions (employees, wage from payroll ÷ headcount, enrollment, SUTA wage base) only where the
+    visitor hasn't typed; files are applied in order (A first) and a quote priced on a different census is flagged.
+  - **"Want the full report?"** below the table: live teaser (gap in year one / three years and the line driving it),
+    business email + Turnstile → `POST /api/report-request` `kind:"compare"`. Server recomputes (`functions/lib/compare-model.js`,
+    parity-tested vs the page on 600 random scenarios), needs ≥2 complete proposals, logs before sending, emails a PDF
+    (line table, years 1–3, all-in PEPM, gap driver, terms with file/check/edited provenance, **questions to put to each
+    provider** generated from what each quote leaves unstated, limitations) + an XLSX with live formulas (a blank term
+    shows "Incomplete"; recalculated in LibreOffice in tests). Same delivery switches as the Cost Lab report — **off in
+    production until the P0.1 secrets exist** (`/api/report-status` returned `available:false` on 2026-11-03); the UI says so.
+  - Event `quote_parsed` (outcome + file kind only) added to the `/api/event` allowlist. Privacy draft updated (file
+    handling, jsDelivr). Download CSV demoted to a secondary button; the report is the primary action.
+  - Tests: `tests/test_quote_parse.mjs` (14, incl. LibreOffice-made XLSX/DOCX), `tests/test_compare_report.mjs` (10),
+    `tests/test_browser.py` +23 (real PDF/XLSX/TXT through the page, scan/image refusals, report payload). Fixtures in
+    `tests/fixtures/` are text; PDF/XLSX are generated at test time.
+
 ## 🔲 Open — prioritized
 
 ### P0.1 — owner-only setup (credentials; Claude must not handle them) — step-by-step in `docs/OWNER_SETUP.md`
@@ -273,6 +298,12 @@ Not chat history. Not artifacts. When you finish or add work, update this file i
       since 2026-10-27; `/api/lead` is still a live endpoint. Owner decides delete vs. keep.
 - [ ] **Multi-state / wage-distribution modeling** (FICA above SS base, SUTA per state) — P2+.
 - [ ] **Comparator v2:** multi-year fee escalators, per-quote SUTA base, link a quote into the Cost Lab.
+- [ ] **Quote parsing — measure, then tune:** read `quote_parsed` outcomes (complete / partial / none_found / no_text by
+      file kind). Add real (redacted) proposal layouts to `tests/fixtures/` before changing any rule.
+- [ ] **Scanned quotes (OCR):** image-only PDFs and photos are refused today. In-browser OCR (tesseract.js, several MB,
+      slow on phones) is possible; only worth it if `no_text` outcomes are common.
+- [ ] **Owner decision — LLM-assisted extraction:** would read messy proposals better, but file text would leave the
+      browser (breaks the stated promise; needs a privacy update). Not built; deterministic parser only.
 - [ ] Decide keep/remove `CNAME` (GitHub Pages fossil; harmless on Cloudflare).
 - [ ] Delete stray `/og-default.png` at repo root (leftover from the upload; unreferenced, harmless).
 

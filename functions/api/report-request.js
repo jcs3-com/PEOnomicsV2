@@ -1,5 +1,7 @@
 /* POST /api/report-request
    body: {"email","snapshot":{...Cost Lab inputs},"turnstileToken","requestId":uuid}
+     or  {"kind":"compare","email","compare":{common,quotes[1-3]},"turnstileToken","requestId"}
+         (Quote Comparator report: PDF + XLSX of the comparison; >= 2 complete proposals)
 
    Emails the visitor a PDF + editable XLSX of THEIR Cost Lab scenario.
    - Business email only (same rules as /api/enrich: functions/lib/validate.js).
@@ -17,7 +19,8 @@
    Missing any -> 503 report_unconfigured, before any third-party call. */
 import { parseSnapshot, calculate, reportLines } from '../lib/report-model.js';
 import { makeReportPdf, base64Bytes } from '../lib/simple-pdf.js';
-import { makeReportXlsx } from '../lib/simple-xlsx.js';
+import { makeReportXlsx, makeCompareXlsx } from '../lib/simple-xlsx.js';
+import { parseCompare, evaluate as evaluateCompare, analyze as analyzeCompare, compareLines, scenarioString as compareScenario } from '../lib/compare-model.js';
 import { parseBusinessEmail } from '../lib/validate.js';
 import { rateLimited } from '../lib/ratelimit.js';
 
@@ -84,6 +87,8 @@ export async function onRequestPost({ request, env }) {
   const requestId = String(body.requestId || '');
   if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(requestId)) return RESP({ ok: false, error: 'bad_request_id' }, 400);
 
+  if (body.kind === 'compare') return compareReport(body, parsed, requestId, ip, env);
+
   // Validate the scenario before spending a Turnstile verification on it.
   let rates, i, result;
   try {
@@ -138,6 +143,58 @@ export async function onRequestPost({ request, env }) {
     });
   } catch { response = null; }
 
+  const sent = response?.ok === true;
+  const sendJson = sent ? await response.json().catch(() => ({})) : {};
+  await record(env.USAGE_WEBHOOK_URL, { ...base, event: sent ? 'report_accepted' : 'report_failed',
+    timestamp: new Date().toISOString(), providerMessageId: sendJson.id || '', summary: sent ? '' : 'provider_status_' + (response ? response.status : 'network') });
+  if (!sent) return RESP({ ok: false, error: 'email_unavailable' }, 502);
+  return RESP({ ok: true, status: 'accepted_for_delivery', requestId });
+}
+
+async function sendMail(env, requestId, to, subject, text, attachments) {
+  try {
+    return await fetch('https://api.resend.com/emails', {
+      method: 'POST', signal: AbortSignal.timeout(15000),
+      headers: { 'Authorization': 'Bearer ' + env.RESEND_API_KEY, 'Content-Type': 'application/json', 'Idempotency-Key': 'peonomics-report-' + requestId },
+      body: JSON.stringify({ from: env.REPORT_FROM, to: [to], subject, text, attachments })
+    });
+  } catch { return null; }
+}
+
+/* Quote Comparator report. Same order of operations as the Cost Lab report:
+   validate -> Turnstile -> log request -> render -> send -> log outcome. */
+async function compareReport(body, parsed, requestId, ip, env) {
+  let c, evals, an;
+  try {
+    c = parseCompare(body.compare);
+    evals = evaluateCompare(c.common, c.quotes);
+    an = analyzeCompare(c, evals);
+  } catch { return RESP({ ok: false, error: 'invalid_compare' }, 400); }
+  if (an.completeCount < 2) return RESP({ ok: false, error: 'need_two' }, 400);
+  if (!(await verifyTurnstile(env.TURNSTILE_SECRET, body.turnstileToken, ip))) return RESP({ ok: false, error: 'challenge_failed' }, 403);
+
+  const base = {
+    event: 'report_requested', timestamp: new Date().toISOString(), email: parsed.email, domain: parsed.domain,
+    company: '', state: '', industry: '', employees: c.common.employees, page: 'compare',
+    source: 'quote comparator', requestId, scenario: compareScenario(c),
+    annualCurrent: '', annualPeo: '', annualDelta: ''
+  };
+  if (!(await record(env.USAGE_WEBHOOK_URL, base))) return RESP({ ok: false, error: 'log_unavailable' }, 503);
+
+  let pdf, xlsx;
+  try { pdf = makeReportPdf(compareLines(c, evals, an)); xlsx = makeCompareXlsx(c, evals, an); }
+  catch {
+    await record(env.USAGE_WEBHOOK_URL, { ...base, event: 'report_failed', timestamp: new Date().toISOString(), summary: 'render_failed' });
+    return RESP({ ok: false, error: 'render_failed' }, 500);
+  }
+  const filename = `PEOnomics_Quote_Comparison_${new Date().toISOString().slice(0, 10)}.pdf`;
+  const response = await sendMail(env, requestId, parsed.email, 'Your PEOnomics quote comparison',
+    'Attached are the PDF report and editable Excel workbook of the quote comparison you built on PEOnomics.\n\n' +
+    'They use only the terms you entered (or that your browser read from your quote files; the files themselves never reached us). ' +
+    'The report includes the questions to put to each provider before you sign. It is a comparison of stated terms, not advice.\n\n' +
+    'We may send one optional survey invitation about 30 days from now; it will include a way to opt out. ' +
+    'We do not sell or forward your details to PEO providers.\n\nPEOnomics - https://peonomics.com/compare',
+    [{ filename, content: base64Bytes(pdf) }, { filename: filename.replace(/\.pdf$/, '.xlsx'), content: base64Bytes(xlsx) }]);
   const sent = response?.ok === true;
   const sendJson = sent ? await response.json().catch(() => ({})) : {};
   await record(env.USAGE_WEBHOOK_URL, { ...base, event: sent ? 'report_accepted' : 'report_failed',

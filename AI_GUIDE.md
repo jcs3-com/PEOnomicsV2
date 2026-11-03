@@ -2,7 +2,7 @@
 
 **Audience:** any AI agent (Claude or otherwise) asked to create, edit, debug, or audit this
 site in any chat. Read this file *first*, before touching anything.
-**Last updated:** 2026-10-28 (auto-post feed for the LinkedIn page; prior: 2026 sourced dataset, extensionless URLs, shared chrome)
+**Last updated:** 2026-11-03 (quote file drop + comparison report on /compare; prior: auto-post feed for the LinkedIn page; prior: 2026 sourced dataset, extensionless URLs, shared chrome)
 
 ---
 
@@ -39,7 +39,7 @@ site in any chat. Read this file *first*, before touching anything.
 - **Serverless:** Cloudflare **Pages Functions** in `functions/api/`. A file at
   `functions/api/<name>.js` becomes a live endpoint at `/api/<name>`. Current endpoints:
   `POST /api/enrich` (business-email lookup — validates, enriches by domain, logs, fails closed),
-  `POST /api/report-request` (Turnstile → server recompute → log → Resend PDF+XLSX),
+  `POST /api/report-request` (Turnstile → server recompute → log → Resend PDF+XLSX; `kind:"compare"` = Quote Comparator report),
   `GET /api/report-status` (`{available, siteKey}` — public Turnstile key only), `GET /api/health` (booleans:
   which secrets production sees, never values), `POST /api/event` (allowlisted, PII-free product events →
   Analytics Engine binding `EVENTS` if present), `GET /api/feed` (auto-post RSS for the LinkedIn page; `?audit=1` = weekly
@@ -67,6 +67,11 @@ site in any chat. Read this file *first*, before touching anything.
 - **The homepage Cost Lab assumes no PEO savings.** Both scenarios carry identical statutory and
   insurance costs unless the visitor enters PEO-quoted rates. Do not reintroduce default
   discounts (the legacy `engine.js` had −12% health, −10% WC, −80% admin — that is why it's retired).
+- **Quote files never leave the browser.** `/compare` reads dropped PDF/XLSX/DOCX/CSV/TXT client-side; there is no upload
+  endpoint and none should be added without an owner decision (it would break the stated privacy promise). Extraction is
+  deterministic rules over the file's text — no LLM. A figure is filled only when its unit is clear; conversions are marked
+  "Check" with the arithmetic; ambiguous items (several WC class rates, per-check fee without a pay frequency, bundled
+  pricing) are offered or warned about, never guessed. Blank still means "not stated", never $0.
 - **Positioning:** agnostic **PEO cost intelligence under the PEOnomics brand** — *not* XcelHR on
   the public site. The credibility promise is "real numbers." Every figure shown to a user must
   be sourced or visibly rendered as an estimate. **Never invent statistics.**
@@ -94,7 +99,11 @@ assets/css/cost-lab.css         Cost Lab classes (tokens only). Linked after sit
 assets/css/compare.css          Comparator / data library / privacy classes (tokens only).
 compare.html data-library.html  Quote Comparator; Data Library. privacy.html = noindex DRAFT notice.
 assets/js/report-client.js      Report button: /api/report-status + Turnstile + POST /api/report-request.
-assets/js/quote-compare.js      Comparator (pure evaluateQuotes on window.PEOCompare).
+assets/js/quote-compare.js      Comparator (pure evaluateQuotes on window.PEOCompare) + drop zone / per-card file load UI.
+assets/js/quote-parse.js        In-browser quote file reader (PDF via pdf.js@3.11.174 from jsDelivr, SRI-pinned; own ZIP/XML
+                                reader for XLSX/DOCX; CSV/TXT) + pure extractQuote(): each figure carries its source line.
+assets/js/compare-report.js     Comparator "Want the full report?" (status → Turnstile → POST kind:"compare").
+functions/lib/compare-model.js  Server comparator model (parity-tested), analysis, deterministic "questions to ask", PDF lines.
 assets/js/data-library.js       Renders rates-2026.json (state tables, sources) and benchmarks-2026.json.
 data/benchmarks-2026.json       Sourced 2026 federal/national figures (not used by the Cost Lab model).
 functions/lib/                  validate.js, report-model.js, simple-pdf.js, simple-xlsx.js (shared code).
