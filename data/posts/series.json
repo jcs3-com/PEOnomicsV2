@@ -252,9 +252,10 @@
             "er",
             "base27"
           ]
-        }
+        },
+        "ee": "dmv:paidLeave.MD.employeeRate"
       },
-      "body": "Starting {start:date}, Maryland employers remit FAMLI contributions: {total:pct2} of wages up to the Social Security wage base ({base27:usd0} in 2027).\n\nEmployers with {thr:int} or more employees pay at least half ({er:pct2}) and may withhold the rest from pay. That is up to {erMax:usd2} per employee at the wage cap. Smaller employers owe no employer share but must remit what they withhold. Benefits begin by {benefits:date}.",
+      "body": "Starting {start:date}, Maryland employers remit FAMLI contributions: {total:pct2} of wages up to the Social Security wage base ({base27:usd0} in 2027).\n\nEmployers with {thr:int} or more employees pay at least half ({er:pct2}) and may withhold the rest from pay. That is up to {erMax:usd2} per employee at the wage cap. Smaller employers owe no employer share but still remit the {ee:pct2} employee share. Benefits begin by {benefits:date}.",
       "stats": [
         [
           "Total rate",
@@ -270,11 +271,11 @@
         ]
       ],
       "sources": [
-        "Maryland FAMLI law via Jackson Lewis",
+        "Maryland Department of Labor",
         "SSA 2027 wage base"
       ],
-      "cta": "DC, MD and VA employer costs, side by side",
-      "url": "/dmv-employer-cost-index",
+      "cta": "Calculate your FAMLI cost",
+      "url": "/maryland-famli-calculator",
       "hashtags": [
         "Maryland",
         "PaidLeave",
@@ -282,6 +283,53 @@
       ],
       "dated": [
         "2026-12-15"
+      ]
+    },
+    {
+      "id": "md-famli-first-payment-2027",
+      "event": "dmv:paidLeave.MD.firstRemittanceDue",
+      "series": "Countdown",
+      "headline": {
+        "countdown": "{when} until the first Maryland FAMLI payment is due"
+      },
+      "cardTitle": "First Maryland FAMLI payment due",
+      "figures": {
+        "total": "dmv:paidLeave.MD.totalRate",
+        "er": "dmv:paidLeave.MD.employerRate",
+        "ee": "dmv:paidLeave.MD.employeeRate",
+        "thr": "dmv:paidLeave.MD.smallEmployerThreshold",
+        "start": "dmv:paidLeave.MD.contributionsBegin",
+        "due": "dmv:paidLeave.MD.firstRemittanceDue",
+        "base27": "dmv:federal.socialSecurityWageBase2027.value"
+      },
+      "body": "Maryland's first quarterly FAMLI payment is due {due:date}, covering wages paid since {start:date}. The wage and hour report is filed with it.\n\nThe payment is {total:pct2} of each employee's wages up to {base27:usd0}: the {er:pct2} employer share at {thr:int} or more employees, plus the {ee:pct2} employee share whether you withheld it or not. Employers under {thr:int} remit the employee share only.",
+      "stats": [
+        [
+          "Total rate",
+          "{total:pct2}"
+        ],
+        [
+          "Employer share",
+          "{er:pct2}"
+        ],
+        [
+          "Due",
+          "{due:date}"
+        ]
+      ],
+      "sources": [
+        "Maryland Department of Labor"
+      ],
+      "cta": "Estimate your quarterly FAMLI payment",
+      "url": "/maryland-famli-calculator",
+      "hashtags": [
+        "Maryland",
+        "PaidLeave",
+        "Payroll"
+      ],
+      "milestones": [
+        "1m",
+        "1w"
       ]
     },
     {

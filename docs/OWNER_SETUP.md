@@ -82,7 +82,15 @@ Confirm:
 
 1. Google Search Console › Add property › **Domain** › `peonomics.com` › copy the `TXT` record ›
    Cloudflare DNS › add it (DNS only) › Verify. (Domain properties cover www and http variants.)
-2. Sitemaps › submit `https://peonomics.com/sitemap.xml`.
+2. Sitemaps › submit `https://peonomics.com/sitemap.xml`. Then URL Inspection › **Request indexing** for the pages
+   most worth ranking first (a new domain is crawled slowly): `/`, `/maryland-famli-calculator`,
+   `/dmv-employer-cost-index`, `/compare`, `/data-library`, `/peo-pricing-explained`, `/states/md`, `/states/dc`,
+   `/states/va`. Do the FAMLI page first: its searches peak in December and January.
+2b. **Bing Webmaster Tools** (bing.com/webmasters) › sign in › **Import from Google Search Console** (no second DNS
+   record needed) › confirm the sitemap is listed. Bing's index feeds ChatGPT search, Copilot and DuckDuckGo.
+2c. Cloudflare › peonomics.com › Caching › Configuration › **Crawler Hints: On**. Cloudflare then tells
+   IndexNow-participating search engines (Bing, Yandex and others) when a page changes, at no cost; no code or key
+   file in the repo is needed.
 3. Cloudflare › Web Analytics is already injected by Pages (cookieless). Product events
    (calculator use, lookup, comparator, report requests) are counted by `/api/event` into
    Cloudflare Workers Analytics Engine **only if** you bind a dataset: Pages › peonomicsv2 ›

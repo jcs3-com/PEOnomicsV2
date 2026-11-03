@@ -102,9 +102,8 @@
    },
    {
     "week": "2027-03-29",
-    "open": 2,
+    "open": 1,
     "suggest": [
-     "2027-03-30",
      "2027-04-01"
     ]
    },
@@ -126,10 +125,9 @@
    },
    {
     "week": "2027-04-19",
-    "open": 2,
+    "open": 1,
     "suggest": [
-     "2027-04-20",
-     "2027-04-22"
+     "2027-04-20"
     ]
    },
    {
@@ -394,7 +392,7 @@
     ]
    }
   ],
-  "openSlots": 77
+  "openSlots": 75
  },
  "items": [
   {
@@ -978,8 +976,8 @@
     ]
    ],
    "estimates": [],
-   "text": "Starting Jan. 1, Maryland employers pay into FAMLI\n\nStarting Jan. 1, 2027, Maryland employers remit FAMLI contributions: 0.90% of wages up to the Social Security wage base ($192,300 in 2027).\n\nEmployers with 15 or more employees pay at least half (0.45%) and may withhold the rest from pay. That is up to $865.35 per employee at the wage cap. Smaller employers owe no employer share but must remit what they withhold. Benefits begin by Jan. 3, 2028.\n\nSource: Maryland FAMLI law via Jackson Lewis; SSA 2027 wage base\n\nDC, MD and VA employer costs, side by side: https://peonomics.com/dmv-employer-cost-index\n\nPEOnomics · PEO cost intelligence\n\n#Maryland #PaidLeave #Payroll",
-   "url": "https://peonomics.com/dmv-employer-cost-index",
+   "text": "Starting Jan. 1, Maryland employers pay into FAMLI\n\nStarting Jan. 1, 2027, Maryland employers remit FAMLI contributions: 0.90% of wages up to the Social Security wage base ($192,300 in 2027).\n\nEmployers with 15 or more employees pay at least half (0.45%) and may withhold the rest from pay. That is up to $865.35 per employee at the wage cap. Smaller employers owe no employer share but still remit the 0.45% employee share. Benefits begin by Jan. 3, 2028.\n\nSource: Maryland Department of Labor; SSA 2027 wage base\n\nCalculate your FAMLI cost: https://peonomics.com/maryland-famli-calculator\n\nPEOnomics · PEO cost intelligence\n\n#Maryland #PaidLeave #Payroll",
+   "url": "https://peonomics.com/maryland-famli-calculator",
    "image": "https://peonomics.com/assets/images/posts/md-famli-2027-2026-12-15.png",
    "figures": {
     "total": 0.009,
@@ -989,6 +987,7 @@
     "benefits": "2028-01-03",
     "base27": 192300,
     "erMax": 865.3499999999999,
+    "ee": 0.0045,
     "event": "2027-01-01"
    },
    "imageBytes": 46907
@@ -1867,6 +1866,98 @@
     "total": 82568.26
    },
    "imageBytes": 59371
+  },
+  {
+   "id": "md-famli-first-payment-2027-2027-03-30",
+   "series": "md-famli-first-payment-2027",
+   "kind": "countdown",
+   "label": "Countdown",
+   "liveDate": "2027-03-30",
+   "liveAt": "2027-03-30T09:00:00-04:00",
+   "pubDate": "Tue, 30 Mar 2027 09:00:00 -0400",
+   "event": "2027-04-30",
+   "daysToEvent": 31,
+   "milestone": "1m",
+   "cardTag": null,
+   "key": null,
+   "headline": "1 month until the first Maryland FAMLI payment is due",
+   "cardTitle": "First Maryland FAMLI payment due",
+   "cardSub": "",
+   "stats": [
+    [
+     "Total rate",
+     "0.90%"
+    ],
+    [
+     "Employer share",
+     "0.45%"
+    ],
+    [
+     "Due",
+     "April 30, 2027"
+    ]
+   ],
+   "estimates": [],
+   "text": "1 month until the first Maryland FAMLI payment is due\n\nMaryland's first quarterly FAMLI payment is due April 30, 2027, covering wages paid since Jan. 1, 2027. The wage and hour report is filed with it.\n\nThe payment is 0.90% of each employee's wages up to $192,300: the 0.45% employer share at 15 or more employees, plus the 0.45% employee share whether you withheld it or not. Employers under 15 remit the employee share only.\n\nSource: Maryland Department of Labor\n\nEstimate your quarterly FAMLI payment: https://peonomics.com/maryland-famli-calculator\n\nPEOnomics · PEO cost intelligence\n\n#Maryland #PaidLeave #Payroll",
+   "url": "https://peonomics.com/maryland-famli-calculator",
+   "image": "https://peonomics.com/assets/images/posts/md-famli-first-payment-2027-2027-03-30.png",
+   "figures": {
+    "total": 0.009,
+    "er": 0.0045,
+    "ee": 0.0045,
+    "thr": 15,
+    "start": "2027-01-01",
+    "due": "2027-04-30",
+    "base27": 192300,
+    "event": "2027-04-30"
+   },
+   "imageBytes": 42774
+  },
+  {
+   "id": "md-famli-first-payment-2027-2027-04-23",
+   "series": "md-famli-first-payment-2027",
+   "kind": "countdown",
+   "label": "Countdown",
+   "liveDate": "2027-04-23",
+   "liveAt": "2027-04-23T09:00:00-04:00",
+   "pubDate": "Fri, 23 Apr 2027 09:00:00 -0400",
+   "event": "2027-04-30",
+   "daysToEvent": 7,
+   "milestone": "1w",
+   "cardTag": null,
+   "key": null,
+   "headline": "1 week until the first Maryland FAMLI payment is due",
+   "cardTitle": "First Maryland FAMLI payment due",
+   "cardSub": "",
+   "stats": [
+    [
+     "Total rate",
+     "0.90%"
+    ],
+    [
+     "Employer share",
+     "0.45%"
+    ],
+    [
+     "Due",
+     "April 30, 2027"
+    ]
+   ],
+   "estimates": [],
+   "text": "1 week until the first Maryland FAMLI payment is due\n\nMaryland's first quarterly FAMLI payment is due April 30, 2027, covering wages paid since Jan. 1, 2027. The wage and hour report is filed with it.\n\nThe payment is 0.90% of each employee's wages up to $192,300: the 0.45% employer share at 15 or more employees, plus the 0.45% employee share whether you withheld it or not. Employers under 15 remit the employee share only.\n\nSource: Maryland Department of Labor\n\nEstimate your quarterly FAMLI payment: https://peonomics.com/maryland-famli-calculator\n\nPEOnomics · PEO cost intelligence\n\n#Maryland #PaidLeave #Payroll",
+   "url": "https://peonomics.com/maryland-famli-calculator",
+   "image": "https://peonomics.com/assets/images/posts/md-famli-first-payment-2027-2027-04-23.png",
+   "figures": {
+    "total": 0.009,
+    "er": 0.0045,
+    "ee": 0.0045,
+    "thr": 15,
+    "start": "2027-01-01",
+    "due": "2027-04-30",
+    "base27": 192300,
+    "event": "2027-04-30"
+   },
+   "imageBytes": 42554
   },
   {
    "id": "va-min-wage-2028-2027-11-02",

@@ -2,7 +2,7 @@
 
 **Audience:** any AI agent (Claude or otherwise) asked to create, edit, debug, or audit this
 site in any chat. Read this file *first*, before touching anything.
-**Last updated:** 2026-11-03 (quote file drop + comparison report on /compare; prior: auto-post feed for the LinkedIn page; prior: 2026 sourced dataset, extensionless URLs, shared chrome)
+**Last updated:** 2026-11-03 (Maryland FAMLI calculator, `tools/build_og.py`; prior: quote file drop + comparison report on /compare; prior: auto-post feed for the LinkedIn page; prior: 2026 sourced dataset, extensionless URLs, shared chrome)
 
 ---
 
@@ -105,6 +105,9 @@ assets/js/quote-parse.js        In-browser quote file reader (PDF via pdf.js@3.1
 assets/js/compare-report.js     Comparator "Want the full report?" (status → Turnstile → POST kind:"compare").
 functions/lib/compare-model.js  Server comparator model (parity-tested), analysis, deterministic "questions to ask", PDF lines.
 assets/js/data-library.js       Renders rates-2026.json (state tables, sources) and benchmarks-2026.json.
+maryland-famli-calculator.html  Maryland FAMLI calculator (deadline page). Model assets/js/famli-calc.js (pure window.PEOFamli);
+                                all rules/dates from data/dmv-index-2026.json paidLeave.MD. Tests: tests/test_famli.py + .mjs.
+tools/build_og.py               Per-page OG cards (assets/images/og-<slug>.png) from data; same look as the post cards.
 data/benchmarks-2026.json       Sourced 2026 federal/national figures (not used by the Cost Lab model).
 functions/lib/                  validate.js, report-model.js, simple-pdf.js, simple-xlsx.js (shared code).
 functions/api/report-*.js       report-request (POST) and report-status (GET).

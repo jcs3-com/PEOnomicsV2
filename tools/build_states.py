@@ -11,6 +11,7 @@ sys.path.insert(0, os.path.join(ROOT, 'tools'))
 from site_chrome import nav, footer  # noqa: E402
 
 R = json.load(open(os.path.join(ROOT, 'data', 'rates-2026.json')))
+DMV = json.load(open(os.path.join(ROOT, 'data', 'dmv-index-2026.json')))
 META = R['meta']
 OUT = os.path.join(ROOT, 'states')
 os.makedirs(OUT, exist_ok=True)
@@ -171,6 +172,12 @@ for ab, s in R['states'].items():
         notes.append(f"<p><strong>Monopolistic workers&rsquo; comp:</strong> employers in {esc(name)} buy coverage from the state fund, so a PEO master policy cannot replace it.</p>")
     if sui_note:
         notes.append(f'<p><strong>SUTA note:</strong> {sui_note}</p>')
+    if ab == 'MD':  # Maryland FAMLI (from dmv-index-2026.json): the one state payroll tax starting in 2027
+        fm, base27 = DMV['paidLeave']['MD'], DMV['federal']['socialSecurityWageBase2027']['value']
+        notes.append(f"<p><strong>Maryland FAMLI from January 1, 2027:</strong> {pct(fm['totalRate'], 2)} of wages up to "
+                     f"{money(base27)}, split {pct(fm['employerRate'], 2)} employer and {pct(fm['employeeRate'], 2)} employee. "
+                     f"Employers with fewer than {fm['smallEmployerThreshold']} employees owe no employer share but still remit the employee share. "
+                     f"<a href=\"/maryland-famli-calculator\">Run your payroll in the FAMLI calculator</a>.</p>")
     body = f"""<main class="section compare-main"><div class="shell">
   <div class="eyebrow"><a href="/states/">State rates</a> / {esc(name)}</div>
   <h1>Employer costs in {esc(name)}, <em>2026.</em></h1>

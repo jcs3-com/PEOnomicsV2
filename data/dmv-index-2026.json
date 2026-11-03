@@ -33,15 +33,25 @@
       "name": "Maryland FAMLI",
       "totalRate": 0.009,
       "employerRate": 0.0045,
+      "employeeRate": 0.0045,
+      "maxTotalRate": 0.012,
       "smallEmployerThreshold": 15,
       "wageBase": "socialSecurityWageBase",
       "contributionsBegin": "2027-01-01",
+      "firstRemittanceDue": "2027-04-30",
+      "employeeNoticeBeforeDeductions": "one pay period before payroll deductions begin",
+      "employeeNoticeAll": "2027-07",
+      "privatePlanDeclarationDeadline": "2026-11-15",
       "benefitsBegin": "2028-01-03",
-      "note": "Total 0.90% of wages up to the Social Security wage base. Employers with 15 or more employees pay at least half and may withhold up to half (0.45%) from pay. Employers with fewer than 15 owe no employer share but must remit any employee share they withhold. Benefits begin no later than Jan 3, 2028.",
+      "headcountRule": "Count employees inside and outside Maryland; independent contractors excluded. For 2027, size is measured each quarter from the Quarterly Wage and Hour Report; from 2028, on the average of the previous four quarters.",
+      "note": "Total 0.90% of wages up to the Social Security wage base, for employees in positions localized in Maryland. Employers with 15 or more employees pay the 0.45% employer share and may withhold up to the 0.45% employee share from pay. Employers with fewer than 15 owe no employer share but still remit the 0.45% employee share. Any employer may pay all or part of the employee share itself. Employees cannot opt out. Contributions and wage and hour reports are filed quarterly; the first payment, for wages paid Jan 1 to Mar 31, 2027, is due Apr 30, 2027. The rate may not exceed 1.2%. Benefits begin no later than Jan 3, 2028.",
       "sources": [
+        { "name": "Maryland Department of Labor, FAMLI: make contributions (reviewed Nov 3, 2026)", "url": "https://paidleave.maryland.gov/employers/make-contributions/" },
+        { "name": "Maryland Department of Labor, FAMLI: employers (reviewed Nov 3, 2026)", "url": "https://paidleave.maryland.gov/employers/" },
         { "name": "Jackson Lewis, Maryland employers' FAMLI contributions begin Jan 2027 (Jul 7, 2026)", "url": "https://www.jacksonlewis.com/insights/maryland-employers-famli-contributions-begin-jan-2027" },
         { "name": "Maryland Daily Record, Maryland prepares for paid family leave (Oct 14, 2026)", "url": "https://thedailyrecord.com/2026/10/14/maryland-prepares-paid-family-leave-2028/" }
       ],
+      "reviewed": "2026-11-03",
       "confidence": "high"
     }
   },

@@ -241,6 +241,20 @@ with sync_playwright() as p:
         check('2026.1' in csvt and 'Employer single health <50 EEs 2025' in csvt, f'{name}: data CSV')
         check(no_overflow(pg), f'{name}: data overflow')
 
+        # ---- Maryland FAMLI calculator ----
+        pg.goto(BASE + '/maryland-famli-calculator.html'); pg.wait_for_selector('#famli-calc.is-ready')
+        val = lambda i: pg.locator('#' + i).inner_text()
+        check(val('famli-employer') == '$5,400' and val('famli-remitted') == '$10,800' and val('famli-paycheck') == '$10.38', f'{name}: FAMLI defaults render')
+        pg.fill('#famli-total', '12'); pg.fill('#famli-md', '12')
+        check(val('famli-employer') == '$0' and val('famli-remitted') == '$3,240', f'{name}: FAMLI under 15 = employee share only')
+        pg.fill('#famli-total', '30'); pg.click('#famli-cover-100')
+        check(val('famli-employer') == '$6,480' and val('famli-withheld') == '$0', f'{name}: FAMLI 15+ counts all locations; employer covers all')
+        pg.click('#famli-cover-0'); pg.click('#famli-calc summary'); pg.fill('#famli-paste', '250,000\n$50,000\nbonus')
+        check(val('famli-remitted') == '$2,181' and '1 line ignored' in val('famli-note') and 'wage cap' in val('famli-note'), f'{name}: FAMLI pasted wages, cap and ignored line')
+        pg.select_option('#famli-freq', '12')
+        check(val('famli-paycheck') == '$45.43', f'{name}: FAMLI monthly paycheck deduction')
+        check(no_overflow(pg), f'{name}: FAMLI overflow')
+
         # ---- Privacy draft ----
         pg.goto(BASE + '/privacy.html')
         check(pg.locator('h1').count() == 1 and 'noindex' in (pg.locator('meta[name=robots]').get_attribute('content') or ''), f'{name}: privacy draft noindex')

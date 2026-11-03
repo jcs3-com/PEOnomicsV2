@@ -3,7 +3,7 @@
 This file is the **only** source of truth for what is done, open, dropped, or pending a decision.
 Not chat history. Not artifacts. When you finish or add work, update this file in the same commit.
 
-**Last updated:** 2026-11-03 (Comparator report sends with incomplete quotes + owner copy; earlier today: drag-and-drop quote files parsed in the browser + emailed comparison report. Report delivery LIVE in production 2026-11-03. Prior: Homepage first screen simplified to email box + slider Cost Lab. Prior: auto-post feed for the LinkedIn page; DMV Employer Cost Index; VA SUI 2.73%. Prior: activation release: health check, shared rate limiter, scenario logging, Turnstile key via env; data/unification/analytics releases follow)
+**Last updated:** 2026-11-03 (Maryland FAMLI calculator page + FAMLI rule correction + first-payment countdown posts + Bing/Crawler Hints owner steps; earlier today: Comparator report sends with incomplete quotes + owner copy; earlier today: drag-and-drop quote files parsed in the browser + emailed comparison report. Report delivery LIVE in production 2026-11-03. Prior: Homepage first screen simplified to email box + slider Cost Lab. Prior: auto-post feed for the LinkedIn page; DMV Employer Cost Index; VA SUI 2.73%. Prior: activation release: health check, shared rate limiter, scenario logging, Turnstile key via env; data/unification/analytics releases follow)
 
 ---
 
@@ -230,6 +230,27 @@ Not chat history. Not artifacts. When you finish or add work, update this file i
 - **Owner setup done 2026-11-03:** `USAGE_WEBHOOK_URL`, `RESEND_API_KEY`, `REPORT_FROM`, `TURNSTILE_SITE_KEY`,
   `TURNSTILE_SECRET` live in production (`/api/health` all true); first real report logged requested → accepted.
 
+- **Maryland FAMLI calculator (2026-11-03, traffic strategy):** `/maryland-famli-calculator` — a deadline page aimed at
+  the December–January search spike before contributions start Jan 1, 2027. Inputs: employees in all locations (the
+  15-employee test counts out-of-state staff), Maryland employees, average wage or a pasted wage column (exact, per-person
+  cap), share of the employee half the employer covers, pay frequency. Outputs: employer cost, withholding, total remitted,
+  quarterly payment, per-employee cost, per-paycheck deduction. Also a salary table, a dated to-do list (private-plan
+  declaration Nov 15, 2026; registration; employee notice one pay period before deductions; first payment Apr 30, 2027;
+  July 2027 notices; benefits by Jan 3, 2028), FAQ (`FAQPage` JSON-LD), citation block, sources. Model
+  `assets/js/famli-calc.js` (pure `window.PEOFamli`); every rate, cap and date is read from `data/dmv-index-2026.json`.
+  Event: existing `calc_used` (state MD, band, outcome `average_wage`/`pasted_wages`; no typed values).
+  - **Data correction:** Maryland Labor's own page says employers under 15 still remit the 0.45% employee share (employees
+    can't opt out). The old note and the Dec 15 post said they remit only "what they withhold." Fixed in
+    `dmv-index-2026.json` (new fields: `employeeRate`, `maxTotalRate`, `firstRemittanceDue`, `headcountRule`, notice and
+    private-plan dates, MD Labor sources), the DMV index timeline and the post copy. Index figures unchanged (employer share only).
+  - Wiring: footer link site-wide (`site_chrome.py` → `unify_pages.py` + `build_states.py`), FAMLI note on `/states/md`,
+    link from the DMV index timeline. Dec 15 FAMLI post now links to the calculator; new countdown
+    `md-famli-first-payment-2027` (Mar 30 and Apr 23, 2027 → 38 posts). Per-page OG card `assets/images/og-famli.png` from
+    new `tools/build_og.py` (figures read from data, same look as the post cards).
+  - Tests: `tests/test_famli.py` (62: every static figure, FAQ ↔ JSON-LD, og:description re-derived from data),
+    `tests/test_famli.mjs` (27: model incl. small-employer, out-of-state headcount, cap, cover share, paste parsing),
+    `tests/test_browser.py` +12 (desktop + mobile).
+
 ## 🔲 Open — prioritized
 
 ### P0.1 — owner-only setup (credentials; Claude must not handle them) — step-by-step in `docs/OWNER_SETUP.md`
@@ -242,8 +263,10 @@ Not chat history. Not artifacts. When you finish or add work, update this file i
       secret → Pages secret `TURNSTILE_SECRET`. Check `/api/health`.
 - [ ] **WAF rate-limit rule** on `/api/enrich` and `/api/report-request` (in-code limiter is per-isolate).
 - [ ] **Analytics Engine binding** `EVENTS` (dataset `peonomics_events`) so product events are stored; then a
-      saved SQL query for weekly counts. **Search Console** domain property via DNS TXT + submit sitemap.
-      (No Search Console connector exists for Claude; owner step in `docs/OWNER_SETUP.md` §6.)
+      saved SQL query for weekly counts. **Search Console** domain property via DNS TXT + submit sitemap + request
+      indexing for the priority pages (FAMLI first); **Bing Webmaster Tools** (import from Search Console); Cloudflare
+      **Crawler Hints** on (IndexNow). As of 2026-11-03 a `site:peonomics.com` web search returned no pages.
+      (No Search Console connector exists for Claude; owner steps in `docs/OWNER_SETUP.md` §6.)
 - [ ] **Zapier Zap for the LinkedIn page** (`docs/OWNER_SETUP.md` §7): RSS `https://peonomics.com/api/feed` →
       LinkedIn *Create Company Update* on the PEOnomics page. First post goes live Oct 30, 2026 9:00 ET. Don't run
       Zapier's action test early (it publishes).
@@ -289,12 +312,20 @@ Not chat history. Not artifacts. When you finish or add work, update this file i
       2027* rotation after the DOL Significant Provisions January 2027 edition and the DMV agency rate pages are
       sourced; extend the state cost note when MEPS-IC 2026 (~mid-2027) and QCEW 2026 (~Sept 2027) are rebuilt
       (bump each rotation's validFrom/validUntil). The audit view lists what's queued.
+- [ ] **Earned links (manual, owner):** ask DMV resource pages to list the FAMLI calculator and DMV index — Maryland SBDC,
+      DC SBDC (Howard), Virginia SBDC, DC / Montgomery County / Northern Virginia chambers, Restaurant Association
+      Metropolitan Washington; data pitches to local business press (one sourced figure, link to the citation block);
+      journalist-request services (Qwoted, Featured, Source of Sources). Claude can draft pitches; the owner sends.
+- [ ] **FAMLI page upkeep:** Maryland Labor announces each year's rate from Nov 2027 (ceiling 1.2%) and the 2028 headcount
+      test switches to a four-quarter average; add the 2028 Social Security base when SSA publishes it (Oct 2027). Update
+      `data/dmv-index-2026.json` (or its 2027 successor), re-derive the page, `tests/test_famli.py` lists what moved.
+      Confirm the private-plan Declaration of Intent date against a Maryland Labor page (currently Jackson Lewis).
 - [ ] **Answer-site distribution (manual only):** Reddit, Quora, forums, Facebook groups — answer specific questions
       and link the relevant page. Never automate it (bans; low-quality signal). Personal LinkedIn profile is out of scope by owner direction.
 
 ### P2 — hygiene & polish
-- [ ] **Per-page OG images.** All pages currently share `og-default.png`. Page-specific cards
-      (e.g. "Best PEOs for Construction 2026") convert better — generate per template later.
+- [ ] **Per-page OG images.** `tools/build_og.py` now draws page cards from data (first: `og-famli.png`). Add the DMV
+      index, `/compare` and the state pages next; everything else still shares `og-default.png`.
 - [ ] **Verify JSON-LD `datePublished`.** New Article/Org blocks use the site's existing
       convention (`2026-01-15`) with `dateModified` = today. Correct if real publish dates are known.
 - [ ] **Content-page body styling**: chrome is unified, but article/ranking bodies still carry ~150 inline

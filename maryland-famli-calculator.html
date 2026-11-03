@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maryland FAMLI Calculator 2027: Employer Cost | PEOnomics</title>
+<meta name="description" content="What Maryland FAMLI costs your payroll from January 1, 2027: employer share, employee withholding, quarterly payment and the small-employer rule, every figure sourced.">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="stylesheet" href="/assets/css/tokens.css">
+<link rel="stylesheet" href="/assets/css/site.css">
+<link rel="stylesheet" href="/assets/css/cost-lab.css">
+<link rel="stylesheet" href="/assets/css/compare.css">
+<style>
+.famli-hero h1{max-width:22ch;}
+.famli-hero .hero-sub{max-width:64ch;}
+.famli-hero .hero-stats{flex-wrap:wrap;}
+.famli-hero .hero-stat{min-width:0;flex:1 1 180px;}
+.famli-hero .hero-stat p{font-size:13.5px;color:var(--muted);margin:4px 0 0;max-width:30ch;}
+.famli-calc{background:var(--bg-elev);border:1px solid var(--border);padding:clamp(16px,3vw,28px);margin-top:20px;}
+.famli-controls{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0 16px;}
+@media(max-width:720px){.famli-controls{grid-template-columns:1fr;}}
+.famli-seg{display:flex;border:1px solid var(--border);}
+.famli-seg button{flex:1;font-family:var(--f-mono);font-size:13px;padding:10px 6px;border:0;background:var(--bg);color:var(--text);cursor:pointer;}
+.famli-seg button+button{border-left:1px solid var(--border);}
+.famli-seg button[aria-pressed="true"]{background:var(--ink);color:var(--ink-text);}
+.famli-calc details{border:1px solid var(--border);background:var(--bg);padding:12px 14px;margin:4px 0 18px;}
+.famli-calc summary{cursor:pointer;font-size:13px;font-weight:600;}
+.famli-calc summary small{font-weight:400;color:var(--muted);}
+.famli-calc textarea{width:100%;min-height:120px;margin-top:10px;padding:10px 12px;border:1px solid var(--border);background:var(--bg-elev);color:var(--text);font-family:var(--f-mono);font-size:13px;border-radius:var(--r-sm);resize:vertical;}
+.famli-calc textarea:focus{outline:2px solid var(--accent);outline-offset:-1px;border-color:var(--accent);}
+.famli-results{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:2px solid var(--text);margin-top:6px;}
+@media(max-width:720px){.famli-results{grid-template-columns:repeat(2,minmax(0,1fr));}}
+.famli-results div{padding:14px 14px 14px 0;border-bottom:1px solid var(--border);min-width:0;}
+.famli-results small{display:block;font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);}
+.famli-results .num{display:block;font-size:clamp(20px,2.4vw,26px);font-weight:600;margin-top:4px;}
+.famli-results .is-key .num{color:var(--accent);}
+.famli-note{font-size:14px;color:var(--muted);border-left:2px solid var(--border);padding-left:12px;margin:18px 0 0;max-width:72ch;}
+.famli-steps{list-style:none;margin:16px 0 0;padding:0;border-top:1px solid var(--border);max-width:var(--w-prose);}
+.famli-steps li{padding:16px 0;border-bottom:1px solid var(--border);display:grid;grid-template-columns:170px minmax(0,1fr);gap:4px 20px;}
+@media(max-width:600px){.famli-steps li{grid-template-columns:1fr;}}
+.famli-steps time,.famli-steps .when{font-family:var(--f-mono);font-size:12.5px;color:var(--accent-hover);}
+.famli-steps p{margin:0;font-size:15px;}
+.famli-faq{max-width:var(--w-prose);margin-top:12px;border-top:1px solid var(--border);}
+.famli-faq h3{font-family:var(--f-body);font-size:16.5px;font-weight:600;margin:18px 0 6px;}
+.famli-faq p{margin:0 0 16px;font-size:15px;}
+.famli-faq div{border-bottom:1px solid var(--border);}
+.famli-method{margin:14px 0 0;padding-left:18px;max-width:var(--w-prose);font-size:15px;}
+.famli-method li{margin-bottom:8px;}
+.famli-cite{display:flex;flex-wrap:wrap;gap:12px;align-items:center;border:1px solid var(--text);background:var(--bg-elev);padding:16px 18px;margin-top:16px;max-width:var(--w-prose);}
+.famli-cite code{font-family:var(--f-mono);font-size:13px;flex:1 1 280px;min-width:0;overflow-wrap:anywhere;}
+.famli-copy{font-family:var(--f-mono);font-size:13px;padding:8px 14px;border:1px solid var(--accent);background:transparent;color:var(--accent);cursor:pointer;}
+.famli-copy:hover{background:var(--accent-dim);}
+.famli-page .lab-cta-buttons{align-items:center;gap:16px;}
+</style>
+<link rel="canonical" href="https://peonomics.com/maryland-famli-calculator">
+<meta property="og:title" content="Maryland FAMLI Calculator 2027: Employer Cost | PEOnomics">
+<meta property="og:description" content="Maryland FAMLI starts Jan. 1, 2027: 0.90% of wages, split 0.45% employer and 0.45% employee. Up to $865.35 per employee per year in employer cost. Run your payroll.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://peonomics.com/maryland-famli-calculator">
+<meta property="og:image" content="https://peonomics.com/assets/images/og-famli.png">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "name": "Maryland FAMLI calculator", "url": "https://peonomics.com/maryland-famli-calculator", "applicationCategory": "BusinessApplication", "operatingSystem": "Any", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "description": "Calculates Maryland FAMLI employer contributions, employee withholding and the quarterly payment from January 1, 2027, from the published rate, wage cap and 15-employee rule.", "creator": {"@type": "Organization", "name": "PEOnomics", "url": "https://peonomics.com/"}}, {"@type": "Article", "headline": "Maryland FAMLI calculator 2027", "description": "What Maryland FAMLI costs an employer from January 1, 2027: employer share, employee withholding, quarterly payments and the small-employer rule.", "datePublished": "2026-11-03", "dateModified": "2026-11-03", "author": {"@type": "Organization", "name": "PEOnomics"}, "publisher": {"@type": "Organization", "name": "PEOnomics", "url": "https://peonomics.com/"}, "mainEntityOfPage": "https://peonomics.com/maryland-famli-calculator", "about": {"@type": "AdministrativeArea", "name": "Maryland"}}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Who pays Maryland FAMLI?", "acceptedAnswer": {"@type": "Answer", "text": "The total contribution is 0.90% of wages up to the Social Security wage base ($192,300 in 2027). Employers with 15 or more employees pay a 0.45% employer share and may withhold up to the 0.45% employee share from pay. Employers may also pay all or part of the employee share themselves."}}, {"@type": "Question", "name": "Do employers with fewer than 15 employees pay FAMLI?", "acceptedAnswer": {"@type": "Answer", "text": "They owe no employer share, but they still remit the 0.45% employee share for every employee in a position localized in Maryland. Even an employer with one Maryland employee must register."}}, {"@type": "Question", "name": "How are the 15 employees counted?", "acceptedAnswer": {"@type": "Answer", "text": "Count employees inside and outside Maryland; independent contractors do not count. For 2027, size is measured each quarter from the Quarterly Wage and Hour Report. From 2028 it is the average of the previous four quarters."}}, {"@type": "Question", "name": "What is the FAMLI wage cap for 2027?", "acceptedAnswer": {"@type": "Answer", "text": "Contributions apply to wages up to the Social Security wage base, which is $192,300 for 2027. At or above the cap the employer share is $865.35 per employee per year."}}, {"@type": "Question", "name": "When is the first FAMLI payment due?", "acceptedAnswer": {"@type": "Answer", "text": "Contributions and wage and hour reports are filed every quarter. The first payment, for wages paid January 1 to March 31, 2027, is due April 30, 2027."}}, {"@type": "Question", "name": "Can employees opt out of FAMLI?", "acceptedAnswer": {"@type": "Answer", "text": "No. Participation is mandatory for employees working in positions localized in Maryland."}}, {"@type": "Question", "name": "Can my payroll provider or CPA file FAMLI for me?", "acceptedAnswer": {"@type": "Answer", "text": "A third-party agent such as a CPA or payroll, HR or benefits provider cannot register on your behalf. After you register, you can authorize one through a power of attorney to file quarterly reports and contributions."}}]}]}
+</script>
+</head>
+<body>
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">PEO<span class="accent">nomics</span></a>
+    <ul class="nav-links">
+      <li><a href="/compare">Compare quotes</a></li>
+      <li><a href="/data-library">Data library</a></li>
+      <li><a href="/states/">State rates</a></li>
+      <li><a href="/peo-pricing-explained">Pricing, explained</a></li>
+      <li><a href="/#cost-lab" class="nav-cta">Open the Cost Lab</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="section compare-main famli-page">
+  <div class="shell">
+
+    <header class="famli-hero">
+      <div class="eyebrow">Maryland FAMLI &middot; contributions begin January 1, 2027 &middot; rules reviewed Nov 3, 2026</div>
+      <h1>Maryland FAMLI starts January 1. Here is what it costs <em>your payroll.</em></h1>
+      <p class="hero-sub">Maryland&rsquo;s Family and Medical Leave Insurance program takes 0.90% of wages, up to the Social Security wage base, for every employee working in Maryland. Who pays which half depends on your headcount. Enter yours below; the arithmetic uses only the published rules.</p>
+      <div class="hero-stats" aria-label="Maryland FAMLI key figures for 2027">
+        <div class="hero-stat"><span class="num">0.90%</span><small>Total rate, 2027</small><p>of wages up to $192,300, split 0.45% employer and 0.45% employee</p></div>
+        <div class="hero-stat"><span class="num">$865.35</span><small>Employer share at the cap</small><p>per employee per year, for employers with 15 or more employees</p></div>
+        <div class="hero-stat"><span class="num">Apr 30, 2027</span><small>First payment due</small><p>covering wages paid January 1 to March 31, 2027</p></div>
+      </div>
+    </header>
+
+    <section class="compare-section" aria-labelledby="calc-title">
+      <h2 id="calc-title">What FAMLI costs you</h2>
+      <p class="sec-sub">Enter your headcount and pay. Nothing you type leaves your browser.</p>
+      <div class="famli-calc" id="famli-calc">
+        <div class="famli-controls">
+          <div class="field">
+            <label for="famli-total">Employees, all locations</label>
+            <input id="famli-total" type="number" inputmode="numeric" min="1" step="1" value="20">
+            <div class="hint">Decides the 15-employee line. Count staff in every state; leave out contractors.</div>
+          </div>
+          <div class="field">
+            <label for="famli-md">Of those, working in Maryland</label>
+            <input id="famli-md" type="number" inputmode="numeric" min="0" step="1" value="20">
+            <div class="hint">Employees in positions localized in Maryland pay in.</div>
+          </div>
+          <div class="field">
+            <label for="famli-avg">Average annual wage, Maryland staff</label>
+            <input id="famli-avg" type="number" inputmode="numeric" min="0" step="1000" value="60000">
+            <div class="hint">2027 wages. Contributions stop at $192,300 per person.</div>
+          </div>
+          <div class="field">
+            <label id="famli-cover-label">You pay of the employee half</label>
+            <div class="famli-seg" role="group" aria-labelledby="famli-cover-label">
+              <button type="button" id="famli-cover-0" aria-pressed="true">None</button>
+              <button type="button" id="famli-cover-50" aria-pressed="false">Half</button>
+              <button type="button" id="famli-cover-100" aria-pressed="false">All</button>
+            </div>
+            <div class="hint">&ldquo;None&rdquo; withholds the full 0.45% from pay, the most the law allows.</div>
+          </div>
+          <div class="field">
+            <label for="famli-freq">Pay frequency</label>
+            <select id="famli-freq">
+              <option value="52">Weekly (52)</option>
+              <option value="26" selected>Biweekly (26)</option>
+              <option value="24">Semimonthly (24)</option>
+              <option value="12">Monthly (12)</option>
+            </select>
+          </div>
+        </div>
+        <details>
+          <summary>Paste each employee&rsquo;s wage instead <small>&middot; exact for uneven pay and high earners</small></summary>
+          <textarea id="famli-paste" aria-label="Annual wages, one per line" spellcheck="false" placeholder="One annual wage per line, copied from a payroll report column:&#10;48,500&#10;$62,000&#10;210000"></textarea>
+        </details>
+        <div class="famli-results" aria-live="polite">
+          <div class="is-key"><small>Your cost per year</small><span class="num mono" id="famli-employer">$5,400</span></div>
+          <div><small>Withheld from pay per year</small><span class="num mono" id="famli-withheld">$5,400</span></div>
+          <div><small>Total you remit per year</small><span class="num mono" id="famli-remitted">$10,800</span></div>
+          <div><small>Each quarterly payment</small><span class="num mono" id="famli-quarter">$2,700</span></div>
+          <div><small>Your cost per employee</small><span class="num mono" id="famli-per-ee">$270</span></div>
+          <div><small>Deduction per paycheck</small><span class="num mono" id="famli-paycheck">$10.38</span></div>
+        </div>
+        <p class="famli-note" id="famli-note">With 20 employees you owe the 0.45% employer share. Count employees in every state, not just Maryland.</p>
+      </div>
+    </section>
+
+    <section class="compare-section" aria-labelledby="table-title">
+      <h2 id="table-title">FAMLI per employee, by salary</h2>
+      <p class="sec-sub">Annual 2027 contributions for one employee at an employer with 15 or more employees, withholding the full employee share. Under 15 employees, the employer column is $0 and the employee column is unchanged.</p>
+      <div class="compare-scroll">
+        <table class="rate-table data-table" id="famli-table"><caption>Maryland FAMLI contributions per employee per year, 2027</caption>
+          <thead><tr><th scope="col">Annual wage</th><th scope="col" class="num">Employer share</th><th scope="col" class="num">Employee share</th><th scope="col" class="num">Total remitted</th></tr></thead>
+          <tbody>
+            <tr><th scope="row" class="mono">$35,000</th><td class="num mono">$157.50</td><td class="num mono">$157.50</td><td class="num mono">$315.00</td></tr>
+            <tr><th scope="row" class="mono">$50,000</th><td class="num mono">$225.00</td><td class="num mono">$225.00</td><td class="num mono">$450.00</td></tr>
+            <tr><th scope="row" class="mono">$60,000</th><td class="num mono">$270.00</td><td class="num mono">$270.00</td><td class="num mono">$540.00</td></tr>
+            <tr><th scope="row" class="mono">$75,000</th><td class="num mono">$337.50</td><td class="num mono">$337.50</td><td class="num mono">$675.00</td></tr>
+            <tr><th scope="row" class="mono">$100,000</th><td class="num mono">$450.00</td><td class="num mono">$450.00</td><td class="num mono">$900.00</td></tr>
+            <tr><th scope="row" class="mono">$150,000</th><td class="num mono">$675.00</td><td class="num mono">$675.00</td><td class="num mono">$1,350.00</td></tr>
+            <tr><th scope="row" class="mono">$192,300 or more</th><td class="num mono">$865.35</td><td class="num mono">$865.35</td><td class="num mono">$1,730.70</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="compare-section" aria-labelledby="steps-title">
+      <h2 id="steps-title">What to do, and by when</h2>
+      <ul class="famli-steps">
+        <li><time datetime="2026-11-15">Nov 15, 2026</time><p>Deadline to file a Declaration of Intent if you plan to use a private plan instead of the state plan (per Jackson Lewis). Private plans may not withhold more from employees than the state rate.</p></li>
+        <li><span class="when">Before your first 2027 payroll</span><p>Register in the FAMLI portal if you have at least one Maryland employee. A payroll provider or CPA cannot register for you, but can file for you afterward under a power of attorney.</p></li>
+        <li><span class="when">One pay period before deductions</span><p>If you will withhold the employee share, give employees written notice at least one pay period before deductions begin.</p></li>
+        <li><time datetime="2027-01-01">Jan 1, 2027</time><p>Contributions begin on wages paid from this date: 0.45% employer share at 15 or more employees, up to 0.45% withheld from pay, both capped at the $192,300 Social Security wage base.</p></li>
+        <li><time datetime="2027-04-30">Apr 30, 2027</time><p>First quarterly payment and wage and hour report due, covering wages paid January 1 to March 31, 2027. Reports and payments are filed electronically every quarter after that.</p></li>
+        <li><time datetime="2027-07">July 2027</time><p>All employers give employees notice of FAMLI rights, six months before benefits begin; then at hire and once a year.</p></li>
+        <li><time datetime="2028-01-03">Jan 3, 2028</time><p>Benefits become available, no later than this date.</p></li>
+      </ul>
+    </section>
+
+    <section class="compare-section" aria-labelledby="faq-title">
+      <h2 id="faq-title">Questions employers ask</h2>
+      <div class="famli-faq">
+        <div><h3>Who pays Maryland FAMLI?</h3><p>The total contribution is 0.90% of wages up to the Social Security wage base ($192,300 in 2027). Employers with 15 or more employees pay a 0.45% employer share and may withhold up to the 0.45% employee share from pay. Employers may also pay all or part of the employee share themselves; the state notes this can have tax consequences, so check with your accountant.</p></div>
+        <div><h3>Do employers with fewer than 15 employees pay FAMLI?</h3><p>They owe no employer share, but they still remit the 0.45% employee share for every employee in a position localized in Maryland. Even an employer with one Maryland employee must register.</p></div>
+        <div><h3>How are the 15 employees counted?</h3><p>Count employees inside and outside Maryland; independent contractors do not count. For 2027, size is measured each quarter from the Quarterly Wage and Hour Report. From 2028 it is the average of the previous four quarters, and an average below 15 sets the lower rate for the following year.</p></div>
+        <div><h3>What is the FAMLI wage cap for 2027?</h3><p>Contributions apply to wages up to the Social Security wage base, which is $192,300 for 2027. At or above the cap the employer share is $865.35 per employee per year.</p></div>
+        <div><h3>When is the first FAMLI payment due?</h3><p>Contributions and wage and hour reports are filed every quarter. The first payment, for wages paid January 1 to March 31, 2027, is due April 30, 2027.</p></div>
+        <div><h3>Can employees opt out of FAMLI?</h3><p>No. Participation is mandatory for employees working in positions localized in Maryland.</p></div>
+        <div><h3>Can my payroll provider or CPA file FAMLI for me?</h3><p>A third-party agent such as a CPA or payroll, HR or benefits provider cannot register on your behalf. After you register, you can authorize one through a power of attorney to file quarterly reports and contributions.</p></div>
+      </div>
+    </section>
+
+    <section class="compare-section" aria-labelledby="method-title">
+      <h2 id="method-title">How the calculator works</h2>
+      <ul class="famli-method">
+        <li>Each employee&rsquo;s wage is capped at the 2027 Social Security wage base of $192,300, then multiplied by the 0.45% employer rate (15 or more employees only) and the 0.45% employee rate.</li>
+        <li>The quarterly payment is the annual total divided by four, which assumes pay is spread evenly across the year. Bonuses or seasonal staff shift money between quarters.</li>
+        <li>Headcount uses the number you enter. In 2027 the state measures size each quarter, so an employer near 15 can cross the line mid-year.</li>
+        <li>Not modeled: private plans, mid-year hires and departures, and rates after 2027. The rate is capped at 1.2% by law; Maryland Labor announces each year&rsquo;s rate starting November 2027.</li>
+        <li>Rates, cap and dates are read from <a href="/data/dmv-index-2026.json">dmv-index-2026.json</a>, the same file behind the <a href="/dmv-employer-cost-index">DMV Employer Cost Index</a>.</li>
+      </ul>
+    </section>
+
+    <div class="panel lab-cta">
+      <div><h3>FAMLI is one line of your employer cost</h3><p>Compare it with DC and Virginia in the DMV Employer Cost Index, or model your whole payroll, with or without a PEO, in the Cost Lab.</p></div>
+      <div class="lab-cta-buttons"><a href="/dmv-employer-cost-index" class="btn-go">DMV Employer Cost Index &rarr;</a> <a href="/?state=MD#cost-lab" class="cta-link">Model Maryland in the Cost Lab</a></div>
+    </div>
+
+    <section class="compare-section" aria-labelledby="cite-title">
+      <h2 id="cite-title">Cite this calculator</h2>
+      <p class="sec-sub">Accountants, HR writers and reporters are welcome to link to or quote these figures.</p>
+      <div class="famli-cite">
+        <code id="famli-cite-text">PEOnomics, &ldquo;Maryland FAMLI calculator,&rdquo; 2027 rules, reviewed November 3, 2026. https://peonomics.com/maryland-famli-calculator</code>
+        <button type="button" class="famli-copy" id="famli-copy">Copy citation</button>
+      </div>
+    </section>
+
+    <section class="compare-section" aria-labelledby="src-title">
+      <h2 id="src-title">Sources</h2>
+      <ul class="src-list">
+        <li><strong>Maryland Department of Labor &mdash; FAMLI: make contributions</strong><a class="mono" href="https://paidleave.maryland.gov/employers/make-contributions/" rel="noopener">paidleave.maryland.gov</a><span>0.9% rate and 50/50 split, Social Security wage cap, 15-employee rule and how employees are counted, small-employer obligation, quarterly filing, first payment due April 30, 2027, 1.2% ceiling.</span></li>
+        <li><strong>Maryland Department of Labor &mdash; FAMLI: employers</strong><a class="mono" href="https://paidleave.maryland.gov/employers/" rel="noopener">paidleave.maryland.gov</a><span>Registration, employee notices, third-party agents and power of attorney.</span></li>
+        <li><strong>Jackson Lewis &mdash; Maryland FAMLI contributions begin Jan 2027 (Jul 7, 2026)</strong><a class="mono" href="https://www.jacksonlewis.com/insights/maryland-employers-famli-contributions-begin-jan-2027" rel="noopener">jacksonlewis.com</a><span>Private plan Declaration of Intent window (Sept 1 to Nov 15, 2026) and benefit start by January 3, 2028.</span></li>
+        <li><strong>Journal of Accountancy &mdash; 2027 Social Security wage base (Oct 2026)</strong><a class="mono" href="https://www.journalofaccountancy.com/news/2026/oct/social-security-wage-base-and-cola-announced-for-2027/" rel="noopener">journalofaccountancy.com</a><span>2027 wage base of $192,300.</span></li>
+      </ul>
+    </section>
+  </div>
+</main>
+
+<footer class="footer">
+  <div><span class="footer-brand">PEO<span class="accent">nomics</span></span><br>Free, independent PEO cost comparison. Estimates are not quotes or advice.</div>
+  <div>
+    <a href="/#cost-lab">Cost Lab</a>
+    <a href="/compare">Compare quotes</a>
+    <a href="/data-library">Data library</a>
+    <a href="/states/">State rates</a>
+    <a href="/dmv-employer-cost-index">DMV cost index</a>
+    <a href="/maryland-famli-calculator">MD FAMLI calculator</a>
+    <a href="/peo-pricing-explained">Pricing, explained</a>
+    <a href="/hidden-costs">Hidden costs</a>
+    <a href="/insights">Guides &amp; rankings</a>
+    <a href="/methodology">Methodology &amp; disclosures</a>
+    <a href="/about">About</a>
+    <a href="/privacy">Privacy (draft)</a>
+    <a href="https://github.com/jcs3-com/PEOnomicsV2">Dataset on GitHub</a>
+  </div>
+  <p class="footer-disclosure">The Cost Lab, Quote Comparator and Data Library assume no PEO savings, favor no provider, and send nothing to any PEO.</p>
+</footer>
+
+<script src="/assets/js/famli-calc.js" defer></script>
+<script src="/assets/js/track.js" defer></script>
+</body>
+</html>
