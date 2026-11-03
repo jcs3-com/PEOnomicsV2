@@ -99,7 +99,7 @@ export function makeCompareXlsx(c,evals,an){
       return q[k]===null?`<c r="${r}" s="0"/>`:num(r,q[k],0);})]));
   }
   inRows.push(row(18,[str('A18','Source of figures'),...c.quotes.map((q,i)=>str(cols[i]+'18',Object.entries(q.src).filter(([,v])=>v!=='typed').map(([k,v])=>k+': '+v).join(', ')||'typed'))]));
-  inRows.push(row(20,[str('A20','Blank = not stated (not zero). A proposal gets totals only when rows 11–17 are all filled.')]));
+  inRows.push(row(20,[str('A20','Blank = not stated (not zero). Each line prices on its own; totals appear once rows 11–17 are all filled. Type a missing term and the Comparison sheet updates.')]));
   const sh1=xmlSheet(inRows,'<col min="1" max="1" width="40" customWidth="1"/><col min="2" max="4" width="24" customWidth="1"/>');
 
   const I=cell=>`'Inputs'!${cell}`;
@@ -117,16 +117,20 @@ export function makeCompareXlsx(c,evals,an){
   };
   const rows=[row(1,[str('A1','Annual cost',1),...c.quotes.map((q,i)=>fxv(cols[i]+'1',I(cols[i]+'9'),q.label))])];
   const order=['Admin','SUTA','Workers comp','Employer health','EPLI','Other'];
-  order.forEach((k,j)=>{const n=j+2;rows.push(row(n,[str('A'+n,k),...evals.map((r,i)=>fxv(cols[i]+n,IF(cols[i],lineExpr[k](cols[i])),val(r,x=>x.parts[k])))]));});
+  // each line prices on its own term; "Not stated" only when that term is blank
+  const lineCell={'Admin':'11','SUTA':'13','Workers comp':'14','Employer health':'15','EPLI':'16','Other':'17','Year-one setup':'12'};
+  const LINE=(L,k)=>`IF(ISBLANK(${I(L+lineCell[k])}),"Not stated",${lineExpr[k](L)})`;
+  const lv=(r,k)=>r.parts[k]===null?'Not stated':r.parts[k];
+  order.forEach((k,j)=>{const n=j+2;rows.push(row(n,[str('A'+n,k),...evals.map((r,i)=>fxv(cols[i]+n,LINE(cols[i],k),lv(r,k)))]));});
   rows.push(row(8,[str('A8','Recurring annual',1),...evals.map((r,i)=>fxv(cols[i]+'8',IF(cols[i],`SUM(${cols[i]}2:${cols[i]}7)`),val(r,x=>x.recurring),3))]));
-  rows.push(row(9,[str('A9','Year-one setup'),...evals.map((r,i)=>fxv(cols[i]+'9',IF(cols[i],lineExpr['Year-one setup'](cols[i])),val(r,x=>x.parts['Year-one setup'])))]));
+  rows.push(row(9,[str('A9','Year-one setup'),...evals.map((r,i)=>fxv(cols[i]+'9',LINE(cols[i],'Year-one setup'),lv(r,'Year-one setup')))]));
   rows.push(row(10,[str('A10','Year one total',1),...evals.map((r,i)=>fxv(cols[i]+'10',IF(cols[i],`${cols[i]}8+${cols[i]}9`),val(r,x=>x.yearOne),3))]));
   rows.push(row(11,[str('A11','Year two'),...evals.map((r,i)=>fxv(cols[i]+'11',IF(cols[i],`${cols[i]}8`),val(r,x=>x.recurring)))]));
   rows.push(row(12,[str('A12','Year three'),...evals.map((r,i)=>fxv(cols[i]+'12',IF(cols[i],`${cols[i]}8`),val(r,x=>x.recurring)))]));
   rows.push(row(13,[str('A13','Three-year total',1),...evals.map((r,i)=>fxv(cols[i]+'13',IF(cols[i],`${cols[i]}8*3+${cols[i]}9`),val(r,x=>x.threeYear),3))]));
   rows.push(row(14,[str('A14','All-in per employee per month, year one'),...evals.map((r,i)=>fxv(cols[i]+'14',IF(cols[i],`${cols[i]}10/${I('$B$3')}/12`),val(r,x=>x.yearOne/cm.employees/12)))]));
   const rng=`$B$10:$${cols[cols.length-1]}$10`;
-  rows.push(row(15,[str('A15','Above lowest, year one'),...evals.map((r,i)=>fxv(cols[i]+'15',IF(cols[i],`${cols[i]}10-MIN(${rng})`),val(r,x=>x.yearOne-(an.low?an.low.yearOne:x.yearOne))))]));
+  rows.push(row(15,[str('A15','Above lowest, year one'),...evals.map((r,i)=>fxv(cols[i]+'15',IF(cols[i],`${cols[i]}10-MIN(${rng})`),val(r,x=>x.yearOne-Math.min(...evals.filter(e=>!e.missing.length).map(e=>e.yearOne)))))]));
   rows.push(row(17,[str('A17','Note'),str('B17','Years two and three repeat year-one pricing. Employer FICA/FUTA excluded (identical under every PEO).')]));
   const sh2=xmlSheet(rows,'<col min="1" max="1" width="40" customWidth="1"/><col min="2" max="4" width="22" customWidth="1"/>');
   const wb=`<?xml version="1.0" encoding="UTF-8"?><workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"><sheets><sheet name="Inputs" sheetId="1" r:id="rId1"/><sheet name="Comparison" sheetId="2" r:id="rId2"/></sheets><calcPr calcId="191029" fullCalcOnLoad="1"/></workbook>`;

@@ -39,7 +39,7 @@ site in any chat. Read this file *first*, before touching anything.
 - **Serverless:** Cloudflare **Pages Functions** in `functions/api/`. A file at
   `functions/api/<name>.js` becomes a live endpoint at `/api/<name>`. Current endpoints:
   `POST /api/enrich` (business-email lookup — validates, enriches by domain, logs, fails closed),
-  `POST /api/report-request` (Turnstile → server recompute → log → Resend PDF+XLSX; `kind:"compare"` = Quote Comparator report),
+  `POST /api/report-request` (Turnstile → server recompute → log → Resend PDF+XLSX; `kind:"compare"` = Quote Comparator report: any quote with ≥1 figure; optional owner copy to Pages variable `REPORT_COPY_TO`),
   `GET /api/report-status` (`{available, siteKey}` — public Turnstile key only), `GET /api/health` (booleans:
   which secrets production sees, never values), `POST /api/event` (allowlisted, PII-free product events →
   Analytics Engine binding `EVENTS` if present), `GET /api/feed` (auto-post RSS for the LinkedIn page; `?audit=1` = weekly

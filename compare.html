@@ -77,9 +77,9 @@
     <section class="panel compare-report" aria-labelledby="rep-title">
       <div class="compare-report-copy">
         <h3 id="rep-title">Want the full report?</h3>
-        <p class="compare-report-teaser" id="reportTeaser" aria-live="polite">Complete at least two proposals to build the report.</p>
+        <p class="compare-report-teaser" id="reportTeaser" aria-live="polite">Drop in or type at least one quote to build the report. Missing numbers are fine.</p>
         <ul class="compare-report-list">
-          <li>Year-by-year cost and all-in cost per employee per month for each quote</li>
+          <li>Every line priced from what each quote states, with year-by-year totals once a quote is complete</li>
           <li>What drives the gap between them, line by line</li>
           <li>The questions to put to each provider before you sign &mdash; built from what each quote leaves unstated</li>
           <li>Which figures came from your files and which you typed</li>
@@ -88,6 +88,7 @@
       <form class="compare-report-form" id="reportForm" novalidate>
         <label for="reportEmail">Business email</label>
         <div class="quote-box"><input type="email" id="reportEmail" name="email" placeholder="you@yourcompany.com" autocomplete="email" aria-describedby="reportNote"><button type="submit" class="btn-go" id="sendReport" disabled>Send me the report</button></div>
+        <label class="compare-report-help"><input type="checkbox" id="reportHelp" name="help"> Help me fill in what's missing &mdash; reply to me by email</label>
         <p class="compare-report-note" id="reportNote">Emailed reports are being connected. Nothing is sent yet &mdash; use Download CSV for now.</p>
       </form>
     </section>

@@ -1,13 +1,14 @@
 /* PEOnomics — "Want the full report?" for the Quote Comparator.
    Same delivery rules as the Cost Lab report (report-client.js): the form only
    enables when /api/report-status says delivery is configured, a public Turnstile
-   key exists, the visitor passes Turnstile, and at least two proposals are complete.
+   key exists, the visitor passes Turnstile, and at least one quote figure is entered
+   (incomplete quotes are fine: the report prices what is stated).
    Sends the typed inputs (never the files); the server recomputes everything.
    The UI reports "accepted for delivery", never "delivered". */
 (() => {
   'use strict';
   const $ = id => document.getElementById(id);
-  const form = $('reportForm'), btn = $('sendReport'), note = $('reportNote'), teaser = $('reportTeaser'), emailIn = $('reportEmail');
+  const form = $('reportForm'), btn = $('sendReport'), note = $('reportNote'), teaser = $('reportTeaser'), emailIn = $('reportEmail'), helpIn = $('reportHelp');
   if (!form || !btn || !note || !window.PEOCompare) return;
   const status = msg => { note.textContent = msg; };
   const money = v => '$' + Math.round(v).toLocaleString('en-US');
@@ -19,7 +20,7 @@
   const ERR = {
     business_email_required: 'Use a company email address. Personal email providers are not supported.',
     invalid_compare: 'One of the inputs is out of range, so no report was sent. Check the highlighted fields.',
-    need_two: 'Complete at least two proposals first.',
+    empty_compare: 'Enter or drop at least one quote figure first.',
     challenge_failed: 'Verification failed or expired. Please verify again.',
     report_unconfigured: OFF,
     log_unavailable: "The request couldn't be recorded, so nothing was sent. Please try again later.",
@@ -28,15 +29,18 @@
     rate_limited: 'Too many report requests from this connection. Please try again later. Nothing was sent.'
   };
 
-  let available = false, token = '', sending = false, widgetId = null, ready = 0;
-  const sync = () => { btn.disabled = !(available && token && ready >= 2 && !sending); };
+  let available = false, token = '', sending = false, widgetId = null, ready = 0, started = 0;
+  // Any quote with at least one figure can be sent: incomplete quotes are reported line by line.
+  const sync = () => { btn.disabled = !(available && token && started >= 1 && !sending); };
+  const countStarted = () => (window.PEOCompare.snapshot().quotes || []).filter(q => window.PEOCompare.REQUIRED.some(k => q[k] !== null)).length;
 
   // Live teaser: what the report will say, computed from the comparison on screen.
   const LINES = ['Admin', 'SUTA', 'Workers comp', 'Employer health', 'EPLI', 'Other', 'Year-one setup'];
   function update(done) {
-    ready = done.length;
-    if (ready < 2) {
-      teaser.textContent = ready === 1 ? 'One complete proposal so far. Complete a second to build the report.' : 'Complete at least two proposals to build the report.';
+    ready = done.length; started = countStarted();
+    if (!started) teaser.textContent = 'Drop in or type at least one quote to build the report.';
+    else if (ready < 2) {
+      teaser.textContent = `Missing some numbers? Send it anyway. The report prices every line you have${started > 1 ? ' for all ' + started + ' quotes' : ''}, lists what's missing, and gives you the questions that get it filled in.`;
     } else {
       const hi = done.reduce((a, b) => (b.yearOne > a.yearOne ? b : a)), lo = done.reduce((a, b) => (b.yearOne < a.yearOne ? b : a));
       const gap = hi.yearOne - lo.yearOne;
@@ -57,7 +61,7 @@
     if (sending) return;
     const email = emailIn.value.trim();
     if (!businessEmail(email)) { status(ERR.business_email_required); emailIn.focus(); return; }
-    if (ready < 2) { status(ERR.need_two); return; }
+    if (!started) { status(ERR.empty_compare); return; }
     if (!token) { status('Complete the verification first.'); return; }
     sending = true; sync();
     status('Building your PDF and Excel workbook…');
@@ -65,7 +69,7 @@
       const snap = window.PEOCompare.snapshot();
       const res = await fetch('/api/report-request', {
         method: 'POST', headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({ kind: 'compare', email, compare: snap, turnstileToken: token, requestId: crypto.randomUUID() })
+        body: JSON.stringify({ kind: 'compare', email, compare: snap, help: !!(helpIn && helpIn.checked), turnstileToken: token, requestId: crypto.randomUUID() })
       });
       const j = await res.json().catch(() => ({}));
       window.peoTrack && window.peoTrack('report_requested', { outcome: res.ok && j.ok ? 'accepted' : (j.error || 'error'), employees: snap.common.employees });
@@ -85,7 +89,7 @@
     if (!window.turnstile) { status('Verification could not load, so email reports are unavailable right now.'); return; }
     widgetId = window.turnstile.render(box, {
       sitekey: key, action: 'report',
-      callback: t => { token = t; sync(); status(ready >= 2 ? 'Verified. Enter your business email and send.' : 'Verified. Complete a second proposal, then send.'); },
+      callback: t => { token = t; sync(); status(started ? 'Verified. Enter your business email and send.' : 'Verified. Add at least one quote figure, then send.'); },
       'expired-callback': () => { token = ''; sync(); status('Verification expired. Please verify again.'); },
       'error-callback': () => { token = ''; sync(); status('Verification unavailable. Please try again.'); }
     });
@@ -98,8 +102,8 @@
       available = j.available === true;
       if (!KEY_RE.test(key) && typeof j.siteKey === 'string') key = j.siteKey.trim();
     } catch { available = false; }
-    if (!available || !KEY_RE.test(key)) { available = false; emailIn.disabled = true; status(OFF); sync(); return; }
-    status('PDF + editable Excel to your business email. No sales calls; nothing goes to any PEO. We may send one optional survey invitation about 30 days later, with an opt-out.');
+    if (!available || !KEY_RE.test(key)) { available = false; emailIn.disabled = true; if (helpIn) helpIn.disabled = true; status(OFF); sync(); return; }
+    status('PDF + editable Excel to your business email. A copy comes to PEOnomics; we reply only if you tick the box above. Nothing goes to any PEO. We may send one optional survey invitation about 30 days later, with an opt-out.');
     note.after(box);
     const s = document.createElement('script');
     s.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';

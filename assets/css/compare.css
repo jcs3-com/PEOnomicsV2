@@ -106,6 +106,9 @@
 .compare-report-form label{display:block;font-size:13px;font-weight:600;margin-bottom:6px;}
 .compare-report-form .quote-box{max-width:none;}
 .compare-report-form .quote-box input:disabled{cursor:not-allowed;}
+.compare-report-help{display:flex!important;gap:8px;align-items:flex-start;font-weight:400!important;font-size:13.5px!important;margin:12px 0 0!important;cursor:pointer;}
+.compare-report-help input{margin:3px 0 0;accent-color:var(--accent);}
+.compare-table td.unstated{color:var(--ink-faint);}
 .compare-report-note{font-size:12.5px;color:var(--muted);margin:10px 0 0;}
 .compare-report .lab-challenge{margin-top:12px;}
 @media(max-width:860px){.compare-report{grid-template-columns:minmax(0,1fr);gap:18px;}}

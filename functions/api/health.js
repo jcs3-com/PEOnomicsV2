@@ -12,7 +12,7 @@ export async function onRequestGet({ env }) {
     ok: true,
     lookup: { ready: has('USAGE_WEBHOOK_URL'), usageLog: has('USAGE_WEBHOOK_URL'), research: has('ANTHROPIC_API_KEY') },
     reports: { ready: reportConfigured(e) && siteKey, usageLog: has('USAGE_WEBHOOK_URL'), resendKey: has('RESEND_API_KEY'),
-      sender: has('REPORT_FROM'), turnstileSecret: has('TURNSTILE_SECRET'), turnstileSiteKey: siteKey }
+      sender: has('REPORT_FROM'), ownerCopy: has('REPORT_COPY_TO'), turnstileSecret: has('TURNSTILE_SECRET'), turnstileSiteKey: siteKey }
   };
   return new Response(JSON.stringify(body), { headers: { 'content-type': 'application/json', 'cache-control': 'no-store' } });
 }

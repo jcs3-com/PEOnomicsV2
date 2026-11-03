@@ -1,7 +1,10 @@
 /* POST /api/report-request
    body: {"email","snapshot":{...Cost Lab inputs},"turnstileToken","requestId":uuid}
-     or  {"kind":"compare","email","compare":{common,quotes[1-3]},"turnstileToken","requestId"}
-         (Quote Comparator report: PDF + XLSX of the comparison; >= 2 complete proposals)
+     or  {"kind":"compare","email","compare":{common,quotes[1-3]},"help":bool,"turnstileToken","requestId"}
+         (Quote Comparator report: PDF + XLSX of the comparison. Any quote with at least one
+          figure is accepted; missing terms are reported as "not stated". If the Pages variable
+          REPORT_COPY_TO is set, a copy goes there with Reply-To = the visitor; help:true marks
+          that the visitor asked for a reply.)
 
    Emails the visitor a PDF + editable XLSX of THEIR Cost Lab scenario.
    - Business email only (same rules as /api/enrich: functions/lib/validate.js).
@@ -20,7 +23,7 @@
 import { parseSnapshot, calculate, reportLines } from '../lib/report-model.js';
 import { makeReportPdf, base64Bytes } from '../lib/simple-pdf.js';
 import { makeReportXlsx, makeCompareXlsx } from '../lib/simple-xlsx.js';
-import { parseCompare, evaluate as evaluateCompare, analyze as analyzeCompare, compareLines, scenarioString as compareScenario } from '../lib/compare-model.js';
+import { parseCompare, evaluate as evaluateCompare, analyze as analyzeCompare, compareLines, scenarioString as compareScenario, started as quoteStarted } from '../lib/compare-model.js';
 import { parseBusinessEmail } from '../lib/validate.js';
 import { rateLimited } from '../lib/ratelimit.js';
 
@@ -151,15 +154,18 @@ export async function onRequestPost({ request, env }) {
   return RESP({ ok: true, status: 'accepted_for_delivery', requestId });
 }
 
-async function sendMail(env, requestId, to, subject, text, attachments) {
+async function sendMail(env, key, to, subject, text, attachments, replyTo) {
   try {
+    const msg = { from: env.REPORT_FROM, to: [to], subject, text, attachments };
+    if (replyTo) msg.reply_to = replyTo;
     return await fetch('https://api.resend.com/emails', {
       method: 'POST', signal: AbortSignal.timeout(15000),
-      headers: { 'Authorization': 'Bearer ' + env.RESEND_API_KEY, 'Content-Type': 'application/json', 'Idempotency-Key': 'peonomics-report-' + requestId },
-      body: JSON.stringify({ from: env.REPORT_FROM, to: [to], subject, text, attachments })
+      headers: { 'Authorization': 'Bearer ' + env.RESEND_API_KEY, 'Content-Type': 'application/json', 'Idempotency-Key': key },
+      body: JSON.stringify(msg)
     });
   } catch { return null; }
 }
+const COPY_TO = /^[^\s@<>",]+@[a-z0-9.-]+\.[a-z]{2,}$/i;
 
 /* Quote Comparator report. Same order of operations as the Cost Lab report:
    validate -> Turnstile -> log request -> render -> send -> log outcome. */
@@ -170,13 +176,15 @@ async function compareReport(body, parsed, requestId, ip, env) {
     evals = evaluateCompare(c.common, c.quotes);
     an = analyzeCompare(c, evals);
   } catch { return RESP({ ok: false, error: 'invalid_compare' }, 400); }
-  if (an.completeCount < 2) return RESP({ ok: false, error: 'need_two' }, 400);
+  if (!c.quotes.some(quoteStarted)) return RESP({ ok: false, error: 'empty_compare' }, 400);
+  const help = body.help === true;
   if (!(await verifyTurnstile(env.TURNSTILE_SECRET, body.turnstileToken, ip))) return RESP({ ok: false, error: 'challenge_failed' }, 403);
 
   const base = {
     event: 'report_requested', timestamp: new Date().toISOString(), email: parsed.email, domain: parsed.domain,
     company: '', state: '', industry: '', employees: c.common.employees, page: 'compare',
     source: 'quote comparator', requestId, scenario: compareScenario(c),
+    summary: `${an.completeCount} of ${c.quotes.length} complete` + (help ? '; HELP REQUESTED' : ''),
     annualCurrent: '', annualPeo: '', annualDelta: ''
   };
   if (!(await record(env.USAGE_WEBHOOK_URL, base))) return RESP({ ok: false, error: 'log_unavailable' }, 503);
@@ -188,17 +196,32 @@ async function compareReport(body, parsed, requestId, ip, env) {
     return RESP({ ok: false, error: 'render_failed' }, 500);
   }
   const filename = `PEOnomics_Quote_Comparison_${new Date().toISOString().slice(0, 10)}.pdf`;
-  const response = await sendMail(env, requestId, parsed.email, 'Your PEOnomics quote comparison',
+  const attachments = [{ filename, content: base64Bytes(pdf) }, { filename: filename.replace(/\.pdf$/, '.xlsx'), content: base64Bytes(xlsx) }];
+  const response = await sendMail(env, 'peonomics-report-' + requestId, parsed.email, 'Your PEOnomics quote comparison',
     'Attached are the PDF report and editable Excel workbook of the quote comparison you built on PEOnomics.\n\n' +
     'They use only the terms you entered (or that your browser read from your quote files; the files themselves never reached us). ' +
     'The report includes the questions to put to each provider before you sign. It is a comparison of stated terms, not advice.\n\n' +
+    (help ? 'You asked for help filling in the missing numbers. We will reply to this address.\n\n' : '') +
     'We may send one optional survey invitation about 30 days from now; it will include a way to opt out. ' +
     'We do not sell or forward your details to PEO providers.\n\nPEOnomics - https://peonomics.com/compare',
-    [{ filename, content: base64Bytes(pdf) }, { filename: filename.replace(/\.pdf$/, '.xlsx'), content: base64Bytes(xlsx) }]);
+    attachments);
   const sent = response?.ok === true;
   const sendJson = sent ? await response.json().catch(() => ({})) : {};
+  // Owner copy (reply goes straight to the visitor). Never blocks or fails the visitor's report.
+  let copyNote = '';
+  const copyTo = String(env.REPORT_COPY_TO || '').trim();
+  if (sent && COPY_TO.test(copyTo)) {
+    const missing = an.per.filter(a => a.started && !a.complete).map(a => `${a.label}: missing ${evals[an.per.indexOf(a)].missing.join(', ')}`);
+    const copy = await sendMail(env, 'peonomics-report-copy-' + requestId, copyTo,
+      `[PEOnomics] Comparison ${help ? 'HELP REQUESTED ' : ''}— ${parsed.email} (${an.completeCount}/${c.quotes.length} complete)`,
+      `Report requested on /compare by ${parsed.email}${help ? ' — they asked for help filling in missing numbers (Reply goes to them).' : ' — no help requested; they were told we reply only if asked.'}\n\n` +
+      (missing.length ? 'Missing:\n- ' + missing.join('\n- ') + '\n\n' : 'All quotes complete.\n\n') +
+      'Inputs: ' + compareScenario(c) + '\n\nRequest ID ' + requestId, attachments, parsed.email);
+    copyNote = copy?.ok === true ? 'copy_sent' : 'copy_failed_' + (copy ? copy.status : 'network');
+  }
   await record(env.USAGE_WEBHOOK_URL, { ...base, event: sent ? 'report_accepted' : 'report_failed',
-    timestamp: new Date().toISOString(), providerMessageId: sendJson.id || '', summary: sent ? '' : 'provider_status_' + (response ? response.status : 'network') });
+    timestamp: new Date().toISOString(), providerMessageId: sendJson.id || '',
+    summary: sent ? [base.summary, copyNote].filter(Boolean).join('; ') : 'provider_status_' + (response ? response.status : 'network') });
   if (!sent) return RESP({ ok: false, error: 'email_unavailable' }, 502);
   return RESP({ ok: true, status: 'accepted_for_delivery', requestId });
 }

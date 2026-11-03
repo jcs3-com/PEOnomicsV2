@@ -43,6 +43,7 @@ await t('server model == on-page comparator (random scenarios, both fee bases, b
     const s = evaluate(c.common, c.quotes), w = client(common, quotes);
     s.forEach((r, i) => {
       assert.deepEqual(r.missing, w[i].missing);
+      for (const k of Object.keys(r.parts)) { if (r.parts[k] === null) assert.equal(w[i].parts[k], null, 'unstated ' + k); else near(r.parts[k], w[i].parts[k], 'partial ' + k); }
       if (!r.missing.length) { near(r.yearOne, w[i].yearOne, 'yearOne'); near(r.threeYear, w[i].threeYear, 'threeYear'); for (const k of Object.keys(r.parts)) near(r.parts[k], w[i].parts[k], k); }
     });
   }
@@ -61,7 +62,10 @@ await t('analysis: lowest, all-in PEPM, gap driver, incomplete proposal', () => 
   assert.equal(a0.completeCount, 2); assert.equal(a0.low.label, 'Insperity');
   near(a0.per[0].pepmAllIn, e0[0].yearOne / 25 / 12, 'pepm all-in');
   assert.equal(a0.per[1].driver.line, 'Admin'); near(a0.per[1].gap, e0[1].yearOne - e0[0].yearOne, 'gap');
-  assert.equal(a0.per[2].complete, false); assert.match(a0.per[2].questions[0], /workers' comp rate/);
+  assert.equal(a0.per[2].complete, false); assert.match(a0.per[2].questions[0], /^Not stated: workers' comp rate/);
+  assert.equal(e0[2].parts['Workers comp'], null); near(e0[2].parts['Admin'], 25 * 160 * 12, 'partial admin still priced');
+  near(a0.per[2].statedAnnual, e0[2].parts['Admin'] + e0[2].parts['SUTA'] + e0[2].parts['Employer health'] + e0[2].parts['EPLI'], 'stated so far');
+  assert.ok(a0.per[2].questions.some(q => /\$160\.00 PEPM/.test(q)), 'questions still cover the terms that are stated');
 });
 await t('questions follow the entered terms', () => {
   const q0 = a0.per[0].questions.join(' '), q1 = a0.per[1].questions.join(' ');
@@ -72,7 +76,7 @@ await t('questions follow the entered terms', () => {
 await t('PDF: table, totals, provenance tags, questions, limitations', () => {
   assert.ok(pdfTxt.startsWith('%PDF-1.4'));
   for (const s of ['PEO QUOTE COMPARISON', '$' + Math.round(e0[0].yearOne).toLocaleString('en-US'), '$' + Math.round(e0[1].threeYear).toLocaleString('en-US'),
-    'Incomplete', 'QUESTIONS TO PUT TO EACH PROVIDER', '\\(file\\)', '\\(check\\)', '\\(edited\\)', 'did not receive your files', 'WHAT SEPARATES THEM'])
+    'Incomplete', 'not stated', 'Stated so far, annual', 'QUESTIONS TO PUT TO EACH PROVIDER', '\\(file\\)', '\\(check\\)', '\\(edited\\)', 'did not receive your files', 'WHAT SEPARATES THEM'])
     assert.ok(pdfTxt.includes(s), 'PDF missing ' + s);
 });
 if (process.env.WRITE_SAMPLES) { fs.writeFileSync(process.env.WRITE_SAMPLES + '/sample_comparison.pdf', pdf); fs.writeFileSync(process.env.WRITE_SAMPLES + '/sample_comparison.xlsx', xlsx); }
@@ -87,7 +91,8 @@ if (soffice) await t('XLSX recalculated in LibreOffice matches the server; blank
   const n = s => Number(String(s).replace(/[^0-9.\-]/g, ''));
   assert.ok(Math.abs(n(r('Year one total')[1]) - e0[0].yearOne) < 1 && Math.abs(n(r('Year one total')[2]) - e0[1].yearOne) < 1, 'year one ' + r('Year one total'));
   assert.ok(Math.abs(n(r('Three-year total')[2]) - e0[1].threeYear) < 1, 'three-year');
-  assert.equal(r('Year one total')[3], 'Incomplete'); assert.equal(r('Admin')[3], 'Incomplete');
+  assert.equal(r('Year one total')[3], 'Incomplete'); assert.equal(r('Workers comp')[3], 'Not stated');
+  assert.ok(Math.abs(n(r('Admin')[3]) - 25 * 160 * 12) < 1, 'incomplete quote still prices its stated lines: ' + r('Admin'));
   assert.ok(Math.abs(n(r('Above lowest, year one')[2]) - (e0[1].yearOne - e0[0].yearOne)) < 1, 'above lowest');
   assert.equal(r('Annual cost')[1], 'Insperity');
 });
@@ -119,9 +124,31 @@ await t('compare report: logged, two attachments named for the comparison, serve
   const p = Buffer.from(send.body.attachments[0].content, 'base64').toString('latin1');
   assert.ok(p.includes('$' + Math.round(e0[0].yearOne).toLocaleString('en-US')));
 });
-await t('fewer than two complete proposals -> need_two before Turnstile', async () => {
-  reset(); const r = await call({ ...BODY, compare: { ...SNAP, quotes: [SNAP.quotes[0], SNAP.quotes[2]] } });
-  assert.equal(r.status, 400); assert.equal(r.body.error, 'need_two'); assert.equal(calls.length, 0);
+await t('incomplete quotes are accepted: one partial quote is enough', async () => {
+  reset(); const r = await call({ ...BODY, compare: { ...SNAP, quotes: [{ label: 'Only a fee', feeBasis: 'pepm', fee: 150, setup: null, suta: null, wc: null, health: null, epli: null, other: null }] } });
+  assert.equal(r.status, 200); assert.match(events[0].summary, /^0 of 1 complete/);
+  const p = Buffer.from(calls.find(c => typeof c === 'object').body.attachments[0].content, 'base64').toString('latin1');
+  assert.ok(p.includes('$45,000') && p.includes('no ranking yet'), 'partial admin line priced, no ranking claimed');
+});
+await t('no figures at all -> empty_compare before Turnstile', async () => {
+  reset(); const blank = { label: 'x', feeBasis: 'pepm', fee: null, setup: null, suta: null, wc: null, health: null, epli: null, other: null };
+  const r = await call({ ...BODY, compare: { ...SNAP, quotes: [blank, blank] } });
+  assert.equal(r.status, 400); assert.equal(r.body.error, 'empty_compare'); assert.equal(calls.length, 0);
+});
+await t('owner copy: sent to REPORT_COPY_TO with Reply-To = visitor; help flag in subject and log', async () => {
+  reset(); const res = await onRequestPost({ request: new Request('https://peonomics.com/api/report-request', { method: 'POST', headers: { origin: 'https://peonomics.com', 'content-type': 'application/json' }, body: JSON.stringify({ ...BODY, help: true }) }), env: { ...ENV, REPORT_COPY_TO: 'owner@peonomics-test.com' } });
+  assert.equal(res.status, 200);
+  const sends = calls.filter(c => typeof c === 'object');
+  assert.equal(sends.length, 2);
+  assert.deepEqual(sends[0].body.to, ['owner@samplebusiness.com']); assert.match(sends[0].body.text, /asked for help/);
+  assert.deepEqual(sends[1].body.to, ['owner@peonomics-test.com']); assert.equal(sends[1].body.reply_to, 'owner@samplebusiness.com');
+  assert.match(sends[1].body.subject, /HELP REQUESTED/); assert.match(sends[1].body.text, /Proposal C: missing wc/); assert.equal(sends[1].body.attachments.length, 2);
+  assert.match(events[0].summary, /2 of 3 complete; HELP REQUESTED/); assert.match(events[1].summary, /copy_sent/);
+});
+await t('no REPORT_COPY_TO -> visitor email only; no help -> no promise of a reply', async () => {
+  reset(); await call(BODY);
+  const sends = calls.filter(c => typeof c === 'object');
+  assert.equal(sends.length, 1); assert.ok(!/asked for help/.test(sends[0].body.text));
 });
 await t('invalid compare -> 400 invalid_compare, nothing called; personal email refused', async () => {
   reset(); let r = await call({ ...BODY, compare: { ...SNAP, common: { ...SNAP.common, employees: -1 } } });

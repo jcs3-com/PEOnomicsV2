@@ -27,19 +27,21 @@
     const { employees: n, wage: w, enrollment: e, sutaBase: base } = common;
     if (!valid(n) || n < 1 || !valid(w) || !valid(e) || e > 100 || !valid(base)) return null;
     return quotes.map(q => {
-      const missing = REQUIRED.filter(k => !valid(q[k]));
-      if (missing.length) return { label: q.label, missing };
-      if (q.suta > 30 || q.wc > 100 || (q.feeBasis === 'pct' && q.fee > 100)) return { label: q.label, missing: ['out-of-range rate'] };
+      if ((valid(q.suta) && q.suta > 30) || (valid(q.wc) && q.wc > 100) || (q.feeBasis === 'pct' && valid(q.fee) && q.fee > 100)) return { label: q.label, missing: ['out-of-range rate'], parts: {} };
       const N = Math.floor(n), payroll = N * w;
+      const has = k => valid(q[k]);
+      // every line that can be priced from what the quote states; null = not stated
       const parts = {
-        'Admin': q.feeBasis === 'pct' ? payroll * q.fee / 100 : N * q.fee * 12,
-        'SUTA': N * Math.min(w, base) * q.suta / 100,
-        'Workers comp': payroll * q.wc / 100,
-        'Employer health': N * e / 100 * q.health,
-        'EPLI': N * q.epli * 12,
-        'Other': q.other,
-        'Year-one setup': q.setup
+        'Admin': !has('fee') ? null : q.feeBasis === 'pct' ? payroll * q.fee / 100 : N * q.fee * 12,
+        'SUTA': has('suta') ? N * Math.min(w, base) * q.suta / 100 : null,
+        'Workers comp': has('wc') ? payroll * q.wc / 100 : null,
+        'Employer health': has('health') ? N * e / 100 * q.health : null,
+        'EPLI': has('epli') ? N * q.epli * 12 : null,
+        'Other': has('other') ? q.other : null,
+        'Year-one setup': has('setup') ? q.setup : null
       };
+      const missing = REQUIRED.filter(k => !has(k));
+      if (missing.length) return { label: q.label, missing, parts };
       const recurring = Object.entries(parts).filter(([k]) => k !== 'Year-one setup').reduce((a, [, v]) => a + v, 0);
       return { label: q.label, parts, recurring, yearOne: recurring + q.setup, threeYear: recurring * 3 + q.setup, missing: [] };
     });
@@ -290,7 +292,11 @@
       const th = el('th', '', line); th.scope = 'row'; tr.append(th);
       for (const q of list) {
         const td = document.createElement('td');
-        if (q.missing.length) { td.textContent = 'Incomplete'; td.className = 'incomplete'; td.title = 'Missing: ' + q.missing.join(', '); }
+        const lineVal = q.parts && q.parts[line];
+        if (q.missing.length && (line.includes('total') || lineVal === null || lineVal === undefined)) {
+          td.textContent = line.includes('total') ? 'Incomplete' : 'Not stated';
+          td.className = line.includes('total') ? 'incomplete' : 'unstated'; td.title = 'Missing: ' + q.missing.join(', ');
+        } else if (q.missing.length) td.textContent = money(lineVal);
         else {
           const v = line === 'Year one total' ? q.yearOne : line === 'Three-year total' ? q.threeYear : q.parts[line];
           td.textContent = money(v);
@@ -326,7 +332,11 @@
     track('comparator_csv');
     const esc = v => '"' + String(v ?? '').replaceAll('"', '""') + '"';
     const rows = [['PEOnomics quote comparison', ...list.map(x => x.label)],
-      ...LINES.map(k => [k, ...list.map(x => x.missing.length ? 'INCOMPLETE' : (k === 'Year one total' ? x.yearOne : k === 'Three-year total' ? x.threeYear : x.parts[k]).toFixed(2))]),
+      ...LINES.map(k => [k, ...list.map(x => {
+        if (!x.missing.length) return (k === 'Year one total' ? x.yearOne : k === 'Three-year total' ? x.threeYear : x.parts[k]).toFixed(2);
+        if (k.includes('total')) return 'INCOMPLETE';
+        const v = x.parts && x.parts[k]; return v === null || v === undefined ? 'NOT STATED' : v.toFixed(2);
+      })]),
       ['Note', 'Only user-entered pricing is compared; charges a quote does not state are not included.']];
     const url = URL.createObjectURL(new Blob([rows.map(r => r.map(esc).join(',')).join('\r\n')], { type: 'text/csv;charset=utf-8' }));
     const a = document.createElement('a'); a.href = url; a.download = 'PEOnomics_quote_comparison.csv'; a.click();

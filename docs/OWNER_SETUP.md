@@ -49,6 +49,11 @@ deployments › Archive, deploy a new one, update the secret.
 ✔ `/api/health` → `"reports":{"ready":true,...}` and `/api/report-status` → `"available":true`.
 The "Email this to me" button then shows the verification widget.
 
+### 3b. Owner copy of comparison reports (optional)
+Pages **variable** (Text) `REPORT_COPY_TO` = the inbox that should receive a copy of every Quote Comparator
+report. Reply-To is the visitor, so replying reaches them directly. Retry the latest deployment.
+✔ `/api/health` → `"ownerCopy":true`.
+
 ## 4. WAF rate-limiting rule (authoritative limit)
 
 The code limits per isolate and per data center (`functions/lib/ratelimit.js`): 8 lookups / 10 min

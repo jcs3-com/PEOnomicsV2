@@ -3,7 +3,7 @@
 This file is the **only** source of truth for what is done, open, dropped, or pending a decision.
 Not chat history. Not artifacts. When you finish or add work, update this file in the same commit.
 
-**Last updated:** 2026-11-03 (Quote Comparator: drag-and-drop quote files parsed in the browser + emailed comparison report. Prior: Homepage first screen simplified to email box + slider Cost Lab. Prior: auto-post feed for the LinkedIn page; DMV Employer Cost Index; VA SUI 2.73%. Prior: activation release: health check, shared rate limiter, scenario logging, Turnstile key via env; data/unification/analytics releases follow)
+**Last updated:** 2026-11-03 (Comparator report sends with incomplete quotes + owner copy; earlier today: drag-and-drop quote files parsed in the browser + emailed comparison report. Report delivery LIVE in production 2026-11-03. Prior: Homepage first screen simplified to email box + slider Cost Lab. Prior: auto-post feed for the LinkedIn page; DMV Employer Cost Index; VA SUI 2.73%. Prior: activation release: health check, shared rate limiter, scenario logging, Turnstile key via env; data/unification/analytics releases follow)
 
 ---
 
@@ -220,15 +220,25 @@ Not chat history. Not artifacts. When you finish or add work, update this file i
     `tests/test_browser.py` +23 (real PDF/XLSX/TXT through the page, scan/image refusals, report payload). Fixtures in
     `tests/fixtures/` are text; PDF/XLSX are generated at test time.
 
+- **Comparator report — incomplete quotes allowed + owner copy (2026-11-03, owner request):** the send button no longer
+  needs every field. Any quote with at least one figure can be sent; each line prices on its own term ("Not stated"
+  otherwise, on screen, CSV, PDF and the XLSX formulas), totals and ranking appear only for complete quotes, and the
+  report lists what each quote is missing as questions. Opt-in checkbox "Help me fill in what's missing — reply to me
+  by email". If Pages variable `REPORT_COPY_TO` is set, a copy of every comparison report goes there with
+  Reply-To = the visitor and "HELP REQUESTED" in the subject when ticked; the Usage Log summary records
+  "n of m complete; HELP REQUESTED; copy_sent". Privacy draft discloses the copy. `/api/health` adds `ownerCopy`.
+- **Owner setup done 2026-11-03:** `USAGE_WEBHOOK_URL`, `RESEND_API_KEY`, `REPORT_FROM`, `TURNSTILE_SITE_KEY`,
+  `TURNSTILE_SECRET` live in production (`/api/health` all true); first real report logged requested → accepted.
+
 ## 🔲 Open — prioritized
 
 ### P0.1 — owner-only setup (credentials; Claude must not handle them) — step-by-step in `docs/OWNER_SETUP.md`
-- [ ] **Usage/event log:** paste `apps-script/usage-log-v2.gs` into the sheet "PEOnomics — Cost Lab
+- [x] **Usage/event log:** paste `apps-script/usage-log-v2.gs` into the sheet "PEOnomics — Cost Lab
       Usage Log" (Drive › 34.02 Website › PEOnomics 2.0 — Site Build), deploy as web app, add the URL
       as Pages secret `USAGE_WEBHOOK_URL`. Unlocks business-email prefill AND is required for reports.
-- [ ] **Resend:** account + verify sending domain `peonomics.com` (DNS records in Cloudflare), API key →
+- [x] **Resend:** account + verify sending domain `peonomics.com` (DNS records in Cloudflare), API key →
       Pages secret `RESEND_API_KEY`; sender → Pages secret `REPORT_FROM` (e.g. `PEOnomics <reports@peonomics.com>`).
-- [ ] **Turnstile:** widget for peonomics.com (+ www); **public** site key → Pages variable `TURNSTILE_SITE_KEY`;
+- [x] **Turnstile:** widget for peonomics.com (+ www); **public** site key → Pages variable `TURNSTILE_SITE_KEY`;
       secret → Pages secret `TURNSTILE_SECRET`. Check `/api/health`.
 - [ ] **WAF rate-limit rule** on `/api/enrich` and `/api/report-request` (in-code limiter is per-isolate).
 - [ ] **Analytics Engine binding** `EVENTS` (dataset `peonomics_events`) so product events are stored; then a

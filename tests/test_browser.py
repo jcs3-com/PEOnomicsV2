@@ -158,7 +158,7 @@ with sync_playwright() as p:
         rows = pg.locator('#compareRows').inner_text()
         check('$45,000' in rows and '$48,000' in rows and 'Incomplete' in rows, f'{name}: comparator math A=$45,000 B=$48,000, C incomplete')
         check('2 complete proposals' in pg.locator('#comparisonStatus').inner_text() and 'Proposal A' in pg.locator('#comparisonStatus').inner_text(), f'{name}: lowest named')
-        pg.fill('#B-other', ''); check('Incomplete' in pg.locator('#compareRows tr:nth-child(1) td:nth-child(3)').inner_text(), f'{name}: clearing a field -> Incomplete, not $0')
+        pg.fill('#B-other', ''); check('Incomplete' in pg.locator('#compareRows tr:nth-child(8) td:nth-child(3)').inner_text() and 'Not stated' in pg.locator('#compareRows tr:nth-child(6) td:nth-child(3)').inner_text() and '$48,000' in pg.locator('#compareRows tr:nth-child(1) td:nth-child(3)').inner_text(), f'{name}: clearing a field -> that line Not stated, total Incomplete, other lines still priced')
         pg.fill('#B-other', '0')
         with pg.expect_download() as d: pg.click('#downloadCompare')
         csv = open(d.value.path()).read()
@@ -201,12 +201,16 @@ with sync_playwright() as p:
                 pg.wait_for_function("document.querySelectorAll('.card-read').length===2", timeout=45000)
                 pg.wait_for_selector('#tsStub'); check(pg.locator('#sendReport').is_disabled(), f'{name}: report disabled before verification')
                 pg.click('#tsStub'); check(pg.locator('#sendReport').is_enabled(), f'{name}: report enabled after verification + 2 complete')
+                pg.fill('#B-health', ''); pg.fill('#B-wc', '')
+                check(pg.locator('#sendReport').is_enabled() and 'Send it anyway' in pg.locator('#reportTeaser').inner_text(), f'{name}: incomplete quotes can still be sent')
+                pg.check('#reportHelp')
                 pg.fill('#reportEmail', 'me@gmail.com'); pg.click('#sendReport')
                 check('company email' in pg.locator('#reportNote').inner_text() and not state['posted'], f'{name}: personal email refused client-side')
                 pg.fill('#reportEmail', 'owner@samplebusiness.com'); pg.click('#sendReport')
                 pg.wait_for_function("/Accepted for delivery/.test(document.getElementById('reportNote').textContent)")
                 body = state['posted'][-1]
                 check(body['kind'] == 'compare' and body['compare']['quotes'][0]['src'].get('fee') == 'file' and body['compare']['quotes'][1]['feeBasis'] == 'pct', f'{name}: compare payload carries inputs + provenance')
+                check(body['help'] is True and body['compare']['quotes'][1]['wc'] is None, f'{name}: help flag + blank stays null (not 0)')
                 check('text' not in json.dumps(body).lower() or 'administrative fee |' not in json.dumps(body), f'{name}: payload carries no file text')
             state['available'], state['report'] = saved
 
