@@ -3,7 +3,7 @@
 This file is the **only** source of truth for what is done, open, dropped, or pending a decision.
 Not chat history. Not artifacts. When you finish or add work, update this file in the same commit.
 
-**Last updated:** 2026-11-06 (Analytics Engine `EVENTS` bound + Crawler Hints on via the Cloudflare API connector; traffic baseline recorded. 2026-11-03: Maryland FAMLI calculator page + FAMLI rule correction + first-payment countdown posts + Bing/Crawler Hints owner steps; earlier today: Comparator report sends with incomplete quotes + owner copy; earlier today: drag-and-drop quote files parsed in the browser + emailed comparison report. Report delivery LIVE in production 2026-11-03. Prior: Homepage first screen simplified to email box + slider Cost Lab. Prior: auto-post feed for the LinkedIn page; DMV Employer Cost Index; VA SUI 2.73%. Prior: activation release: health check, shared rate limiter, scenario logging, Turnstile key via env; data/unification/analytics releases follow)
+**Last updated:** 2026-11-06 (Search Console + Bing verified; Analytics Engine `EVENTS` bound + Crawler Hints on via the Cloudflare API connector; traffic baseline recorded. 2026-11-03: Maryland FAMLI calculator page + FAMLI rule correction + first-payment countdown posts + Bing/Crawler Hints owner steps; earlier today: Comparator report sends with incomplete quotes + owner copy; earlier today: drag-and-drop quote files parsed in the browser + emailed comparison report. Report delivery LIVE in production 2026-11-03. Prior: Homepage first screen simplified to email box + slider Cost Lab. Prior: auto-post feed for the LinkedIn page; DMV Employer Cost Index; VA SUI 2.73%. Prior: activation release: health check, shared rate limiter, scenario logging, Turnstile key via env; data/unification/analytics releases follow)
 
 ---
 
@@ -268,10 +268,11 @@ Not chat history. Not artifacts. When you finish or add work, update this file i
       counts). Query: `POST /accounts/{id}/analytics_engine/sql`, `SELECT blob1 AS name, count() ... FROM
       peonomics_events`. Note: if Analytics Engine is ever disabled, Functions deploys fail until the binding is removed.
 - [x] **Cloudflare Crawler Hints** on (IndexNow), 2026-11-06 via the API connector (zone flag `cache.crawlhints_enabled`).
-- [ ] **Search Console** domain property via DNS TXT + submit sitemap + request indexing for the priority pages
-      (FAMLI first); **Bing Webmaster Tools** (import from Search Console). Owner step (Google sign-in); Claude can add
-      the TXT record via the Cloudflare connector if the owner pastes it. As of 2026-11-03 a `site:peonomics.com` web
-      search returned no pages. Owner steps in `docs/OWNER_SETUP.md` §6.
+- [x] **Search Console** (2026-11-06): Domain property verified by DNS TXT, added via Cloudflare sign-in. An older
+      `google-site-verification` TXT from 2026-06-12 also exists; leave it, a separate property may depend on it.
+      Owner to submit the sitemap and request indexing for the priority pages (FAMLI first) if not already done.
+- [x] **Bing Webmaster Tools** (2026-11-06): verified by CNAME `0fc090dd0067a9b3075fc9240144958e` → `verify.bing.com`
+      (DNS only; keep it, Bing re-checks). Sitemap via the Search Console import.
 - [ ] **Traffic checks from the Claude app:** the Cloudflare API connector (`https://mcp.cloudflare.com/mcp`, custom
       connector) reads Web Analytics (GraphQL `rumPageloadEventsAdaptiveGroups`, siteTag
       `9be7a568b8c3435cad1f9d72335ab181`). Exclude `userAgentBrowser = ChromeHeadless` (Claude's test runs) and filter
