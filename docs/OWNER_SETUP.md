@@ -88,10 +88,10 @@ Confirm:
    `/states/va`. Do the FAMLI page first: its searches peak in December and January.
 2b. **Bing Webmaster Tools** (bing.com/webmasters) › sign in › **Import from Google Search Console** (no second DNS
    record needed) › confirm the sitemap is listed. Bing's index feeds ChatGPT search, Copilot and DuckDuckGo.
-2c. Cloudflare › peonomics.com › Caching › Configuration › **Crawler Hints: On**. Cloudflare then tells
+2c. ✔ Done 2026-11-06 (Claude, via the Cloudflare API connector). Cloudflare › peonomics.com › Caching › Configuration › **Crawler Hints: On**. Cloudflare then tells
    IndexNow-participating search engines (Bing, Yandex and others) when a page changes, at no cost; no code or key
    file in the repo is needed.
-3. Cloudflare › Web Analytics is already injected by Pages (cookieless). Product events
+3. ✔ Done 2026-11-06 (owner enabled Analytics Engine; Claude bound it via the API connector). Cloudflare › Web Analytics is already injected by Pages (cookieless). Product events
    (calculator use, lookup, comparator, report requests) are counted by `/api/event` into
    Cloudflare Workers Analytics Engine **only if** you bind a dataset: Pages › peonomicsv2 ›
    Settings › Bindings › Add › Analytics Engine › variable `EVENTS` › dataset `peonomics_events`.

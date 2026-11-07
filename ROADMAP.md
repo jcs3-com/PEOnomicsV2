@@ -3,7 +3,7 @@
 This file is the **only** source of truth for what is done, open, dropped, or pending a decision.
 Not chat history. Not artifacts. When you finish or add work, update this file in the same commit.
 
-**Last updated:** 2026-11-03 (Maryland FAMLI calculator page + FAMLI rule correction + first-payment countdown posts + Bing/Crawler Hints owner steps; earlier today: Comparator report sends with incomplete quotes + owner copy; earlier today: drag-and-drop quote files parsed in the browser + emailed comparison report. Report delivery LIVE in production 2026-11-03. Prior: Homepage first screen simplified to email box + slider Cost Lab. Prior: auto-post feed for the LinkedIn page; DMV Employer Cost Index; VA SUI 2.73%. Prior: activation release: health check, shared rate limiter, scenario logging, Turnstile key via env; data/unification/analytics releases follow)
+**Last updated:** 2026-11-06 (Analytics Engine `EVENTS` bound + Crawler Hints on via the Cloudflare API connector; traffic baseline recorded. 2026-11-03: Maryland FAMLI calculator page + FAMLI rule correction + first-payment countdown posts + Bing/Crawler Hints owner steps; earlier today: Comparator report sends with incomplete quotes + owner copy; earlier today: drag-and-drop quote files parsed in the browser + emailed comparison report. Report delivery LIVE in production 2026-11-03. Prior: Homepage first screen simplified to email box + slider Cost Lab. Prior: auto-post feed for the LinkedIn page; DMV Employer Cost Index; VA SUI 2.73%. Prior: activation release: health check, shared rate limiter, scenario logging, Turnstile key via env; data/unification/analytics releases follow)
 
 ---
 
@@ -142,7 +142,7 @@ Not chat history. Not artifacts. When you finish or add work, update this file i
     "Sponsored analysis" banners and the methodology disclosure are unchanged.
   - Measurement: `assets/js/track.js` + `POST /api/event` (allowlisted events: calc_used, lookup_submitted,
     report_requested, comparator_used, comparator_csv, data_csv, cost_lab_cta; GPC/DNT honored; no PII —
-    tested). Stored only if the owner binds Analytics Engine `EVENTS`; otherwise discarded.
+    tested). Stored in Analytics Engine `EVENTS` (dataset `peonomics_events`, bound 2026-11-06).
   - Sitemap (66 URLs) and every canonical/og:url verified extensionless and 200 in production. /contact had lost its
     canonical, og:image and JSON-LD (restored). `tests/test_seo.py` now enforces §4 on all 66 indexable pages.
 - **DMV Employer Cost Index** (2026-10-28): `/dmv-employer-cost-index` — flagship citable data page. Statutory
@@ -262,11 +262,21 @@ Not chat history. Not artifacts. When you finish or add work, update this file i
 - [x] **Turnstile:** widget for peonomics.com (+ www); **public** site key → Pages variable `TURNSTILE_SITE_KEY`;
       secret → Pages secret `TURNSTILE_SECRET`. Check `/api/health`.
 - [ ] **WAF rate-limit rule** on `/api/enrich` and `/api/report-request` (in-code limiter is per-isolate).
-- [ ] **Analytics Engine binding** `EVENTS` (dataset `peonomics_events`) so product events are stored; then a
-      saved SQL query for weekly counts. **Search Console** domain property via DNS TXT + submit sitemap + request
-      indexing for the priority pages (FAMLI first); **Bing Webmaster Tools** (import from Search Console); Cloudflare
-      **Crawler Hints** on (IndexNow). As of 2026-11-03 a `site:peonomics.com` web search returned no pages.
-      (No Search Console connector exists for Claude; owner steps in `docs/OWNER_SETUP.md` §6.)
+- [x] **Analytics Engine binding** `EVENTS` → dataset `peonomics_events`, production only (2026-11-06, via the
+      Cloudflare API connector after the owner enabled Analytics Engine for the account; preview builds don't log).
+      Verified: deploy succeeded and a test row landed (`outcome = setup_test`, `path = /setup-test`; exclude it from
+      counts). Query: `POST /accounts/{id}/analytics_engine/sql`, `SELECT blob1 AS name, count() ... FROM
+      peonomics_events`. Note: if Analytics Engine is ever disabled, Functions deploys fail until the binding is removed.
+- [x] **Cloudflare Crawler Hints** on (IndexNow), 2026-11-06 via the API connector (zone flag `cache.crawlhints_enabled`).
+- [ ] **Search Console** domain property via DNS TXT + submit sitemap + request indexing for the priority pages
+      (FAMLI first); **Bing Webmaster Tools** (import from Search Console). Owner step (Google sign-in); Claude can add
+      the TXT record via the Cloudflare connector if the owner pastes it. As of 2026-11-03 a `site:peonomics.com` web
+      search returned no pages. Owner steps in `docs/OWNER_SETUP.md` §6.
+- [ ] **Traffic checks from the Claude app:** the Cloudflare API connector (`https://mcp.cloudflare.com/mcp`, custom
+      connector) reads Web Analytics (GraphQL `rumPageloadEventsAdaptiveGroups`, siteTag
+      `9be7a568b8c3435cad1f9d72335ab181`). Exclude `userAgentBrowser = ChromeHeadless` (Claude's test runs) and filter
+      `requestHost_like: "%peonomics.com"`. Baseline week Oct 31 – Nov 6, 2026: 45 pageviews, roughly 10–15 from real
+      outside visitors, 0 from Google. Re-check 2–3 weeks after Search Console is live.
 - [ ] **Zapier Zap for the LinkedIn page** (`docs/OWNER_SETUP.md` §7): RSS `https://peonomics.com/api/feed` →
       LinkedIn *Create Company Update* on the PEOnomics page. First post goes live Oct 30, 2026 9:00 ET. Don't run
       Zapier's action test early (it publishes).
