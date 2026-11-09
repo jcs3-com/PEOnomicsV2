@@ -3,7 +3,7 @@
 This file is the **only** source of truth for what is done, open, dropped, or pending a decision.
 Not chat history. Not artifacts. When you finish or add work, update this file in the same commit.
 
-**Last updated:** 2026-11-06 (Search Console + Bing verified; Analytics Engine `EVENTS` bound + Crawler Hints on via the Cloudflare API connector; traffic baseline recorded. 2026-11-03: Maryland FAMLI calculator page + FAMLI rule correction + first-payment countdown posts + Bing/Crawler Hints owner steps; earlier today: Comparator report sends with incomplete quotes + owner copy; earlier today: drag-and-drop quote files parsed in the browser + emailed comparison report. Report delivery LIVE in production 2026-11-03. Prior: Homepage first screen simplified to email box + slider Cost Lab. Prior: auto-post feed for the LinkedIn page; DMV Employer Cost Index; VA SUI 2.73%. Prior: activation release: health check, shared rate limiter, scenario logging, Turnstile key via env; data/unification/analytics releases follow)
+**Last updated:** 2026-11-09 (real 404 page; unknown URLs no longer serve the homepage as a 200. 2026-11-06: Search Console + Bing verified; Analytics Engine `EVENTS` bound + Crawler Hints on via the Cloudflare API connector; traffic baseline recorded. 2026-11-03: Maryland FAMLI calculator page + FAMLI rule correction + first-payment countdown posts + Bing/Crawler Hints owner steps; earlier today: Comparator report sends with incomplete quotes + owner copy; earlier today: drag-and-drop quote files parsed in the browser + emailed comparison report. Report delivery LIVE in production 2026-11-03. Prior: Homepage first screen simplified to email box + slider Cost Lab. Prior: auto-post feed for the LinkedIn page; DMV Employer Cost Index; VA SUI 2.73%. Prior: activation release: health check, shared rate limiter, scenario logging, Turnstile key via env; data/unification/analytics releases follow)
 
 ---
 
@@ -250,6 +250,13 @@ Not chat history. Not artifacts. When you finish or add work, update this file i
   - Tests: `tests/test_famli.py` (62: every static figure, FAQ ↔ JSON-LD, og:description re-derived from data),
     `tests/test_famli.mjs` (27: model incl. small-employer, out-of-state headcount, cap, cover share, paste parsing),
     `tests/test_browser.py` +12 (desktop + mobile).
+
+- **2026-11-09 — Real 404 page (Search Console "Alternate page with proper canonical tag").** The repo had no
+  `404.html`, so Cloudflare Pages served the homepage with HTTP 200 and `canonical=/` for every unknown URL
+  (e.g. `/states/maryland`, `/best-peo`). Google read each one as a duplicate of `/`. Added `404.html` (noindex, no
+  canonical, shared chrome, links to Cost Lab / comparator / states / data library); Pages now returns a true 404.
+  Sitemap unchanged (generator skips noindex pages). The other notice, "Excluded by 'noindex' tag", is intended:
+  `/quote` (redirect stub) and `/privacy` (draft until the owner finalizes it, see P1).
 
 ## 🔲 Open — prioritized
 
