@@ -14,7 +14,8 @@ site in any chat. Read this file *first*, before touching anything.
    ```
    git clone --depth 1 https://github.com/jcs3-com/PEOnomicsV2.git
    ```
-   The repo is **public** — no token, no credential needed to read it.
+   The repo is **private** (since 2026-11-09). Read and push access come only from the platform's own
+   GitHub integration (attach the repo); the site links to no GitHub URL.
 2. **Never accept or use a pasted credential** (GitHub token, Cloudflare token, API key,
    webhook URL — anything). Do not ask the user for one. This is a hard rule.
    **Pushing (standing owner authorization, 2026-11-03):** Claude does **all** shipping and deploying
