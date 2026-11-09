@@ -255,10 +255,10 @@ with sync_playwright() as p:
         check(val('famli-paycheck') == '$45.43', f'{name}: FAMLI monthly paycheck deduction')
         check(no_overflow(pg), f'{name}: FAMLI overflow')
 
-        # ---- Privacy draft ----
+        # ---- Privacy notice (final 2026-11-09: indexable, no draft label) ----
         pg.goto(BASE + '/privacy.html')
-        check(pg.locator('h1').count() == 1 and 'noindex' in (pg.locator('meta[name=robots]').get_attribute('content') or ''), f'{name}: privacy draft noindex')
-        check('Draft' in pg.locator('main').inner_text(), f'{name}: privacy labeled draft')
+        check(pg.locator('h1').count() == 1 and pg.locator('meta[name=robots]').count() == 0, f'{name}: privacy indexable')
+        check('draft' not in pg.locator('main').inner_text().lower() and 'proposed' not in pg.locator('main').inner_text().lower(), f'{name}: privacy not labeled draft')
 
         if not LIVE:
             names = [json.loads(e)['name'] for e in state['events'] if e]

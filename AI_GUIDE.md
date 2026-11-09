@@ -83,7 +83,7 @@ site in any chat. Read this file *first*, before touching anything.
 
 ```
 index.html                      Homepage: email box + slider Cost Lab first screen; full breakdown below (#breakdown). REFERENCE IMPLEMENTATION.
-quote.html                      Redirect stub → /#cost-lab (noindex, not in sitemap).
+_redirects                      Cloudflare Pages redirects: /quote → /#cost-lab (301; the old quote.html stub is deleted).
 about.html contact.html         Org / contact pages.
 insights.html methodology.html  Editorial / methodology content.
 hidden-costs.html               Content landing.
@@ -98,7 +98,7 @@ assets/css/content.css          Base for article pages.
 assets/css/ranking.css          Styles for best-peo ranking pages.
 assets/css/cost-lab.css         Cost Lab classes (tokens only). Linked after site.css on index + tool pages.
 assets/css/compare.css          Comparator / data library / privacy classes (tokens only).
-compare.html data-library.html  Quote Comparator; Data Library. privacy.html = noindex DRAFT notice.
+compare.html data-library.html  Quote Comparator; Data Library. privacy.html = final privacy notice (indexable).
 assets/js/report-client.js      Report button: /api/report-status + Turnstile + POST /api/report-request.
 assets/js/quote-compare.js      Comparator (pure evaluateQuotes on window.PEOCompare) + drop zone / per-card file load UI.
 assets/js/quote-parse.js        In-browser quote file reader (PDF via pdf.js@3.11.174 from jsDelivr, SRI-pinned; own ZIP/XML

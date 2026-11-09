@@ -15,8 +15,8 @@ internals: `docs/COST_LAB.md`.
 index.html               Homepage + Cost Lab (cost-lab.js/.css) + report button (report-client.js)
 compare.html             Quote Comparator (browser-only, CSV export)
 data-library.html        51-state reference table (2025, historical) + sourced 2026 national benchmarks
-privacy.html             Draft privacy notice (noindex)
-quote.html               Redirect stub -> /#cost-lab
+privacy.html             Privacy notice
+_redirects               /quote -> /#cost-lab (301)
 states/                  51 generated state rate pages + index
 data/rates-2025.json     State model dataset (tax year 2025, preliminary). Per-figure confidence flags.
 data/benchmarks-2026.json Sourced 2026 federal/national figures

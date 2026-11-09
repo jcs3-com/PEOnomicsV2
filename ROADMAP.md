@@ -3,7 +3,7 @@
 This file is the **only** source of truth for what is done, open, dropped, or pending a decision.
 Not chat history. Not artifacts. When you finish or add work, update this file in the same commit.
 
-**Last updated:** 2026-11-09 (real 404 page; unknown URLs no longer serve the homepage as a 200. 2026-11-06: Search Console + Bing verified; Analytics Engine `EVENTS` bound + Crawler Hints on via the Cloudflare API connector; traffic baseline recorded. 2026-11-03: Maryland FAMLI calculator page + FAMLI rule correction + first-payment countdown posts + Bing/Crawler Hints owner steps; earlier today: Comparator report sends with incomplete quotes + owner copy; earlier today: drag-and-drop quote files parsed in the browser + emailed comparison report. Report delivery LIVE in production 2026-11-03. Prior: Homepage first screen simplified to email box + slider Cost Lab. Prior: auto-post feed for the LinkedIn page; DMV Employer Cost Index; VA SUI 2.73%. Prior: activation release: health check, shared rate limiter, scenario logging, Turnstile key via env; data/unification/analytics releases follow)
+**Last updated:** 2026-11-09 (privacy notice final + indexable; /quote → 301. Earlier today: real 404 page; unknown URLs no longer serve the homepage as a 200. 2026-11-06: Search Console + Bing verified; Analytics Engine `EVENTS` bound + Crawler Hints on via the Cloudflare API connector; traffic baseline recorded. 2026-11-03: Maryland FAMLI calculator page + FAMLI rule correction + first-payment countdown posts + Bing/Crawler Hints owner steps; earlier today: Comparator report sends with incomplete quotes + owner copy; earlier today: drag-and-drop quote files parsed in the browser + emailed comparison report. Report delivery LIVE in production 2026-11-03. Prior: Homepage first screen simplified to email box + slider Cost Lab. Prior: auto-post feed for the LinkedIn page; DMV Employer Cost Index; VA SUI 2.73%. Prior: activation release: health check, shared rate limiter, scenario logging, Turnstile key via env; data/unification/analytics releases follow)
 
 ---
 
@@ -258,6 +258,12 @@ Not chat history. Not artifacts. When you finish or add work, update this file i
   Sitemap unchanged (generator skips noindex pages). The other notice, "Excluded by 'noindex' tag", is intended:
   `/quote` (redirect stub) and `/privacy` (draft until the owner finalizes it, see P1).
 
+- **2026-11-09 — Privacy notice final; `/quote` is a server redirect.** Owner confirmed the terms (12-month retention,
+  request channel via /contact). `privacy.html`: Draft label, "Proposed" tags and `noindex` removed; now in the sitemap
+  (69 URLs). Footer link "Privacy (draft)" → "Privacy" site-wide via `site_chrome.py` (+ `unify_pages.py`,
+  `build_states.py`). `quote.html` stub deleted; `_redirects` 301s `/quote` and `/quote.html` → `/#cost-lab`.
+  `tests/test_browser.py` privacy check now asserts indexable and no draft label.
+
 ## 🔲 Open — prioritized
 
 ### P0.1 — owner-only setup (credentials; Claude must not handle them) — step-by-step in `docs/OWNER_SETUP.md`
@@ -296,8 +302,8 @@ Not chat history. Not artifacts. When you finish or add work, update this file i
       minimum wages). Update `data/dmv-index-2026.json` / `data/src/`, re-derive the page's static figures,
       `tests/test_dmv_index.py` lists every figure that moved. Check VA's 0.20%/0.03% add-ons against a VEC page.
 - [ ] **Delivery webhooks** (Resend `email.delivered/bounced`) → log true delivery status, not just acceptance.
-- [ ] **Finalize privacy notice** (owner): confirm the proposed 12-month retention and the request
-      channel actually work, then drop the Draft label and `noindex`. Build deletion/suppression handling.
+- [ ] **Privacy deletion/suppression handling** — the notice is final (2026-11-09); requests arrive via
+      /contact with "privacy request" in the subject. Build the handling behind it.
 - [ ] **30-day survey invite** — separate, disclosed permission; CAN-SPAM identification, postal
       address, working unsubscribe. Owner enables; don't automate before compliance is settled.
 - [ ] **SUTA surcharge pass for the other 43 states** — DOL base rates exclude surcharges (e.g. MA workforce

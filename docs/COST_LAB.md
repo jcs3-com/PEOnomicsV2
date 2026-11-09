@@ -25,9 +25,9 @@ This file documents how the Cost Lab works so the next agent doesn't reverse-eng
 | `data/rates-2026.json` | **The model dataset** (generated). Every state figure with year + source. |
 | `data/src/*.json`, `tools/build_rates_2026.py`, `tools/data2026/` | Sourced inputs and the builder/extractors that produce rates-2026.json. |
 | `data/benchmarks-2026.json` | Sourced 2026 federal/national figures (Data Library context). |
-| `compare.html`, `data-library.html`, `privacy.html` | New pages (privacy is a noindex draft). |
+| `compare.html`, `data-library.html`, `privacy.html` | New pages (privacy notice final and indexable since 2026-11-09). |
 | `tests/` | `test_enrich.mjs`, `test_model.mjs`, `test_report.mjs` (node, no deps), `test_browser.py` (Playwright). |
-| `quote.html` | Redirect stub → `/#cost-lab` (noindex; excluded from sitemap). |
+| `_redirects` | `/quote` → `/#cost-lab` 301 (the old `quote.html` stub is deleted). |
 | `assets/js/engine.js` | **Legacy, unreferenced.** Old model with built-in PEO savings. Do not re-wire. |
 | `functions/api/lead.js`, `apps-script/lead-capture.gs` | **Legacy, unreferenced** sales-lead path. |
 
